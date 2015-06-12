@@ -1,3 +1,5 @@
+'use strict';
+
 // Tell JSHint to ignore this warning: 'character may get silently deleted by one or more browsers'
 // jshint -W100
 
