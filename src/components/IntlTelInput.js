@@ -9,7 +9,7 @@ require('../styles/main.css');
 
 var imageURL = require('../images/yeoman.png');
 
-var ReactIntlTelInputApp = React.createClass({
+var IntlTelInput = React.createClass({
   render: function() {
     return (
       <div className='main'>
@@ -20,6 +20,6 @@ var ReactIntlTelInputApp = React.createClass({
     );
   }
 });
-React.render(<ReactIntlTelInputApp />, document.getElementById('content')); // jshint ignore:line
+React.render(<IntlTelInput />, document.getElementById('content')); // jshint ignore:line
 
-module.exports = ReactIntlTelInputApp;
+module.exports = IntlTelInput;

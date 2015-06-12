@@ -1,5 +1,5 @@
 {
-  "name": "reactintltelinput",
+  "name": "react-intl-tel-input",
   "version": "0.0.0",
   "description": "",
   "repository": "",
@@ -7,7 +7,7 @@
   "src": "src",
   "test": "test",
   "dist": "dist",
-  "mainInput": "ReactIntlTelInputApp",
+  "mainInput": "IntlTelInput",
   "mainOutput": "main",
   "dependencies": {
     "react": "~0.12.2",

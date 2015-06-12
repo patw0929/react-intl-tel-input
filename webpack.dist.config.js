@@ -18,7 +18,7 @@ module.exports = {
 
   debug: false,
   devtool: false,
-  entry: './src/components/ReactIntlTelInputApp.js',
+  entry: './src/components/IntlTelInput.js',
 
   stats: {
     colors: true,
