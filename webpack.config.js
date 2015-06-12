@@ -19,7 +19,8 @@ module.exports = {
   devtool: false,
   entry: [
       'webpack/hot/only-dev-server',
-      './src/components/IntlTelInput.js'
+      './src/components/IntlTelInput.js',
+      './src/example.js'
   ],
 
   stats: {
