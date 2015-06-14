@@ -1,16 +1,27 @@
 'use strict';
 
 import React from 'react';
+import classNames from 'classnames';
+import utils from './utils';
 
 export default React.createClass({
   propTypes: {
     isMobile: React.PropTypes.bool,
     countries: React.PropTypes.array,
-    preferredCountries: React.PropTypes.array
+    preferredCountries: React.PropTypes.array,
+    showDropdown: React.PropTypes.bool
+  },
+
+  handleChangeCountry (e) {
+    this.selectFlag(e.target.value, e.target.options[e.target.selectedIndex].getAttribute("data-dial-code"));
+  },
+
+  selectFlag (iso2, dialCode) {
+    this.props.selectFlag(iso2, dialCode);
   },
 
   appendListItem (countries, className) {
-    return countries.map((country) => {
+    return countries.map((country, index) => {
       if (this.props.isMobile) {
         return (
           <option data-dial-code={country.dialCode} value={country.iso2}>
@@ -18,12 +29,23 @@ export default React.createClass({
           </option>
         );
       } else {
+        let countryClassObj = {
+              country: true,
+              highlight: (this.props.highlightedCountry === country.iso2)
+            },
+            countryClass;
+        countryClassObj[className] = true;
+        countryClass = classNames(countryClassObj);
+
         return (
-          <li className={'country ' + className}
+          <li key={'country-' + index}
+              className={countryClass}
               data-dial-code={country.dialCode}
-              data-country-code={country.iso2}>
-            <div className="flag">
-              <div className={'iti-flag ' + country.iso2}></div>
+              data-country-code={country.iso2}
+              onMouseOver={this.handleMouseOver}
+              onClick={this.selectFlag.bind(this, country.iso2, country.dialCode)}>
+            <div ref="selectedFlag" className="flag">
+              <div ref="selectedFlagInner" className={'iti-flag ' + country.iso2}></div>
             </div>
 
             <span className="country-name">{country.name}</span>
@@ -34,36 +56,87 @@ export default React.createClass({
     });
   },
 
+  handleMouseOver (e) {
+    if (e.currentTarget.getAttribute('class').indexOf('country') > -1) {
+      let highlightedCountry = React.findDOMNode(e.currentTarget).getAttribute("data-country-code");
+      this.props.changeHighlightCountry(highlightedCountry);
+    }
+  },
+
+  componentDidMount () {
+
+  },
+
+  setDropdownPosition () {
+    let inputTop = this.props.inputTop,
+      windowTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop,
+      windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
+      inputOuterHeight = this.props.inputOuterHeight,
+      countryListOuterHeight = utils.getOuterHeight(React.findDOMNode(this.refs.listElement)),
+      dropdownFitsBelow = (inputTop + inputOuterHeight + countryListOuterHeight < windowTop + windowHeight),
+      dropdownFitsAbove = (inputTop - countryListOuterHeight > windowTop);
+
+    // dropdownHeight - 1 for border
+    let cssTop = (!dropdownFitsBelow && dropdownFitsAbove) ? "-" + (countryListOuterHeight - 1) + "px" : "";
+    React.findDOMNode(this.refs.listElement).style.top = cssTop;
+    React.findDOMNode(this.refs.listElement).setAttribute("class", "country-list");
+  },
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.showDropdown && !nextProps.isMobile) {
+      React.findDOMNode(this.refs.listElement).setAttribute("class", "country-list v-hide");
+      this.setDropdownPosition();
+
+      // show it
+      // React.findDOMNode(this.refs.listElement).setAttribute('class', 'country-list');
+      // if (activeListItem.length) {
+        //this.scrollTo(activeListItem);
+      // }
+
+      // bind all the dropdown-related listeners: mouseover, click, click-off, keydown
+      //this.bindDropdownListeners();
+    }
+  },
+
   render () {
-    let listElement = '',
+    let options = '',
         preferredCountries = this.props.preferredCountries,
-        countries = this.props.countries;
+        preferredOptions,
+        countries = this.props.countries,
+        className = classNames({
+          'country-list': true,
+          'hide': !this.props.showDropdown
+        }),
+        divider;
 
     if (this.props.isMobile) {
-      let options = this.appendListItem(countries, '');
+      options = this.appendListItem(countries, '');
 
-      listElement = (
-        <select className="iti-mobile-select">{options}</select>
+      return (
+        <select className="iti-mobile-select" onChange={this.handleChangeCountry}>
+          {options}
+        </select>
       );
     } else {
-      let preferredOptions = '';
-
       if (preferredCountries.length) {
         preferredOptions = this.appendListItem(preferredCountries, 'preferred');
+        divider = (
+          <div className="divider"></div>
+        );
       }
 
-      let options = this.appendListItem(countries, '');
+      options = this.appendListItem(countries, '');
 
-      listElement = (
-        <ul className="country-list v-hide">
+      return (
+        <ul ref="listElement" className={className}>
           {preferredOptions}
+          {divider}
           {options}
         </ul>
       );
-    }
 
-    return (
-      <div>{listElement}</div>
-    );
+      // this is useful in lots of places
+      // this.countryListItems = this.countryList.children(".country");
+    }
   }
 });
