@@ -44,7 +44,7 @@ module.exports = {
     }],
     loaders: [{
       test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
+      exclude: /(node_modules|libphonenumber\.js)/,
       loader: 'react-hot!babel-loader'
     }, {
       test: /\.scss/,

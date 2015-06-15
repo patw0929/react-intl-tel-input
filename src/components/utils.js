@@ -3,6 +3,26 @@
 import AllCountries from './AllCountries';
 
 export default {
+  trim (str) {
+    // Make sure we trim BOM and NBSP
+    let rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+    return str.replace(rtrim, '');
+  },
+
+  isNumeric (obj) {
+    return obj - parseFloat(obj) >= 0;
+  },
+
+  // extract the numeric digits from the given string
+  getNumeric (s) {
+    return s.replace(/\D/g, "");
+  },
+
+  getClean (s) {
+    let prefix = (s.charAt(0) == "+") ? "+" : "";
+    return prefix + this.getNumeric(s);
+  },
+
   // check if (uppercase) string a starts with string b
   startsWith (a, b) {
     return (a.substr(0, b.length).toUpperCase() === b);

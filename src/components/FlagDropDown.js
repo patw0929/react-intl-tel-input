@@ -11,8 +11,8 @@ export default React.createClass({
           'iti-flag': true
         },
         flagClass,
-        selectedCountryData = utils.getCountryData(this.props.countryCode, false),
-        titleTip = selectedCountryData.name + ": +" + selectedCountryData.dialCode,
+        selectedCountryData = (this.props.countryCode && this.props.countryCode !== 'auto') ? utils.getCountryData(this.props.countryCode, false) : {},
+        titleTip = (selectedCountryData) ? selectedCountryData.name + ": +" + selectedCountryData.dialCode : "Unknown",
         arrowClass = classNames({
           'arrow': true,
           'up': this.props.showDropdown
