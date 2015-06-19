@@ -103,8 +103,17 @@ module.exports = function (grunt) {
           ]
         }]
       }
+    },
+
+    'gh-pages': {
+      options: {
+        base: 'dist'
+      },
+      src: ['**']
     }
   });
+
+  grunt.registerTask('publish:examples', ['gh-pages']);
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
