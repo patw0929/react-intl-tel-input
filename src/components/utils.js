@@ -15,11 +15,11 @@ export default {
 
   // extract the numeric digits from the given string
   getNumeric (s) {
-    return s.replace(/\D/g, "");
+    return s.replace(/\D/g, '');
   },
 
   getClean (s) {
-    let prefix = (s.charAt(0) == "+") ? "+" : "";
+    let prefix = (s.charAt(0) === '+') ? '+' : '';
     return prefix + this.getNumeric(s);
   },
 
@@ -57,8 +57,8 @@ export default {
   // retrieve outerHeight of element
   getOuterHeight (element) {
     return element.offsetHeight +
-           parseFloat(getComputedStyle(element).getPropertyValue("margin-top")) +
-           parseFloat(getComputedStyle(element).getPropertyValue("margin-bottom"));
+           parseFloat(getComputedStyle(element).getPropertyValue('margin-top')) +
+           parseFloat(getComputedStyle(element).getPropertyValue('margin-bottom'));
   },
 
   // find the country data for the given country code

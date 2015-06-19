@@ -6,13 +6,28 @@ import CountryList from './CountryList';
 import utils from './utils';
 
 export default React.createClass({
+  propTypes: {
+    countryCode: React.PropTypes.string,
+    showDropdown: React.PropTypes.bool,
+    clickSelectedFlag: React.PropTypes.func,
+    handleSelectedFlagKeydown: React.PropTypes.func,
+    isMobile: React.PropTypes.bool,
+    selectFlag: React.PropTypes.func,
+    countries: React.PropTypes.array,
+    inputTop: React.PropTypes.number,
+    inputOuterHeight: React.PropTypes.number,
+    preferredCountries: React.PropTypes.array,
+    highlightedCountry: React.PropTypes.string,
+    changeHighlightCountry: React.PropTypes.func
+  },
+
   render () {
     let flagClassObj = {
           'iti-flag': true
         },
         flagClass,
         selectedCountryData = (this.props.countryCode && this.props.countryCode !== 'auto') ? utils.getCountryData(this.props.countryCode, false) : {},
-        titleTip = (selectedCountryData) ? selectedCountryData.name + ": +" + selectedCountryData.dialCode : "Unknown",
+        titleTip = (selectedCountryData) ? selectedCountryData.name + ': +' + selectedCountryData.dialCode : 'Unknown',
         arrowClass = classNames({
           'arrow': true,
           'up': this.props.showDropdown

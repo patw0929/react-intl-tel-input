@@ -13,7 +13,7 @@ export default React.createClass({
   },
 
   handleChangeCountry (e) {
-    this.selectFlag(e.target.value, e.target.options[e.target.selectedIndex].getAttribute("data-dial-code"));
+    this.selectFlag(e.target.value, e.target.options[e.target.selectedIndex].getAttribute('data-dial-code'));
   },
 
   selectFlag (iso2, dialCode) {
@@ -58,7 +58,7 @@ export default React.createClass({
 
   handleMouseOver (e) {
     if (e.currentTarget.getAttribute('class').indexOf('country') > -1) {
-      let highlightedCountry = React.findDOMNode(e.currentTarget).getAttribute("data-country-code");
+      let highlightedCountry = React.findDOMNode(e.currentTarget).getAttribute('data-country-code');
       this.props.changeHighlightCountry(highlightedCountry);
     }
   },
@@ -77,14 +77,14 @@ export default React.createClass({
       dropdownFitsAbove = (inputTop - countryListOuterHeight > windowTop);
 
     // dropdownHeight - 1 for border
-    let cssTop = (!dropdownFitsBelow && dropdownFitsAbove) ? "-" + (countryListOuterHeight - 1) + "px" : "";
+    let cssTop = (!dropdownFitsBelow && dropdownFitsAbove) ? '-' + (countryListOuterHeight - 1) + 'px' : '';
     React.findDOMNode(this.refs.listElement).style.top = cssTop;
-    React.findDOMNode(this.refs.listElement).setAttribute("class", "country-list");
+    React.findDOMNode(this.refs.listElement).setAttribute('class', 'country-list');
   },
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.showDropdown && !nextProps.isMobile) {
-      React.findDOMNode(this.refs.listElement).setAttribute("class", "country-list v-hide");
+      React.findDOMNode(this.refs.listElement).setAttribute('class', 'country-list v-hide');
       this.setDropdownPosition();
 
       // show it

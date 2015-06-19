@@ -10,7 +10,7 @@ import TelInput from './TelInput';
 import utils from './utils';
 
 import '../styles/intlTelInput.scss';
-require("file?name=libphonenumber.js!./libphonenumber.js");
+require('file?name=libphonenumber.js!./libphonenumber.js');
 
 export default React.createClass({
   isGoodBrowser () {
@@ -126,7 +126,7 @@ export default React.createClass({
 
   // highlight the next/prev item in the list (and ensure it is visible)
   handleUpDownKey (key) {
-    let current = React.findDOMNode(this.refs.flagDropDown).querySelectorAll(".highlight")[0];
+    let current = React.findDOMNode(this.refs.flagDropDown).querySelectorAll('.highlight')[0];
     let next = ((key === this.keys.UP) ? ((current) ? current.previousElementSibling : undefined) : ((current) ? current.nextElementSibling : undefined));
 
     if (next) {
@@ -152,7 +152,7 @@ export default React.createClass({
 
   // select the currently highlighted item
   handleEnterKey () {
-    let current = React.findDOMNode(this.refs.flagDropDown).querySelectorAll(".highlight")[0];
+    let current = React.findDOMNode(this.refs.flagDropDown).querySelectorAll('.highlight')[0];
     if (current) {
       let countryCode = current.getAttribute('data-country-code');
 
@@ -327,7 +327,7 @@ export default React.createClass({
     let formatted;
 
     if (this.props.autoFormat && window.intlTelInputUtils && this.selectedCountryData) {
-      if (typeof format === "number" && window.intlTelInputUtils.isValidNumber(val, this.selectedCountryData.iso2)) {
+      if (typeof format === 'number' && window.intlTelInputUtils.isValidNumber(val, this.selectedCountryData.iso2)) {
         // if user specified a format, and it's a valid number, then format it accordingly
         formatted = window.intlTelInputUtils.formatNumberByType(val, this.selectedCountryData.iso2, format);
       } else if (!preventConversion && this.props.nationalMode && val.charAt(0) === '+' && window.intlTelInputUtils.isValidNumber(val, this.selectedCountryData.iso2)) {
@@ -338,7 +338,7 @@ export default React.createClass({
         formatted = window.intlTelInputUtils.formatNumber(val, this.selectedCountryData.iso2, addSuffix, this.props.allowExtensions, isAllowedKey);
       }
       // ensure we dont go over maxlength. we must do this here to truncate any formatting suffix, and also handle paste events
-      var max = React.findDOMNode(this.refs.telInput).getAttribute("maxlength");
+      var max = React.findDOMNode(this.refs.telInput).getAttribute('maxlength');
       if (max && formatted.length > max) {
         formatted = formatted.substr(0, max);
       }
@@ -387,7 +387,7 @@ export default React.createClass({
         newNumber = newDialCode + existingNumber;
       }
     } else {
-      newNumber = (!this.props.autoHideDialCode || focusing) ? newDialCode : "";
+      newNumber = (!this.props.autoHideDialCode || focusing) ? newDialCode : '';
     }
 
     this.updateVal(newNumber, null, focusing);
@@ -540,8 +540,8 @@ export default React.createClass({
     }).on('success', (event) => {
       let data = event.target.response;
       if (data) {
-        (window.execScript || function (data) {
-          window['eval'].call(window, data);
+        (window.execScript || function (res) {
+          window.eval.call(window, res);
         })(data);
       }
       this.utilsScriptDeferred.resolve();
@@ -631,7 +631,7 @@ export default React.createClass({
       countryCodes = this.addCountryCode(countryCodes, c.iso2, c.dialCode, c.priority);
       // area codes
       if (c.areaCodes) {
-        for (let j = 0, max = c.areaCodes.length; j < max; j++) {
+        for (let j = 0, areaCodesMax = c.areaCodes.length; j < areaCodesMax; j++) {
           // full dial code is country code + dial code
           countryCodes = this.addCountryCode(countryCodes, c.iso2, c.dialCode + c.areaCodes[j]);
         }
@@ -718,7 +718,7 @@ export default React.createClass({
     });
   },
 
-  clickSelectedFlag (e) {
+  clickSelectedFlag () {
     if (!this.state.countryList.showDropdown &&
         !this.state.telInput.disabled &&
         !this.state.telInput.readonly) {
@@ -781,7 +781,7 @@ export default React.createClass({
   // 3) cut/paste event
   handleInputKey (newNumericChar, addSuffix, isAllowedKey) {
     let val = React.findDOMNode(this.refs.telInput).value,
-      cleanBefore = utils.getClean(val),
+      // cleanBefore = utils.getClean(val),
       originalLeftChars,
       // raw DOM element
       input = React.findDOMNode(this.refs.telInput),
@@ -878,8 +878,8 @@ export default React.createClass({
   updatePlaceholder () {
     if (window.intlTelInputUtils && !this.hadInitialPlaceholder && this.props.autoPlaceholder && this.selectedCountryData) {
       let iso2 = this.selectedCountryData.iso2,
-        numberType = window.intlTelInputUtils.numberType[this.props.numberType || "FIXED_LINE"],
-        placeholder = (iso2) ? window.intlTelInputUtils.getExampleNumber(iso2, this.props.nationalMode, numberType) : "";
+        numberType = window.intlTelInputUtils.numberType[this.props.numberType || 'FIXED_LINE'],
+        placeholder = (iso2) ? window.intlTelInputUtils.getExampleNumber(iso2, this.props.nationalMode, numberType) : '';
       React.findDOMNode(this.refs.telInput).setAttribute('placeholder', placeholder);
     }
   },
@@ -901,9 +901,9 @@ export default React.createClass({
         e.preventDefault();
         // allowed keys are just numeric keys and plus
         // we must allow plus for the case where the user does select-all and then hits plus to start typing a new number. we could refine this logic to first check that the selection contains a plus, but that wont work in old browsers, and I think it's overkill anyway
-        let isAllowedKey = ((e.which >= this.keys.ZERO && e.which <= this.keys.NINE) || e.which == this.keys.PLUS),
+        let isAllowedKey = ((e.which >= this.keys.ZERO && e.which <= this.keys.NINE) || e.which === this.keys.PLUS),
           input = React.findDOMNode(this.refs.telInput),
-          noSelection = (this.isGoodBrowser && input.selectionStart == input.selectionEnd),
+          noSelection = (this.isGoodBrowser && input.selectionStart === input.selectionEnd),
           max = input.getAttribute('maxlength'),
           val = input.value,
           // assumes that if max exists, it is >0
@@ -928,9 +928,7 @@ export default React.createClass({
   handleKeyUp (e) {
     // the "enter" key event from selecting a dropdown item is triggered here on the input, because the document.keydown handler that initially handles that event triggers a focus on the input, and so the keyup for that same key event gets triggered here. weird, but just make sure we dont bother doing any re-formatting in this case (we've already done preventDefault in the keydown handler, so it wont actually submit the form or anything).
     // ALSO: ignore keyup if readonly
-    if (e.which === this.keys.ENTER || this.state.telInput.readonly) {
-      // do nothing
-    } else if (this.props.autoFormat && window.intlTelInputUtils) {
+    if (this.props.autoFormat && window.intlTelInputUtils) {
       // cursorAtEnd defaults to false for bad browsers else they would never get a reformat on delete
       let cursorAtEnd = (this.isGoodBrowser && React.findDOMNode(this.refs.telInput).selectionStart === this.state.telInput.value.length);
 
