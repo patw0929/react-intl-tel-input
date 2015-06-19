@@ -1,0 +1,8 @@
+dist/*
+test/*
+src/components/libphonenumber.js
+node_modules/*
+Gruntfile.js
+karma.conf.js
+package.json
+webpack.*.js
