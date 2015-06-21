@@ -675,7 +675,7 @@ export default React.createClass({
     // and the input's placeholder
     this.updatePlaceholder();
 
-    //this.updateDialCode(listItem.attr("data-dial-code"), true);
+    this.updateDialCode(this.selectedCountryData.dialCode, true);
 
     // always fire the change event as even if nationalMode=true (and we haven't updated the input val), the system as a whole has still changed - see country-sync example. think of it as making a selection from a select element.
     //this.telInput.trigger("change");
