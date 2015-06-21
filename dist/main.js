@@ -115,6 +115,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  propTypes: {
 	    css: React.PropTypes.arrayOf(React.PropTypes.string),
+	    fieldName: React.PropTypes.string,
 	    value: React.PropTypes.string,
 	    allowExtensions: React.PropTypes.bool,
 	    autoFormat: React.PropTypes.bool,
@@ -133,6 +134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      css: ["intl-tel-input", ""],
+	      fieldName: "",
 	      value: "",
 	      // typing digits after a valid number will be added to the extension part of the number
 	      allowExtensions: false,
@@ -177,11 +179,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	  },
 
-	  changeHighlightCountry: function changeHighlightCountry(country) {
+	  changeHighlightCountry: function changeHighlightCountry(countryIndex) {
 	    this.setState({
 	      countryList: {
 	        showDropdown: true,
-	        highlightedCountry: country
+	        highlightedCountry: countryIndex
 	      },
 	      telInput: this.state.telInput,
 	      countryCode: this.state.countryCode
@@ -201,12 +203,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      this.scrollTo(next);
 
-	      var countryCode = next.getAttribute("data-country-code");
+	      var selectedIndex = utils.retrieveLiIndex(next);
 
 	      this.setState({
 	        countryList: {
 	          showDropdown: true,
-	          highlightedCountry: countryCode
+	          highlightedCountry: selectedIndex
 	        },
 	        telInput: this.state.telInput,
 	        countryCode: this.state.countryCode
@@ -220,12 +222,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var current = React.findDOMNode(this.refs.flagDropDown).querySelectorAll(".highlight")[0];
 	    if (current) {
+	      var selectedIndex = utils.retrieveLiIndex(current);
 	      var countryCode = current.getAttribute("data-country-code");
 
 	      this.setState({
 	        countryList: {
 	          showDropdown: false,
-	          highlightedCountry: countryCode
+	          highlightedCountry: selectedIndex
 	        },
 	        telInput: this.state.telInput,
 	        countryCode: countryCode
@@ -282,11 +285,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (utils.startsWith(this.countries[i].name, query)) {
 	        var listItem = React.findDOMNode(this.refs.flagDropDown).querySelector(".country-list [data-country-code=\"" + this.countries[i].iso2 + "\"]:not(.preferred)");
 
+	        var selectedIndex = utils.retrieveLiIndex(listItem);
+
 	        // update highlighting and scroll
 	        this.setState({
 	          countryList: {
 	            showDropdown: true,
-	            highlightedCountry: this.countries[i].iso2
+	            highlightedCountry: selectedIndex
 	          },
 	          telInput: this.state.telInput,
 	          countryCode: this.state.countryCode
@@ -1066,6 +1071,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        className: inputClass,
 	        disabled: this.state.telInput.disabled,
 	        readonly: this.state.telInput.readonly,
+	        fieldName: this.props.fieldName,
 	        value: this.state.telInput.value,
 	        handleInputChange: this.handleInputChange,
 	        handleKeyPress: this.handleKeyPress,
@@ -1099,6 +1105,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  isNumeric: function isNumeric(obj) {
 	    return obj - parseFloat(obj) >= 0;
+	  },
+
+	  retrieveLiIndex: function retrieveLiIndex(node) {
+	    var children = node.parentNode.childNodes;
+	    var num = 0;
+	    for (var i = 0, max = children.length; i < max; i++) {
+	      if (children[i] === node) {
+	        return num;
+	      }
+
+	      if (children[i].nodeType === 1 && children[i].tagName.toLowerCase() === "li") {
+	        num++;
+	      }
+	    }
+	    return -1;
 	  },
 
 	  // extract the numeric digits from the given string
@@ -1321,6 +1342,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  appendListItem: function appendListItem(countries, className) {
 	    var _this = this;
 
+	    var preferredCountriesCount = this.props.preferredCountries.length;
 	    return countries.map(function (country, index) {
 	      if (_this.props.isMobile) {
 	        return React.createElement(
@@ -1329,9 +1351,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	          country.name + " +" + country.dialCode
 	        );
 	      } else {
+	        var actualIndex = className === "preferred" ? index : index + preferredCountriesCount;
 	        var countryClassObj = {
 	          country: true,
-	          highlight: _this.props.highlightedCountry === country.iso2
+	          highlight: _this.props.highlightedCountry === actualIndex
 	        },
 	            countryClass = undefined;
 	        countryClassObj[className] = true;
@@ -1367,8 +1390,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  handleMouseOver: function handleMouseOver(e) {
 	    if (e.currentTarget.getAttribute("class").indexOf("country") > -1) {
-	      var highlightedCountry = React.findDOMNode(e.currentTarget).getAttribute("data-country-code");
-	      this.props.changeHighlightCountry(highlightedCountry);
+	      var selectedIndex = utils.retrieveLiIndex(e.currentTarget);
+	      this.props.changeHighlightCountry(selectedIndex);
 	    }
 	  },
 
@@ -1476,7 +1499,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    inputTop: React.PropTypes.number,
 	    inputOuterHeight: React.PropTypes.number,
 	    preferredCountries: React.PropTypes.array,
-	    highlightedCountry: React.PropTypes.string,
+	    highlightedCountry: React.PropTypes.number,
 	    changeHighlightCountry: React.PropTypes.func
 	  },
 
@@ -1541,6 +1564,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    className: React.PropTypes.string,
 	    disabled: React.PropTypes.bool,
 	    readonly: React.PropTypes.bool,
+	    fieldName: React.PropTypes.string,
 	    value: React.PropTypes.string,
 	    handleInputChange: React.PropTypes.func,
 	    handleKeyPress: React.PropTypes.func,
@@ -1552,6 +1576,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      className: this.props.className,
 	      disabled: this.props.disabled ? "disabled" : false,
 	      readOnly: this.props.readonly ? "readonly" : false,
+	      name: this.props.fieldName,
 	      value: this.props.value,
 	      onChange: this.props.handleInputChange,
 	      onKeyPress: this.props.handleKeyPress,

@@ -48,6 +48,7 @@ export default React.createClass({
 
   propTypes: {
     css: React.PropTypes.arrayOf(React.PropTypes.string),
+    fieldName: React.PropTypes.string,
     value: React.PropTypes.string,
     allowExtensions: React.PropTypes.bool,
     autoFormat: React.PropTypes.bool,
@@ -66,6 +67,7 @@ export default React.createClass({
   getDefaultProps () {
     return {
       css: ['intl-tel-input', ''],
+      fieldName: '',
       value: '',
       // typing digits after a valid number will be added to the extension part of the number
       allowExtensions: false,
@@ -993,6 +995,7 @@ export default React.createClass({
                   className={inputClass}
                   disabled={this.state.telInput.disabled}
                   readonly={this.state.telInput.readonly}
+                  fieldName={this.props.fieldName}
                   value={this.state.telInput.value}
                   handleInputChange={this.handleInputChange}
                   handleKeyPress={this.handleKeyPress}
