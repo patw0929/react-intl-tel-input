@@ -13,10 +13,15 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
 
   // Read configuration from package.json
-  var pkgConfig = grunt.file.readJSON('package.json');
+  var folders = {
+    src: "src",
+    test: "test",
+    dist: "dist",
+    example: "example"
+  };
 
   grunt.initConfig({
-    pkg: pkgConfig,
+    folders: folders,
 
     webpack: {
       example: webpackExampleConfig,
@@ -29,7 +34,7 @@ module.exports = function (grunt) {
         port: 8000,
         webpack: webpackDevConfig,
         publicPath: '/assets/',
-        contentBase: './<%= pkg.src %>/'
+        contentBase: './<%= folders.src %>/'
       },
 
       start: {
@@ -47,7 +52,7 @@ module.exports = function (grunt) {
           keepalive: true,
           middleware: function (connect) {
             return [
-              mountFolder(connect, pkgConfig.example)
+              mountFolder(connect, folders.example)
             ];
           }
         }
@@ -80,37 +85,37 @@ module.exports = function (grunt) {
             flatten: true,
             expand: true,
             src: [
-              '<%= pkg.src %>/index.html'
+              '<%= folders.src %>/index.html'
             ],
-            dest: '<%= pkg.example %>/',
+            dest: '<%= folders.example %>/',
             filter: 'isFile'
           },
           {
             flatten: true,
             expand: true,
             src: [
-              '<%= pkg.src %>/libphonenumber.js'
+              '<%= folders.src %>/libphonenumber.js'
             ],
-            dest: '<%= pkg.dist %>/',
+            dest: '<%= folders.dist %>/',
             filter: 'isFile'
           },
           {
             flatten: true,
             expand: true,
-            src: '<%= pkg.dist %>/*.png',
-            dest: '<%= pkg.example %>/'
+            src: '<%= folders.dist %>/*.png',
+            dest: '<%= folders.example %>/'
           },
           {
             flatten: true,
             expand: true,
-            src: '<%= pkg.src %>/styles/*',
-            dest: '<%= pkg.dist %>/styles/'
+            src: '<%= folders.src %>/styles/*',
+            dest: '<%= folders.dist %>/styles/'
           },
           {
             flatten: true,
             expand: true,
-            src: '<%= pkg.src %>/images/*',
-            dest: '<%= pkg.dist %>/images/'
+            src: '<%= folders.src %>/images/*',
+            dest: '<%= folders.dist %>/images/'
           }
         ]
       }
@@ -121,7 +126,7 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '<%= pkg.example %>'
+            '<%= folders.example %>'
           ]
         }]
       },
@@ -129,7 +134,7 @@ module.exports = function (grunt) {
         files: [{
           dot: true,
           src: [
-            '<%= pkg.dist %>'
+            '<%= folders.dist %>'
           ]
         }]
       }

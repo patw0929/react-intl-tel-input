@@ -17,10 +17,6 @@
   "bugs": {
     "url": "https://github.com/patw0929/react-intl-tel-input/issues"
   },
-  "src": "src",
-  "test": "test",
-  "dist": "dist",
-  "example": "example",
   "main": "dist/main.js",
   "dependencies": {
     "react": "~0.13.3"

@@ -31,3 +31,4 @@ node_modules/
 .tmp
 /src/main.js
 .grunt/
+npm-debug.log
