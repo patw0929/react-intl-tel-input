@@ -21,6 +21,7 @@ export default React.createClass({
   },
 
   appendListItem (countries, className) {
+    let preferredCountriesCount = this.props.preferredCountries.length;
     return countries.map((country, index) => {
       if (this.props.isMobile) {
         return (
@@ -29,9 +30,10 @@ export default React.createClass({
           </option>
         );
       } else {
+        let actualIndex = (className === 'preferred') ? index : index + preferredCountriesCount;
         let countryClassObj = {
               country: true,
-              highlight: (this.props.highlightedCountry === country.iso2)
+              highlight: (this.props.highlightedCountry === actualIndex)
             },
             countryClass;
         countryClassObj[className] = true;
@@ -58,8 +60,8 @@ export default React.createClass({
 
   handleMouseOver (e) {
     if (e.currentTarget.getAttribute('class').indexOf('country') > -1) {
-      let highlightedCountry = React.findDOMNode(e.currentTarget).getAttribute('data-country-code');
-      this.props.changeHighlightCountry(highlightedCountry);
+      let selectedIndex = utils.retrieveLiIndex(e.currentTarget);
+      this.props.changeHighlightCountry(selectedIndex);
     }
   },
 

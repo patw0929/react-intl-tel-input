@@ -13,6 +13,21 @@ export default {
     return obj - parseFloat(obj) >= 0;
   },
 
+  retrieveLiIndex (node) {
+    var children = node.parentNode.childNodes;
+    var num = 0;
+    for (var i = 0, max = children.length; i < max; i++) {
+      if (children[i] === node) {
+        return num;
+      }
+
+      if (children[i].nodeType === 1 && children[i].tagName.toLowerCase() === 'li') {
+        num++;
+      }
+    }
+    return -1;
+  },
+
   // extract the numeric digits from the given string
   getNumeric (s) {
     return s.replace(/\D/g, '');

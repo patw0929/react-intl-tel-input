@@ -17,7 +17,7 @@ export default React.createClass({
     inputTop: React.PropTypes.number,
     inputOuterHeight: React.PropTypes.number,
     preferredCountries: React.PropTypes.array,
-    highlightedCountry: React.PropTypes.string,
+    highlightedCountry: React.PropTypes.number,
     changeHighlightCountry: React.PropTypes.func
   },
 

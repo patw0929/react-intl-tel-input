@@ -110,11 +110,11 @@ export default React.createClass({
     };
   },
 
-  changeHighlightCountry (country) {
+  changeHighlightCountry (countryIndex) {
     this.setState({
       countryList: {
         showDropdown: true,
-        highlightedCountry: country
+        highlightedCountry: countryIndex
       },
       telInput: this.state.telInput,
       countryCode: this.state.countryCode
@@ -134,12 +134,12 @@ export default React.createClass({
 
       this.scrollTo(next);
 
-      let countryCode = next.getAttribute('data-country-code');
+      let selectedIndex = utils.retrieveLiIndex(next);
 
       this.setState({
         countryList: {
           showDropdown: true,
-          highlightedCountry: countryCode
+          highlightedCountry: selectedIndex
         },
         telInput: this.state.telInput,
         countryCode: this.state.countryCode
@@ -151,12 +151,13 @@ export default React.createClass({
   handleEnterKey () {
     let current = React.findDOMNode(this.refs.flagDropDown).querySelectorAll('.highlight')[0];
     if (current) {
+      let selectedIndex = utils.retrieveLiIndex(current);
       let countryCode = current.getAttribute('data-country-code');
 
       this.setState({
         countryList: {
           showDropdown: false,
-          highlightedCountry: countryCode
+          highlightedCountry: selectedIndex
         },
         telInput: this.state.telInput,
         countryCode: countryCode
@@ -214,11 +215,13 @@ export default React.createClass({
         let listItem = React.findDOMNode(this.refs.flagDropDown)
                             .querySelector('.country-list [data-country-code="' + this.countries[i].iso2 + '"]:not(.preferred)');
 
+        let selectedIndex = utils.retrieveLiIndex(listItem);
+
         // update highlighting and scroll
         this.setState({
           countryList: {
             showDropdown: true,
-            highlightedCountry: this.countries[i].iso2
+            highlightedCountry: selectedIndex
           },
           telInput: this.state.telInput,
           countryCode: this.state.countryCode
