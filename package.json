@@ -2,6 +2,7 @@
   "name": "react-intl-tel-input",
   "version": "0.0.1",
   "description": "Rewrite intl-tel-input in React.",
+  "author": "patw",
   "keywords": [
     "react",
     "react-component",
@@ -9,7 +10,13 @@
     "intl-tel-input",
     "phonenumber"
   ],
-  "repository": "https://github.com/patw0929/react-intl-tel-input",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/patw0929/react-intl-tel-input"
+  },
+  "bugs": {
+    "url": "https://github.com/patw0929/react-intl-tel-input/issues"
+  },
   "src": "src",
   "test": "test",
   "dist": "dist",
@@ -62,5 +69,6 @@
     "lint": "eslint ./; true",
     "gh-pages": "grunt gh-pages",
     "test": "echo \"no tests yet\" && exit 0"
-  }
+  },
+  "license": "MIT"
 }
