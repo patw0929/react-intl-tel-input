@@ -11,7 +11,7 @@ To build the examples locally, run:
 
 ```
 npm install
-npm start
+npm run example
 ```
 
 Then open [`localhost:8000`](http://localhost:8000) in a browser.
@@ -32,6 +32,8 @@ npm install react-intl-tel-input --save
 
 ```
 var IntlTelInput = require('react-intl-tel-input');
+require('file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js');
+require('./node_modules/react-intl-tel-input/dist/styles/intlTelInput.scss');
 
 <IntlTelInput css={['county-sel', 'district-sel', 'zipcode']}>Example</IntlTelInput>
 ```
@@ -45,7 +47,7 @@ Please see the [Demo Page](http://patw0929.github.io/react-intl-tel-input/)
 
 **NOTE:** The source code for the component is in `src`. A UMD bundle is also built to `dist`, which can be included without the need for any build system.
 
-To build, watch and serve the examples (which will also watch the component source), run `npm start`.
+To build, watch and serve the examples (which will also watch the component source), run `npm run example`.
 
 ## Inspired by
 

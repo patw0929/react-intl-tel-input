@@ -10,18 +10,23 @@ var webpack = require('webpack');
 module.exports = {
 
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
     publicPath: '/assets/'
   },
 
   cache: true,
   debug: true,
   devtool: false,
-  entry: [
+  entry: {
+    main: [
       'webpack/hot/only-dev-server',
-      './src/components/IntlTelInput.js',
+      './src/components/IntlTelInput.js'
+    ],
+    example: [
+      'webpack/hot/only-dev-server',
       './src/example.js'
-  ],
+    ]
+  },
 
   stats: {
     colors: true,
@@ -33,15 +38,11 @@ module.exports = {
     alias: {
       'styles': __dirname + '/src/styles',
       'mixins': __dirname + '/src/mixins',
-      'components': __dirname + '/src/components/'
+      'components': __dirname + '/src/components/',
+      'react-intl-tel-input': './components/IntlTelInput.js'
     }
   },
   module: {
-    preLoaders: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      loader: 'jsxhint'
-    }],
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: /(node_modules|libphonenumber\.js)/,

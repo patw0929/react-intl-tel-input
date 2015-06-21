@@ -11,21 +11,15 @@ var webpack = require('webpack');
 module.exports = {
 
   output: {
-    publicPath: './',
-    path: 'dist/',
-    filename: 'main.js',
-    library: 'IntlTelInput',
-    libraryTarget: 'umd'
+    publicPath: './assets/',
+    path: 'example/assets/',
+    filename: '[name].js'
   },
 
   debug: false,
   devtool: false,
   entry: {
-    main: './src/components/IntlTelInput.js'
-  },
-
-  externals: {
-    react: 'react'
+    example: ['./src/example.js']
   },
 
   stats: {
@@ -35,11 +29,11 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.DedupePlugin(),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false
-    //   }
-    // }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin()
   ],
@@ -49,14 +43,15 @@ module.exports = {
     alias: {
       'styles': __dirname + '/src/styles',
       'mixins': __dirname + '/src/mixins',
-      'components': __dirname + '/src/components/'
+      'components': __dirname + '/src/components/',
+      'react-intl-tel-input': '../dist/main.js'
     }
   },
 
   module: {
     loaders: [{
       test: /\.js$/,
-      exclude: /node_modules/,
+      exclude: /(node_modules|libphonenumber\.js)/,
       loader: 'babel-loader'
     }, {
       test: /\.css$/,

@@ -1,6 +1,7 @@
 dist/*
+example/*
 test/*
-src/components/libphonenumber.js
+src/libphonenumber.js
 node_modules/*
 Gruntfile.js
 karma.conf.js

@@ -4,7 +4,8 @@ var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
 
-var webpackDistConfig = require('./webpack.dist.config.js'),
+var webpackExampleConfig = require('./webpack.example.config.js'),
+    webpackDistConfig = require('./webpack.dist.config.js'),
     webpackDevConfig = require('./webpack.config.js');
 
 module.exports = function (grunt) {
@@ -18,10 +19,8 @@ module.exports = function (grunt) {
     pkg: pkgConfig,
 
     webpack: {
-      options: webpackDistConfig,
-      dist: {
-        cache: false
-      }
+      example: webpackExampleConfig,
+      dist: webpackDistConfig
     },
 
     'webpack-dev-server': {
@@ -43,12 +42,12 @@ module.exports = function (grunt) {
         port: 8000
       },
 
-      dist: {
+      example: {
         options: {
           keepalive: true,
           middleware: function (connect) {
             return [
-              mountFolder(connect, pkgConfig.dist)
+              mountFolder(connect, pkgConfig.example)
             ];
           }
         }
@@ -62,7 +61,7 @@ module.exports = function (grunt) {
       dev: {
         path: 'http://localhost:<%= connect.options.port %>/webpack-dev-server/'
       },
-      dist: {
+      example: {
         path: 'http://localhost:<%= connect.options.port %>/'
       }
     },
@@ -80,14 +79,37 @@ module.exports = function (grunt) {
           {
             flatten: true,
             expand: true,
-            src: ['<%= pkg.src %>/*'],
+            src: [
+              '<%= pkg.src %>/index.html'
+            ],
+            dest: '<%= pkg.example %>/',
+            filter: 'isFile'
+          },
+          {
+            flatten: true,
+            expand: true,
+            src: [
+              '<%= pkg.src %>/libphonenumber.js'
+            ],
             dest: '<%= pkg.dist %>/',
             filter: 'isFile'
           },
           {
             flatten: true,
             expand: true,
-            src: ['<%= pkg.src %>/images/*'],
+            src: '<%= pkg.dist %>/*.png',
+            dest: '<%= pkg.example %>/'
+          },
+          {
+            flatten: true,
+            expand: true,
+            src: '<%= pkg.src %>/styles/*',
+            dest: '<%= pkg.dist %>/styles/'
+          },
+          {
+            flatten: true,
+            expand: true,
+            src: '<%= pkg.src %>/images/*',
             dest: '<%= pkg.dist %>/images/'
           }
         ]
@@ -95,6 +117,14 @@ module.exports = function (grunt) {
     },
 
     clean: {
+      example: {
+        files: [{
+          dot: true,
+          src: [
+            '<%= pkg.example %>'
+          ]
+        }]
+      },
       dist: {
         files: [{
           dot: true,
@@ -107,7 +137,7 @@ module.exports = function (grunt) {
 
     'gh-pages': {
       options: {
-        base: 'dist'
+        base: 'example'
       },
       src: ['**']
     }
@@ -116,8 +146,8 @@ module.exports = function (grunt) {
   grunt.registerTask('publish:examples', ['gh-pages']);
 
   grunt.registerTask('serve', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'open:dist', 'connect:dist']);
+    if (target === 'example') {
+      return grunt.task.run(['clean:dist', 'webpack:dist', 'build', 'open:example', 'connect:example']);
     }
 
     grunt.task.run([
@@ -128,7 +158,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', ['karma']);
 
-  grunt.registerTask('build', ['clean', 'copy', 'webpack']);
+  grunt.registerTask('build', ['clean:example', 'copy', 'webpack:example']);
 
   grunt.registerTask('default', []);
 };

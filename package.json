@@ -2,15 +2,21 @@
   "name": "react-intl-tel-input",
   "version": "0.0.1",
   "description": "Rewrite intl-tel-input in React.",
+  "keywords": [
+    "react",
+    "react-component",
+    "tel",
+    "intl-tel-input",
+    "phonenumber"
+  ],
   "repository": "https://github.com/patw0929/react-intl-tel-input",
   "private": true,
   "src": "src",
   "test": "test",
   "dist": "dist",
-  "mainInput": "IntlTelInput",
-  "mainOutput": "main",
+  "example": "example",
+  "main": "dist/main.js",
   "dependencies": {
-    "normalize.css": "~3.0.3",
     "react": "~0.13.3"
   },
   "devDependencies": {
@@ -19,11 +25,10 @@
     "babel-loader": "^4.0.0",
     "classnames": "^2.1.2",
     "cookies-js": "^1.2.1",
-    "copy-loader": "^0.1.2",
     "css-loader": "~0.9.0",
     "eslint": "^0.23.0",
     "eslint-plugin-react": "^2.5.2",
-    "file-loader": "^0.8.4",
+    "file-loader": "^0.8.3",
     "grunt": "~0.4.5",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-connect": "~0.8.0",
@@ -54,6 +59,7 @@
   "scripts": {
     "build": "grunt build",
     "start": "grunt serve",
+    "example": "grunt serve:example",
     "lint": "eslint ./; true",
     "gh-pages": "grunt gh-pages",
     "test": "echo \"no tests yet\" && exit 0"

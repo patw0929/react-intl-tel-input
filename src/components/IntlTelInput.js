@@ -9,9 +9,6 @@ import FlagDropDown from './FlagDropDown';
 import TelInput from './TelInput';
 import utils from './utils';
 
-import '../styles/intlTelInput.scss';
-require('file?name=libphonenumber.js!./libphonenumber.js');
-
 export default React.createClass({
   isGoodBrowser () {
     return Boolean(document.createElement('input').setSelectionRange);
