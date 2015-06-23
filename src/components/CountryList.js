@@ -13,11 +13,11 @@ export default React.createClass({
   },
 
   handleChangeCountry (e) {
-    this.selectFlag(e.target.value, e.target.options[e.target.selectedIndex].getAttribute('data-dial-code'));
+    this.selectFlag(e.target.value);
   },
 
-  selectFlag (iso2, dialCode) {
-    this.props.selectFlag(iso2, dialCode);
+  selectFlag (iso2) {
+    this.props.selectFlag(iso2);
   },
 
   appendListItem (countries, className) {
@@ -25,7 +25,7 @@ export default React.createClass({
     return countries.map((country, index) => {
       if (this.props.isMobile) {
         return (
-          <option data-dial-code={country.dialCode} value={country.iso2}>
+          <option key={'country-' + index} data-dial-code={country.dialCode} value={country.iso2}>
             {country.name + ' +' + country.dialCode}
           </option>
         );
@@ -45,7 +45,7 @@ export default React.createClass({
               data-dial-code={country.dialCode}
               data-country-code={country.iso2}
               onMouseOver={this.handleMouseOver}
-              onClick={this.selectFlag.bind(this, country.iso2, country.dialCode)}>
+              onClick={this.selectFlag.bind(this, country.iso2)}>
             <div ref="selectedFlag" className="flag">
               <div ref="selectedFlagInner" className={'iti-flag ' + country.iso2}></div>
             </div>
