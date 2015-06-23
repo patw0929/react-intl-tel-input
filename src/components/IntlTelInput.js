@@ -661,32 +661,30 @@ export default React.createClass({
   selectFlag (countryCode) {
     this.selectedCountryData = (countryCode) ? utils.getCountryData(countryCode, false) : {};
     // update selected flag and active list item
-    if (!this.isMobile) {
-      this.setState({
-        countryList: {
-          showDropdown: false,
-          highlightedCountry: this.state.countryList.highlightedCountry
-        },
-        telInput: this.state.telInput,
-        countryCode: countryCode
-      });
-    }
+    this.setState({
+      countryList: {
+        showDropdown: false,
+        highlightedCountry: this.state.countryList.highlightedCountry
+      },
+      telInput: this.state.telInput,
+      countryCode: countryCode
+    }, () => {
+      // and the input's placeholder
+      this.updatePlaceholder();
 
-    // and the input's placeholder
-    this.updatePlaceholder();
+      this.updateDialCode(this.selectedCountryData.dialCode, true);
 
-    this.updateDialCode(this.selectedCountryData.dialCode, true);
+      // always fire the change event as even if nationalMode=true (and we haven't updated the input val), the system as a whole has still changed - see country-sync example. think of it as making a selection from a select element.
+      //this.telInput.trigger("change");
 
-    // always fire the change event as even if nationalMode=true (and we haven't updated the input val), the system as a whole has still changed - see country-sync example. think of it as making a selection from a select element.
-    //this.telInput.trigger("change");
-
-    // focus the input
-    React.findDOMNode(this.refs.telInput).focus();
-    // fix for FF and IE11 (with nationalMode=false i.e. auto inserting dial code), who try to put the cursor at the beginning the first time
-    if (this.isGoodBrowser) {
-      let len = this.state.telInput.value.length;
-      React.findDOMNode(this.refs.telInput).setSelectionRange(len, len);
-    }
+      // focus the input
+      React.findDOMNode(this.refs.telInput).focus();
+      // fix for FF and IE11 (with nationalMode=false i.e. auto inserting dial code), who try to put the cursor at the beginning the first time
+      if (this.isGoodBrowser) {
+        let len = this.state.telInput.value.length;
+        React.findDOMNode(this.refs.telInput).setSelectionRange(len, len);
+      }
+    });
   },
 
   handleSelectedFlagKeydown (e) {
