@@ -3,6 +3,45 @@
 import AllCountries from './AllCountries';
 
 export default {
+  arraysEqual (a, b) {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length !== b.length) return false;
+
+    // If you don't care about the order of the elements inside
+    // the array, you should sort both arrays here.
+
+    for (let i = 0; i < a.length; ++i) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
+  },
+
+  shallowEquals (a, b) {
+    if (a === b) {
+      return true;
+    }
+
+    for (let key in a) {
+      if (a[key] !== b[key]) {
+        if (Array.isArray(a[key]) && Array.isArray(b[key])) {
+          if (!this.arraysEqual(a[key], b[key])) {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      }
+    }
+
+    for (let key in b) {
+      if (a.hasOwnProperty(key) === false) {
+        return false;
+      }
+    }
+    return true;
+  },
+
   trim (str) {
     // Make sure we trim BOM and NBSP
     let rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
