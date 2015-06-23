@@ -360,8 +360,7 @@ export default React.createClass({
         readonly: this.state.telInput.readonly,
         offsetTop: this.state.telInput.offsetTop,
         outerHeight: this.state.telInput.outerHeight
-      },
-      countryCode: this.state.countryCode
+      }
     });
   },
 
@@ -430,7 +429,7 @@ export default React.createClass({
 
   // check if need to select a new flag based on the given number
   updateFlagFromNumber (number, updateDefault) {
-    // if we're in nationalMode and we're on US/Canada, make sure the number starts with a +1 so _getDialCode will be able to extract the area code
+    // if we're in nationalMode and we're on US/Canada, make sure the number starts with a +1 so getDialCode will be able to extract the area code
     // update: if we dont yet have selectedCountryData, but we're here (trying to update the flag from the number), that means we're initialising the plugin with a number that already has a dial code, so fine to ignore this bit
     if (number && this.props.nationalMode &&
         this.selectedCountryData && this.selectedCountryData.dialCode === '1' &&
@@ -443,10 +442,12 @@ export default React.createClass({
     // try and extract valid dial code from input
     let dialCode = this.getDialCode(number),
       countryCode = null;
+
     if (dialCode) {
       // check if one of the matching countries is already selected
       let countryCodes = this.countryCodes[utils.getNumeric(dialCode)],
         alreadySelected = (this.selectedCountryData && countryCodes.indexOf(this.selectedCountryData.iso2) !== -1);
+
       // if a matching country is not already selected (or this is an unknown NANP area code): choose the first in the list
       if (!alreadySelected || this.isUnknownNanp(number, dialCode)) {
         // if using onlyCountries option, countryCodes[0] may be empty, so we must find the first non-empty index
@@ -467,7 +468,7 @@ export default React.createClass({
     }
 
     if (countryCode !== null && countryCode !== '') {
-      this.selectFlag(countryCode, updateDefault);
+      this.selectFlag(countryCode);
     }
   },
 
@@ -628,8 +629,8 @@ export default React.createClass({
     // generate countryCodes map
     let countryCodes = {};
 
-    for (let i = 0, max = countries.length; i < max; i++) {
-      let c = countries[i];
+    for (let i = 0, max = this.countries.length; i < max; i++) {
+      let c = this.countries[i];
       countryCodes = this.addCountryCode(countryCodes, c.iso2, c.dialCode, c.priority);
       // area codes
       if (c.areaCodes) {
@@ -660,6 +661,7 @@ export default React.createClass({
   // called when the user selects a list item from the dropdown
   selectFlag (countryCode) {
     this.selectedCountryData = (countryCode) ? utils.getCountryData(countryCode, false) : {};
+
     // update selected flag and active list item
     this.setState({
       countryList: {
