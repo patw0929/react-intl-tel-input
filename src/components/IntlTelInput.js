@@ -99,7 +99,7 @@ export default React.createClass({
     return {
       countryList: {
         showDropdown: false,
-        highlightedCountry: this.props.defaultCountry || 'us'
+        highlightedCountry: 0
       },
       telInput: {
         value: '',
