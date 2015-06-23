@@ -5,10 +5,19 @@ import classNames from 'classnames';
 import utils from './utils';
 
 export default React.createClass({
+  shouldComponentUpdate(nextProps) {
+    return !utils.shallowEquals(this.props, nextProps);
+  },
+
   propTypes: {
     isMobile: React.PropTypes.bool,
+    selectFlag: React.PropTypes.func,
     countries: React.PropTypes.array,
+    inputTop: React.PropTypes.number,
+    inputOuterHeight: React.PropTypes.number,
     preferredCountries: React.PropTypes.array,
+    highlightedCountry: React.PropTypes.number,
+    changeHighlightCountry: React.PropTypes.func,
     showDropdown: React.PropTypes.bool
   },
 
