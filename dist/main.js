@@ -166,7 +166,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return {
 	      countryList: {
 	        showDropdown: false,
-	        highlightedCountry: this.props.defaultCountry || "us"
+	        highlightedCountry: 0
 	      },
 	      telInput: {
 	        value: "",
@@ -735,34 +735,34 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // called when the user selects a list item from the dropdown
 	  selectFlag: function selectFlag(countryCode) {
+	    var _this = this;
+
 	    this.selectedCountryData = countryCode ? utils.getCountryData(countryCode, false) : {};
 	    // update selected flag and active list item
-	    if (!this.isMobile) {
-	      this.setState({
-	        countryList: {
-	          showDropdown: false,
-	          highlightedCountry: this.state.countryList.highlightedCountry
-	        },
-	        telInput: this.state.telInput,
-	        countryCode: countryCode
-	      });
-	    }
+	    this.setState({
+	      countryList: {
+	        showDropdown: false,
+	        highlightedCountry: this.state.countryList.highlightedCountry
+	      },
+	      telInput: this.state.telInput,
+	      countryCode: countryCode
+	    }, function () {
+	      // and the input's placeholder
+	      _this.updatePlaceholder();
 
-	    // and the input's placeholder
-	    this.updatePlaceholder();
+	      _this.updateDialCode(_this.selectedCountryData.dialCode, true);
 
-	    this.updateDialCode(this.selectedCountryData.dialCode, true);
+	      // always fire the change event as even if nationalMode=true (and we haven't updated the input val), the system as a whole has still changed - see country-sync example. think of it as making a selection from a select element.
+	      //this.telInput.trigger("change");
 
-	    // always fire the change event as even if nationalMode=true (and we haven't updated the input val), the system as a whole has still changed - see country-sync example. think of it as making a selection from a select element.
-	    //this.telInput.trigger("change");
-
-	    // focus the input
-	    React.findDOMNode(this.refs.telInput).focus();
-	    // fix for FF and IE11 (with nationalMode=false i.e. auto inserting dial code), who try to put the cursor at the beginning the first time
-	    if (this.isGoodBrowser) {
-	      var len = this.state.telInput.value.length;
-	      React.findDOMNode(this.refs.telInput).setSelectionRange(len, len);
-	    }
+	      // focus the input
+	      React.findDOMNode(_this.refs.telInput).focus();
+	      // fix for FF and IE11 (with nationalMode=false i.e. auto inserting dial code), who try to put the cursor at the beginning the first time
+	      if (_this.isGoodBrowser) {
+	        var len = _this.state.telInput.value.length;
+	        React.findDOMNode(_this.refs.telInput).setSelectionRange(len, len);
+	      }
+	    });
 	  },
 
 	  handleSelectedFlagKeydown: function handleSelectedFlagKeydown(e) {
@@ -1332,11 +1332,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  handleChangeCountry: function handleChangeCountry(e) {
-	    this.selectFlag(e.target.value, e.target.options[e.target.selectedIndex].getAttribute("data-dial-code"));
+	    this.selectFlag(e.target.value);
 	  },
 
-	  selectFlag: function selectFlag(iso2, dialCode) {
-	    this.props.selectFlag(iso2, dialCode);
+	  selectFlag: function selectFlag(iso2) {
+	    this.props.selectFlag(iso2);
 	  },
 
 	  appendListItem: function appendListItem(countries, className) {
@@ -1347,7 +1347,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (_this.props.isMobile) {
 	        return React.createElement(
 	          "option",
-	          { "data-dial-code": country.dialCode, value: country.iso2 },
+	          { key: "country-" + index, "data-dial-code": country.dialCode, value: country.iso2 },
 	          country.name + " +" + country.dialCode
 	        );
 	      } else {
@@ -1367,7 +1367,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            "data-dial-code": country.dialCode,
 	            "data-country-code": country.iso2,
 	            onMouseOver: _this.handleMouseOver,
-	            onClick: _this.selectFlag.bind(_this, country.iso2, country.dialCode) },
+	            onClick: _this.selectFlag.bind(_this, country.iso2) },
 	          React.createElement(
 	            "div",
 	            { ref: "selectedFlag", className: "flag" },
