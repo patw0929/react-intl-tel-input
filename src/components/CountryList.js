@@ -25,7 +25,7 @@ export default React.createClass({
     return countries.map((country, index) => {
       if (this.props.isMobile) {
         return (
-          <option data-dial-code={country.dialCode} value={country.iso2}>
+          <option key={'country-' + index} data-dial-code={country.dialCode} value={country.iso2}>
             {country.name + ' +' + country.dialCode}
           </option>
         );
