@@ -91,7 +91,7 @@ export default React.createClass({
       preferredCountries: ['us', 'gb'],
       // specify the path to the libphonenumber script to enable validation/formatting
       utilsScript: '',
-      validNumber: null
+      onPhoneNumberChange: null
     };
   },
 
@@ -115,8 +115,8 @@ export default React.createClass({
   componentWillReceiveProps (nextProps) {
     var newState = {
       telInput: this.state.telInput
-    }
-    newState.telInput.value = nextProps.value
+    };
+    newState.telInput.value = nextProps.value;
     this.setState(newState);
   },
 
@@ -378,7 +378,7 @@ export default React.createClass({
       }
     });
 
-    this.notifyPhoneNumberChange(formatted)
+    this.notifyPhoneNumberChange(formatted);
   },
 
   // replace any existing dial code with the new one (if not in nationalMode)
@@ -962,7 +962,7 @@ export default React.createClass({
       this.updateFlagFromNumber(React.findDOMNode(this.refs.telInput).value);
     }
 
-    this.notifyPhoneNumberChange(e.target.value)
+    this.notifyPhoneNumberChange(e.target.value);
   },
 
   handleInputChange (e) {
