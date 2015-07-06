@@ -104,11 +104,11 @@ var IntlTelInput = require('react-intl-tel-input');
 require('file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js');
 require('./node_modules/react-intl-tel-input/dist/styles/intlTelInput.scss');
 
-var check = function (status, value, countryData) {
+var changeHandler = function (status, value, countryData) {
   console.log(status, value, countryData);
 };
 
-React.render(&lt;IntlTelInput validNumber={check}
+React.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
                            css={['intl-tel-input', 'form-control']}
                            utilsScript={'libphonenumber.js'} /&gt;, document.getElementById('content'));
 </code></pre>
@@ -193,7 +193,7 @@ React.render(&lt;IntlTelInput validNumber={check}
                 <td>Specify the path to the libphonenumber script to enable validation/formatting.</td>
               </tr>
               <tr>
-                <th scope="row">validNumber</th>
+                <th scope="row">onPhoneNumberChange</th>
                 <td><code>null</code></td>
                 <td>Validation callback function. It returns validation status, input box value and selected country data.</td>
               </tr>
