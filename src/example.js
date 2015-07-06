@@ -13,7 +13,8 @@ var DemoComponent = React.createClass({
   render () {
     return (
       <div>
-        <IntlTelInput onPhoneNumberChange={this.changeHandler} css={['intl-tel-input', 'form-control']} utilsScript={'assets/libphonenumber.js'} />
+        <IntlTelInput value={this.state.phoneNumber} onPhoneNumberChange={this.changeHandler} css={['intl-tel-input', 'form-control']} utilsScript={'assets/libphonenumber.js'} />
+        <IntlTelInput value={this.state.phoneNumber} css={['intl-tel-input', 'form-control']} utilsScript={'assets/libphonenumber.js'} />
         <div>Phone Number: {this.state.phoneNumber}</div>
       </div>
     )

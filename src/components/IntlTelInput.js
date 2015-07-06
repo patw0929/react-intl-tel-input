@@ -102,7 +102,7 @@ export default React.createClass({
         highlightedCountry: 0
       },
       telInput: {
-        value: '',
+        value: this.props.value || '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
@@ -110,6 +110,12 @@ export default React.createClass({
       },
       countryCode: this.props.defaultCountry || 'us'
     };
+  },
+
+  componentWillReceiveProps (nextProps) {
+    var newState = this.state
+    newState.telInput.value = nextProps.value
+    this.setState(newState);
   },
 
   changeHighlightCountry (countryIndex) {
