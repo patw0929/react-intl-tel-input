@@ -61,7 +61,7 @@ export default React.createClass({
     onlyCountries: React.PropTypes.arrayOf(React.PropTypes.string),
     preferredCountries: React.PropTypes.arrayOf(React.PropTypes.string),
     utilsScript: React.PropTypes.string,
-    validNumber: React.PropTypes.func
+    onPhoneNumberChange: React.PropTypes.func
   },
 
   getDefaultProps () {
@@ -102,7 +102,7 @@ export default React.createClass({
         highlightedCountry: 0
       },
       telInput: {
-        value: '',
+        value: this.props.value || '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
@@ -110,6 +110,21 @@ export default React.createClass({
       },
       countryCode: this.props.defaultCountry || 'us'
     };
+  },
+
+  componentWillReceiveProps (nextProps) {
+    var newState = {
+      telInput: this.state.telInput
+    }
+    newState.telInput.value = nextProps.value
+    this.setState(newState);
+  },
+
+  notifyPhoneNumberChange (newNumber) {
+    if (typeof this.props.onPhoneNumberChange === 'function') {
+      let result = this.isValidNumber(newNumber);
+      this.props.onPhoneNumberChange(result, newNumber, this.selectedCountryData);
+    }
   },
 
   changeHighlightCountry (countryIndex) {
@@ -200,8 +215,8 @@ export default React.createClass({
   },
 
   // validate the input val - assumes the global function isValidNumber (from utilsScript)
-  isValidNumber () {
-    let val = utils.trim(this.state.telInput.value),
+  isValidNumber (number) {
+    let val = utils.trim(number),
       countryCode = (this.props.nationalMode) ? this.selectedCountryData.iso2 : '';
 
     if (window.intlTelInputUtils) {
@@ -362,6 +377,8 @@ export default React.createClass({
         outerHeight: this.state.telInput.outerHeight
       }
     });
+
+    this.notifyPhoneNumberChange(formatted)
   },
 
   // replace any existing dial code with the new one (if not in nationalMode)
@@ -915,10 +932,6 @@ export default React.createClass({
         if (isBelowMax && (isAllowedKey || noSelection)) {
           let newChar = (isAllowedKey) ? String.fromCharCode(e.which) : null;
           this.handleInputKey(newChar, true, isAllowedKey);
-          // if something has changed, trigger the input event (which was otherwised squashed by the preventDefault)
-          // if (val !== this.state.telInput.value) {
-            // that.telInput.trigger("input");
-          // }
         }
         if (!isAllowedKey) {
           this.handleInvalidKey();
@@ -949,10 +962,7 @@ export default React.createClass({
       this.updateFlagFromNumber(React.findDOMNode(this.refs.telInput).value);
     }
 
-    if (typeof this.props.validNumber === 'function') {
-      let result = this.isValidNumber();
-      this.props.validNumber(result, e.target.value, this.selectedCountryData);
-    }
+    this.notifyPhoneNumberChange(e.target.value)
   },
 
   handleInputChange (e) {

@@ -164,6 +164,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', ['karma']);
 
   grunt.registerTask('build', ['clean:example', 'copy', 'webpack:example']);
+  grunt.registerTask('build:dist', ['clean:dist', 'copy', 'webpack:dist']);
 
   grunt.registerTask('default', []);
 };
