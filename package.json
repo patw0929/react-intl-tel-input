@@ -61,6 +61,7 @@
   },
   "scripts": {
     "build": "grunt build",
+    "build-dist": "grunt build:dist",
     "start": "grunt serve",
     "example": "grunt serve:example",
     "lint": "eslint ./; true",
