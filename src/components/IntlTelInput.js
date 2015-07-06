@@ -61,7 +61,7 @@ export default React.createClass({
     onlyCountries: React.PropTypes.arrayOf(React.PropTypes.string),
     preferredCountries: React.PropTypes.arrayOf(React.PropTypes.string),
     utilsScript: React.PropTypes.string,
-    validNumber: React.PropTypes.func
+    onPhoneNumberChange: React.PropTypes.func
   },
 
   getDefaultProps () {
