@@ -362,6 +362,11 @@ export default React.createClass({
         outerHeight: this.state.telInput.outerHeight
       }
     });
+
+    if (typeof this.props.onPhoneNumberChange === 'function') {
+      let result = this.isValidNumber();
+      this.props.onPhoneNumberChange(result, formatted, this.selectedCountryData);
+    }
   },
 
   // replace any existing dial code with the new one (if not in nationalMode)
@@ -915,10 +920,6 @@ export default React.createClass({
         if (isBelowMax && (isAllowedKey || noSelection)) {
           let newChar = (isAllowedKey) ? String.fromCharCode(e.which) : null;
           this.handleInputKey(newChar, true, isAllowedKey);
-          // if something has changed, trigger the input event (which was otherwised squashed by the preventDefault)
-          // if (val !== this.state.telInput.value) {
-            // that.telInput.trigger("input");
-          // }
         }
         if (!isAllowedKey) {
           this.handleInvalidKey();
@@ -949,9 +950,9 @@ export default React.createClass({
       this.updateFlagFromNumber(React.findDOMNode(this.refs.telInput).value);
     }
 
-    if (typeof this.props.validNumber === 'function') {
+    if (typeof this.props.onPhoneNumberChange === 'function') {
       let result = this.isValidNumber();
-      this.props.validNumber(result, e.target.value, this.selectedCountryData);
+      this.props.onPhoneNumberChange(result, e.target.value, this.selectedCountryData);
     }
   },
 
