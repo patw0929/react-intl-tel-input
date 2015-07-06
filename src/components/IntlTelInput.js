@@ -113,7 +113,9 @@ export default React.createClass({
   },
 
   componentWillReceiveProps (nextProps) {
-    var newState = this.state
+    var newState = {
+      telInput: this.state.telInput
+    }
     newState.telInput.value = nextProps.value
     this.setState(newState);
   },
