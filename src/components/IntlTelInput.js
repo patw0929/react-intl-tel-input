@@ -120,6 +120,13 @@ export default React.createClass({
     this.setState(newState);
   },
 
+  notifyPhoneNumberChange (newNumber) {
+    if (typeof this.props.onPhoneNumberChange === 'function') {
+      let result = this.isValidNumber(newNumber);
+      this.props.onPhoneNumberChange(result, newNumber, this.selectedCountryData);
+    }
+  },
+
   changeHighlightCountry (countryIndex) {
     this.setState({
       countryList: {
@@ -208,8 +215,8 @@ export default React.createClass({
   },
 
   // validate the input val - assumes the global function isValidNumber (from utilsScript)
-  isValidNumber () {
-    let val = utils.trim(this.state.telInput.value),
+  isValidNumber (number) {
+    let val = utils.trim(number),
       countryCode = (this.props.nationalMode) ? this.selectedCountryData.iso2 : '';
 
     if (window.intlTelInputUtils) {
@@ -371,10 +378,7 @@ export default React.createClass({
       }
     });
 
-    if (typeof this.props.onPhoneNumberChange === 'function') {
-      let result = this.isValidNumber();
-      this.props.onPhoneNumberChange(result, formatted, this.selectedCountryData);
-    }
+    this.notifyPhoneNumberChange(formatted)
   },
 
   // replace any existing dial code with the new one (if not in nationalMode)
@@ -958,10 +962,7 @@ export default React.createClass({
       this.updateFlagFromNumber(React.findDOMNode(this.refs.telInput).value);
     }
 
-    if (typeof this.props.onPhoneNumberChange === 'function') {
-      let result = this.isValidNumber();
-      this.props.onPhoneNumberChange(result, e.target.value, this.selectedCountryData);
-    }
+    this.notifyPhoneNumberChange(e.target.value)
   },
 
   handleInputChange (e) {
