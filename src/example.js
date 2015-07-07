@@ -9,7 +9,7 @@ var DemoComponent = React.createClass({
   getInitialState () {
     return { phoneNumber: '' };
   },
-  changeHandler (isValid, value, country) {
+  changeHandler (isValid, value) {
     this.setState({ phoneNumber: value });
   },
   render () {
