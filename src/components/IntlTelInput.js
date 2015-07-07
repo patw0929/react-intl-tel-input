@@ -10,9 +10,7 @@ import TelInput from './TelInput';
 import utils from './utils';
 
 export default React.createClass({
-  isGoodBrowser () {
-    return Boolean(document.createElement('input').setSelectionRange);
-  },
+  isGoodBrowser: Boolean(document.createElement('input').setSelectionRange),
 
   keys: {
     UP: 38,
