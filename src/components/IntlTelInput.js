@@ -375,8 +375,6 @@ export default React.createClass({
         outerHeight: this.state.telInput.outerHeight
       }
     });
-
-    this.notifyPhoneNumberChange(formatted);
   },
 
   // replace any existing dial code with the new one (if not in nationalMode)
@@ -595,6 +593,9 @@ export default React.createClass({
     } else {
       document.removeEventListener('keydown', this.handleDocumentKeyDown);
       document.querySelector('html').removeEventListener('click', this.handleDocumentClick);
+    }
+    if (this.state.telInput.value !== nextState.telInput.value) {
+      this.notifyPhoneNumberChange(nextState.telInput.value);
     }
   },
 
@@ -959,8 +960,6 @@ export default React.createClass({
       // if no autoFormat, just update flag
       this.updateFlagFromNumber(React.findDOMNode(this.refs.telInput).value);
     }
-
-    this.notifyPhoneNumberChange(e.target.value);
   },
 
   handleInputChange (e) {
