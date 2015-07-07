@@ -94,6 +94,7 @@ export default React.createClass({
   },
 
   getInitialState () {
+    this.processCountryData();
     return {
       countryList: {
         showDropdown: false,
@@ -606,7 +607,7 @@ export default React.createClass({
     this.setPreferredCountries();
   },
 
-  // add a country code to this.countryCodes
+  // add a country code to countryCodes
   addCountryCode (countryCodes, iso2, dialCode, priority) {
     if (!(dialCode in countryCodes)) {
       countryCodes[dialCode] = [];
@@ -620,21 +621,13 @@ export default React.createClass({
 
   // process onlyCountries array if present, and generate the countryCodes map
   setInstanceCountryData () {
-    let country = '';
-
     // process onlyCountries option
     if (this.props.onlyCountries.length) {
-      // standardise case
-      for (let i = 0, max = this.props.onlyCountries.length; i < max; i++) {
-        country = this.props.onlyCountries[i].toLowerCase();
-      }
 
       // build instance country array
-      for (let i = 0, max = AllCountries.length; i < max; i++) {
-        if (country.indexOf(AllCountries[i].iso2) > -1) {
-          this.countries.push(AllCountries[i]);
-        }
-      }
+      this.countries = AllCountries.filter(function (country) {
+        return this.props.onlyCountries.indexOf(country.iso2) > -1;
+      }, this);
     } else {
       this.countries = AllCountries;
     }
@@ -974,8 +967,6 @@ export default React.createClass({
   },
 
   render () {
-    this.processCountryData();
-
     let wrapperClass = this.props.css[0],
         inputClass = this.props.css[1];
 
