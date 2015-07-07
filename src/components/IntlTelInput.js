@@ -113,11 +113,9 @@ export default React.createClass({
   },
 
   componentWillReceiveProps (nextProps) {
-    var newState = {
-      telInput: this.state.telInput
-    };
-    newState.telInput.value = nextProps.value;
-    this.setState(newState);
+    if (this.state.telInput.value !== nextProps.value) {
+      this.setNumber(nextProps.value, null, true);
+    }
   },
 
   notifyPhoneNumberChange (newNumber) {
