@@ -313,7 +313,7 @@ export default React.createClass({
 
     // if there is a number, and it's valid, we can go ahead and set the flag, else fall back to default
     if (this.getDialCode(val)) {
-      this.updateFlagFromNumber(val, true);
+      this.updateFlagFromNumber(val);
     } else if (this.props.defaultCountry !== 'auto') {
       // check the defaultCountry option, else fall back to the first in the list
       let defaultCountry = this.props.defaultCountry;
@@ -441,7 +441,7 @@ export default React.createClass({
   },
 
   // check if need to select a new flag based on the given number
-  updateFlagFromNumber (number, updateDefault) {
+  updateFlagFromNumber (number) {
     // if we're in nationalMode and we're on US/Canada, make sure the number starts with a +1 so getDialCode will be able to extract the area code
     // update: if we dont yet have selectedCountryData, but we're here (trying to update the flag from the number), that means we're initialising the plugin with a number that already has a dial code, so fine to ignore this bit
     if (number && this.props.nationalMode &&
@@ -622,8 +622,7 @@ export default React.createClass({
 
   // process onlyCountries array if present, and generate the countryCodes map
   setInstanceCountryData () {
-    let country = '',
-        countries = [];
+    let country = '';
 
     // process onlyCountries option
     if (this.props.onlyCountries.length) {
