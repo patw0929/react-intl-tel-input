@@ -478,7 +478,7 @@ export default React.createClass({
       countryCode = this.props.defaultCountry;
     }
 
-    if (countryCode !== null && countryCode !== '') {
+    if (countryCode !== null && countryCode !== '' && this.state.countryCode !== countryCode) {
       this.selectFlag(countryCode);
     }
   },
