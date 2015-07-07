@@ -10,9 +10,7 @@ import TelInput from './TelInput';
 import utils from './utils';
 
 export default React.createClass({
-  isGoodBrowser () {
-    return Boolean(document.createElement('input').setSelectionRange);
-  },
+  isGoodBrowser: Boolean(document.createElement('input').setSelectionRange),
 
   keys: {
     UP: 38,
@@ -480,7 +478,7 @@ export default React.createClass({
       countryCode = this.props.defaultCountry;
     }
 
-    if (countryCode !== null && countryCode !== '') {
+    if (countryCode !== null && countryCode !== '' && this.state.countryCode !== countryCode) {
       this.selectFlag(countryCode);
     }
   },
