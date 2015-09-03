@@ -1,35 +1,42 @@
-'use strict';
-
-import React from 'react';
+import React, { Component, PropTypes, findDOMNode } from 'react';
 import classNames from 'classnames';
 import utils from './utils';
 
-export default React.createClass({
+class CountryList extends Component {
+  constructor() {
+    super();
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleChangeCountry = this.handleChangeCountry.bind(this);
+    this.selectFlag = this.selectFlag.bind(this);
+    this.appendListItem = this.appendListItem.bind(this);
+    this.setDropdownPosition = this.setDropdownPosition.bind(this);
+  }
+
   shouldComponentUpdate(nextProps) {
     return !utils.shallowEquals(this.props, nextProps);
-  },
+  }
 
-  propTypes: {
-    isMobile: React.PropTypes.bool,
-    selectFlag: React.PropTypes.func,
-    countries: React.PropTypes.array,
-    inputTop: React.PropTypes.number,
-    inputOuterHeight: React.PropTypes.number,
-    preferredCountries: React.PropTypes.array,
-    highlightedCountry: React.PropTypes.number,
-    changeHighlightCountry: React.PropTypes.func,
-    showDropdown: React.PropTypes.bool
-  },
+  static propTypes = {
+    isMobile: PropTypes.bool,
+    selectFlag: PropTypes.func,
+    countries: PropTypes.array,
+    inputTop: PropTypes.number,
+    inputOuterHeight: PropTypes.number,
+    preferredCountries: PropTypes.array,
+    highlightedCountry: PropTypes.number,
+    changeHighlightCountry: PropTypes.func,
+    showDropdown: PropTypes.bool
+  };
 
-  handleChangeCountry (e) {
+  handleChangeCountry(e) {
     this.selectFlag(e.target.value);
-  },
+  }
 
-  selectFlag (iso2) {
+  selectFlag(iso2) {
     this.props.selectFlag(iso2);
-  },
+  }
 
-  appendListItem (countries, className) {
+  appendListItem(countries, className) {
     let preferredCountriesCount = this.props.preferredCountries.length;
     return countries.map((country, index) => {
       if (this.props.isMobile) {
@@ -65,51 +72,38 @@ export default React.createClass({
         );
       }
     });
-  },
+  }
 
-  handleMouseOver (e) {
+  handleMouseOver(e) {
     if (e.currentTarget.getAttribute('class').indexOf('country') > -1) {
       let selectedIndex = utils.retrieveLiIndex(e.currentTarget);
       this.props.changeHighlightCountry(selectedIndex);
     }
-  },
+  }
 
-  componentDidMount () {
-
-  },
-
-  setDropdownPosition () {
+  setDropdownPosition() {
     let inputTop = this.props.inputTop,
       windowTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop,
       windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
       inputOuterHeight = this.props.inputOuterHeight,
-      countryListOuterHeight = utils.getOuterHeight(React.findDOMNode(this.refs.listElement)),
+      countryListOuterHeight = utils.getOuterHeight(findDOMNode(this.refs.listElement)),
       dropdownFitsBelow = (inputTop + inputOuterHeight + countryListOuterHeight < windowTop + windowHeight),
       dropdownFitsAbove = (inputTop - countryListOuterHeight > windowTop);
 
     // dropdownHeight - 1 for border
     let cssTop = (!dropdownFitsBelow && dropdownFitsAbove) ? '-' + (countryListOuterHeight - 1) + 'px' : '';
-    React.findDOMNode(this.refs.listElement).style.top = cssTop;
-    React.findDOMNode(this.refs.listElement).setAttribute('class', 'country-list');
-  },
+    findDOMNode(this.refs.listElement).style.top = cssTop;
+    findDOMNode(this.refs.listElement).setAttribute('class', 'country-list');
+  }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.showDropdown && !nextProps.isMobile) {
-      React.findDOMNode(this.refs.listElement).setAttribute('class', 'country-list v-hide');
+      findDOMNode(this.refs.listElement).setAttribute('class', 'country-list v-hide');
       this.setDropdownPosition();
-
-      // show it
-      // React.findDOMNode(this.refs.listElement).setAttribute('class', 'country-list');
-      // if (activeListItem.length) {
-        //this.scrollTo(activeListItem);
-      // }
-
-      // bind all the dropdown-related listeners: mouseover, click, click-off, keydown
-      //this.bindDropdownListeners();
     }
-  },
+  }
 
-  render () {
+  render() {
     let options = '',
         preferredCountries = this.props.preferredCountries,
         preferredOptions,
@@ -145,9 +139,8 @@ export default React.createClass({
           {options}
         </ul>
       );
-
-      // this is useful in lots of places
-      // this.countryListItems = this.countryList.children(".country");
     }
   }
-});
+}
+
+export default CountryList;

@@ -1,20 +1,18 @@
-'use strict';
+import React, { Component, PropTypes } from 'react';
 
-import React from 'react';
+class TelInput extends Component {
+  static propTypes = {
+    className: PropTypes.string,
+    disabled: PropTypes.bool,
+    readonly: PropTypes.bool,
+    fieldName: PropTypes.string,
+    value: PropTypes.string,
+    handleInputChange: PropTypes.func,
+    handleKeyPress: PropTypes.func,
+    handleKeyUp: PropTypes.func
+  };
 
-export default React.createClass({
-  propTypes: {
-    className: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    readonly: React.PropTypes.bool,
-    fieldName: React.PropTypes.string,
-    value: React.PropTypes.string,
-    handleInputChange: React.PropTypes.func,
-    handleKeyPress: React.PropTypes.func,
-    handleKeyUp: React.PropTypes.func
-  },
-
-  render () {
+  render() {
     return (
       <input type="tel" autoComplete="off"
              className={this.props.className}
@@ -27,4 +25,6 @@ export default React.createClass({
              onKeyUp={this.props.handleKeyUp} />
     );
   }
-});
+}
+
+export default TelInput;

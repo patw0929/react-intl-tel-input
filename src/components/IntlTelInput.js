@@ -1,6 +1,4 @@
-'use strict';
-
-import React from 'react';
+import React, { Component, PropTypes, findDOMNode } from 'react';
 import Ajax from 'simple-ajax';
 import _ from 'underscore.deferred';
 import Cookies from 'cookies-js';
@@ -9,10 +7,68 @@ import FlagDropDown from './FlagDropDown';
 import TelInput from './TelInput';
 import utils from './utils';
 
-export default React.createClass({
-  isGoodBrowser: Boolean(document.createElement('input').setSelectionRange),
+class IntlTelInput extends Component {
+  constructor(props) {
+    super(props);
 
-  keys: {
+    this.processCountryData.call(this);
+    this.state = {
+      countryList: {
+        showDropdown: false,
+        highlightedCountry: 0
+      },
+      telInput: {
+        value: this.props.value || '',
+        disabled: false,
+        readonly: false,
+        offsetTop: 0,
+        outerHeight: 0
+      },
+      countryCode: this.props.defaultCountry || 'us'
+    };
+
+    this.addCountryCode = this.addCountryCode.bind(this);
+    this.autoCountryLoaded = this.autoCountryLoaded.bind(this);
+    this.changeHighlightCountry = this.changeHighlightCountry.bind(this);
+    this.clickSelectedFlag = this.clickSelectedFlag.bind(this);
+    this.ensurePlus = this.ensurePlus.bind(this);
+    this.getCursorFromLeftChar = this.getCursorFromLeftChar.bind(this);
+    this.getCursorFromDigitsOnRight = this.getCursorFromDigitsOnRight.bind(this);
+    this.getDigitsOnRight = this.getDigitsOnRight.bind(this);
+    this.getDialCode = this.getDialCode.bind(this);
+    this.handleDocumentClick = this.handleDocumentClick.bind(this);
+    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
+    this.handleEnterKey = this.handleEnterKey.bind(this);
+    this.handleUpDownKey = this.handleUpDownKey.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleSelectedFlagKeydown = this.handleSelectedFlagKeydown.bind(this);
+    this.handleInvalidKey = this.handleInvalidKey.bind(this);
+    this.handleInputKey = this.handleInputKey.bind(this);
+    this.searchForCountry = this.searchForCountry.bind(this);
+    this.selectFlag = this.selectFlag.bind(this);
+    this.setInitialState = this.setInitialState.bind(this);
+    this.setNumber = this.setNumber.bind(this);
+    this.setInstanceCountryData = this.setInstanceCountryData.bind(this);
+    this.scrollTo = this.scrollTo.bind(this);
+    this.notifyPhoneNumberChange = this.notifyPhoneNumberChange.bind(this);
+    this.isValidNumber = this.isValidNumber.bind(this);
+    this.isUnknownNanp = this.isUnknownNanp.bind(this);
+    this.initRequests = this.initRequests.bind(this);
+    this.updateVal = this.updateVal.bind(this);
+    this.updateDialCode = this.updateDialCode.bind(this);
+    this.updateFlagFromNumber = this.updateFlagFromNumber.bind(this);
+    this.updatePlaceholder = this.updatePlaceholder.bind(this);
+    this.loadAutoCountry = this.loadAutoCountry.bind(this);
+    this.loadUtils = this.loadUtils.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.processCountryData = this.processCountryData.bind(this);
+  }
+
+  isGoodBrowser = Boolean(document.createElement('input').setSelectionRange);
+
+  keys = {
     UP: 38,
     DOWN: 40,
     ENTER: 13,
@@ -29,102 +85,82 @@ export default React.createClass({
     CTRL: 17,
     CMD1: 91, // Chrome
     CMD2: 224 // FF
-  },
+  };
 
-  windowLoaded: false,
+  windowLoaded = false;
 
-  autoCountry: '',
-  startedLoadingAutoCountry: false,
+  autoCountry = '';
+  startedLoadingAutoCountry = false;
 
-  autoCountryDeferred: new _.Deferred(),
-  utilsScriptDeferred: new _.Deferred(),
+  autoCountryDeferred = new _.Deferred();
+  utilsScriptDeferred = new _.Deferred();
 
-  isMobile: /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-  preferredCountries: [],
-  countries: [],
-  countryCodes: {},
+  isMobile = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  preferredCountries = [];
+  countries = [];
+  countryCodes = {};
 
-  propTypes: {
-    css: React.PropTypes.arrayOf(React.PropTypes.string),
-    fieldName: React.PropTypes.string,
-    value: React.PropTypes.string,
-    allowExtensions: React.PropTypes.bool,
-    autoFormat: React.PropTypes.bool,
-    autoPlaceholder: React.PropTypes.bool,
-    autoHideDialCode: React.PropTypes.bool,
-    defaultCountry: React.PropTypes.string,
-    geoIpLookup: React.PropTypes.func,
-    nationalMode: React.PropTypes.bool,
-    numberType: React.PropTypes.string,
-    onlyCountries: React.PropTypes.arrayOf(React.PropTypes.string),
-    preferredCountries: React.PropTypes.arrayOf(React.PropTypes.string),
-    utilsScript: React.PropTypes.string,
-    onPhoneNumberChange: React.PropTypes.func
-  },
+  static propTypes = {
+    css: PropTypes.arrayOf(PropTypes.string),
+    fieldName: PropTypes.string,
+    value: PropTypes.string,
+    allowExtensions: PropTypes.bool,
+    autoFormat: PropTypes.bool,
+    autoPlaceholder: PropTypes.bool,
+    autoHideDialCode: PropTypes.bool,
+    defaultCountry: PropTypes.string,
+    geoIpLookup: PropTypes.func,
+    nationalMode: PropTypes.bool,
+    numberType: PropTypes.string,
+    onlyCountries: PropTypes.arrayOf(PropTypes.string),
+    preferredCountries: PropTypes.arrayOf(PropTypes.string),
+    utilsScript: PropTypes.string,
+    onPhoneNumberChange: PropTypes.func
+  };
 
-  getDefaultProps () {
-    return {
-      css: ['intl-tel-input', ''],
-      fieldName: '',
-      value: '',
-      // typing digits after a valid number will be added to the extension part of the number
-      allowExtensions: false,
-      // automatically format the number according to the selected country
-      autoFormat: true,
-      // add or remove input placeholder with an example number for the selected country
-      autoPlaceholder: true,
-      // if there is just a dial code in the input: remove it on blur, and re-add it on focus
-      autoHideDialCode: true,
-      // default country
-      defaultCountry: '',
-      // geoIp lookup function
-      geoIpLookup: null,
-      // don't insert international dial codes
-      nationalMode: true,
-      // number type to use for placeholders
-      numberType: 'MOBILE',
-      // display only these countries
-      onlyCountries: [],
-      // the countries at the top of the list. defaults to united states and united kingdom
-      preferredCountries: ['us', 'gb'],
-      // specify the path to the libphonenumber script to enable validation/formatting
-      utilsScript: '',
-      onPhoneNumberChange: null
-    };
-  },
+  static defaultProps = {
+    css: ['intl-tel-input', ''],
+    fieldName: '',
+    value: '',
+    // typing digits after a valid number will be added to the extension part of the number
+    allowExtensions: false,
+    // automatically format the number according to the selected country
+    autoFormat: true,
+    // add or remove input placeholder with an example number for the selected country
+    autoPlaceholder: true,
+    // if there is just a dial code in the input: remove it on blur, and re-add it on focus
+    autoHideDialCode: true,
+    // default country
+    defaultCountry: '',
+    // geoIp lookup function
+    geoIpLookup: null,
+    // don't insert international dial codes
+    nationalMode: true,
+    // number type to use for placeholders
+    numberType: 'MOBILE',
+    // display only these countries
+    onlyCountries: [],
+    // the countries at the top of the list. defaults to united states and united kingdom
+    preferredCountries: ['us', 'gb'],
+    // specify the path to the libphonenumber script to enable validation/formatting
+    utilsScript: '',
+    onPhoneNumberChange: null
+  };
 
-  getInitialState () {
-    this.processCountryData();
-    return {
-      countryList: {
-        showDropdown: false,
-        highlightedCountry: 0
-      },
-      telInput: {
-        value: this.props.value || '',
-        disabled: false,
-        readonly: false,
-        offsetTop: 0,
-        outerHeight: 0
-      },
-      countryCode: this.props.defaultCountry || 'us'
-    };
-  },
-
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (this.state.telInput.value !== nextProps.value) {
       this.setNumber(nextProps.value, null, true);
     }
-  },
+  }
 
-  notifyPhoneNumberChange (newNumber) {
+  notifyPhoneNumberChange(newNumber) {
     if (typeof this.props.onPhoneNumberChange === 'function') {
       let result = this.isValidNumber(newNumber);
       this.props.onPhoneNumberChange(result, newNumber, this.selectedCountryData);
     }
-  },
+  }
 
-  changeHighlightCountry (countryIndex) {
+  changeHighlightCountry(countryIndex) {
     this.setState({
       countryList: {
         showDropdown: true,
@@ -133,11 +169,11 @@ export default React.createClass({
       telInput: this.state.telInput,
       countryCode: this.state.countryCode
     });
-  },
+  }
 
   // highlight the next/prev item in the list (and ensure it is visible)
-  handleUpDownKey (key) {
-    let current = React.findDOMNode(this.refs.flagDropDown).querySelectorAll('.highlight')[0];
+  handleUpDownKey(key) {
+    let current = findDOMNode(this.refs.flagDropDown).querySelectorAll('.highlight')[0];
     let next = ((key === this.keys.UP) ? ((current) ? current.previousElementSibling : undefined) : ((current) ? current.nextElementSibling : undefined));
 
     if (next) {
@@ -159,11 +195,11 @@ export default React.createClass({
         countryCode: this.state.countryCode
       });
     }
-  },
+  }
 
   // select the currently highlighted item
-  handleEnterKey () {
-    let current = React.findDOMNode(this.refs.flagDropDown).querySelectorAll('.highlight')[0];
+  handleEnterKey() {
+    let current = findDOMNode(this.refs.flagDropDown).querySelectorAll('.highlight')[0];
     if (current) {
       let selectedIndex = utils.retrieveLiIndex(current);
       let countryCode = current.getAttribute('data-country-code');
@@ -179,12 +215,12 @@ export default React.createClass({
         this.selectFlag(this.state.countryCode);
       });
     }
-  },
+  }
 
   // check if an element is visible within it's container, else scroll until it is
-  scrollTo (element, middle) {
-    let container = React.findDOMNode(this.refs.flagDropDown).querySelector('.country-list'),
-      containerHeight = parseFloat(getComputedStyle(container).getPropertyValue('height')),
+  scrollTo(element, middle) {
+    let container = findDOMNode(this.refs.flagDropDown).querySelector('.country-list'),
+      containerHeight = parseFloat(getComputedStyle(container).getPropertyValue('height'), 10),
       containerTop = utils.offset(container).top,
       containerBottom = containerTop + containerHeight,
       elementHeight = utils.getOuterHeight(element),
@@ -209,10 +245,10 @@ export default React.createClass({
 
       container.scrollTop = newScrollTop - heightDifference;
     }
-  },
+  }
 
   // validate the input val - assumes the global function isValidNumber (from utilsScript)
-  isValidNumber (number) {
+  isValidNumber(number) {
     let val = utils.trim(number),
       countryCode = (this.props.nationalMode) ? this.selectedCountryData.iso2 : '';
 
@@ -220,13 +256,13 @@ export default React.createClass({
       return window.intlTelInputUtils.isValidNumber(val, countryCode);
     }
     return false;
-  },
+  }
 
   // find the first list item whose name starts with the query string
-  searchForCountry (query) {
+  searchForCountry(query) {
     for (let i = 0, max = this.countries.length; i < max; i++) {
       if (utils.startsWith(this.countries[i].name, query)) {
-        let listItem = React.findDOMNode(this.refs.flagDropDown)
+        let listItem = findDOMNode(this.refs.flagDropDown)
                             .querySelector('.country-list [data-country-code="' + this.countries[i].iso2 + '"]:not(.preferred)');
 
         let selectedIndex = utils.retrieveLiIndex(listItem);
@@ -244,11 +280,11 @@ export default React.createClass({
         break;
       }
     }
-  },
+  }
 
-  query: '',
+  query = '';
 
-  handleDocumentKeyDown (e) {
+  handleDocumentKeyDown(e) {
     let queryTimer;
     // prevent down key from scrolling the whole page,
     // and enter key from submitting a form etc
@@ -293,9 +329,9 @@ export default React.createClass({
         this.query = '';
       }, 1000);
     }
-  },
+  }
 
-  handleDocumentClick () {
+  handleDocumentClick() {
     this.setState({
       countryList: {
         showDropdown: false,
@@ -304,10 +340,10 @@ export default React.createClass({
       telInput: this.state.telInput,
       countryCode: this.state.countryCode
     });
-  },
+  }
 
   // set the initial state of the input value and the selected flag
-  setInitialState () {
+  setInitialState() {
     let val = this.props.value || '';
 
     // if there is a number, and it's valid, we can go ahead and set the flag, else fall back to default
@@ -332,12 +368,12 @@ export default React.createClass({
       // this wont be run after updateDialCode as that's only called if no val
       this.updateVal(val);
     }
-  },
+  }
 
   // update the input's value to the given val
   // if autoFormat=true, format it first according to the country-specific formatting rules
   // Note: preventConversion will be false (i.e. we allow conversion) on init and when dev calls public method setNumber
-  updateVal (val, format, addSuffix, preventConversion, isAllowedKey) {
+  updateVal(val, format, addSuffix, preventConversion, isAllowedKey) {
     let formatted;
 
     if (this.props.autoFormat && window.intlTelInputUtils && this.selectedCountryData) {
@@ -352,7 +388,7 @@ export default React.createClass({
         formatted = window.intlTelInputUtils.formatNumber(val, this.selectedCountryData.iso2, addSuffix, this.props.allowExtensions, isAllowedKey);
       }
       // ensure we dont go over maxlength. we must do this here to truncate any formatting suffix, and also handle paste events
-      var max = React.findDOMNode(this.refs.telInput).getAttribute('maxlength');
+      var max = findDOMNode(this.refs.telInput).getAttribute('maxlength');
       if (max && formatted.length > max) {
         formatted = formatted.substr(0, max);
       }
@@ -374,12 +410,12 @@ export default React.createClass({
         outerHeight: this.state.telInput.outerHeight
       }
     });
-  },
+  }
 
   // replace any existing dial code with the new one (if not in nationalMode)
   // also we need to know if we're focusing for a couple of reasons e.g. if so, we want to add any formatting suffix, also if the input is empty and we're not in nationalMode, then we want to insert the dial code
-  updateDialCode (newDialCode, focusing) {
-    var inputVal = React.findDOMNode(this.refs.telInput).value,
+  updateDialCode(newDialCode, focusing) {
+    var inputVal = findDOMNode(this.refs.telInput).value,
       newNumber;
 
     // save having to pass this every time
@@ -404,11 +440,11 @@ export default React.createClass({
     }
 
     this.updateVal(newNumber, null, focusing);
-  },
+  }
 
   // try and extract a valid international dial code from a full telephone number
   // Note: returns the raw string inc plus character and any whitespace/dots etc
-  getDialCode (number) {
+  getDialCode(number) {
     let dialCode = '';
     // only interested in international numbers (starting with a plus)
     if (number.charAt(0) === '+') {
@@ -432,15 +468,15 @@ export default React.createClass({
       }
     }
     return dialCode;
-  },
+  }
 
   // check if the given number contains an unknown area code from the North American Numbering Plan i.e. the only dialCode that could be extracted was +1 but the actual number's length is >=4
-  isUnknownNanp (number, dialCode) {
+  isUnknownNanp(number, dialCode) {
     return (dialCode === '+1' && utils.getNumeric(number).length >= 4);
-  },
+  }
 
   // check if need to select a new flag based on the given number
-  updateFlagFromNumber (number) {
+  updateFlagFromNumber(number) {
     // if we're in nationalMode and we're on US/Canada, make sure the number starts with a +1 so getDialCode will be able to extract the area code
     // update: if we dont yet have selectedCountryData, but we're here (trying to update the flag from the number), that means we're initialising the plugin with a number that already has a dial code, so fine to ignore this bit
     if (number && this.props.nationalMode &&
@@ -482,9 +518,9 @@ export default React.createClass({
     if (countryCode !== null && countryCode !== '' && this.state.countryCode !== countryCode) {
       this.selectFlag(countryCode);
     }
-  },
+  }
 
-  initRequests () {
+  initRequests() {
     // if the user has specified the path to the utils script, fetch it on window.load
     if (this.props.utilsScript) {
       // if the plugin is being initialised after the window.load event has already been fired
@@ -505,9 +541,9 @@ export default React.createClass({
     } else {
       this.autoCountryDeferred.resolve();
     }
-  },
+  }
 
-  loadAutoCountry () {
+  loadAutoCountry() {
     // check for cookie
     let cookieAutoCountry = (Cookies) ? Cookies.get('itiAutoCountry') : '';
     if (cookieAutoCountry) {
@@ -538,18 +574,18 @@ export default React.createClass({
         });
       }
     }
-  },
+  }
 
   // this is called when the geoip call returns
-  autoCountryLoaded () {
+  autoCountryLoaded() {
     if (this.props.defaultCountry === 'auto') {
       this.props.defaultCountry = this.autoCountry;
       this.setInitialState();
       this.autoCountryDeferred.resolve();
     }
-  },
+  }
 
-  loadUtils () {
+  loadUtils() {
     let ajax = new Ajax({
       url: this.props.utilsScript
     }).on('success', (event) => {
@@ -562,9 +598,9 @@ export default React.createClass({
       this.utilsScriptDeferred.resolve();
     });
     ajax.send();
-  },
+  }
 
-  componentDidMount () {
+  componentDidMount() {
     window.onload = () => {
       this.windowLoaded = true;
     };
@@ -583,9 +619,9 @@ export default React.createClass({
 
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.querySelector('html').addEventListener('click', this.handleDocumentClick);
-  },
+  }
 
-  componentWillUpdate (nextProps, nextState) {
+  componentWillUpdate(nextProps, nextState) {
     if (nextState.countryList.showDropdown) {
       document.addEventListener('keydown', this.handleDocumentKeyDown);
       document.querySelector('html').addEventListener('click', this.handleDocumentClick);
@@ -596,19 +632,19 @@ export default React.createClass({
     if (this.state.telInput.value !== nextState.telInput.value) {
       this.notifyPhoneNumberChange(nextState.telInput.value);
     }
-  },
+  }
 
   // prepare all of the country data, including onlyCountries and preferredCountries options
-  processCountryData () {
+  processCountryData() {
     // set the instances country data objects
-    this.setInstanceCountryData();
+    this.setInstanceCountryData.call(this);
 
     // set the preferredCountries property
-    this.setPreferredCountries();
-  },
+    this.setPreferredCountries.call(this);
+  }
 
   // add a country code to countryCodes
-  addCountryCode (countryCodes, iso2, dialCode, priority) {
+  addCountryCode(countryCodes, iso2, dialCode, priority) {
     if (!(dialCode in countryCodes)) {
       countryCodes[dialCode] = [];
     }
@@ -617,10 +653,10 @@ export default React.createClass({
     countryCodes[dialCode][index] = iso2;
 
     return countryCodes;
-  },
+  }
 
   // process onlyCountries array if present, and generate the countryCodes map
-  setInstanceCountryData () {
+  setInstanceCountryData() {
     // process onlyCountries option
     if (this.props.onlyCountries.length) {
 
@@ -648,11 +684,11 @@ export default React.createClass({
     }
 
     this.countryCodes = countryCodes;
-  },
+  }
 
   // process preferred countries - iterate through the preferences,
   // fetching the country data for each one
-  setPreferredCountries () {
+  setPreferredCountries() {
     this.preferredCountries = [];
     for (let i = 0, max = this.props.preferredCountries.length; i < max; i++) {
       let countryCode = this.props.preferredCountries[i].toLowerCase(),
@@ -662,10 +698,10 @@ export default React.createClass({
         this.preferredCountries.push(countryData);
       }
     }
-  },
+  }
 
   // called when the user selects a list item from the dropdown
-  selectFlag (countryCode) {
+  selectFlag(countryCode) {
     this.selectedCountryData = (countryCode) ? utils.getCountryData(countryCode, false) : {};
 
     // update selected flag and active list item
@@ -686,16 +722,16 @@ export default React.createClass({
       //this.telInput.trigger("change");
 
       // focus the input
-      React.findDOMNode(this.refs.telInput).focus();
+      findDOMNode(this.refs.telInput).focus();
       // fix for FF and IE11 (with nationalMode=false i.e. auto inserting dial code), who try to put the cursor at the beginning the first time
       if (this.isGoodBrowser) {
         let len = this.state.telInput.value.length;
-        React.findDOMNode(this.refs.telInput).setSelectionRange(len, len);
+        findDOMNode(this.refs.telInput).setSelectionRange(len, len);
       }
     });
-  },
+  }
 
-  handleSelectedFlagKeydown (e) {
+  handleSelectedFlagKeydown(e) {
     if (!this.state.showDropdown &&
        (e.which === this.keys.UP || e.which === this.keys.DOWN ||
         e.which === this.keys.SPACE || e.which === this.keys.ENTER)
@@ -713,9 +749,9 @@ export default React.createClass({
     if (e.which === this.keys.TAB) {
       this.toggleDropdown(false);
     }
-  },
+  }
 
-  toggleDropdown (status) {
+  toggleDropdown(status) {
     this.setState({
       countryList: {
         showDropdown: !!status,
@@ -724,9 +760,9 @@ export default React.createClass({
       telInput: this.state.telInput,
       countryCode: this.state.countryCode
     });
-  },
+  }
 
-  clickSelectedFlag () {
+  clickSelectedFlag() {
     if (!this.state.countryList.showDropdown &&
         !this.state.telInput.disabled &&
         !this.state.telInput.readonly) {
@@ -739,19 +775,19 @@ export default React.createClass({
           value: this.state.telInput.value,
           disabled: this.state.telInput.disabled,
           readonly: this.state.telInput.readonly,
-          offsetTop: utils.offset(React.findDOMNode(this.refs.telInput)).top,
-          outerHeight: utils.getOuterHeight(React.findDOMNode(this.refs.telInput))
+          offsetTop: utils.offset(findDOMNode(this.refs.telInput)).top,
+          outerHeight: utils.getOuterHeight(findDOMNode(this.refs.telInput))
         },
         countryCode: this.state.countryCode
       });
     }
-  },
+  }
 
   // prevent deleting the plus (if not in nationalMode)
-  ensurePlus () {
+  ensurePlus() {
     if (!this.props.nationalMode) {
       let val = this.state.telInput.value,
-        input = React.findDOMNode(this.refs.telInput);
+        input = findDOMNode(this.refs.telInput);
       if (val.charAt(0) !== '+') {
         // newCursorPos is current pos + 1 to account for the plus we are about to add
         let newCursorPos = (this.isGoodBrowser) ? input.selectionStart + 1 : 0;
@@ -773,26 +809,26 @@ export default React.createClass({
         }
       }
     }
-  },
+  }
 
   // alert the user to an invalid key event
-  handleInvalidKey () {
-    React.findDOMNode(this.refs.telInput).classList.add('iti-invalid-key');
+  handleInvalidKey() {
+    findDOMNode(this.refs.telInput).classList.add('iti-invalid-key');
     setTimeout(() => {
-      React.findDOMNode(this.refs.telInput).classList.remove('iti-invalid-key');
+      findDOMNode(this.refs.telInput).classList.remove('iti-invalid-key');
     }, 100);
-  },
+  }
 
   // when autoFormat is enabled: handle various key events on the input:
   // 1) adding a new number character, which will replace any selection, reformat, and preserve the cursor position
   // 2) reformatting on backspace/delete
   // 3) cut/paste event
-  handleInputKey (newNumericChar, addSuffix, isAllowedKey) {
-    let val = React.findDOMNode(this.refs.telInput).value,
+  handleInputKey(newNumericChar, addSuffix, isAllowedKey) {
+    let val = findDOMNode(this.refs.telInput).value,
       // cleanBefore = utils.getClean(val),
       originalLeftChars,
       // raw DOM element
-      input = React.findDOMNode(this.refs.telInput),
+      input = findDOMNode(this.refs.telInput),
       digitsOnRight = 0;
 
     if (this.isGoodBrowser) {
@@ -818,7 +854,7 @@ export default React.createClass({
     // update the cursor position
     if (this.isGoodBrowser) {
       let newCursor;
-      val = React.findDOMNode(this.refs.telInput).value;
+      val = findDOMNode(this.refs.telInput).value;
 
       // if it was at the end, keep it there
       if (!digitsOnRight) {
@@ -835,10 +871,10 @@ export default React.createClass({
       // set the new cursor
       input.setSelectionRange(newCursor, newCursor);
     }
-  },
+  }
 
   // we start from the position in guessCursor, and work our way left until we hit the originalLeftChars or a number to make sure that after reformatting the cursor has the same char on the left in the case of a delete etc
-  getCursorFromLeftChar (val, guessCursor, originalLeftChars) {
+  getCursorFromLeftChar(val, guessCursor, originalLeftChars) {
     for (let i = guessCursor; i > 0; i--) {
       let leftChar = val.charAt(i - 1);
       if (utils.isNumeric(leftChar) || val.substr(i - 2, 2) === originalLeftChars) {
@@ -846,10 +882,10 @@ export default React.createClass({
       }
     }
     return 0;
-  },
+  }
 
   // after a reformat we need to make sure there are still the same number of digits to the right of the cursor
-  getCursorFromDigitsOnRight (val, digitsOnRight) {
+  getCursorFromDigitsOnRight(val, digitsOnRight) {
     for (let i = val.length - 1; i >= 0; i--) {
       if (utils.isNumeric(val.charAt(i))) {
         if (--digitsOnRight === 0) {
@@ -858,10 +894,10 @@ export default React.createClass({
       }
     }
     return 0;
-  },
+  }
 
   // get the number of numeric digits to the right of the cursor so we can reposition the cursor correctly after the reformat has happened
-  getDigitsOnRight (val, selectionEnd) {
+  getDigitsOnRight(val, selectionEnd) {
     let digitsOnRight = 0;
     for (let i = selectionEnd, max = val.length; i < max; i++) {
       if (utils.isNumeric(val.charAt(i))) {
@@ -869,10 +905,10 @@ export default React.createClass({
       }
     }
     return digitsOnRight;
-  },
+  }
 
   // set the input value and update the flag
-  setNumber (number, format, addSuffix, preventConversion, isAllowedKey) {
+  setNumber(number, format, addSuffix, preventConversion, isAllowedKey) {
     // ensure starts with plus
     if (!this.props.nationalMode && number.charAt(0) !== '+') {
       number = '+' + number;
@@ -880,19 +916,19 @@ export default React.createClass({
     // we must update the flag first, which updates this.selectedCountryData, which is used later for formatting the number before displaying it
     this.updateFlagFromNumber(number);
     this.updateVal(number, format, addSuffix, preventConversion, isAllowedKey);
-  },
+  }
 
   // update the input placeholder to an example number from the currently selected country
-  updatePlaceholder () {
+  updatePlaceholder() {
     if (window.intlTelInputUtils && !this.hadInitialPlaceholder && this.props.autoPlaceholder && this.selectedCountryData) {
       let iso2 = this.selectedCountryData.iso2,
         numberType = window.intlTelInputUtils.numberType[this.props.numberType || 'FIXED_LINE'],
         placeholder = (iso2) ? window.intlTelInputUtils.getExampleNumber(iso2, this.props.nationalMode, numberType) : '';
-      React.findDOMNode(this.refs.telInput).setAttribute('placeholder', placeholder);
+      findDOMNode(this.refs.telInput).setAttribute('placeholder', placeholder);
     }
-  },
+  }
 
-  handleKeyPress (e) {
+  handleKeyPress(e) {
     if (this.props.autoFormat) {
       // format number and update flag on keypress
       // use keypress event as we want to ignore all input except for a select few keys,
@@ -910,7 +946,7 @@ export default React.createClass({
         // allowed keys are just numeric keys and plus
         // we must allow plus for the case where the user does select-all and then hits plus to start typing a new number. we could refine this logic to first check that the selection contains a plus, but that wont work in old browsers, and I think it's overkill anyway
         let isAllowedKey = ((e.which >= this.keys.ZERO && e.which <= this.keys.NINE) || e.which === this.keys.PLUS),
-          input = React.findDOMNode(this.refs.telInput),
+          input = findDOMNode(this.refs.telInput),
           noSelection = (this.isGoodBrowser && input.selectionStart === input.selectionEnd),
           max = input.getAttribute('maxlength'),
           val = input.value,
@@ -927,16 +963,16 @@ export default React.createClass({
         }
       }
     }
-  },
+  }
 
-  handleKeyUp (e) {
+  handleKeyUp(e) {
     // the "enter" key event from selecting a dropdown item is triggered here on the input, because the document.keydown handler that initially handles that event triggers a focus on the input, and so the keyup for that same key event gets triggered here. weird, but just make sure we dont bother doing any re-formatting in this case (we've already done preventDefault in the keydown handler, so it wont actually submit the form or anything).
     // ALSO: ignore keyup if readonly
     if (this.props.autoFormat && window.intlTelInputUtils) {
       // cursorAtEnd defaults to false for bad browsers else they would never get a reformat on delete
-      let cursorAtEnd = (this.isGoodBrowser && React.findDOMNode(this.refs.telInput).selectionStart === this.state.telInput.value.length);
+      let cursorAtEnd = (this.isGoodBrowser && findDOMNode(this.refs.telInput).selectionStart === this.state.telInput.value.length);
 
-      if (!React.findDOMNode(this.refs.telInput).value) {
+      if (!findDOMNode(this.refs.telInput).value) {
         // if they just cleared the input, update the flag to the default
         this.updateFlagFromNumber('');
       } else if ((e.which === this.keys.DEL && !cursorAtEnd) || e.which === this.keys.BSPACE) {
@@ -948,11 +984,11 @@ export default React.createClass({
       this.ensurePlus();
     } else {
       // if no autoFormat, just update flag
-      this.updateFlagFromNumber(React.findDOMNode(this.refs.telInput).value);
+      this.updateFlagFromNumber(findDOMNode(this.refs.telInput).value);
     }
-  },
+  }
 
-  handleInputChange (e) {
+  handleInputChange(e) {
     this.setState({
       countryList: this.state.countryList,
       telInput: {
@@ -964,9 +1000,9 @@ export default React.createClass({
       },
       countryCode: this.state.countryCode
     });
-  },
+  }
 
-  render () {
+  render() {
     let wrapperClass = this.props.css[0],
         inputClass = this.props.css[1];
 
@@ -998,4 +1034,6 @@ export default React.createClass({
       </div>
     );
   }
-});
+};
+
+export default IntlTelInput;
