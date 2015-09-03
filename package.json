@@ -50,6 +50,8 @@
     "style-loader": "~0.8.0",
     "underscore.deferred": "^0.4.0",
     "url-loader": "~0.5.5",
+    "react-redux": "^2.0.0",
+    "redux": "^2.0.0",
     "webpack": "~1.4.3",
     "webpack-dev-server": "~1.6.5"
   },
