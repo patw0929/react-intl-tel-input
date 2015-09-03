@@ -21,7 +21,7 @@ module.exports = {
   debug: false,
   devtool: false,
   entry: {
-    main: './src/components/IntlTelInput.js'
+    main: './src/containers/IntlTelInputApp.js'
   },
 
   externals: {
