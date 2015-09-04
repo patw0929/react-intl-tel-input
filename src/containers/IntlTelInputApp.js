@@ -14,7 +14,7 @@ class IntlTelInputApp extends Component {
   constructor(props) {
     super(props);
 
-    this.props.dispatch(intlTelInputActions.getPropsData(this.props.value, this.props.countryCode));
+    this.props.dispatch(intlTelInputActions.getPropsData(this.props.defaultValue, this.props.countryCode));
     this.processCountryData.call(this);
 
     this.selectedCountryData = {};
@@ -61,6 +61,7 @@ class IntlTelInputApp extends Component {
     css: PropTypes.arrayOf(PropTypes.string),
     fieldName: PropTypes.string,
     value: PropTypes.string,
+    defaultValue: PropTypes.string,
     allowExtensions: PropTypes.bool,
     autoFormat: PropTypes.bool,
     autoPlaceholder: PropTypes.bool,
@@ -129,7 +130,7 @@ class IntlTelInputApp extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.intlTelInputData.telInput.value !== nextProps.intlTelInputData.telInput.value) {
+    if (this.props.value !== nextProps.value) {
       this.setNumber(nextProps.intlTelInputData.telInput.value, null, true);
     }
 
@@ -180,7 +181,7 @@ class IntlTelInputApp extends Component {
   isGoodBrowser = Boolean(document.createElement('input').setSelectionRange);
 
   notifyPhoneNumberChange(newNumber) {
-    if (typeof this.props.onPhoneNumberChange === 'function') {
+    if (typeof this.props.onPhoneNumberChange === 'function' && newNumber) {
       let result = this.isValidNumber(newNumber);
       this.props.onPhoneNumberChange(result, newNumber, this.selectedCountryData);
     }
@@ -231,7 +232,7 @@ class IntlTelInputApp extends Component {
 
   // set the initial state of the input value and the selected flag
   setInitialState() {
-    let val = this.props.value || '';
+    let val = this.props.defaultValue || '';
 
     // if there is a number, and it's valid, we can go ahead and set the flag, else fall back to default
     if (this.getDialCode(val)) {
@@ -254,7 +255,7 @@ class IntlTelInputApp extends Component {
     // format
     if (val) {
       // this wont be run after updateDialCode as that's only called if no val
-      this.props.dispatch(intlTelInputActions.updateVal(val));
+      this.updateVal(val);
     }
   }
 
@@ -316,6 +317,7 @@ class IntlTelInputApp extends Component {
         }
       }
     }
+
     return dialCode;
   }
 

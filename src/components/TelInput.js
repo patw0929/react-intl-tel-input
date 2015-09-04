@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes, findDOMNode } from 'react';
 
 class TelInput extends Component {
   constructor() {
