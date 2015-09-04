@@ -1,4 +1,4 @@
-# React-Intl-Tel-Input
+# React-Intl-Tel-Input [![Build Status](https://travis-ci.org/patw0929/react-intl-tel-input.svg)](https://travis-ci.org/patw0929/react-intl-tel-input)
 
 Rewrite [International Telephone Input](https://github.com/Bluefieldscom/intl-tel-input) in React.js.
 
