@@ -1,6 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 
 class TelInput extends Component {
+  constructor() {
+    super();
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
   static propTypes = {
     className: PropTypes.string,
     disabled: PropTypes.bool,
@@ -9,8 +15,13 @@ class TelInput extends Component {
     value: PropTypes.string,
     handleInputChange: PropTypes.func,
     handleKeyPress: PropTypes.func,
-    handleKeyUp: PropTypes.func
+    handleKeyUp: PropTypes.func,
+    actions: PropTypes.object
   };
+
+  handleInputChange(e) {
+    this.props.actions.handleInputChange(e.target.value);
+  }
 
   render() {
     return (
@@ -20,7 +31,7 @@ class TelInput extends Component {
              readOnly={this.props.readonly ? 'readonly' : false}
              name={this.props.fieldName}
              value={this.props.value}
-             onChange={this.props.handleInputChange}
+             onChange={this.handleInputChange}
              onKeyPress={this.props.handleKeyPress}
              onKeyUp={this.props.handleKeyUp} />
     );

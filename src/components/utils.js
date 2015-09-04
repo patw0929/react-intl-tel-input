@@ -16,7 +16,9 @@ export default {
     // the array, you should sort both arrays here.
 
     for (let i = 0; i < a.length; ++i) {
-      if (a[i] !== b[i]) return false;
+      if (a[i] !== b[i]) {
+        return false;
+      }
     }
     return true;
   },
@@ -131,7 +133,7 @@ export default {
     if (allowFail) {
       return null;
     } else {
-      throw new Error("No country data for '" + countryCode + "'");
+      throw new Error('No country data for "' + countryCode + '"');
     }
   }
 };

@@ -12,10 +12,6 @@ class CountryList extends Component {
     this.setDropdownPosition = this.setDropdownPosition.bind(this);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return !utils.shallowEquals(this.props, nextProps);
-  }
-
   static propTypes = {
     isMobile: PropTypes.bool,
     selectFlag: PropTypes.func,
@@ -25,8 +21,20 @@ class CountryList extends Component {
     preferredCountries: PropTypes.array,
     highlightedCountry: PropTypes.number,
     changeHighlightCountry: PropTypes.func,
-    showDropdown: PropTypes.bool
+    showDropdown: PropTypes.bool,
+    actions: PropTypes.object
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.showDropdown && !nextProps.isMobile) {
+      findDOMNode(this.refs.listElement).setAttribute('class', 'country-list v-hide');
+      this.setDropdownPosition();
+    }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return !utils.shallowEquals(this.props, nextProps);
+  }
 
   handleChangeCountry(e) {
     this.selectFlag(e.target.value);
@@ -77,7 +85,7 @@ class CountryList extends Component {
   handleMouseOver(e) {
     if (e.currentTarget.getAttribute('class').indexOf('country') > -1) {
       let selectedIndex = utils.retrieveLiIndex(e.currentTarget);
-      this.props.changeHighlightCountry(selectedIndex);
+      this.props.actions.changeHighlightCountry(true, selectedIndex);
     }
   }
 
@@ -94,13 +102,6 @@ class CountryList extends Component {
     let cssTop = (!dropdownFitsBelow && dropdownFitsAbove) ? '-' + (countryListOuterHeight - 1) + 'px' : '';
     findDOMNode(this.refs.listElement).style.top = cssTop;
     findDOMNode(this.refs.listElement).setAttribute('class', 'country-list');
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.showDropdown && !nextProps.isMobile) {
-      findDOMNode(this.refs.listElement).setAttribute('class', 'country-list v-hide');
-      this.setDropdownPosition();
-    }
   }
 
   render() {
