@@ -1,27 +1,26 @@
-'use strict';
-
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import CountryList from './CountryList';
 import utils from './utils';
 
-export default React.createClass({
-  propTypes: {
-    countryCode: React.PropTypes.string,
-    showDropdown: React.PropTypes.bool,
-    clickSelectedFlag: React.PropTypes.func,
-    handleSelectedFlagKeydown: React.PropTypes.func,
-    isMobile: React.PropTypes.bool,
-    selectFlag: React.PropTypes.func,
-    countries: React.PropTypes.array,
-    inputTop: React.PropTypes.number,
-    inputOuterHeight: React.PropTypes.number,
-    preferredCountries: React.PropTypes.array,
-    highlightedCountry: React.PropTypes.number,
-    changeHighlightCountry: React.PropTypes.func
-  },
+class FlagDropDown extends Component {
+  static propTypes = {
+    countryCode: PropTypes.string,
+    showDropdown: PropTypes.bool,
+    clickSelectedFlag: PropTypes.func,
+    handleSelectedFlagKeydown: PropTypes.func,
+    isMobile: PropTypes.bool,
+    selectFlag: PropTypes.func,
+    countries: PropTypes.array,
+    inputTop: PropTypes.number,
+    inputOuterHeight: PropTypes.number,
+    preferredCountries: PropTypes.array,
+    highlightedCountry: PropTypes.number,
+    changeHighlightCountry: PropTypes.func,
+    actions: PropTypes.object
+  };
 
-  render () {
+  render() {
     let flagClassObj = {
           'iti-flag': true
         },
@@ -49,6 +48,7 @@ export default React.createClass({
           <div className={arrowClass}></div>
         </div>
         <CountryList ref="countryList"
+                     actions={this.props.actions}
                      isMobile={this.props.isMobile}
                      showDropdown={this.props.showDropdown}
                      selectFlag={this.props.selectFlag}
@@ -61,4 +61,6 @@ export default React.createClass({
       </div>
     );
   }
-});
+}
+
+export default FlagDropDown;

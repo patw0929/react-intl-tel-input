@@ -20,7 +20,7 @@ module.exports = {
   entry: {
     main: [
       'webpack/hot/only-dev-server',
-      './src/components/IntlTelInput.js'
+      './src/containers/IntlTelInputApp.js'
     ],
     example: [
       'webpack/hot/only-dev-server',
@@ -39,7 +39,7 @@ module.exports = {
       'styles': __dirname + '/src/styles',
       'mixins': __dirname + '/src/mixins',
       'components': __dirname + '/src/components/',
-      'react-intl-tel-input': './components/IntlTelInput.js'
+      'react-intl-tel-input': './containers/App.js'
     }
   },
   module: {

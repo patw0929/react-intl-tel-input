@@ -1,5 +1,3 @@
-'use strict';
-
 // Tell JSHint to ignore this warning: 'character may get silently deleted by one or more browsers'
 // jshint -W100
 
@@ -45,7 +43,7 @@ JSON.stringify(result);
 //    Order (if >1 country with same dial code),
 //    Area codes (if >1 country with same dial code)
 // ]
-var allCountries = [
+let allCountries = [
   [
     'Afghanistan (‫افغانستان‬‎)',
     'af',
