@@ -1,6 +1,6 @@
 # React-Intl-Tel-Input [![Build Status](https://travis-ci.org/patw0929/react-intl-tel-input.svg)](https://travis-ci.org/patw0929/react-intl-tel-input)
 
-Rewrite [International Telephone Input](https://github.com/Bluefieldscom/intl-tel-input) in React.js.
+Rewrite [International Telephone Input](https://github.com/Bluefieldscom/intl-tel-input) in React.js & Redux.
 
 
 ## Demo & Examples
@@ -30,12 +30,13 @@ npm install react-intl-tel-input --save
 
 ## Usage
 
-```
+```javascript
 var IntlTelInput = require('react-intl-tel-input');
 require('file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js');
 require('./node_modules/react-intl-tel-input/dist/styles/intlTelInput.scss');
 
-<IntlTelInput css={['county-sel', 'district-sel', 'zipcode']}>Example</IntlTelInput>
+<IntlTelInput css={['intl-tel-input', 'form-control']}
+              utilsScript={'libphonenumber.js'}>Example</IntlTelInput>
 ```
 
 ### Properties
