@@ -55,12 +55,12 @@ class IntlTelInputApp extends Component {
     this.handleEnterKey = this.handleEnterKey.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.handleUpDownKey = this.handleUpDownKey.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   static propTypes = {
     css: PropTypes.arrayOf(PropTypes.string),
     fieldName: PropTypes.string,
-    value: PropTypes.string,
     defaultValue: PropTypes.string,
     allowExtensions: PropTypes.bool,
     autoFormat: PropTypes.bool,
@@ -129,18 +129,15 @@ class IntlTelInputApp extends Component {
     document.querySelector('html').addEventListener('click', this.handleDocumentClick);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.value !== nextProps.value) {
-      this.setNumber(nextProps.intlTelInputData.telInput.value, null, true);
-    }
-
-    if (this.props.intlTelInputData.countryList.showDropdown) {
+  componentWillUpdate(nextProps) {
+    if (nextProps.intlTelInputData.countryList.showDropdown) {
       document.addEventListener('keydown', this.handleDocumentKeyDown);
       document.querySelector('html').addEventListener('click', this.handleDocumentClick);
     } else {
       document.removeEventListener('keydown', this.handleDocumentKeyDown);
       document.querySelector('html').removeEventListener('click', this.handleDocumentClick);
     }
+
     if (this.props.intlTelInputData.telInput.value !== nextProps.intlTelInputData.telInput.value) {
       this.notifyPhoneNumberChange(nextProps.intlTelInputData.telInput.value);
     }
@@ -181,7 +178,7 @@ class IntlTelInputApp extends Component {
   isGoodBrowser = Boolean(document.createElement('input').setSelectionRange);
 
   notifyPhoneNumberChange(newNumber) {
-    if (typeof this.props.onPhoneNumberChange === 'function' && newNumber) {
+    if (typeof this.props.onPhoneNumberChange === 'function') {
       let result = this.isValidNumber(newNumber);
       this.props.onPhoneNumberChange(result, newNumber, this.selectedCountryData);
     }
@@ -557,12 +554,11 @@ class IntlTelInputApp extends Component {
 
   // when autoFormat is enabled: handle various key events on the input:
   // 1) adding a new number character, which will replace any selection,
-  // reformat, and preserve the cursor position
+  //    reformat, and preserve the cursor position
   // 2) reformatting on backspace/delete
   // 3) cut/paste event
   handleInputKey(newNumericChar, addSuffix, isAllowedKey) {
     let val = findDOMNode(this.refs.telInput).value,
-      // cleanBefore = utils.getClean(val),
       originalLeftChars,
       // raw DOM element
       input = findDOMNode(this.refs.telInput),
@@ -574,7 +570,6 @@ class IntlTelInputApp extends Component {
       // A) we dont have to account for the new digit (or multiple digits if paste event),
       // and B) we're always on the right side of formatting suffixes
       digitsOnRight = this.getDigitsOnRight(val, input.selectionEnd);
-
       // if handling a new number character: insert it in the right place
       if (newNumericChar) {
         // replace any selection they may have made with the new char
@@ -694,7 +689,8 @@ class IntlTelInputApp extends Component {
       // Update: also ignore if ctrlKey (FF on Windows/Ubuntu)
       // Update: also check that we have utils before we do any autoFormat stuff
       if (e.which >= this.keys.SPACE &&
-          !e.ctrlKey && !e.metaKey && window.intlTelInputUtils && !this.state.telInput.readonly) {
+          !e.ctrlKey && !e.metaKey && window.intlTelInputUtils &&
+          !this.props.intlTelInputData.telInput.readonly) {
         e.preventDefault();
         // allowed keys are just numeric keys and plus
         // we must allow plus for the case where the user does select-all and then
@@ -735,7 +731,8 @@ class IntlTelInputApp extends Component {
     if (this.props.autoFormat && window.intlTelInputUtils) {
       // cursorAtEnd defaults to false for bad browsers else
       // they would never get a reformat on delete
-      let cursorAtEnd = (this.isGoodBrowser && findDOMNode(this.refs.telInput).selectionStart === this.state.telInput.value.length);
+      let cursorAtEnd = (this.isGoodBrowser &&
+        findDOMNode(this.refs.telInput).selectionStart === this.props.intlTelInputData.telInput.value.length);
 
       if (!findDOMNode(this.refs.telInput).value) {
         // if they just cleared the input, update the flag to the default
@@ -821,7 +818,7 @@ class IntlTelInputApp extends Component {
   // prevent deleting the plus (if not in nationalMode)
   ensurePlus() {
     if (!this.props.nationalMode) {
-      let val = this.state.telInput.value,
+      let val = this.props.intlTelInputData.telInput.value,
         input = findDOMNode(this.refs.telInput);
       if (val.charAt(0) !== '+') {
         // newCursorPos is current pos + 1 to account for the plus we are about to add
@@ -925,6 +922,10 @@ class IntlTelInputApp extends Component {
     }
   }
 
+  handleInputChange() {
+    this.props.dispatch(intlTelInputActions.handleInputChange(findDOMNode(this.refs.telInput).value));
+  }
+
   render() {
     const { dispatch, intlTelInputData } = this.props;
     const actions = bindActionCreators(intlTelInputActions, dispatch);
@@ -949,6 +950,9 @@ class IntlTelInputApp extends Component {
                       highlightedCountry={intlTelInputData.countryList.highlightedCountry} />
         <TelInput ref="telInput"
                   actions={actions}
+                  handleKeyUp={this.handleKeyUp}
+                  handleKeyPress={this.handleKeyPress}
+                  handleInputChange={this.handleInputChange}
                   className={inputClass}
                   disabled={intlTelInputData.telInput.disabled}
                   readonly={intlTelInputData.telInput.readonly}

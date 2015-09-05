@@ -1,10 +1,10 @@
-import React, { Component, PropTypes, findDOMNode } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 class TelInput extends Component {
   constructor() {
     super();
 
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   static propTypes = {
@@ -19,8 +19,8 @@ class TelInput extends Component {
     actions: PropTypes.object
   };
 
-  handleInputChange(e) {
-    this.props.actions.handleInputChange(e.target.value);
+  onChange() {
+    this.props.handleInputChange.call(this);
   }
 
   render() {
@@ -31,7 +31,7 @@ class TelInput extends Component {
              readOnly={this.props.readonly ? 'readonly' : false}
              name={this.props.fieldName}
              value={this.props.value}
-             onChange={this.handleInputChange}
+             onChange={this.onChange}
              onKeyPress={this.props.handleKeyPress}
              onKeyUp={this.props.handleKeyUp} />
     );
