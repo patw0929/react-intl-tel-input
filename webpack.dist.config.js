@@ -4,12 +4,13 @@
  * This file is set up for serving the distribution version. It will be compiled to dist/ by default
  */
 
-'use strict';
-
-var webpack = require('webpack');
+var webpack = require('webpack'),
+    path = require('path');
+var eslintrcPath = path.resolve(__dirname, '.eslintrc');
 
 module.exports = {
-
+  devtool: 'eval',
+  watch: true,
   output: {
     publicPath: './',
     path: 'dist/',
@@ -18,10 +19,8 @@ module.exports = {
     libraryTarget: 'umd'
   },
 
-  debug: false,
-  devtool: false,
   entry: {
-    main: './src/containers/IntlTelInputApp.js'
+    main: './src/containers/App.js'
   },
 
   externals: {
@@ -68,5 +67,9 @@ module.exports = {
       test: /\.(png|jpg|woff|woff2)$/,
       loader: 'url-loader?limit=8192'
     }]
+  },
+
+  eslint: {
+    configFile: eslintrcPath
   }
 };
