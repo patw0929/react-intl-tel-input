@@ -4,19 +4,18 @@
  * This file is set up for serving the webpack-dev-server, which will watch for changes and recompile as required if
  * the subfolder /webpack-dev-server/ is visited. Visiting the root will not automatically reload.
  */
-'use strict';
-var webpack = require('webpack');
+
+var webpack = require('webpack'),
+    path = require('path');
+var eslintrcPath = path.resolve(__dirname, '.eslintrc');
 
 module.exports = {
-
+  devtool: 'eval',
+  watch: true,
   output: {
     filename: '[name].js',
     publicPath: '/assets/'
   },
-
-  cache: true,
-  debug: true,
-  devtool: false,
   entry: {
     main: [
       'webpack/hot/only-dev-server',
@@ -62,6 +61,9 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
-  ]
+  ],
 
+  eslint: {
+    configFile: eslintrcPath
+  }
 };
