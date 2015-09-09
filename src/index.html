@@ -104,8 +104,8 @@ var IntlTelInput = require('react-intl-tel-input');
 require('file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js');
 require('./node_modules/react-intl-tel-input/dist/styles/intlTelInput.scss');
 
-var changeHandler = function (status, value, countryData) {
-  console.log(status, value, countryData);
+var changeHandler = function (status, value, countryData, number) {
+  console.log(status, value, countryData, number);
 };
 
 React.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
