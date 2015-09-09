@@ -50,8 +50,8 @@ var DemoComponent = React.createClass({
       }.call(this), 250);
     };
   },
-  changeHandler (isValid, value, countryData) {
-    console.log(isValid, value, countryData);
+  changeHandler (isValid, value, countryData, number) {
+    console.log(isValid, value, countryData, number);
     this.setState({
       phoneNumber: value
     });

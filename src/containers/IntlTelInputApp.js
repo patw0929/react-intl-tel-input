@@ -43,6 +43,7 @@ class IntlTelInputApp extends Component {
     this.loadAutoCountry = this.loadAutoCountry.bind(this);
     this.loadUtils = this.loadUtils.bind(this);
     this.processCountryData = this.processCountryData.bind(this);
+    this.getNumber = this.getNumber.bind(this);
 
     // wrapping actions
     this.selectFlag = this.selectFlag.bind(this);
@@ -180,7 +181,7 @@ class IntlTelInputApp extends Component {
   notifyPhoneNumberChange(newNumber) {
     if (typeof this.props.onPhoneNumberChange === 'function') {
       let result = this.isValidNumber(newNumber);
-      this.props.onPhoneNumberChange(result, newNumber, this.selectedCountryData);
+      this.props.onPhoneNumberChange(result, newNumber, this.selectedCountryData, this.getNumber(newNumber));
     }
   }
 
@@ -221,6 +222,17 @@ class IntlTelInputApp extends Component {
 
     if (window.intlTelInputUtils) {
       return window.intlTelInputUtils.isValidNumber(val, countryCode);
+    }
+    return false;
+  }
+
+  // get international phone number - assumes the global function formatNumberByType (from utilsScript)
+  getNumber(number) {
+    let val = utils.trim(number),
+      countryCode = (this.props.nationalMode) ? this.selectedCountryData.iso2 : '';
+
+    if (window.intlTelInputUtils) {
+      return window.intlTelInputUtils.formatNumberByType(val, countryCode);
     }
     return false;
   }
