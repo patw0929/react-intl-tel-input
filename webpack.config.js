@@ -45,7 +45,8 @@ module.exports = {
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: /(node_modules|libphonenumber\.js)/,
-      loader: 'react-hot!babel-loader'
+      loader: 'react-hot!babel-loader',
+      query: { compact: false }
     }, {
       test: /\.scss/,
       loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
