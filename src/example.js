@@ -16,9 +16,9 @@ var loadJSONP = function (url, callback) {
 var lookup = function (callback) {
   loadJSONP('http://ipinfo.io', 'sendBack');
   window.sendBack = function (resp) {
-    var countryCode = (resp && resp.country) ? resp.country : "";
+    var countryCode = (resp && resp.country) ? resp.country : '';
     callback(countryCode);
-  }
+  };
 };
 
 var debounce = function (func, wait, immediate) {
