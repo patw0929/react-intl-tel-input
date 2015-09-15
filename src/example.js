@@ -3,6 +3,24 @@ import IntlTelInput from 'react-intl-tel-input';
 import 'file?name=libphonenumber.js!./libphonenumber.js';
 import './styles/intlTelInput.scss';
 
+var loadJSONP = function (url, callback) {
+  var ref = window.document.getElementsByTagName('script')[0];
+  var script = window.document.createElement('script');
+  script.src = url + (url.indexOf('?') + 1 ? '&' : '?') + 'callback=' + callback;
+  ref.parentNode.insertBefore(script, ref);
+  script.onload = function () {
+    this.remove();
+  };
+};
+
+var lookup = function (callback) {
+  loadJSONP('http://ipinfo.io', 'sendBack');
+  window.sendBack = function (resp) {
+    var countryCode = (resp && resp.country) ? resp.country : '';
+    callback(countryCode);
+  };
+};
+
 var debounce = function (func, wait, immediate) {
   var timeout, args, context, timestamp, result;
 
@@ -60,6 +78,8 @@ var DemoComponent = React.createClass({
     return (
       <div>
         <IntlTelInput onPhoneNumberChange={this.deplayedChangeHandler}
+                      defaultCountry={"auto"}
+                      geoIpLookup={lookup}
                       css={['intl-tel-input', 'form-control']}
                       utilsScript={'assets/libphonenumber.js'} />
         <div>Phone Number: {this.state.phoneNumber}</div>

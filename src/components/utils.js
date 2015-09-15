@@ -51,6 +51,9 @@ export default {
   trim (str) {
     // Make sure we trim BOM and NBSP
     let rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+    if (!str) {
+      return '';
+    }
     return str.replace(rtrim, '');
   },
 

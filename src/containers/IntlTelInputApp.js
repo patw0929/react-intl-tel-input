@@ -242,7 +242,6 @@ class IntlTelInputApp extends Component {
   // set the initial state of the input value and the selected flag
   setInitialState() {
     let val = this.props.defaultValue || '';
-
     // if there is a number, and it's valid, we can go ahead and set the flag, else fall back to default
     if (this.getDialCode(val)) {
       this.updateFlagFromNumber(val);
@@ -425,7 +424,9 @@ class IntlTelInputApp extends Component {
     // 2) not already started loading (start)
     // 3) already started loading (do nothing - just wait for loading callback to fire)
     if (this.autoCountry) {
-      this.autoCountryLoaded();
+      setTimeout(() => {
+        this.autoCountryLoaded();
+      }, 100);
     } else if (!this.startedLoadingAutoCountry) {
       // don't do this twice!
       this.startedLoadingAutoCountry = true;
@@ -450,7 +451,6 @@ class IntlTelInputApp extends Component {
   autoCountryLoaded() {
     if (this.props.defaultCountry === 'auto') {
       this.props.defaultCountry = this.autoCountry;
-      this.setInitialState();
       this.autoCountryDeferred.resolve();
     }
   }
