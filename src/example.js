@@ -2,13 +2,23 @@ import React from 'react';
 import IntlTelInput from 'react-intl-tel-input';
 import 'file?name=libphonenumber.js!./libphonenumber.js';
 import './styles/intlTelInput.scss';
-import jsonp from 'jsonp';
+
+var loadJSONP = function (url, callback) {
+  var ref = window.document.getElementsByTagName('script')[0];
+  var script = window.document.createElement('script');
+  script.src = url + (url.indexOf('?') + 1 ? '&' : '?') + 'callback=' + callback;
+  ref.parentNode.insertBefore(script, ref);
+  script.onload = function () {
+    this.remove();
+  };
+};
 
 var lookup = function (callback) {
-  jsonp('http://ipinfo.io', function(err, data) {
-    if(err){callback('us')}
-    callback(data.country);
-  })
+  loadJSONP('http://ipinfo.io', 'sendBack');
+  window.sendBack = function (resp) {
+    var countryCode = (resp && resp.country) ? resp.country : "";
+    callback(countryCode);
+  }
 };
 
 var debounce = function (func, wait, immediate) {
