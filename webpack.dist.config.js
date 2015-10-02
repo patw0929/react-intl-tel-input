@@ -24,7 +24,7 @@ module.exports = {
   },
 
   externals: {
-    react: 'react'
+    react: 'React'
   },
 
   stats: {

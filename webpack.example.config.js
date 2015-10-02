@@ -43,15 +43,14 @@ module.exports = {
     alias: {
       'styles': __dirname + '/src/styles',
       'mixins': __dirname + '/src/mixins',
-      'components': __dirname + '/src/components/',
-      'react-intl-tel-input': '../dist/main.js'
+      'components': __dirname + '/src/components/'
     }
   },
 
   module: {
     loaders: [{
       test: /\.js$/,
-      exclude: /(node_modules|libphonenumber\.js)/,
+      exclude: /(node_modules|libphonenumber\.js|main\.js)/,
       loader: 'babel-loader',
       query: { compact: false }
     }, {
