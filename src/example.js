@@ -1,5 +1,4 @@
-import React from 'react';
-import IntlTelInput from 'react-intl-tel-input';
+import 'script!../dist/main.js';
 import 'file?name=libphonenumber.js!./libphonenumber.js';
 import './styles/intlTelInput.scss';
 
