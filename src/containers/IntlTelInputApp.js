@@ -261,10 +261,7 @@ class IntlTelInputApp extends Component {
     }
 
     // format
-    if (val) {
-      // this wont be run after updateDialCode as that's only called if no val
-      this.updateVal(val);
-    }
+    this.updateVal(val);
   }
 
   // replace any existing dial code with the new one (if not in nationalMode)
