@@ -1,12 +1,6 @@
-/*
- * Webpack distribution configuration
- *
- * This file is set up for serving the distribution version. It will be compiled to dist/ by default
- */
-
-'use strict';
-
-var webpack = require('webpack');
+var webpack = require('webpack'),
+    path = require('path');
+var eslintrcPath = path.resolve(__dirname, '.eslintrc');
 
 module.exports = {
 
@@ -22,20 +16,31 @@ module.exports = {
     example: ['./src/example.js']
   },
 
+  externals: {
+    react: 'React'
+  },
+
   stats: {
     colors: true,
     reasons: false
   },
 
   plugins: [
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
       }
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin()
+    new webpack.DefinePlugin({
+      "process.env": {
+        // This has effect on the react lib size
+        "NODE_ENV": JSON.stringify("production")
+      }
+    }),
+    new webpack.NormalModuleReplacementPlugin( // allow examples to include react-mentions
+      /^react-intl-tel-input$/,
+      __dirname + '/src/containers/App.js'
+    )
   ],
 
   resolve: {
@@ -43,8 +48,7 @@ module.exports = {
     alias: {
       'styles': __dirname + '/src/styles',
       'mixins': __dirname + '/src/mixins',
-      'components': __dirname + '/src/components/',
-      'react-intl-tel-input': '../dist/main.js'
+      'components': __dirname + '/src/components/'
     }
   },
 
@@ -64,5 +68,9 @@ module.exports = {
       test: /\.(png|jpg|woff|woff2)$/,
       loader: 'url-loader?limit=8192'
     }]
+  },
+
+  eslint: {
+    configFile: eslintrcPath
   }
 };

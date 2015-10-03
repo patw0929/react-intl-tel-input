@@ -14,17 +14,15 @@ module.exports = {
   output: {
     publicPath: './',
     path: 'dist/',
-    filename: 'main.js',
-    library: 'IntlTelInput',
-    libraryTarget: 'umd'
+    filename: 'main.js'
   },
 
   entry: {
-    main: './src/containers/App.js'
+    main: ['./src/containers/App.js']
   },
 
   externals: {
-    react: 'react'
+    react: 'React'
   },
 
   stats: {
@@ -33,6 +31,11 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {

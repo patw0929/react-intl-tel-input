@@ -27,6 +27,10 @@ module.exports = {
     ]
   },
 
+  externals: {
+    react: 'React'
+  },
+
   stats: {
     colors: true,
     reasons: true
