@@ -39,7 +39,7 @@ module.exports = {
     }),
     new webpack.NormalModuleReplacementPlugin( // allow examples to include react-mentions
       /^react-intl-tel-input$/,
-      __dirname + '/src/containers/App.js'
+      __dirname + '/dist/main.js'
     )
   ],
 
