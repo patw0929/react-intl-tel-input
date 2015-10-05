@@ -16,15 +16,20 @@ module.exports = {
     path: 'dist/',
     filename: 'main.js',
     library: 'IntlTelInput',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
   },
 
   entry: {
-    main: './src/containers/App.js'
+    main: ['./src/containers/App.js']
   },
 
   externals: {
-    react: 'react'
+    'react': {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react'
+    }
   },
 
   stats: {
@@ -33,6 +38,11 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
