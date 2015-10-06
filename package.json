@@ -43,6 +43,7 @@
     "grunt-open": "~0.2.3",
     "grunt-webpack": "~1.0.8",
     "image-webpack-loader": "^1.6.1",
+    "imagemin-pngquant": "^4.2.0",
     "jest-cli": "^0.4.19",
     "jshint": "^2.8.0",
     "jshint-loader": "~0.8.0",
