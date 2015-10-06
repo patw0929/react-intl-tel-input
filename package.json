@@ -38,6 +38,7 @@
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-connect": "~0.8.0",
     "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-imagemin": "^0.9.4",
     "grunt-gh-pages": "^0.10.0",
     "grunt-open": "~0.2.3",
     "grunt-webpack": "~1.0.8",
