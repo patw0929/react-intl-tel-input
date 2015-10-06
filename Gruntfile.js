@@ -8,6 +8,8 @@ var webpackExampleConfig = require('./webpack.example.config.js'),
     webpackDistConfig = require('./webpack.dist.config.js'),
     webpackDevConfig = require('./webpack.config.js');
 
+var imageminPngquant = require('imagemin-pngquant');
+
 module.exports = function (grunt) {
   // Let *load-grunt-tasks* require everything
   require('load-grunt-tasks')(grunt);
@@ -76,6 +78,7 @@ module.exports = function (grunt) {
       dist: {
         options: {
           optimizationLevel: 3,
+          use: [imageminPngquant({quality: '30-40', speed: 1})]
         },
         files: [{
           flatten: true,
