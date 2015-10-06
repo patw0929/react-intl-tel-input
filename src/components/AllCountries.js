@@ -29,7 +29,24 @@ JSON.stringify(result);
 // and Vatican City from +379 to +39 (see issue 50)
 // and Caribean Netherlands from +5997 to +599
 // and Curacao from +5999 to +599
-// Removed: Åland Islands, Christmas Island, Cocos Islands, Guernsey, Isle of Man, Jersey, Kosovo, Mayotte, Pitcairn Islands, South Georgia, Svalbard, Western Sahara
+// Removed: Kosovo, Pitcairn Islands, South Georgia
+
+// UPDATE Sept 12th 2015
+// List of regions that have iso2 country codes, which I have chosen to omit:
+// (based on this information: https://en.wikipedia.org/wiki/List_of_country_calling_codes)
+// AQ - Antarctica - all different country codes depending on which "base"
+// BV - Bouvet Island - no calling code
+// GS - South Georgia and the South Sandwich Islands - "inhospitable collection of islands" - same flag and calling code as Falkland Islands
+// HM - Heard Island and McDonald Islands - no calling code
+// PN - Pitcairn - tiny population (56), same calling code as New Zealand
+// TF - French Southern Territories - no calling code
+// UM - United States Minor Outlying Islands - no calling code
+
+// UPDATE the criteria of supported countries or territories (see issue 297)
+// Have an iso2 code: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+// Have a country calling code: https://en.wikipedia.org/wiki/List_of_country_calling_codes
+// Have a flag
+// Must be supported by libphonenumber: https://github.com/googlei18n/libphonenumber
 
 // Update: converted objects to arrays to save bytes!
 // Update: added 'priority' for countries with the same dialCode as others
@@ -102,7 +119,8 @@ let allCountries = [
   [
     'Australia',
     'au',
-    '61'
+    '61',
+    0
   ],
   [
     'Austria (Österreich)',
@@ -268,6 +286,18 @@ let allCountries = [
     '86'
   ],
   [
+    'Christmas Island',
+    'cx',
+    '61',
+    2
+  ],
+  [
+    'Cocos (Keeling) Islands',
+    'cc',
+    '61',
+    1
+  ],
+  [
     'Colombia',
     'co',
     '57'
@@ -403,7 +433,8 @@ let allCountries = [
   [
     'Finland (Suomi)',
     'fi',
-    '358'
+    '358',
+    0
   ],
   [
     'France',
@@ -482,6 +513,12 @@ let allCountries = [
     '502'
   ],
   [
+    'Guernsey',
+    'gg',
+    '44',
+    1
+  ],
+  [
     'Guinea (Guinée)',
     'gn',
     '224'
@@ -547,6 +584,12 @@ let allCountries = [
     '353'
   ],
   [
+    'Isle of Man',
+    'im',
+    '44',
+    2
+  ],
+  [
     'Israel (‫ישראל‬‎)',
     'il',
     '972'
@@ -566,6 +609,12 @@ let allCountries = [
     'Japan (日本)',
     'jp',
     '81'
+  ],
+  [
+    'Jersey',
+    'je',
+    '44',
+    3
   ],
   [
     'Jordan (‫الأردن‬‎)',
@@ -704,6 +753,12 @@ let allCountries = [
     '230'
   ],
   [
+    'Mayotte',
+    'yt',
+    '262',
+    1
+  ],
+  [
     'Mexico (México)',
     'mx',
     '52'
@@ -741,7 +796,8 @@ let allCountries = [
   [
     'Morocco (‫المغرب‬‎)',
     'ma',
-    '212'
+    '212',
+    0
   ],
   [
     'Mozambique (Moçambique)',
@@ -821,7 +877,8 @@ let allCountries = [
   [
     'Norway (Norge)',
     'no',
-    '47'
+    '47',
+    0
   ],
   [
     'Oman (‫عُمان‬‎)',
@@ -893,7 +950,8 @@ let allCountries = [
   [
     'Réunion (La Réunion)',
     're',
-    '262'
+    '262',
+    0
   ],
   [
     'Romania (România)',
@@ -1054,6 +1112,12 @@ let allCountries = [
     '597'
   ],
   [
+    'Svalbard and Jan Mayen',
+    'sj',
+    '47',
+    1
+  ],
+  [
     'Swaziland',
     'sz',
     '268'
@@ -1166,7 +1230,8 @@ let allCountries = [
   [
     'United Kingdom',
     'gb',
-    '44'
+    '44',
+    0
   ],
   [
     'United States',
@@ -1211,6 +1276,12 @@ let allCountries = [
     '681'
   ],
   [
+    'Western Sahara (‫الصحراء الغربية‬‎)',
+    'eh',
+    '212',
+    1
+  ],
+  [
     'Yemen (‫اليمن‬‎)',
     'ye',
     '967'
@@ -1224,6 +1295,12 @@ let allCountries = [
     'Zimbabwe',
     'zw',
     '263'
+  ],
+  [
+    'Åland Islands',
+    'ax',
+    '358',
+    1
   ]
 ];
 
