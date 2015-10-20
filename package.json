@@ -18,7 +18,7 @@
     "url": "https://github.com/patw0929/react-intl-tel-input/issues"
   },
   "main": "dist/main.js",
-  "dependencies": {
+  "peerDependencies": {
     "react": "~0.13.3"
   },
   "devDependencies": {
@@ -50,6 +50,7 @@
     "karma-script-launcher": "~0.1.0",
     "karma-webpack": "~1.2.2",
     "load-grunt-tasks": "~0.6.0",
+    "react": "~0.13.3",
     "react-hot-loader": "^1.0.7",
     "sass-loader": "^1.0.1",
     "simple-ajax": "^2.1.0",
