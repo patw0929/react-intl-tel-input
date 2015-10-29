@@ -1,4 +1,5 @@
-import React, { Component, PropTypes, findDOMNode } from 'react';
+import React, { Component, PropTypes } from 'react';
+import ReactDOM, { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import utils from './utils';
 
@@ -27,7 +28,7 @@ class CountryList extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.showDropdown && !nextProps.isMobile) {
-      this.refs.listElement.setAttribute('class', 'country-list v-hide');
+      findDOMNode(this.refs.listElement).setAttribute('class', 'country-list v-hide');
       this.setDropdownPosition();
     }
   }
@@ -94,14 +95,14 @@ class CountryList extends Component {
       windowTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop,
       windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight,
       inputOuterHeight = this.props.inputOuterHeight,
-      countryListOuterHeight = utils.getOuterHeight(this.refs.listElement),
+      countryListOuterHeight = utils.getOuterHeight(findDOMNode(this.refs.listElement)),
       dropdownFitsBelow = (inputTop + inputOuterHeight + countryListOuterHeight < windowTop + windowHeight),
       dropdownFitsAbove = (inputTop - countryListOuterHeight > windowTop);
 
     // dropdownHeight - 1 for border
     let cssTop = (!dropdownFitsBelow && dropdownFitsAbove) ? '-' + (countryListOuterHeight - 1) + 'px' : '';
-    this.refs.listElement.style.top = cssTop;
-    this.refs.listElement.setAttribute('class', 'country-list');
+    findDOMNode(this.refs.listElement).style.top = cssTop;
+    findDOMNode(this.refs.listElement).setAttribute('class', 'country-list');
   }
 
   render() {
