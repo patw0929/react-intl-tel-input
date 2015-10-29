@@ -46,7 +46,6 @@
     "jshint-loader": "~0.8.0",
     "jsxhint-loader": "~0.2.0",
     "load-grunt-tasks": "~0.6.0",
-    "react": "~0.13.3",
     "react-hot-loader": "^1.0.7",
     "react-redux": "^2.0.0",
     "redux": "^2.0.0",
