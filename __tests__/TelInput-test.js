@@ -1,5 +1,6 @@
 import '../.auto_mock_off';
-import React, { findDOMNode } from 'react/addons';
+import React from 'react';
+import ReactDOM, { findDOMNode } from 'react-dom';
 import IntlTelInput from '../src/containers/App';
 import TelInput from '../src/components/TelInput';
 
