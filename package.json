@@ -55,7 +55,8 @@
     "underscore.deferred": "^0.4.0",
     "url-loader": "~0.5.5",
     "webpack": "~1.4.3",
-    "webpack-dev-server": "~1.6.5"
+    "webpack-dev-server": "~1.6.5",
+    "react-addons-test-utils": "^0.14.0"
   },
   "scripts": {
     "build": "grunt build",
