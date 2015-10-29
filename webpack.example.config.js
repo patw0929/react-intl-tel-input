@@ -22,6 +22,11 @@ module.exports = {
     example: ['./src/example.js']
   },
 
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM'
+  },
+
   stats: {
     colors: true,
     reasons: false
