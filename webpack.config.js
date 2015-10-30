@@ -28,6 +28,11 @@ module.exports = {
     ]
   },
 
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM'
+  },
+
   stats: {
     colors: true,
     reasons: true

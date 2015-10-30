@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import IntlTelInput from 'react-intl-tel-input';
 import 'file?name=libphonenumber.js!./libphonenumber.js';
 import './styles/intlTelInput.scss';
@@ -22,4 +23,4 @@ var DemoComponent = React.createClass({
   }
 });
 
-React.render(<DemoComponent />, document.getElementById('content'));
+ReactDOM.render(<DemoComponent />, document.getElementById('content'));
