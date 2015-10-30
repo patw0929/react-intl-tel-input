@@ -63,7 +63,7 @@ class DemoComponent extends React.Component {
     super(props);
     this.state = {
       phoneNumber: ''
-    }
+    };
   }
 
   componentWillMount() {
