@@ -15,7 +15,6 @@ class IntlTelInputApp extends Component {
   constructor(props) {
     super(props);
 
-    this.props.dispatch(intlTelInputActions.getPropsData(this.props.defaultValue, this.props.countryCode));
     this.processCountryData.call(this);
 
     this.selectedCountryData = {};
@@ -114,6 +113,8 @@ class IntlTelInputApp extends Component {
     window.onload = () => {
       this.windowLoaded = true;
     };
+
+    this.props.dispatch(intlTelInputActions.getPropsData(this.props.defaultValue, this.props.countryCode));
 
     this.initRequests();
 
