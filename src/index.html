@@ -52,14 +52,15 @@
         <pre><code class="javascript">'use strict';
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var IntlTelInput = require('react-intl-tel-input');
 require('file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js');
 require('./node_modules/react-intl-tel-input/dist/styles/intlTelInput.scss');
 
-React.render(&lt;IntlTelInput preferredCountries={['tw']}
-                           css={['intl-tel-input', 'form-control']}
-                           utilsScript={'libphonenumber.js'} /&gt;,
-                           document.getElementById('content'));
+ReactDOM.render(&lt;IntlTelInput preferredCountries={['tw']}
+                              css={['intl-tel-input', 'form-control']}
+                              utilsScript={'libphonenumber.js'} /&gt;,
+                              document.getElementById('content'));
 </code></pre>
 
         <h3>Demo: Lookup user's country</h3>
@@ -67,6 +68,7 @@ React.render(&lt;IntlTelInput preferredCountries={['tw']}
         <pre><code class="javascript">'use strict';
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var IntlTelInput = require('react-intl-tel-input');
 require('file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js');
 require('./node_modules/react-intl-tel-input/dist/styles/intlTelInput.scss');
@@ -89,10 +91,10 @@ var lookup = function (callback) {
   }
 };
 
-React.render(&lt;IntlTelInput defaultCountry={'auto'}
-                           geoIpLookup={lookup}
-                           css={['intl-tel-input', 'form-control']}
-                           utilsScript={'libphonenumber.js'} /&gt;, document.getElementById('content'));
+ReactDOM.render(&lt;IntlTelInput defaultCountry={'auto'}
+                              geoIpLookup={lookup}
+                              css={['intl-tel-input', 'form-control']}
+                              utilsScript={'libphonenumber.js'} /&gt;, document.getElementById('content'));
 </code></pre>
 
         <h3>Validation callback</h3>
@@ -100,6 +102,7 @@ React.render(&lt;IntlTelInput defaultCountry={'auto'}
         <pre><code class="javascript">'use strict';
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var IntlTelInput = require('react-intl-tel-input');
 require('file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js');
 require('./node_modules/react-intl-tel-input/dist/styles/intlTelInput.scss');
@@ -108,9 +111,9 @@ var changeHandler = function (status, value, countryData, number) {
   console.log(status, value, countryData, number);
 };
 
-React.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
-                           css={['intl-tel-input', 'form-control']}
-                           utilsScript={'libphonenumber.js'} /&gt;, document.getElementById('content'));
+ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
+                              css={['intl-tel-input', 'form-control']}
+                              utilsScript={'libphonenumber.js'} /&gt;, document.getElementById('content'));
 </code></pre>
 
         <hr>
@@ -229,7 +232,8 @@ React.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.min.js"></script>
+  <script src="https://fb.me/react-0.14.1.min.js"></script>
+  <script src="https://fb.me/react-dom-0.14.1.min.js"></script>
   <script>
     __REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__
   </script>

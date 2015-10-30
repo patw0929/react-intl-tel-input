@@ -34,22 +34,22 @@ class IntlTelInput extends Component {
   render() {
     return (
       <Provider store={store}>
-        {() => <IntlTelInputApp value={this.props.value}
-                             defaultValue={this.props.defaultValue}
-                             onPhoneNumberChange={this.props.onPhoneNumberChange}
-                             css={this.props.css}
-                             fieldName={this.props.fieldName}
-                             allowExtensions={this.props.allowExtensions}
-                             autoFormat={this.props.autoFormat}
-                             autoPlaceholder={this.props.autoPlaceholder}
-                             autoHideDialCode={this.props.autoHideDialCode}
-                             defaultCountry={this.props.defaultCountry}
-                             geoIpLookup={this.props.geoIpLookup}
-                             nationalMode={this.props.nationalMode}
-                             numberType={this.props.numberType}
-                             onlyCountries={this.props.onlyCountries}
-                             preferredCountries={this.props.preferredCountries}
-                             utilsScript={this.props.utilsScript} />}
+        <IntlTelInputApp value={this.props.value}
+                         defaultValue={this.props.defaultValue}
+                         onPhoneNumberChange={this.props.onPhoneNumberChange}
+                         css={this.props.css}
+                         fieldName={this.props.fieldName}
+                         allowExtensions={this.props.allowExtensions}
+                         autoFormat={this.props.autoFormat}
+                         autoPlaceholder={this.props.autoPlaceholder}
+                         autoHideDialCode={this.props.autoHideDialCode}
+                         defaultCountry={this.props.defaultCountry}
+                         geoIpLookup={this.props.geoIpLookup}
+                         nationalMode={this.props.nationalMode}
+                         numberType={this.props.numberType}
+                         onlyCountries={this.props.onlyCountries}
+                         preferredCountries={this.props.preferredCountries}
+                         utilsScript={this.props.utilsScript} />
       </Provider>
     );
   }

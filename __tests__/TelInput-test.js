@@ -1,10 +1,11 @@
 import '../.auto_mock_off';
-import React, { findDOMNode } from 'react/addons';
+import React from 'react';
+import { findDOMNode } from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import IntlTelInput from '../src/containers/App';
 import TelInput from '../src/components/TelInput';
 
 describe('TelInput', () => {
-  var TestUtils = React.addons.TestUtils;
   var component;
 
   beforeEach(() => {

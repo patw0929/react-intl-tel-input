@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import IntlTelInput from 'react-intl-tel-input';
 import 'file?name=libphonenumber.js!./libphonenumber.js';
 import './styles/intlTelInput.scss';
@@ -57,24 +58,30 @@ var debounce = function (func, wait, immediate) {
   };
 };
 
-var DemoComponent = React.createClass({
-  getInitialState () {
-    return { phoneNumber: '' };
-  },
-  componentWillMount () {
+class DemoComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      phoneNumber: ''
+    };
+  }
+
+  componentWillMount() {
     this.deplayedChangeHandler = (...data) => {
       debounce(function () {
         this.changeHandler.apply(this, data);
       }.call(this), 250);
     };
-  },
-  changeHandler (isValid, value, countryData, number) {
+  }
+
+  changeHandler(isValid, value, countryData, number) {
     console.log(isValid, value, countryData, number);
     this.setState({
       phoneNumber: value
     });
-  },
-  render () {
+  }
+
+  render() {
     return (
       <div>
         <IntlTelInput onPhoneNumberChange={this.deplayedChangeHandler}
@@ -86,6 +93,6 @@ var DemoComponent = React.createClass({
       </div>
     );
   }
-});
+}
 
-React.render(<DemoComponent />, document.getElementById('content'));
+ReactDOM.render(<DemoComponent />, document.getElementById('content'));
