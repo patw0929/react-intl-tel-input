@@ -83,7 +83,6 @@ class IntlTelInputApp extends Component {
   static defaultProps = {
     css: ['intl-tel-input', ''],
     fieldName: '',
-    value: '',
     // typing digits after a valid number will be added to the extension part of the number
     allowExtensions: false,
     // automatically format the number according to the selected country
