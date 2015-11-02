@@ -64,6 +64,7 @@ class IntlTelInputApp extends Component {
   static propTypes = {
     css: PropTypes.arrayOf(PropTypes.string),
     fieldName: PropTypes.string,
+    value: PropTypes.string,
     defaultValue: PropTypes.string,
     allowExtensions: PropTypes.bool,
     autoFormat: PropTypes.bool,
@@ -85,6 +86,7 @@ class IntlTelInputApp extends Component {
   static defaultProps = {
     css: ['intl-tel-input', ''],
     fieldName: '',
+    value: '',
     // typing digits after a valid number will be added to the extension part of the number
     allowExtensions: false,
     // automatically format the number according to the selected country
@@ -131,6 +133,12 @@ class IntlTelInputApp extends Component {
 
     document.addEventListener('keydown', this.handleDocumentKeyDown);
     document.querySelector('html').addEventListener('click', this.handleDocumentClick);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value !== this.props.value) {
+      this.setNumber(nextProps.value);
+    }
   }
 
   componentWillUpdate(nextProps) {
