@@ -57,6 +57,8 @@ class IntlTelInputApp extends Component {
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.handleUpDownKey = this.handleUpDownKey.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+
+    this.tempCountry = this.props.defaultCountry;
   }
 
   static propTypes = {
@@ -146,6 +148,7 @@ class IntlTelInputApp extends Component {
   }
 
   autoCountry = '';
+  tempCountry = '';
   startedLoadingAutoCountry = false;
 
   autoCountryDeferred = new _.Deferred();
@@ -246,10 +249,10 @@ class IntlTelInputApp extends Component {
     // if there is a number, and it's valid, we can go ahead and set the flag, else fall back to default
     if (this.getDialCode(val)) {
       this.updateFlagFromNumber(val);
-    } else if (this.props.defaultCountry !== 'auto') {
+    } else if (this.tempCountry !== 'auto') {
       // check the defaultCountry option, else fall back to the first in the list
-      let defaultCountry = this.props.defaultCountry;
-      if (!this.props.defaultCountry) {
+      let defaultCountry = this.tempCountry;
+      if (!this.tempCountry) {
         defaultCountry = (this.preferredCountries.length) ? this.preferredCountries[0].iso2 : this.countries[0].iso2;
       }
       this.selectFlag(defaultCountry);
@@ -379,7 +382,7 @@ class IntlTelInputApp extends Component {
       countryCode = '';
     } else if (!number || number === '+') {
       // empty, or just a plus, so default
-      countryCode = this.props.defaultCountry;
+      countryCode = this.tempCountry;
     }
 
     if (countryCode !== null && countryCode !== '' && this.props.intlTelInputData.countryCode !== countryCode) {
@@ -403,7 +406,7 @@ class IntlTelInputApp extends Component {
       this.utilsScriptDeferred.resolve();
     }
 
-    if (this.props.defaultCountry === 'auto') {
+    if (this.tempCountry === 'auto') {
       this.loadAutoCountry();
     } else {
       this.autoCountryDeferred.resolve();
@@ -447,8 +450,8 @@ class IntlTelInputApp extends Component {
 
   // this is called when the geoip call returns
   autoCountryLoaded() {
-    if (this.props.defaultCountry === 'auto') {
-      this.props.defaultCountry = this.autoCountry;
+    if (this.tempCountry === 'auto') {
+      this.tempCountry = this.autoCountry;
       this.autoCountryDeferred.resolve();
     }
   }
