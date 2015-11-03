@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import ReactDOM, { findDOMNode } from 'react-dom';
+import { findDOMNode } from 'react-dom';
 import Ajax from 'simple-ajax';
 import _ from 'underscore.deferred';
 import Cookies from 'cookies-js';
