@@ -1,6 +1,6 @@
 {
   "name": "react-intl-tel-input",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "description": "Rewrite intl-tel-input in React.",
   "author": "patw",
   "keywords": [
@@ -19,8 +19,8 @@
   },
   "main": "dist/main.js",
   "peerDependencies": {
-    "react": "~0.14.1",
-    "react-dom": "~0.14.1"
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
   },
   "devDependencies": {
     "babel": "^4.0.0",
@@ -51,7 +51,6 @@
     "karma-script-launcher": "~0.1.0",
     "karma-webpack": "~1.2.2",
     "load-grunt-tasks": "~0.6.0",
-    "react": "~0.13.3",
     "react-hot-loader": "^1.0.7",
     "sass-loader": "^1.0.1",
     "simple-ajax": "^2.1.0",

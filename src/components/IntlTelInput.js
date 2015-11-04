@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { findDOMNode } from 'react-dom';
 import Ajax from 'simple-ajax';
 import _ from 'underscore.deferred';
 import Cookies from 'cookies-js';
@@ -137,7 +138,7 @@ export default React.createClass({
 
   // highlight the next/prev item in the list (and ensure it is visible)
   handleUpDownKey (key) {
-    let current = React.findDOMNode(this.refs.flagDropDown).querySelectorAll('.highlight')[0];
+    let current = findDOMNode(this.refs.flagDropDown).querySelectorAll('.highlight')[0];
     let next = ((key === this.keys.UP) ? ((current) ? current.previousElementSibling : undefined) : ((current) ? current.nextElementSibling : undefined));
 
     if (next) {
@@ -163,7 +164,7 @@ export default React.createClass({
 
   // select the currently highlighted item
   handleEnterKey () {
-    let current = React.findDOMNode(this.refs.flagDropDown).querySelectorAll('.highlight')[0];
+    let current = findDOMNode(this.refs.flagDropDown).querySelectorAll('.highlight')[0];
     if (current) {
       let selectedIndex = utils.retrieveLiIndex(current);
       let countryCode = current.getAttribute('data-country-code');
@@ -183,7 +184,7 @@ export default React.createClass({
 
   // check if an element is visible within it's container, else scroll until it is
   scrollTo (element, middle) {
-    let container = React.findDOMNode(this.refs.flagDropDown).querySelector('.country-list'),
+    let container = findDOMNode(this.refs.flagDropDown).querySelector('.country-list'),
       containerHeight = parseFloat(getComputedStyle(container).getPropertyValue('height')),
       containerTop = utils.offset(container).top,
       containerBottom = containerTop + containerHeight,
@@ -226,7 +227,7 @@ export default React.createClass({
   searchForCountry (query) {
     for (let i = 0, max = this.countries.length; i < max; i++) {
       if (utils.startsWith(this.countries[i].name, query)) {
-        let listItem = React.findDOMNode(this.refs.flagDropDown)
+        let listItem = findDOMNode(this.refs.flagDropDown)
                             .querySelector('.country-list [data-country-code="' + this.countries[i].iso2 + '"]:not(.preferred)');
 
         let selectedIndex = utils.retrieveLiIndex(listItem);
@@ -352,7 +353,7 @@ export default React.createClass({
         formatted = window.intlTelInputUtils.formatNumber(val, this.selectedCountryData.iso2, addSuffix, this.props.allowExtensions, isAllowedKey);
       }
       // ensure we dont go over maxlength. we must do this here to truncate any formatting suffix, and also handle paste events
-      var max = React.findDOMNode(this.refs.telInput).getAttribute('maxlength');
+      var max = findDOMNode(this.refs.telInput).getAttribute('maxlength');
       if (max && formatted.length > max) {
         formatted = formatted.substr(0, max);
       }
@@ -379,7 +380,7 @@ export default React.createClass({
   // replace any existing dial code with the new one (if not in nationalMode)
   // also we need to know if we're focusing for a couple of reasons e.g. if so, we want to add any formatting suffix, also if the input is empty and we're not in nationalMode, then we want to insert the dial code
   updateDialCode (newDialCode, focusing) {
-    var inputVal = React.findDOMNode(this.refs.telInput).value,
+    var inputVal = findDOMNode(this.refs.telInput).value,
       newNumber;
 
     // save having to pass this every time
@@ -686,11 +687,11 @@ export default React.createClass({
       //this.telInput.trigger("change");
 
       // focus the input
-      React.findDOMNode(this.refs.telInput).focus();
+      findDOMNode(this.refs.telInput).focus();
       // fix for FF and IE11 (with nationalMode=false i.e. auto inserting dial code), who try to put the cursor at the beginning the first time
       if (this.isGoodBrowser) {
         let len = this.state.telInput.value.length;
-        React.findDOMNode(this.refs.telInput).setSelectionRange(len, len);
+        findDOMNode(this.refs.telInput).setSelectionRange(len, len);
       }
     });
   },
@@ -739,8 +740,8 @@ export default React.createClass({
           value: this.state.telInput.value,
           disabled: this.state.telInput.disabled,
           readonly: this.state.telInput.readonly,
-          offsetTop: utils.offset(React.findDOMNode(this.refs.telInput)).top,
-          outerHeight: utils.getOuterHeight(React.findDOMNode(this.refs.telInput))
+          offsetTop: utils.offset(findDOMNode(this.refs.telInput)).top,
+          outerHeight: utils.getOuterHeight(findDOMNode(this.refs.telInput))
         },
         countryCode: this.state.countryCode
       });
@@ -751,7 +752,7 @@ export default React.createClass({
   ensurePlus () {
     if (!this.props.nationalMode) {
       let val = this.state.telInput.value,
-        input = React.findDOMNode(this.refs.telInput);
+        input = findDOMNode(this.refs.telInput);
       if (val.charAt(0) !== '+') {
         // newCursorPos is current pos + 1 to account for the plus we are about to add
         let newCursorPos = (this.isGoodBrowser) ? input.selectionStart + 1 : 0;
@@ -777,9 +778,9 @@ export default React.createClass({
 
   // alert the user to an invalid key event
   handleInvalidKey () {
-    React.findDOMNode(this.refs.telInput).classList.add('iti-invalid-key');
+    findDOMNode(this.refs.telInput).classList.add('iti-invalid-key');
     setTimeout(() => {
-      React.findDOMNode(this.refs.telInput).classList.remove('iti-invalid-key');
+      findDOMNode(this.refs.telInput).classList.remove('iti-invalid-key');
     }, 100);
   },
 
@@ -788,11 +789,11 @@ export default React.createClass({
   // 2) reformatting on backspace/delete
   // 3) cut/paste event
   handleInputKey (newNumericChar, addSuffix, isAllowedKey) {
-    let val = React.findDOMNode(this.refs.telInput).value,
+    let val = findDOMNode(this.refs.telInput).value,
       // cleanBefore = utils.getClean(val),
       originalLeftChars,
       // raw DOM element
-      input = React.findDOMNode(this.refs.telInput),
+      input = findDOMNode(this.refs.telInput),
       digitsOnRight = 0;
 
     if (this.isGoodBrowser) {
@@ -818,7 +819,7 @@ export default React.createClass({
     // update the cursor position
     if (this.isGoodBrowser) {
       let newCursor;
-      val = React.findDOMNode(this.refs.telInput).value;
+      val = findDOMNode(this.refs.telInput).value;
 
       // if it was at the end, keep it there
       if (!digitsOnRight) {
@@ -888,7 +889,7 @@ export default React.createClass({
       let iso2 = this.selectedCountryData.iso2,
         numberType = window.intlTelInputUtils.numberType[this.props.numberType || 'FIXED_LINE'],
         placeholder = (iso2) ? window.intlTelInputUtils.getExampleNumber(iso2, this.props.nationalMode, numberType) : '';
-      React.findDOMNode(this.refs.telInput).setAttribute('placeholder', placeholder);
+      findDOMNode(this.refs.telInput).setAttribute('placeholder', placeholder);
     }
   },
 
@@ -910,7 +911,7 @@ export default React.createClass({
         // allowed keys are just numeric keys and plus
         // we must allow plus for the case where the user does select-all and then hits plus to start typing a new number. we could refine this logic to first check that the selection contains a plus, but that wont work in old browsers, and I think it's overkill anyway
         let isAllowedKey = ((e.which >= this.keys.ZERO && e.which <= this.keys.NINE) || e.which === this.keys.PLUS),
-          input = React.findDOMNode(this.refs.telInput),
+          input = findDOMNode(this.refs.telInput),
           noSelection = (this.isGoodBrowser && input.selectionStart === input.selectionEnd),
           max = input.getAttribute('maxlength'),
           val = input.value,
@@ -934,9 +935,9 @@ export default React.createClass({
     // ALSO: ignore keyup if readonly
     if (this.props.autoFormat && window.intlTelInputUtils) {
       // cursorAtEnd defaults to false for bad browsers else they would never get a reformat on delete
-      let cursorAtEnd = (this.isGoodBrowser && React.findDOMNode(this.refs.telInput).selectionStart === this.state.telInput.value.length);
+      let cursorAtEnd = (this.isGoodBrowser && findDOMNode(this.refs.telInput).selectionStart === this.state.telInput.value.length);
 
-      if (!React.findDOMNode(this.refs.telInput).value) {
+      if (!findDOMNode(this.refs.telInput).value) {
         // if they just cleared the input, update the flag to the default
         this.updateFlagFromNumber('');
       } else if ((e.which === this.keys.DEL && !cursorAtEnd) || e.which === this.keys.BSPACE) {
@@ -948,7 +949,7 @@ export default React.createClass({
       this.ensurePlus();
     } else {
       // if no autoFormat, just update flag
-      this.updateFlagFromNumber(React.findDOMNode(this.refs.telInput).value);
+      this.updateFlagFromNumber(findDOMNode(this.refs.telInput).value);
     }
   },
 
