@@ -138,5 +138,17 @@ export default {
     } else {
       throw new Error('No country data for "' + countryCode + '"');
     }
+  },
+
+  addClass(el, klass) {
+    el.className += ' ' + klass;
+  },
+
+  removeClass(el, klass) {
+    let elClass = ' ' + el.className + ' ';
+    while (elClass.indexOf(' ' + klass + ' ') !== -1) {
+      elClass = elClass.replace(' ' + klass + ' ', '');
+    }
+    el.className = elClass;
   }
 };
