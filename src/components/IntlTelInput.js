@@ -778,9 +778,9 @@ export default React.createClass({
 
   // alert the user to an invalid key event
   handleInvalidKey () {
-    findDOMNode(this.refs.telInput).classList.add('iti-invalid-key');
+    utils.addClass(findDOMNode(this.refs.telInput), 'iti-invalid-key');
     setTimeout(() => {
-      findDOMNode(this.refs.telInput).classList.remove('iti-invalid-key');
+      utils.removeClass(findDOMNode(this.refs.telInput), 'iti-invalid-key');
     }, 100);
   },
 
