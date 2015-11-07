@@ -468,11 +468,14 @@ class IntlTelInputApp extends Component {
     let ajax = new Ajax({
       url: this.props.utilsScript
     }).on('success', (event) => {
-      let data = event.target.response;
+      let data = event.target.responseText;
+
       if (data) {
-        (window.execScript || function (res) {
-          window.eval.call(window, res);
-        })(data);
+        if (window.execScript) {
+          window.execScript(data);
+        } else {
+          window.eval(data);
+        }
       }
       this.utilsScriptDeferred.resolve();
     });
@@ -567,9 +570,9 @@ class IntlTelInputApp extends Component {
 
   // alert the user to an invalid key event
   handleInvalidKey() {
-    findDOMNode(this.refs.telInput).classList.add('iti-invalid-key');
+    utils.addClass(findDOMNode(this.refs.telInput), 'iti-invalid-key');
     setTimeout(() => {
-      findDOMNode(this.refs.telInput).classList.remove('iti-invalid-key');
+      utils.removeClass(findDOMNode(this.refs.telInput), 'iti-invalid-key');
     }, 100);
   }
 
