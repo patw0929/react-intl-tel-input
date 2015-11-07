@@ -11,7 +11,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.2.0/es5-shim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.2.0/es5-sham.min.js"></script>
   <script src="https://rawgit.com/paulmillr/console-polyfill/master/index.js"></script>
+  <!--[if gte IE 9]><!-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+  <!--<![endif]-->
   <style>
     .footer {
       text-align: center;
@@ -240,6 +242,8 @@ ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
   </script>
   <script type="text/javascript" src="assets/example.js"></script>
 
+  <!--[if gte IE 9]><!-->
   <script>hljs.initHighlightingOnLoad();</script>
+  <!--<![endif]-->
 </body>
 </html>
