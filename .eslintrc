@@ -12,7 +12,7 @@
     "quotes": [2, "single", "avoid-escape"],
     "react/display-name": 0,
     "react/jsx-boolean-value": 1,
-    "react/jsx-quotes": 1,
+    "react/jsx-quotes": 0,
     "react/jsx-no-undef": 1,
     "react/jsx-sort-props": 0,
     "react/jsx-sort-prop-types": 0,
