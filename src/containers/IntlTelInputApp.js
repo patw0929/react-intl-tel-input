@@ -263,7 +263,7 @@ class IntlTelInputApp extends Component {
       if (!this.tempCountry) {
         defaultCountry = (this.preferredCountries.length) ? this.preferredCountries[0].iso2 : this.countries[0].iso2;
       }
-      this.selectFlag(defaultCountry);
+      this.selectFlag(defaultCountry, false);
 
       // if empty, insert the default dial code
       // (this function will check !nationalMode and !autoHideDialCode)
@@ -818,7 +818,7 @@ class IntlTelInputApp extends Component {
   }
 
   // called when the user selects a list item from the dropdown
-  selectFlag(countryCode) {
+  selectFlag(countryCode, setFocus = true) {
     this.selectedCountryData = (countryCode) ? utils.getCountryData(countryCode, false) : {};
 
     // update selected flag and active list item
@@ -829,7 +829,9 @@ class IntlTelInputApp extends Component {
     this.updateDialCode(this.selectedCountryData.dialCode, true);
 
     // focus the input
-    findDOMNode(this.refs.telInput).focus();
+    if (setFocus) {
+      findDOMNode(this.refs.telInput).focus();
+    }
 
     // fix for FF and IE11 (with nationalMode=false i.e. auto inserting dial code),
     // who try to put the cursor at the beginning the first time
