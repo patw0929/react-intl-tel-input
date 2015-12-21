@@ -74,6 +74,7 @@ class IntlTelInputApp extends Component {
     geoIpLookup: PropTypes.func,
     nationalMode: PropTypes.bool,
     numberType: PropTypes.string,
+    noCountryDataHandler: PropTypes.func,
     onlyCountries: PropTypes.arrayOf(PropTypes.string),
     preferredCountries: PropTypes.arrayOf(PropTypes.string),
     utilsScript: PropTypes.string,
@@ -820,7 +821,7 @@ class IntlTelInputApp extends Component {
 
   // called when the user selects a list item from the dropdown
   selectFlag(countryCode, setFocus = true) {
-    this.selectedCountryData = (countryCode) ? utils.getCountryData(countryCode, false) : {};
+    this.selectedCountryData = (countryCode) ? utils.getCountryData(countryCode, false, this.props.noCountryDataHandler) : {};
 
     // update selected flag and active list item
     this.props.dispatch(intlTelInputActions.selectFlag(false, countryCode));
