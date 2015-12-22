@@ -22,7 +22,7 @@ export default function intlTelInputReducer(state = initialState, action) {
       ...state,
       telInput: {
         value: action.data.telInput.value,
-        disabled: state.telInput.disabled,
+        disabled: action.data.telInput.disabled,
         readonly: state.telInput.readonly,
         offsetTop: state.telInput.offsetTop,
         outerHeight: state.telInput.outerHeight

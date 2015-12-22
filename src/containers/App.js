@@ -17,6 +17,7 @@ class IntlTelInput extends Component {
     fieldName: PropTypes.string,
     value: PropTypes.string,
     defaultValue: PropTypes.string,
+    disabled: PropTypes.bool,
     allowExtensions: PropTypes.bool,
     autoFormat: PropTypes.bool,
     autoPlaceholder: PropTypes.bool,
@@ -36,6 +37,7 @@ class IntlTelInput extends Component {
       <Provider store={store}>
         <IntlTelInputApp value={this.props.value}
                          defaultValue={this.props.defaultValue}
+                         disabled={this.props.disabled}
                          onPhoneNumberChange={this.props.onPhoneNumberChange}
                          css={this.props.css}
                          fieldName={this.props.fieldName}
