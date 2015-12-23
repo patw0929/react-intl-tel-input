@@ -39,6 +39,7 @@ describe('reducer', () => {
       type: types.GET_PROPS_DATA,
       data: {
         telInput: {
+          disabled: false,
           value: '0912 345 678'
         },
         countryCode: 'tw'
