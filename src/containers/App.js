@@ -26,6 +26,7 @@ class IntlTelInput extends Component {
     geoIpLookup: PropTypes.func,
     nationalMode: PropTypes.bool,
     numberType: PropTypes.string,
+    noCountryDataHandler: PropTypes.func,
     onlyCountries: PropTypes.arrayOf(PropTypes.string),
     preferredCountries: PropTypes.arrayOf(PropTypes.string),
     utilsScript: PropTypes.string,
@@ -49,6 +50,7 @@ class IntlTelInput extends Component {
                          geoIpLookup={this.props.geoIpLookup}
                          nationalMode={this.props.nationalMode}
                          numberType={this.props.numberType}
+                         noCountryDataHandler={this.props.noCountryDataHandler}
                          onlyCountries={this.props.onlyCountries}
                          preferredCountries={this.props.preferredCountries}
                          utilsScript={this.props.utilsScript} />

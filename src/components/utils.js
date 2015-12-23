@@ -125,7 +125,7 @@ export default {
   },
 
   // find the country data for the given country code
-  getCountryData (countryCode, allowFail) {
+  getCountryData (countryCode, allowFail, errorHandler) {
     let countryList = AllCountries;
     for (let i = 0, max = countryList.length; i < max; i++) {
       if (countryList[i].iso2 === countryCode) {
@@ -136,7 +136,11 @@ export default {
     if (allowFail) {
       return null;
     } else {
-      throw new Error('No country data for "' + countryCode + '"');
+      if (typeof errorHandler === 'function') {
+        errorHandler(countryCode);
+      } else {
+        throw new Error('No country data for "' + countryCode + '"');
+      }
     }
   },
 
