@@ -78,6 +78,7 @@ class IntlTelInputApp extends Component {
     preferredCountries: PropTypes.arrayOf(PropTypes.string),
     utilsScript: PropTypes.string,
     onPhoneNumberChange: PropTypes.func,
+    disabled: PropTypes.bool,
     dispatch: PropTypes.func,
     intlTelInputData: PropTypes.object,
     countryCode: PropTypes.string
@@ -117,7 +118,7 @@ class IntlTelInputApp extends Component {
       this.windowLoaded = true;
     };
 
-    this.props.dispatch(intlTelInputActions.getPropsData(this.props.defaultValue, this.props.countryCode));
+    this.props.dispatch(intlTelInputActions.getPropsData(this.props.defaultValue, this.props.countryCode, this.props.disabled));
 
     this.initRequests();
 

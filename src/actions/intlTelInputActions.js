@@ -1,11 +1,12 @@
 import * as types from '../constants/actionTypes';
 
-export function getPropsData(telInputValue, countryCode = 'us') {
+export function getPropsData(telInputValue, countryCode = 'us', disabled) {
   return {
     type: types.GET_PROPS_DATA,
     data: {
       telInput: {
-        value: telInputValue
+        value: telInputValue,
+        disabled: disabled
       },
       countryCode: countryCode
     }
