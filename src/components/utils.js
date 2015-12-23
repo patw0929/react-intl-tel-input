@@ -139,6 +139,10 @@ export default {
       if (typeof errorHandler === 'function') {
         errorHandler(countryCode);
       } else {
+        if (countryCode === 'auto') {
+          return {};
+        }
+
         throw new Error('No country data for "' + countryCode + '"');
       }
     }
