@@ -152,6 +152,11 @@ ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
                 <td>Default value.</td>
               </tr>
               <tr>
+                <th scope="row">disabled</th>
+                <td><code>null</code></td>
+                <td>Disable this component.</td>
+              </tr>
+              <tr>
                 <th scope="row">allowExtensions</th>
                 <td><code>false</code></td>
                 <td>Typing digits after a valid number will be added to the extension part of the number.</td>
@@ -175,6 +180,11 @@ ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
                 <th scope="row">defaultCountry</th>
                 <td><code>''</code></td>
                 <td>Default country.</td>
+              </tr>
+              <tr>
+                <th scope="row">noCountryDataHandler</th>
+                <td><code>null</code></td>
+                <td>The function which can catch the "no this default country" exception.</td>
               </tr>
               <tr>
                 <th scope="row">geoIpLookup</th>
