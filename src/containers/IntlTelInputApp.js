@@ -258,7 +258,7 @@ class IntlTelInputApp extends Component {
     let val = this.props.defaultValue || '';
 
     // Init the flag setting
-    this.selectFlag(this.props.defaultCountry || '');
+    this.selectFlag(this.props.defaultCountry || '', false);
 
     // if there is a number, and it's valid, we can go ahead and set the flag, else fall back to default
     if (this.getDialCode(val)) {
