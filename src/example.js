@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import IntlTelInput from 'react-intl-tel-input';
 import 'file?name=libphonenumber.js!./libphonenumber.js';
-import './styles/intlTelInput.scss';
 
 var loadJSONP = function (url, callback) {
   var ref = window.document.getElementsByTagName('script')[0];
