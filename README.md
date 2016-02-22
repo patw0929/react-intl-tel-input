@@ -52,7 +52,7 @@ To build, watch and serve the examples (which will also watch the component sour
 
 ## Inspired by
 
-[International Telephone Input](https://github.com/Bluefieldscom/intl-tel-input) - [@jackocnr](https://github.com/jackocnr)
+[International Telephone Input](https://github.com/jackocnr/intl-tel-input) - [@jackocnr](https://github.com/jackocnr)
 
 ## License
 
