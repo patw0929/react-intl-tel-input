@@ -72,8 +72,7 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: { compact: false }
+      loader: 'uglify-loader!babel-loader'
     }, {
       test: /\.css$/,
       loader: 'style-loader!css-loader'
