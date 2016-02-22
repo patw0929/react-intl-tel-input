@@ -33,7 +33,7 @@ npm install react-intl-tel-input --save
 ```javascript
 var IntlTelInput = require('react-intl-tel-input');
 require('file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js');
-require('./node_modules/react-intl-tel-input/dist/styles/intlTelInput.scss');
+require('./node_modules/react-intl-tel-input/dist/main.css');
 
 <IntlTelInput css={['intl-tel-input', 'form-control']}
               utilsScript={'libphonenumber.js'}>Example</IntlTelInput>
@@ -58,4 +58,4 @@ To build, watch and serve the examples (which will also watch the component sour
 
 MIT
 
-Copyright (c) 2015 patw.
+Copyright (c) 2015-2016 patw.
