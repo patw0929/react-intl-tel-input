@@ -79,6 +79,7 @@ class IntlTelInputApp extends Component {
     preferredCountries: PropTypes.arrayOf(PropTypes.string),
     utilsScript: PropTypes.string,
     onPhoneNumberChange: PropTypes.func,
+    onSelectFlag: PropTypes.func,
     disabled: PropTypes.bool,
     dispatch: PropTypes.func,
     intlTelInputData: PropTypes.object,
@@ -111,7 +112,8 @@ class IntlTelInputApp extends Component {
     preferredCountries: ['us', 'gb'],
     // specify the path to the libphonenumber script to enable validation/formatting
     utilsScript: '',
-    onPhoneNumberChange: null
+    onPhoneNumberChange: null,
+    onSelectFlag: null
   };
 
   componentDidMount() {
@@ -844,6 +846,11 @@ class IntlTelInputApp extends Component {
     if (this.isGoodBrowser) {
       let len = this.props.intlTelInputData.telInput.value.length;
       findDOMNode(this.refs.telInput).setSelectionRange(len, len);
+    }
+
+    // Allow Main app to do things when a country is selected
+    if (typeof this.props.onSelectFlag === 'function') {
+      this.props.onSelectFlag(this.selectedCountryData);
     }
   }
 
