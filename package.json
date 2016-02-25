@@ -64,6 +64,7 @@
     "webpack-dev-server": "^1.10.1"
   },
   "scripts": {
+    "prepublish": "npm run build-dist",
     "build": "grunt build",
     "build-dist": "grunt build:dist",
     "start": "grunt serve",
