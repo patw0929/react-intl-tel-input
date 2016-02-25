@@ -3,6 +3,7 @@ import IntlTelInputApp from './IntlTelInputApp';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import * as reducers from '../reducers';
+import '../styles/intlTelInput.scss';
 
 const reducer = combineReducers(reducers);
 const store = createStore(reducer);

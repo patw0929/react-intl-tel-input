@@ -7,6 +7,7 @@
 var webpack = require('webpack'),
     path = require('path');
 var eslintrcPath = path.resolve(__dirname, '.eslintrc');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: 'eval',
@@ -56,7 +57,8 @@ module.exports = {
       }
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin()
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new ExtractTextPlugin('[name].css'),
   ],
 
   resolve: {
@@ -72,17 +74,14 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
-      loader: 'uglify-loader!babel-loader'
-    }, {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader'
+      loader: 'uglify!babel'
     }, {
       test: /\.scss/,
-      loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+      loader: ExtractTextPlugin.extract('style', 'css!sass?outputStyle=expanded')
     }, {
-      test: /\.(jpe?g|png|gif|svg)$/i,
+      test: /\.png$/i,
       loaders: [
-        'file?hash=sha512&digest=hex&name=[hash].[ext]',
+        'file?hash=sha512&digest=hex&name=[name].[ext]',
         'image-webpack?{progressive:true, optimizationLevel: 3, interlaced: false, pngquant:{quality: "30-40", speed: 1}}'
       ]
     }]

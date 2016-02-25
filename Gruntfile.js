@@ -8,8 +8,6 @@ var webpackExampleConfig = require('./webpack.example.config.js'),
     webpackDistConfig = require('./webpack.dist.config.js'),
     webpackDevConfig = require('./webpack.config.js');
 
-var imageminPngquant = require('imagemin-pngquant');
-
 module.exports = function (grunt) {
   // Let *load-grunt-tasks* require everything
   require('load-grunt-tasks')(grunt);
@@ -74,21 +72,6 @@ module.exports = function (grunt) {
       }
     },
 
-    imagemin: {
-      dist: {
-        options: {
-          optimizationLevel: 3,
-          use: [imageminPngquant({quality: '30-40', speed: 1})]
-        },
-        files: [{
-          flatten: true,
-          expand: true,
-          src: '<%= folders.src %>/images/*',
-          dest: '<%= folders.dist %>/images/'
-        }]
-      }
-    },
-
     copy: {
       dist: {
         files: [
@@ -110,12 +93,6 @@ module.exports = function (grunt) {
             ],
             dest: '<%= folders.dist %>/',
             filter: 'isFile'
-          },
-          {
-            flatten: true,
-            expand: true,
-            src: '<%= folders.src %>/styles/*',
-            dest: '<%= folders.dist %>/styles/'
           }
         ]
       }
@@ -161,8 +138,8 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('build', ['clean:example', 'imagemin', 'copy', 'webpack:example']);
-  grunt.registerTask('build:dist', ['clean:dist', 'imagemin', 'copy', 'webpack:dist']);
+  grunt.registerTask('build', ['clean:example', 'copy', 'webpack:example']);
+  grunt.registerTask('build:dist', ['clean:dist', 'copy', 'webpack:dist']);
 
   grunt.registerTask('default', []);
 };
