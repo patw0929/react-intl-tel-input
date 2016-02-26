@@ -55,13 +55,11 @@
 
         <h3>General</h3>
 
-        <pre><code class="javascript">'use strict';
-
-var React = require('react');
-var ReactDOM = require('react-dom');
-var IntlTelInput = require('react-intl-tel-input');
-require('file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js');
-require('./node_modules/react-intl-tel-input/dist/main.css');
+        <pre><code class="javascript">import React from 'react';
+import ReactDOM from 'react-dom';
+import IntlTelInput from 'react-intl-tel-input';
+import 'file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js';
+import './node_modules/react-intl-tel-input/dist/main.css';
 
 ReactDOM.render(&lt;IntlTelInput preferredCountries={['tw']}
                               css={['intl-tel-input', 'form-control']}
@@ -71,28 +69,26 @@ ReactDOM.render(&lt;IntlTelInput preferredCountries={['tw']}
 
         <h3>Demo: Lookup user's country</h3>
 
-        <pre><code class="javascript">'use strict';
+        <pre><code class="javascript">import React from 'react';
+import ReactDOM from 'react-dom';
+import IntlTelInput from 'react-intl-tel-input';
+import 'file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js';
+import './node_modules/react-intl-tel-input/dist/main.css';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var IntlTelInput = require('react-intl-tel-input');
-require('file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js');
-require('./node_modules/react-intl-tel-input/dist/main.css');
-
-var loadJSONP = function (url, callback) {
-  var ref = window.document.getElementsByTagName( 'script' )[ 0 ];
-  var script = window.document.createElement( 'script' );
-  script.src = url + (url.indexOf( '?' ) + 1 ? '&amp;' : '?') + 'callback=' + callback;
-  ref.parentNode.insertBefore( script, ref );
-  script.onload = function () {
+const loadJSONP = (url, callback) => {
+  const ref = window.document.getElementsByTagName('script')[0];
+  const script = window.document.createElement('script');
+  script.src = `${url + (url.indexOf('?') + 1 ? '&amp;' : '?')}callback=${callback}`;
+  ref.parentNode.insertBefore(script, ref);
+  script.onload = () => {
     this.remove();
   };
 };
 
-var lookup = function (callback) {
+const lookup = (callback) => {
   loadJSONP('http://ipinfo.io', 'sendBack');
-  window.sendBack = function (resp) {
-    var countryCode = (resp &amp;&amp; resp.country) ? resp.country : "";
+  window.sendBack = (resp) => {
+    const countryCode = (resp &amp;&amp; resp.country) ? resp.country : '';
     callback(countryCode);
   }
 };
@@ -105,15 +101,13 @@ ReactDOM.render(&lt;IntlTelInput defaultCountry={'auto'}
 
         <h3>Validation callback</h3>
 
-        <pre><code class="javascript">'use strict';
+        <pre><code class="javascript">import React from 'react';
+import ReactDOM from 'react-dom';
+import IntlTelInput from 'react-intl-tel-input';
+import 'file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js';
+import './node_modules/react-intl-tel-input/dist/main.css';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var IntlTelInput = require('react-intl-tel-input');
-require('file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js');
-require('./node_modules/react-intl-tel-input/dist/main.css');
-
-var changeHandler = function (status, value, countryData, number) {
+const changeHandler = (status, value, countryData, number) => {
   console.log(status, value, countryData, number);
 };
 
@@ -247,7 +241,7 @@ ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
       <div class="col-md-12">
         <ul class="list-inline">
           <li><a href="https://github.com/patw0929/react-intl-tel-input" target="_blank">GitHub</a></li>
-          <li><a href="http://patw.me" target="_blank">@patw</a></li>
+          <li><a href="https://patw.me" target="_blank">@patw</a></li>
         </ul>
       </div>
     </div>
