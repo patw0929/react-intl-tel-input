@@ -4,29 +4,33 @@ import IntlTelInput from 'react-intl-tel-input';
 import 'file?name=libphonenumber.js!./libphonenumber.js';
 import './main.css';
 
-var loadJSONP = function (url, callback) {
-  var ref = window.document.getElementsByTagName('script')[0];
-  var script = window.document.createElement('script');
-  script.src = url + (url.indexOf('?') + 1 ? '&' : '?') + 'callback=' + callback;
+const loadJSONP = (url, callback) => {
+  const ref = window.document.getElementsByTagName('script')[0];
+  const script = window.document.createElement('script');
+  script.src = `${url + (url.indexOf('?') + 1 ? '&' : '?')}callback=${callback}`;
   ref.parentNode.insertBefore(script, ref);
-  script.onload = function () {
+  script.onload = () => {
     this.remove();
   };
 };
 
-var lookup = function (callback) {
+const lookup = (callback) => {
   loadJSONP('http://ipinfo.io', 'sendBack');
-  window.sendBack = function (resp) {
-    var countryCode = (resp && resp.country) ? resp.country : '';
+  window.sendBack = (resp) => {
+    const countryCode = (resp && resp.country) ? resp.country : '';
     callback(countryCode);
   };
 };
 
-var debounce = function (func, wait, immediate) {
-  var timeout, args, context, timestamp, result;
+const debounce = (func, wait, immediate) => {
+  let timeout;
+  let args;
+  let context;
+  let timestamp;
+  let result;
 
-  var later = () => {
-    var last = new Date().getTime() - timestamp;
+  const later = () => {
+    const last = new Date().getTime() - timestamp;
 
     if (last < wait && last >= 0) {
       timeout = setTimeout(later, wait - last);
@@ -45,10 +49,12 @@ var debounce = function (func, wait, immediate) {
     context = this;
     args = arguments;
     timestamp = new Date().getTime();
-    var callNow = immediate && !timeout;
+    const callNow = immediate && !timeout;
+
     if (!timeout) {
       timeout = setTimeout(later, wait);
     }
+
     if (callNow) {
       result = func.apply(context, args);
       context = args = null;
@@ -62,22 +68,24 @@ class DemoComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      phoneNumber: ''
+      phoneNumber: '',
     };
   }
 
   componentWillMount() {
     this.deplayedChangeHandler = (...data) => {
-      debounce(function () {
+      debounce(() => {
         this.changeHandler.apply(this, data);
-      }.call(this), 250);
+      }, 250);
     };
   }
 
   changeHandler(isValid, value, countryData, number) {
+    /* eslint-disable */
     console.log(isValid, value, countryData, number);
+    /* eslint-enable */
     this.setState({
-      phoneNumber: value
+      phoneNumber: value,
     });
   }
 
@@ -85,10 +93,11 @@ class DemoComponent extends React.Component {
     return (
       <div>
         <IntlTelInput onPhoneNumberChange={this.deplayedChangeHandler}
-                      defaultCountry={"auto"}
-                      geoIpLookup={lookup}
-                      css={['intl-tel-input', 'form-control']}
-                      utilsScript={'assets/libphonenumber.js'} />
+          defaultCountry={"auto"}
+          geoIpLookup={lookup}
+          css={['intl-tel-input', 'form-control']}
+          utilsScript={'assets/libphonenumber.js'}
+        />
         <div>Phone Number: {this.state.phoneNumber}</div>
       </div>
     );

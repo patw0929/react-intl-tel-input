@@ -6,10 +6,10 @@ export function getPropsData(telInputValue, countryCode = 'us', disabled) {
     data: {
       telInput: {
         value: telInputValue,
-        disabled: disabled
+        disabled,
       },
-      countryCode: countryCode
-    }
+      countryCode,
+    },
   };
 }
 
@@ -18,10 +18,10 @@ export function changeHighlightCountry(showDropdown, highlightedCountry) {
     type: types.CHANGE_HIGHLIGHT_COUNTRY,
     data: {
       countryList: {
-        showDropdown: showDropdown,
-        highlightedCountry: highlightedCountry
-      }
-    }
+        showDropdown,
+        highlightedCountry,
+      },
+    },
   };
 }
 
@@ -30,10 +30,10 @@ export function handleUpDownKey(showDropdown, highlightedCountry) {
     type: types.HANDLE_UPDOWN_KEY,
     data: {
       countryList: {
-        showDropdown: showDropdown,
-        highlightedCountry: highlightedCountry
-      }
-    }
+        showDropdown,
+        highlightedCountry,
+      },
+    },
   };
 }
 
@@ -42,11 +42,11 @@ export function handleEnterKey(showDropdown, highlightedCountry, countryCode) {
     type: types.HANDLE_ENTER_KEY,
     data: {
       countryList: {
-        showDropdown: showDropdown,
-        highlightedCountry: highlightedCountry
+        showDropdown,
+        highlightedCountry,
       },
-      countryCode: countryCode
-    }
+      countryCode,
+    },
   };
 }
 
@@ -55,10 +55,10 @@ export function searchForCountry(showDropdown, highlightedCountry) {
     type: types.SEARCH_FOR_COUNTRY,
     data: {
       countryList: {
-        showDropdown: showDropdown,
-        highlightedCountry: highlightedCountry
-      }
-    }
+        showDropdown,
+        highlightedCountry,
+      },
+    },
   };
 }
 
@@ -67,9 +67,9 @@ export function handleDocumentKeydown(showDropdown) {
     type: types.HANDLE_DOCUMENT_KEYDOWN,
     data: {
       countryList: {
-        showDropdown: showDropdown
-      }
-    }
+        showDropdown,
+      },
+    },
   };
 }
 
@@ -78,9 +78,9 @@ export function handleDocumentClick(showDropdown) {
     type: types.HANDLE_DOCUMENT_CLICK,
     data: {
       countryList: {
-        showDropdown: showDropdown
-      }
-    }
+        showDropdown,
+      },
+    },
   };
 }
 
@@ -89,12 +89,12 @@ export function updateVal(showDropdown, telInputValue) {
     type: types.UPDATE_VAL,
     data: {
       countryList: {
-        showDropdown: showDropdown
+        showDropdown,
       },
       telInput: {
-        value: telInputValue
-      }
-    }
+        value: telInputValue,
+      },
+    },
   };
 }
 
@@ -103,10 +103,10 @@ export function selectFlag(showDropdown, countryCode) {
     type: types.SELECT_FLAG,
     data: {
       countryList: {
-        showDropdown: showDropdown
+        showDropdown,
       },
-      countryCode: countryCode
-    }
+      countryCode,
+    },
   };
 }
 
@@ -115,9 +115,9 @@ export function toggleDropdown(showDropdown) {
     type: types.TOGGLE_DROPDOWN,
     data: {
       countryList: {
-        showDropdown: showDropdown
-      }
-    }
+        showDropdown,
+      },
+    },
   };
 }
 
@@ -126,13 +126,13 @@ export function clickSelectedFlag(showDropdown, offsetTop, outerHeight) {
     type: types.CLICK_SELECTED_FLAG,
     data: {
       countryList: {
-        showDropdown: showDropdown
+        showDropdown,
       },
       telInput: {
-        offsetTop: offsetTop,
-        outerHeight: outerHeight
-      }
-    }
+        offsetTop,
+        outerHeight,
+      },
+    },
   };
 }
 
@@ -141,9 +141,9 @@ export function ensurePlus(telInputValue) {
     type: types.ENSURE_PLUS,
     data: {
       telInput: {
-        value: telInputValue
-      }
-    }
+        value: telInputValue,
+      },
+    },
   };
 }
 
@@ -152,8 +152,8 @@ export function handleInputChange(telInputValue) {
     type: types.HANDLE_INPUT_CHANGE,
     data: {
       telInput: {
-        value: telInputValue
-      }
-    }
+        value: telInputValue,
+      },
+    },
   };
 }
