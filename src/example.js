@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import IntlTelInput from 'react-intl-tel-input';
+import { debounce } from 'throttle-debounce';
+
 import 'file?name=libphonenumber.js!./libphonenumber.js';
 import './main.css';
 
@@ -22,48 +24,6 @@ const lookup = (callback) => {
   };
 };
 
-const debounce = (func, wait, immediate) => {
-  let timeout;
-  let args;
-  let context;
-  let timestamp;
-  let result;
-
-  const later = () => {
-    const last = new Date().getTime() - timestamp;
-
-    if (last < wait && last >= 0) {
-      timeout = setTimeout(later, wait - last);
-    } else {
-      timeout = null;
-      if (!immediate) {
-        result = func.apply(context, args);
-        if (!timeout) {
-          context = args = null;
-        }
-      }
-    }
-  };
-
-  return () => {
-    context = this;
-    args = arguments;
-    timestamp = new Date().getTime();
-    const callNow = immediate && !timeout;
-
-    if (!timeout) {
-      timeout = setTimeout(later, wait);
-    }
-
-    if (callNow) {
-      result = func.apply(context, args);
-      context = args = null;
-    }
-
-    return result;
-  };
-};
-
 class DemoComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -74,9 +34,9 @@ class DemoComponent extends React.Component {
 
   componentWillMount() {
     this.deplayedChangeHandler = (...data) => {
-      debounce(() => {
+      debounce(250, () => {
         this.changeHandler.apply(this, data);
-      }, 250);
+      })();
     };
   }
 
