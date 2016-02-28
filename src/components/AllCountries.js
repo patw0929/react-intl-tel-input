@@ -61,7 +61,8 @@ JSON.stringify(result);
 //    Order (if >1 country with same dial code),
 //    Area codes (if >1 country with same dial code)
 // ]
-const allCountries = [
+
+const defaultCountriesData = [
   [
     'Afghanistan (‫افغانستان‬‎)',
     'af',
@@ -1308,13 +1309,33 @@ const allCountries = [
   ],
 ];
 
-// loop over all of the countries above
-const result = allCountries.map((country) => ({
-  name: country[0],
-  iso2: country[1],
-  dialCode: country[2],
-  priority: country[3] || 0,
-  areaCodes: country[4] || null,
-}));
+let countries;
 
-export default result;
+function _formatCountriesData(countries) {
+  return countries.map((country) => ({
+    name: country[0],
+    iso2: country[1],
+    dialCode: country[2],
+    priority: country[3] || 0,
+    areaCodes: country[4] || null,
+  }));
+}
+
+function initialize(externalCountriesList) {
+  countries = _formatCountriesData(externalCountriesList || defaultCountriesData);
+}
+
+function getCountries() {
+  if (!countries) {
+    initialize();
+  }
+
+  return countries;
+}
+
+const AllCountries = {
+  initialize,
+  getCountries
+};
+
+export default AllCountries;

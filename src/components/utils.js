@@ -127,7 +127,7 @@ export default {
 
   // find the country data for the given country code
   getCountryData(countryCode, allowFail, errorHandler) {
-    const countryList = AllCountries;
+    const countryList = AllCountries.getCountries();
     for (let i = 0, max = countryList.length; i < max; i++) {
       if (countryList[i].iso2 === countryCode) {
         return countryList[i];
