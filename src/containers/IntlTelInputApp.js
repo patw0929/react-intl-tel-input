@@ -972,6 +972,10 @@ class IntlTelInputApp extends Component {
     let wrapperClass = this.props.css[0],
         inputClass = this.props.css[1];
 
+    if (intlTelInputData.countryList.showDropdown) {
+      wrapperClass += ' expanded';
+    }
+
     return (
       <div className={wrapperClass}>
         <FlagDropDown ref="flagDropDown"
