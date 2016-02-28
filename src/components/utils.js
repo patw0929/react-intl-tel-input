@@ -1,11 +1,11 @@
 import AllCountries from './AllCountries';
 
 export default {
-  arraysEqual (a, b) {
+  arraysEqual(a, b) {
     if (a === b) {
       return true;
     }
-    if (a == null || b == null) {
+    if (a === null || b === null) {
       return false;
     }
     if (a.length !== b.length) {
@@ -23,12 +23,12 @@ export default {
     return true;
   },
 
-  shallowEquals (a, b) {
+  shallowEquals(a, b) {
     if (a === b) {
       return true;
     }
 
-    for (let key in a) {
+    for (const key in a) {
       if (a[key] !== b[key]) {
         if (Array.isArray(a[key]) && Array.isArray(b[key])) {
           if (!this.arraysEqual(a[key], b[key])) {
@@ -40,7 +40,7 @@ export default {
       }
     }
 
-    for (let key in b) {
+    for (const key in b) {
       if (a.hasOwnProperty(key) === false) {
         return false;
       }
@@ -48,23 +48,23 @@ export default {
     return true;
   },
 
-  trim (str) {
+  trim(str) {
     // Make sure we trim BOM and NBSP
-    let rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+    const rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
     if (!str) {
       return '';
     }
     return str.replace(rtrim, '');
   },
 
-  isNumeric (obj) {
+  isNumeric(obj) {
     return obj - parseFloat(obj) >= 0;
   },
 
-  retrieveLiIndex (node) {
-    var children = node.parentNode.childNodes;
-    var num = 0;
-    for (var i = 0, max = children.length; i < max; i++) {
+  retrieveLiIndex(node) {
+    const children = node.parentNode.childNodes;
+    let num = 0;
+    for (let i = 0, max = children.length; i < max; i++) {
       if (children[i] === node) {
         return num;
       }
@@ -77,32 +77,33 @@ export default {
   },
 
   // extract the numeric digits from the given string
-  getNumeric (s) {
+  getNumeric(s) {
     return s.replace(/\D/g, '');
   },
 
-  getClean (s) {
-    let prefix = (s.charAt(0) === '+') ? '+' : '';
+  getClean(s) {
+    const prefix = (s.charAt(0) === '+') ? '+' : '';
     return prefix + this.getNumeric(s);
   },
 
   // check if (uppercase) string a starts with string b
-  startsWith (a, b) {
+  startsWith(a, b) {
     return (a.substr(0, b.length).toUpperCase() === b);
   },
 
-  isWindow (obj) {
+  isWindow(obj) {
     return obj !== null && obj === obj.window;
   },
 
-  getWindow (elem) {
-    return this.isWindow( elem ) ? elem : elem.nodeType === 9 && elem.defaultView;
+  getWindow(elem) {
+    return this.isWindow(elem) ? elem : elem.nodeType === 9 && elem.defaultView;
   },
 
-  offset (elem) {
-    let docElem, win,
-        box = { top: 0, left: 0 },
-        doc = elem && elem.ownerDocument;
+  offset(elem) {
+    let docElem = undefined;
+    let win = undefined;
+    let box = { top: 0, left: 0 };
+    const doc = elem && elem.ownerDocument;
 
     docElem = doc.documentElement;
 
@@ -113,20 +114,20 @@ export default {
     win = this.getWindow(doc);
     return {
       top: box.top + win.pageYOffset - docElem.clientTop,
-      left: box.left + win.pageXOffset - docElem.clientLeft
+      left: box.left + win.pageXOffset - docElem.clientLeft,
     };
   },
 
   // retrieve outerHeight of element
-  getOuterHeight (element) {
+  getOuterHeight(element) {
     return element.offsetHeight +
            parseFloat(getComputedStyle(element).getPropertyValue('margin-top')) +
            parseFloat(getComputedStyle(element).getPropertyValue('margin-bottom'));
   },
 
   // find the country data for the given country code
-  getCountryData (countryCode, allowFail, errorHandler) {
-    let countryList = AllCountries;
+  getCountryData(countryCode, allowFail, errorHandler) {
+    const countryList = AllCountries;
     for (let i = 0, max = countryList.length; i < max; i++) {
       if (countryList[i].iso2 === countryCode) {
         return countryList[i];
@@ -135,41 +136,43 @@ export default {
 
     if (allowFail) {
       return null;
-    } else {
-      if (typeof errorHandler === 'function') {
-        errorHandler(countryCode);
-      } else {
-        if (countryCode === 'auto') {
-          return {};
-        }
-
-        throw new Error('No country data for "' + countryCode + '"');
-      }
     }
+
+    if (typeof errorHandler === 'function') {
+      errorHandler(countryCode);
+    } else {
+      if (countryCode === 'auto') {
+        return {};
+      }
+
+      throw new Error(`No country data for "${countryCode}"`);
+    }
+
+    return {};
   },
 
   // Copied from http://jaketrent.com/post/addremove-classes-raw-javascript/
-  hasClass (el, className) {
+  hasClass(el, className) {
     if (el.classList) {
       return el.classList.contains(className);
-    } else {
-      return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
     }
+
+    return !!el.className.match(new RegExp(`(\\s|^)${className}(\\s|$)`));
   },
 
-  addClass (el, className) {
+  addClass(el, className) {
     if (el.classList) {
       el.classList.add(className);
     } else if (!this.hasClass(el, className)) {
-      el.className += ' ' + className;
+      el.className += ` ${className}`;
     }
   },
 
-  removeClass (el, className) {
+  removeClass(el, className) {
     if (el.classList) {
       el.classList.remove(className);
     } else if (this.hasClass(el, className)) {
-      let reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+      const reg = new RegExp(`(\\s|^)${className}(\\s|$)`);
       el.className = el.className.replace(reg, ' ');
     }
   },

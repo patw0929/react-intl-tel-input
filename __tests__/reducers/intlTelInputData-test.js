@@ -8,16 +8,16 @@ describe('reducer', () => {
     expect(reducer(undefined, {})).toEqual({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     });
   });
 
@@ -25,38 +25,38 @@ describe('reducer', () => {
     expect(reducer({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     }, {
       type: types.GET_PROPS_DATA,
       data: {
         telInput: {
           disabled: false,
-          value: '0912 345 678'
+          value: '0912 345 678',
         },
-        countryCode: 'tw'
-      }
+        countryCode: 'tw',
+      },
     })).toEqual({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '0912 345 678',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'tw'
+      countryCode: 'tw',
     });
   });
 
@@ -64,37 +64,37 @@ describe('reducer', () => {
     expect(reducer({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     }, {
       type: types.CHANGE_HIGHLIGHT_COUNTRY,
       data: {
         countryList: {
           showDropdown: true,
-          highlightedCountry: 27
-        }
-      }
+          highlightedCountry: 27,
+        },
+      },
     })).toEqual({
       countryList: {
         showDropdown: true,
-        highlightedCountry: 27
+        highlightedCountry: 27,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     });
   });
 
@@ -102,37 +102,37 @@ describe('reducer', () => {
     expect(reducer({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     }, {
       type: types.HANDLE_UPDOWN_KEY,
       data: {
         countryList: {
           showDropdown: true,
-          highlightedCountry: 29
-        }
-      }
+          highlightedCountry: 29,
+        },
+      },
     })).toEqual({
       countryList: {
         showDropdown: true,
-        highlightedCountry: 29
+        highlightedCountry: 29,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     });
   });
 
@@ -140,38 +140,38 @@ describe('reducer', () => {
     expect(reducer({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     }, {
       type: types.HANDLE_ENTER_KEY,
       data: {
         countryList: {
           showDropdown: true,
-          highlightedCountry: 20
+          highlightedCountry: 20,
         },
-        countryCode: 'tw'
-      }
+        countryCode: 'tw',
+      },
     })).toEqual({
       countryList: {
         showDropdown: true,
-        highlightedCountry: 20
+        highlightedCountry: 20,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'tw'
+      countryCode: 'tw',
     });
   });
 
@@ -179,37 +179,37 @@ describe('reducer', () => {
     expect(reducer({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     }, {
       type: types.SEARCH_FOR_COUNTRY,
       data: {
         countryList: {
           showDropdown: true,
-          highlightedCountry: 30
-        }
-      }
+          highlightedCountry: 30,
+        },
+      },
     })).toEqual({
       countryList: {
         showDropdown: true,
-        highlightedCountry: 30
+        highlightedCountry: 30,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     });
   });
 
@@ -217,36 +217,36 @@ describe('reducer', () => {
     expect(reducer({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     }, {
       type: types.HANDLE_DOCUMENT_KEYDOWN,
       data: {
         countryList: {
-          showDropdown: false
-        }
-      }
+          showDropdown: false,
+        },
+      },
     })).toEqual({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     });
   });
 
@@ -254,36 +254,36 @@ describe('reducer', () => {
     expect(reducer({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     }, {
       type: types.HANDLE_DOCUMENT_CLICK,
       data: {
         countryList: {
-          showDropdown: false
-        }
-      }
+          showDropdown: false,
+        },
+      },
     })).toEqual({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     });
   });
 
@@ -291,39 +291,39 @@ describe('reducer', () => {
     expect(reducer({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     }, {
       type: types.UPDATE_VAL,
       data: {
         countryList: {
-          showDropdown: false
+          showDropdown: false,
         },
         telInput: {
-          value: '0912 345 678'
-        }
-      }
+          value: '0912 345 678',
+        },
+      },
     })).toEqual({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '0912 345 678',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     });
   });
 
@@ -331,37 +331,37 @@ describe('reducer', () => {
     expect(reducer({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     }, {
       type: types.SELECT_FLAG,
       data: {
         countryList: {
-          showDropdown: false
+          showDropdown: false,
         },
-        countryCode: 'tw'
-      }
+        countryCode: 'tw',
+      },
     })).toEqual({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'tw'
+      countryCode: 'tw',
     });
   });
 
@@ -369,36 +369,36 @@ describe('reducer', () => {
     expect(reducer({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     }, {
       type: types.TOGGLE_DROPDOWN,
       data: {
         countryList: {
-          showDropdown: true
-        }
-      }
+          showDropdown: true,
+        },
+      },
     })).toEqual({
       countryList: {
         showDropdown: true,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     });
   });
 
@@ -406,40 +406,40 @@ describe('reducer', () => {
     expect(reducer({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     }, {
       type: types.CLICK_SELECTED_FLAG,
       data: {
         countryList: {
-          showDropdown: true
+          showDropdown: true,
         },
         telInput: {
           offsetTop: 100,
-          outerHeight: 500
-        }
-      }
+          outerHeight: 500,
+        },
+      },
     })).toEqual({
       countryList: {
         showDropdown: true,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 100,
-        outerHeight: 500
+        outerHeight: 500,
       },
-      countryCode: 'us'
+      countryCode: 'us',
     });
   });
 
@@ -447,36 +447,36 @@ describe('reducer', () => {
     expect(reducer({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'tw'
+      countryCode: 'tw',
     }, {
       type: types.ENSURE_PLUS,
       data: {
         telInput: {
-          value: '+886912345678'
-        }
-      }
+          value: '+886912345678',
+        },
+      },
     })).toEqual({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '+886912345678',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'tw'
+      countryCode: 'tw',
     });
   });
 
@@ -484,36 +484,36 @@ describe('reducer', () => {
     expect(reducer({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'tw'
+      countryCode: 'tw',
     }, {
       type: types.HANDLE_INPUT_CHANGE,
       data: {
         telInput: {
-          value: '0999 12'
-        }
-      }
+          value: '0999 12',
+        },
+      },
     })).toEqual({
       countryList: {
         showDropdown: false,
-        highlightedCountry: 0
+        highlightedCountry: 0,
       },
       telInput: {
         value: '0999 12',
         disabled: false,
         readonly: false,
         offsetTop: 0,
-        outerHeight: 0
+        outerHeight: 0,
       },
-      countryCode: 'tw'
+      countryCode: 'tw',
     });
   });
 });

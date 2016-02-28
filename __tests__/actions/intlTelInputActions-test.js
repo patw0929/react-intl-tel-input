@@ -9,10 +9,10 @@ describe('actions', () => {
       type: types.GET_PROPS_DATA,
       data: {
         telInput: {
-          value: ''
+          value: '',
         },
-        countryCode: 'us'
-      }
+        countryCode: 'us',
+      },
     });
   });
 
@@ -22,9 +22,9 @@ describe('actions', () => {
       data: {
         countryList: {
           showDropdown: true,
-          highlightedCountry: 5
-        }
-      }
+          highlightedCountry: 5,
+        },
+      },
     });
   });
 
@@ -34,9 +34,9 @@ describe('actions', () => {
       data: {
         countryList: {
           showDropdown: true,
-          highlightedCountry: 15
-        }
-      }
+          highlightedCountry: 15,
+        },
+      },
     });
   });
 
@@ -46,10 +46,10 @@ describe('actions', () => {
       data: {
         countryList: {
           showDropdown: true,
-          highlightedCountry: 8
+          highlightedCountry: 8,
         },
-        countryCode: 'tw'
-      }
+        countryCode: 'tw',
+      },
     });
   });
 
@@ -59,9 +59,9 @@ describe('actions', () => {
       data: {
         countryList: {
           showDropdown: true,
-          highlightedCountry: 3
-        }
-      }
+          highlightedCountry: 3,
+        },
+      },
     });
   });
 
@@ -70,9 +70,9 @@ describe('actions', () => {
       type: types.HANDLE_DOCUMENT_KEYDOWN,
       data: {
         countryList: {
-          showDropdown: true
-        }
-      }
+          showDropdown: true,
+        },
+      },
     });
   });
 
@@ -81,9 +81,9 @@ describe('actions', () => {
       type: types.HANDLE_DOCUMENT_CLICK,
       data: {
         countryList: {
-          showDropdown: true
-        }
-      }
+          showDropdown: true,
+        },
+      },
     });
   });
 
@@ -92,12 +92,12 @@ describe('actions', () => {
       type: types.UPDATE_VAL,
       data: {
         countryList: {
-          showDropdown: false
+          showDropdown: false,
         },
         telInput: {
-          value: '0912 345 678'
-        }
-      }
+          value: '0912 345 678',
+        },
+      },
     });
   });
 
@@ -106,10 +106,10 @@ describe('actions', () => {
       type: types.SELECT_FLAG,
       data: {
         countryList: {
-          showDropdown: false
+          showDropdown: false,
         },
-        countryCode: 'tw'
-      }
+        countryCode: 'tw',
+      },
     });
   });
 
@@ -118,9 +118,9 @@ describe('actions', () => {
       type: types.TOGGLE_DROPDOWN,
       data: {
         countryList: {
-          showDropdown: false
-        }
-      }
+          showDropdown: false,
+        },
+      },
     });
   });
 
@@ -129,13 +129,13 @@ describe('actions', () => {
       type: types.CLICK_SELECTED_FLAG,
       data: {
         countryList: {
-          showDropdown: true
+          showDropdown: true,
         },
         telInput: {
           offsetTop: 100,
-          outerHeight: 500
-        }
-      }
+          outerHeight: 500,
+        },
+      },
     });
   });
 
@@ -144,9 +144,9 @@ describe('actions', () => {
       type: types.ENSURE_PLUS,
       data: {
         telInput: {
-          value: '+886912345678'
-        }
-      }
+          value: '+886912345678',
+        },
+      },
     });
   });
 
@@ -155,9 +155,9 @@ describe('actions', () => {
       type: types.HANDLE_INPUT_CHANGE,
       data: {
         telInput: {
-          value: '0912 3'
-        }
-      }
+          value: '0912 3',
+        },
+      },
     });
   });
 });

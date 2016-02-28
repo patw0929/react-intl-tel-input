@@ -9,10 +9,6 @@ const reducer = combineReducers(reducers);
 const store = createStore(reducer);
 
 class IntlTelInput extends Component {
-  constructor() {
-    super();
-  }
-
   static propTypes = {
     css: PropTypes.arrayOf(PropTypes.string),
     fieldName: PropTypes.string,
@@ -32,31 +28,32 @@ class IntlTelInput extends Component {
     preferredCountries: PropTypes.arrayOf(PropTypes.string),
     utilsScript: PropTypes.string,
     onPhoneNumberChange: PropTypes.func,
-    onSelectFlag: PropTypes.func
+    onSelectFlag: PropTypes.func,
   }
 
   render() {
     return (
       <Provider store={store}>
         <IntlTelInputApp value={this.props.value}
-                         defaultValue={this.props.defaultValue}
-                         disabled={this.props.disabled}
-                         onPhoneNumberChange={this.props.onPhoneNumberChange}
-                         onSelectFlag={this.props.onSelectFlag}
-                         css={this.props.css}
-                         fieldName={this.props.fieldName}
-                         allowExtensions={this.props.allowExtensions}
-                         autoFormat={this.props.autoFormat}
-                         autoPlaceholder={this.props.autoPlaceholder}
-                         autoHideDialCode={this.props.autoHideDialCode}
-                         defaultCountry={this.props.defaultCountry}
-                         geoIpLookup={this.props.geoIpLookup}
-                         nationalMode={this.props.nationalMode}
-                         numberType={this.props.numberType}
-                         noCountryDataHandler={this.props.noCountryDataHandler}
-                         onlyCountries={this.props.onlyCountries}
-                         preferredCountries={this.props.preferredCountries}
-                         utilsScript={this.props.utilsScript} />
+          defaultValue={this.props.defaultValue}
+          disabled={this.props.disabled}
+          onPhoneNumberChange={this.props.onPhoneNumberChange}
+          onSelectFlag={this.props.onSelectFlag}
+          css={this.props.css}
+          fieldName={this.props.fieldName}
+          allowExtensions={this.props.allowExtensions}
+          autoFormat={this.props.autoFormat}
+          autoPlaceholder={this.props.autoPlaceholder}
+          autoHideDialCode={this.props.autoHideDialCode}
+          defaultCountry={this.props.defaultCountry}
+          geoIpLookup={this.props.geoIpLookup}
+          nationalMode={this.props.nationalMode}
+          numberType={this.props.numberType}
+          noCountryDataHandler={this.props.noCountryDataHandler}
+          onlyCountries={this.props.onlyCountries}
+          preferredCountries={this.props.preferredCountries}
+          utilsScript={this.props.utilsScript}
+        />
       </Provider>
     );
   }
