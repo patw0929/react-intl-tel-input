@@ -999,7 +999,7 @@ class IntlTelInputApp extends Component {
     const { dispatch, intlTelInputData } = this.props;
     const actions = bindActionCreators(intlTelInputActions, dispatch);
 
-    const wrapperClass = this.props.css[0];
+    let wrapperClass = this.props.css[0];
     const inputClass = this.props.css[1];
 
     if (intlTelInputData.countryList.showDropdown) {
