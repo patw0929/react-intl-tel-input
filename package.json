@@ -1,6 +1,6 @@
 {
   "name": "react-intl-tel-input",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "description": "Rewrite intl-tel-input in React.",
   "author": "patw",
   "keywords": [
