@@ -140,9 +140,6 @@ export default {
 
     if (typeof errorHandler === 'function') {
       errorHandler(countryCode);
-    } else if (countryCode !== 'auto') {
-      // Do not crash, but let user know there is a problem and why
-      console.error(`No country data for "${countryCode}", defaulting to first country`);
     }
 
     return {};
