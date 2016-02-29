@@ -1311,8 +1311,8 @@ const defaultCountriesData = [
 
 let countries;
 
-function _formatCountriesData(countries) {
-  return countries.map((country) => ({
+function _formatCountriesData(countriesData) {
+  return countriesData.map((country) => ({
     name: country[0],
     iso2: country[1],
     dialCode: country[2],
@@ -1335,7 +1335,7 @@ function getCountries() {
 
 const AllCountries = {
   initialize,
-  getCountries
+  getCountries,
 };
 
 export default AllCountries;

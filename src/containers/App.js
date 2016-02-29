@@ -12,6 +12,7 @@ class IntlTelInput extends Component {
   static propTypes = {
     css: PropTypes.arrayOf(PropTypes.string),
     fieldName: PropTypes.string,
+    countriesData: PropTypes.arrayOf(PropTypes.array),
     value: PropTypes.string,
     defaultValue: PropTypes.string,
     disabled: PropTypes.bool,
