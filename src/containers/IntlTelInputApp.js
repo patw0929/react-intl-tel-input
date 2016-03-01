@@ -117,7 +117,18 @@ class IntlTelInputApp extends Component {
     this.handleUpDownKey = this.handleUpDownKey.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 
-    this.tempCountry = this.props.defaultCountry;
+    this.tempCountry = this.getTempCountry(this.props.defaultCountry);
+  }
+
+  getTempCountry(countryCode) {
+    let countryData = utils.getCountryData(countryCode);
+
+    // check if country is available in the list
+    if (!countryData.iso2) {
+      countryData = AllCountries.getCountries()[0];
+    }
+
+    return countryData.iso2;
   }
 
   componentDidMount() {
@@ -390,7 +401,6 @@ class IntlTelInputApp extends Component {
   // set the initial state of the input value and the selected flag
   setInitialState() {
     const val = this.props.defaultValue || '';
-    const defaultCountryData = utils.getCountryData(this.props.defaultCountry);
 
     // Init the flag setting
     this.selectFlag(this.props.defaultCountry || '', false);
@@ -400,10 +410,9 @@ class IntlTelInputApp extends Component {
     if (this.getDialCode(val)) {
       this.updateFlagFromNumber(val);
     } else if (this.tempCountry !== 'auto') {
-      // check the defaultCountry option and make sure it's available,
-      // else fall back to the first in the list
+      // check the defaultCountry option, else fall back to the first in the list
       let defaultCountry = this.tempCountry;
-      if (!this.tempCountry || !defaultCountryData.iso2) {
+      if (!this.tempCountry) {
         defaultCountry = (this.preferredCountries.length) ?
           this.preferredCountries[0].iso2 : this.countries[0].iso2;
       }
