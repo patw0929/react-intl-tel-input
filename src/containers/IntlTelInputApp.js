@@ -121,7 +121,7 @@ class IntlTelInputApp extends Component {
 
     this.tempCountry = this.getTempCountry(this.props.defaultCountry);
 
-    this.windowLoaded[this.props.id] = [];
+    this.windowLoaded[this.props.id] = false;
 
     // attach id to all actions
     this.dispatch = (action) => {
