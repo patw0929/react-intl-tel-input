@@ -120,17 +120,6 @@ class IntlTelInputApp extends Component {
     this.tempCountry = this.getTempCountry(this.props.defaultCountry);
   }
 
-  getTempCountry(countryCode) {
-    let countryData = utils.getCountryData(countryCode);
-
-    // check if country is available in the list
-    if (!countryData.iso2) {
-      countryData = AllCountries.getCountries()[0];
-    }
-
-    return countryData.iso2;
-  }
-
   componentDidMount() {
     window.onload = () => {
       this.windowLoaded = true;
@@ -175,6 +164,17 @@ class IntlTelInputApp extends Component {
     if (this.props.intlTelInputData.telInput.value !== nextProps.intlTelInputData.telInput.value) {
       this.notifyPhoneNumberChange(nextProps.intlTelInputData.telInput.value);
     }
+  }
+
+  getTempCountry(countryCode) {
+    let countryData = utils.getCountryData(countryCode);
+
+    // check if country is available in the list
+    if (!countryData.iso2) {
+      countryData = AllCountries.getCountries()[0];
+    }
+
+    return countryData.iso2;
   }
 
   // set the input value and update the flag
