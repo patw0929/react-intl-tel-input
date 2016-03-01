@@ -69,7 +69,11 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.NormalModuleReplacementPlugin(
+      /^\.\/main\.css$/,
+      __dirname + '/dist/main.css'
+    ),
   ],
 
   eslint: {
