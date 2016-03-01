@@ -10,6 +10,7 @@ const store = createStore(reducer);
 
 class IntlTelInput extends Component {
   static propTypes = {
+    id: PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     css: PropTypes.arrayOf(PropTypes.string),
     fieldName: PropTypes.string,
     countriesData: PropTypes.arrayOf(PropTypes.array),
@@ -35,8 +36,8 @@ class IntlTelInput extends Component {
   render() {
     return (
       <Provider store={store}>
-        <IntlTelInputApp value={this.props.value}
-          countriesData={this.props.countriesData}
+        <IntlTelInputApp id={this.props.id}
+          value={this.props.value}
           defaultValue={this.props.defaultValue}
           disabled={this.props.disabled}
           onPhoneNumberChange={this.props.onPhoneNumberChange}

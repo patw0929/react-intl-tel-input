@@ -1,5 +1,11 @@
 import * as types from '../constants/actionTypes';
 
+export function initialize() {
+  return {
+    type: types.INITIALIZE,
+  };
+}
+
 export function getPropsData(telInputValue, countryCode = 'us', disabled) {
   return {
     type: types.GET_PROPS_DATA,
