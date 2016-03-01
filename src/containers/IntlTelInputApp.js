@@ -121,8 +121,6 @@ class IntlTelInputApp extends Component {
 
     this.tempCountry = this.getTempCountry(this.props.defaultCountry);
 
-    this.windowLoaded[this.props.id] = false;
-
     // attach id to all actions
     this.dispatch = (action) => {
       action.id = this.props.id;
@@ -134,9 +132,9 @@ class IntlTelInputApp extends Component {
   }
 
   componentDidMount() {
-    window.onload = () => {
-      this.windowLoaded[this.props.id] = true;
-    };
+    window.addEventListener('load', () => {
+      this.windowLoaded = true;
+    });
 
     this.dispatch(
       intlTelInputActions.getPropsData(
@@ -346,7 +344,7 @@ class IntlTelInputApp extends Component {
   countries = [];
   countryCodes = {};
 
-  windowLoaded = [];
+  windowLoaded = false;
 
   keys = {
     UP: 38,
@@ -548,13 +546,13 @@ class IntlTelInputApp extends Component {
     // if the user has specified the path to the utils script, fetch it on window.load
     if (this.props.utilsScript) {
       // if the plugin is being initialised after the window.load event has already been fired
-      if (this.windowLoaded[this.props.id]) {
+      if (this.windowLoaded) {
         this.loadUtils();
       } else {
         // wait until the load event so we don't block any other requests e.g. the flags image
-        window.onload = () => {
+        window.addEventListener('load', () => {
           this.loadUtils();
-        };
+        });
       }
     } else {
       this.utilsScriptDeferred.resolve();
