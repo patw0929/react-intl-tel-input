@@ -514,9 +514,6 @@ class IntlTelInputApp extends Component {
       // Note: use getNumeric here because the number has not been formatted yet,
       // so could contain bad shit
       countryCode = '';
-    } else if (!number || number === '+') {
-      // empty, or just a plus, so default
-      countryCode = this.tempCountry;
     }
 
     if (countryCode !== null && countryCode !== '' &&
