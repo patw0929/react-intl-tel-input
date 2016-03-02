@@ -7,7 +7,11 @@ import shortid from 'shortid';
 import '../styles/intlTelInput.scss';
 
 const reducer = combineReducers(reducers);
-const store = createStore(reducer);
+let devtool = window.devToolsExtension ? window.devToolsExtension() : undefined;
+if (process.env.NODE_ENV === 'production') {
+  devtool = undefined;
+}
+const store = createStore(reducer, {}, devtool);
 
 class IntlTelInput extends Component {
   static propTypes = {
