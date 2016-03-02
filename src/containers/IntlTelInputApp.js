@@ -16,6 +16,9 @@ class IntlTelInputApp extends Component {
     css: ['intl-tel-input', ''],
     fieldName: '',
     value: '',
+    // define the countries that'll be present in the dropdown
+    // defaults to the data defined in `AllCountries`
+    countriesData: null,
     // typing digits after a valid number will be added to the extension part of the number
     allowExtensions: false,
     // automatically format the number according to the selected country
@@ -46,6 +49,7 @@ class IntlTelInputApp extends Component {
     css: PropTypes.arrayOf(PropTypes.string),
     fieldName: PropTypes.string,
     value: PropTypes.string,
+    countriesData: PropTypes.arrayOf(PropTypes.array),
     defaultValue: PropTypes.string,
     allowExtensions: PropTypes.bool,
     autoFormat: PropTypes.bool,
@@ -113,7 +117,7 @@ class IntlTelInputApp extends Component {
     this.handleUpDownKey = this.handleUpDownKey.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 
-    this.tempCountry = this.props.defaultCountry;
+    this.tempCountry = this.getTempCountry(this.props.defaultCountry);
   }
 
   componentDidMount() {
@@ -160,6 +164,17 @@ class IntlTelInputApp extends Component {
     if (this.props.intlTelInputData.telInput.value !== nextProps.intlTelInputData.telInput.value) {
       this.notifyPhoneNumberChange(nextProps.intlTelInputData.telInput.value);
     }
+  }
+
+  getTempCountry(countryCode) {
+    let countryData = utils.getCountryData(countryCode);
+
+    // check if country is available in the list
+    if (!countryData.iso2) {
+      countryData = AllCountries.getCountries()[0];
+    }
+
+    return countryData.iso2;
   }
 
   // set the input value and update the flag
@@ -231,10 +246,10 @@ class IntlTelInputApp extends Component {
     // process onlyCountries option
     if (this.props.onlyCountries.length) {
       // build instance country array
-      this.countries = AllCountries.filter((country) =>
+      this.countries = AllCountries.getCountries().filter((country) =>
         this.props.onlyCountries.indexOf(country.iso2) > -1, this);
     } else {
-      this.countries = AllCountries;
+      this.countries = AllCountries.getCountries();
     }
 
     // generate countryCodes map
@@ -599,6 +614,10 @@ class IntlTelInputApp extends Component {
 
   // prepare all of the country data, including onlyCountries and preferredCountries options
   processCountryData() {
+    // format countries data to what is necessary for component function
+    // defaults to data defined in `AllCountries`
+    AllCountries.initialize(this.props.countriesData);
+
     // set the instances country data objects
     this.setInstanceCountryData.call(this);
 

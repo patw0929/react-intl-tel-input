@@ -12,6 +12,7 @@ class IntlTelInput extends Component {
   static propTypes = {
     css: PropTypes.arrayOf(PropTypes.string),
     fieldName: PropTypes.string,
+    countriesData: PropTypes.arrayOf(PropTypes.array),
     value: PropTypes.string,
     defaultValue: PropTypes.string,
     disabled: PropTypes.bool,
@@ -35,6 +36,7 @@ class IntlTelInput extends Component {
     return (
       <Provider store={store}>
         <IntlTelInputApp value={this.props.value}
+          countriesData={this.props.countriesData}
           defaultValue={this.props.defaultValue}
           disabled={this.props.disabled}
           onPhoneNumberChange={this.props.onPhoneNumberChange}
