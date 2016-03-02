@@ -118,6 +118,7 @@ class IntlTelInputApp extends Component {
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.handleUpDownKey = this.handleUpDownKey.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.changeHighlightCountry = this.changeHighlightCountry.bind(this);
 
     this.tempCountry = this.getTempCountry(this.props.defaultCountry);
 
@@ -1031,6 +1032,11 @@ class IntlTelInputApp extends Component {
       intlTelInputActions.handleInputChange(findDOMNode(this.refs.telInput).value));
   }
 
+  changeHighlightCountry(showDropdown, selectedIndex) {
+    this.dispatch(
+      intlTelInputActions.changeHighlightCountry(showDropdown, selectedIndex));
+  }
+
   render() {
     const { dispatch, intlTelInputData } = this.props;
     const actions = bindActionCreators(intlTelInputActions, dispatch);
@@ -1051,6 +1057,7 @@ class IntlTelInputApp extends Component {
           countryCode={intlTelInputData.countryCode}
           isMobile={this.isMobile}
           handleSelectedFlagKeydown={this.handleSelectedFlagKeydown}
+          changeHighlightCountry={this.changeHighlightCountry}
           countries={this.countries}
           showDropdown={intlTelInputData.countryList.showDropdown}
           inputTop={intlTelInputData.telInput.offsetTop}
