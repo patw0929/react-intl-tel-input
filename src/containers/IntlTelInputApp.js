@@ -1088,4 +1088,4 @@ function select(state, props) {
   };
 }
 
-export default connect(select)(IntlTelInputApp);
+export default connect(select, null, null, { withRef: true })(IntlTelInputApp);
