@@ -167,11 +167,19 @@ class IntlTelInputApp extends Component {
   }
 
   getTempCountry(countryCode) {
+    if (countryCode === 'auto') {
+      return 'auto';
+    }
+
     let countryData = utils.getCountryData(countryCode);
 
     // check if country is available in the list
     if (!countryData.iso2) {
-      countryData = AllCountries.getCountries()[0];
+      if (this.props.preferredCountries.length > 0) {
+        countryData = utils.getCountryData(this.props.preferredCountries[0]);
+      } else {
+        countryData = AllCountries.getCountries()[0];
+      }
     }
 
     return countryData.iso2;
