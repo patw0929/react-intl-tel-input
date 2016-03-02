@@ -11,6 +11,7 @@ const store = createStore(reducer);
 
 class IntlTelInput extends Component {
   static propTypes = {
+    id: PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     css: PropTypes.arrayOf(PropTypes.string),
     fieldName: PropTypes.string,
     countriesData: PropTypes.arrayOf(PropTypes.array),
@@ -33,7 +34,7 @@ class IntlTelInput extends Component {
     onSelectFlag: PropTypes.func,
   }
 
-  id = shortid.generate();
+  id = this.props.id || shortid.generate();
 
   render() {
     return (
