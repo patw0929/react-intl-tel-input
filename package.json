@@ -77,7 +77,7 @@
     "test": "BABEL_JEST_STAGE=0 jest"
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/__tests__/preprocessor.js",
+    "scriptPreprocessor": "<rootDir>/preprocessor.js",
     "unmockedModulePathPatterns": [
       "react",
       "react-dom",
