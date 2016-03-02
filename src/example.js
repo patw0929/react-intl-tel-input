@@ -27,10 +27,7 @@ const lookup = (callback) => {
 class DemoComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      0: '',
-      1: '',
-    };
+    this.state = {};
   }
 
   componentWillMount() {
@@ -48,28 +45,32 @@ class DemoComponent extends React.Component {
     this.setState({
       [id]: value,
     });
+
+    // Not a good solution
+    if (id !== 'foo') {
+      document.querySelector('.result2').innerText = value;
+    }
   }
 
   render() {
     return (
       <div>
-        <IntlTelInput
+        <IntlTelInput id="foo"
           onPhoneNumberChange={this.deplayedChangeHandler}
           defaultCountry={'auto'}
           geoIpLookup={lookup}
           css={['intl-tel-input', 'form-control']}
           utilsScript={'assets/libphonenumber.js'}
         />
-        <div>Phone Number: {this.state['0']}</div>
+        <div>Phone Number: {this.state.foo}</div>
 
         <IntlTelInput
           onPhoneNumberChange={this.deplayedChangeHandler}
-          defaultCountry={'auto'}
-          geoIpLookup={lookup}
+          defaultCountry={'jp'}
           css={['intl-tel-input', 'form-control']}
           utilsScript={'assets/libphonenumber.js'}
         />
-        <div>Phone Number: {this.state['1']}</div>
+        <div>Phone Number: <span className="result2"></span></div>
       </div>
     );
   }
