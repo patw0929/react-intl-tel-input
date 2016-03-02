@@ -3,6 +3,7 @@ import IntlTelInputApp from './IntlTelInputApp';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import * as reducers from '../reducers';
+import shortid from 'shortid';
 import '../styles/intlTelInput.scss';
 
 const reducer = combineReducers(reducers);
@@ -10,7 +11,6 @@ const store = createStore(reducer);
 
 class IntlTelInput extends Component {
   static propTypes = {
-    id: PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     css: PropTypes.arrayOf(PropTypes.string),
     fieldName: PropTypes.string,
     countriesData: PropTypes.arrayOf(PropTypes.array),
@@ -33,10 +33,12 @@ class IntlTelInput extends Component {
     onSelectFlag: PropTypes.func,
   }
 
+  id = shortid.generate();
+
   render() {
     return (
       <Provider store={store}>
-        <IntlTelInputApp id={this.props.id}
+        <IntlTelInputApp id={this.id}
           value={this.props.value}
           defaultValue={this.props.defaultValue}
           disabled={this.props.disabled}
