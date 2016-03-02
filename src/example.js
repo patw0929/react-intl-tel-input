@@ -53,7 +53,7 @@ class DemoComponent extends React.Component {
   render() {
     return (
       <div>
-        <IntlTelInput id={'0'}
+        <IntlTelInput
           onPhoneNumberChange={this.deplayedChangeHandler}
           defaultCountry={'auto'}
           geoIpLookup={lookup}
@@ -62,7 +62,7 @@ class DemoComponent extends React.Component {
         />
         <div>Phone Number: {this.state['0']}</div>
 
-        <IntlTelInput id={'1'}
+        <IntlTelInput
           onPhoneNumberChange={this.deplayedChangeHandler}
           defaultCountry={'auto'}
           geoIpLookup={lookup}
