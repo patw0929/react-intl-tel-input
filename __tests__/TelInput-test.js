@@ -10,7 +10,7 @@ describe('TelInput', () => {
 
   beforeEach(() => {
     component = TestUtils.renderIntoDocument(
-        <IntlTelInput id={'0'} css={['intl-tel-input', 'form-control phoneNumber']}
+        <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName={'telephone'}
           defaultValue={'0999 123 456'}
           utilsScript={'../example/assets/libphonenumber.js'}
