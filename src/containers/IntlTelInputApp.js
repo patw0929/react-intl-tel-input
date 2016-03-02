@@ -29,6 +29,8 @@ class IntlTelInputApp extends Component {
     autoHideDialCode: true,
     // default country
     defaultCountry: '',
+    // default to default country when input is empty and backspace is pressed
+    defaultWhenEmpty: true,
     // geoIp lookup function
     geoIpLookup: null,
     // don't insert international dial codes
@@ -56,6 +58,7 @@ class IntlTelInputApp extends Component {
     autoPlaceholder: PropTypes.bool,
     autoHideDialCode: PropTypes.bool,
     defaultCountry: PropTypes.string,
+    defaultWhenEmpty: PropTypes.bool,
     geoIpLookup: PropTypes.func,
     nationalMode: PropTypes.bool,
     numberType: PropTypes.string,
@@ -514,7 +517,7 @@ class IntlTelInputApp extends Component {
       // Note: use getNumeric here because the number has not been formatted yet,
       // so could contain bad shit
       countryCode = '';
-    } else if (!number || number === '+') {
+    } else if (this.props.defaultWhenEmpty && (!number || number === '+')) {
       // empty, or just a plus, so default
       countryCode = this.tempCountry;
     }
