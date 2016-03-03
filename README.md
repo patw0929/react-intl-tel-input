@@ -35,8 +35,8 @@ import IntlTelInput from 'react-intl-tel-input';
 import 'file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js';
 import './node_modules/react-intl-tel-input/dist/main.css';
 
-<IntlTelInput id={'0'} css={['intl-tel-input', 'form-control']}
-              utilsScript={'libphonenumber.js'}>Example</IntlTelInput>
+<IntlTelInput css={['intl-tel-input', 'form-control']}
+  utilsScript={'libphonenumber.js'}>Example</IntlTelInput>
 ```
 
 ### Properties

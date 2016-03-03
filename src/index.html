@@ -61,7 +61,7 @@ import IntlTelInput from 'react-intl-tel-input';
 import 'file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js';
 import './node_modules/react-intl-tel-input/dist/main.css';
 
-ReactDOM.render(&lt;IntlTelInput id={'0'} preferredCountries={['tw']}
+ReactDOM.render(&lt;IntlTelInput preferredCountries={['tw']}
                               css={['intl-tel-input', 'form-control']}
                               utilsScript={'libphonenumber.js'} /&gt;,
                               document.getElementById('content'));
@@ -93,7 +93,7 @@ const lookup = (callback) => {
   }
 };
 
-ReactDOM.render(&lt;IntlTelInput id={'0'} defaultCountry={'auto'}
+ReactDOM.render(&lt;IntlTelInput defaultCountry={'auto'}
                               geoIpLookup={lookup}
                               css={['intl-tel-input', 'form-control']}
                               utilsScript={'libphonenumber.js'} /&gt;, document.getElementById('content'));
@@ -111,7 +111,7 @@ const changeHandler = (status, value, countryData, number, id) => {
   console.log(status, value, countryData, number, id);
 };
 
-ReactDOM.render(&lt;IntlTelInput id={'0'} onPhoneNumberChange={changeHandler}
+ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
                               css={['intl-tel-input', 'form-control']}
                               utilsScript={'libphonenumber.js'} /&gt;, document.getElementById('content'));
 </code></pre>
