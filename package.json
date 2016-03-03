@@ -7,7 +7,9 @@
     "react",
     "react-component",
     "tel",
+    "telephone",
     "intl-tel-input",
+    "international-telephone-input",
     "phonenumber"
   ],
   "repository": {
