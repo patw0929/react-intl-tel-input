@@ -111,7 +111,7 @@ class CountryList extends Component {
   handleMouseOver(e) {
     if (e.currentTarget.getAttribute('class').indexOf('country') > -1) {
       const selectedIndex = utils.retrieveLiIndex(e.currentTarget);
-      this.props.actions.changeHighlightCountry(true, selectedIndex);
+      this.props.changeHighlightCountry(true, selectedIndex);
     }
   }
 

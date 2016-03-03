@@ -27,9 +27,7 @@ const lookup = (callback) => {
 class DemoComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      phoneNumber: '',
-    };
+    this.state = {};
   }
 
   componentWillMount() {
@@ -40,25 +38,39 @@ class DemoComponent extends React.Component {
     };
   }
 
-  changeHandler(isValid, value, countryData, number) {
+  changeHandler(isValid, value, countryData, number, id) {
     /* eslint-disable */
-    console.log(isValid, value, countryData, number);
+    console.log(isValid, value, countryData, number, id);
     /* eslint-enable */
     this.setState({
-      phoneNumber: value,
+      [id]: value,
     });
+
+    // Not a good solution
+    if (id !== 'foo') {
+      document.querySelector('.result2').innerText = value;
+    }
   }
 
   render() {
     return (
       <div>
-        <IntlTelInput onPhoneNumberChange={this.deplayedChangeHandler}
-          defaultCountry={"auto"}
+        <IntlTelInput id="foo"
+          onPhoneNumberChange={this.deplayedChangeHandler}
+          defaultCountry={'auto'}
           geoIpLookup={lookup}
           css={['intl-tel-input', 'form-control']}
           utilsScript={'assets/libphonenumber.js'}
         />
-        <div>Phone Number: {this.state.phoneNumber}</div>
+        <div>Phone Number: {this.state.foo}</div>
+
+        <IntlTelInput
+          onPhoneNumberChange={this.deplayedChangeHandler}
+          defaultCountry={'jp'}
+          css={['intl-tel-input', 'form-control']}
+          utilsScript={'assets/libphonenumber.js'}
+        />
+        <div>Phone Number: <span className="result2"></span></div>
       </div>
     );
   }

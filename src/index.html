@@ -107,8 +107,8 @@ import IntlTelInput from 'react-intl-tel-input';
 import 'file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js';
 import './node_modules/react-intl-tel-input/dist/main.css';
 
-const changeHandler = (status, value, countryData, number) => {
-  console.log(status, value, countryData, number);
+const changeHandler = (status, value, countryData, number, id) => {
+  console.log(status, value, countryData, number, id);
 };
 
 ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
@@ -130,6 +130,11 @@ ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <th scope="row">id</th>
+                <td><code><code>shortid</code></td>
+                <td>Optional attribute. When you want to put multiple react-intl-tel-input components in page, please set different id here. If not set here, we will generate <code><a href="https://www.npmjs.com/package/shortid" target="_blank">shortid</a></code> automatically.</td>
+              </tr>
               <tr>
                 <th scope="row">css</th>
                 <td><code>['intl-tel-input', '']</code></td>
