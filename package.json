@@ -54,6 +54,7 @@
     "jest-cli": "^0.8.0",
     "jest-webpack-alias": "^2.2.0",
     "load-grunt-tasks": "~0.6.0",
+    "node-sass": "^3.4.2",
     "react-addons-test-utils": "^0.14.0",
     "react-hot-loader": "^1.0.7",
     "react-redux": "4.4.0",

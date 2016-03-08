@@ -3,6 +3,7 @@
 
 ### JetBrains ###
 .idea
+*.iml
 
 ### OSX ###
 .DS_Store
