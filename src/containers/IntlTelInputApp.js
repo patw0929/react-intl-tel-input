@@ -127,12 +127,12 @@ class IntlTelInputApp extends Component {
       action.id = this.props.id;
       this.props.dispatch(action);
     };
-
-    // initialize state
-    this.dispatch(intlTelInputActions.initialize());
   }
 
   componentDidMount() {
+    // initialize state
+    this.dispatch(intlTelInputActions.initialize());
+
     window.addEventListener('load', () => {
       this.windowLoaded = true;
     });
