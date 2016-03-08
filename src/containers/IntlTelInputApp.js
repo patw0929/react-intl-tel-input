@@ -133,13 +133,11 @@ class IntlTelInputApp extends Component {
     // initialize state
     this.dispatch(intlTelInputActions.initialize());
 
-    if (document.readyState === 'complete') {
-      this.windowLoaded = true;
-    } else {
-      window.addEventListener('load', () => {
+    document.onreadystatechange = () => {
+      if (document.readyState === 'complete') {
         this.windowLoaded = true;
-      });
-    }
+      }
+    };
 
     this.dispatch(
       intlTelInputActions.getPropsData(
