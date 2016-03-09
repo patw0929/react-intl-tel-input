@@ -170,6 +170,11 @@ class IntlTelInputApp extends Component {
     }
   }
 
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    document.querySelector('html').removeEventListener('click', this.handleDocumentClick);
+  }
+
   getTempCountry(countryCode) {
     if (countryCode === 'auto') {
       return 'auto';
