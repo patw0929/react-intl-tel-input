@@ -27,50 +27,45 @@ const lookup = (callback) => {
 class DemoComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-  }
-
-  componentWillMount() {
-    this.deplayedChangeHandler = (...data) => {
-      debounce(250, () => {
-        this.changeHandler.apply(this, data);
-      })();
+    this.state = {
+        phone1: null,
+        phone2: null,
     };
   }
 
-  changeHandler(isValid, value, countryData, number, id) {
+  componentWillMount() {
+    this.changePhone1 = this.changeHandler.bind(this, 'phone1');
+    this.changePhone2 = this.changeHandler.bind(this, 'phone2');
+  }
+
+  changeHandler(name, isValid, value, countryData, number) {
     /* eslint-disable */
-    console.log(isValid, value, countryData, number, id);
+    console.log(isValid, value, countryData, number);
     /* eslint-enable */
     this.setState({
-      [id]: value,
+      [name]: value,
     });
-
-    // Not a good solution
-    if (id !== 'foo') {
-      document.querySelector('.result2').innerText = value;
-    }
   }
 
   render() {
     return (
       <div>
-        <IntlTelInput id="foo"
-          onPhoneNumberChange={this.deplayedChangeHandler}
+        <IntlTelInput
+          onPhoneNumberChange={this.changePhone1}
           defaultCountry={'auto'}
           geoIpLookup={lookup}
           css={['intl-tel-input', 'form-control']}
           utilsScript={'assets/libphonenumber.js'}
         />
-        <div>Phone Number: {this.state.foo}</div>
+        <div>Phone Number: {this.state.phone1}</div>
 
         <IntlTelInput
-          onPhoneNumberChange={this.deplayedChangeHandler}
+          onPhoneNumberChange={this.changePhone2}
           defaultCountry={'jp'}
           css={['intl-tel-input', 'form-control']}
           utilsScript={'assets/libphonenumber.js'}
         />
-        <div>Phone Number: <span className="result2"></span></div>
+        <div>Phone Number: {this.state.phone2}</div>
       </div>
     );
   }
