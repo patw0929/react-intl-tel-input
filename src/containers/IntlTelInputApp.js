@@ -7,7 +7,6 @@ import FlagDropDown from '../components/FlagDropDown';
 import TelInput from '../components/TelInput';
 import utils from '../components/utils';
 import * as intlTelInputActions from '../actions/intlTelInputActions';
-import Ajax from 'simple-ajax';
 import _ from 'underscore.deferred';
 import Cookies from 'cookies-js';
 
@@ -603,24 +602,28 @@ class IntlTelInputApp extends Component {
   }
 
   loadUtils() {
-    const ajax = new Ajax({
-      url: this.props.utilsScript,
-    }).on('success', (event) => {
-      const data = event.target.responseText;
+    const request = new XMLHttpRequest();
+    request.open('GET', this.props.utilsScript, true);
 
-      if (data) {
-        if (window.execScript) {
-          window.execScript(data);
-        } else {
-          /* eslint-disable */
-          window.eval(data);
-          /* eslint-enable */
+    request.onload = () => {
+      if (request.status >= 200 && request.status < 400) {
+        const data = request.responseText;
+
+        if (data) {
+          if (window.execScript) {
+            window.execScript(data);
+          } else {
+            /* eslint-disable */
+            window.eval(data);
+            /* eslint-enable */
+          }
         }
-      }
 
-      this.utilsScriptDeferred.resolve();
-    });
-    ajax.send();
+        this.utilsScriptDeferred.resolve();
+      }
+    };
+
+    request.send();
   }
 
   // prepare all of the country data, including onlyCountries and preferredCountries options
