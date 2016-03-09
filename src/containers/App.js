@@ -40,7 +40,7 @@ class IntlTelInput extends Component {
   render() {
     return (
       <Provider store={this.store}>
-        <IntlTelInputApp id={'intlTelInput'}
+        <IntlTelInputApp
           value={this.props.value}
           countriesData={this.props.countriesData}
           defaultValue={this.props.defaultValue}

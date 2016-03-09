@@ -46,7 +46,6 @@ class IntlTelInputApp extends Component {
   };
 
   static propTypes = {
-    id: PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     css: PropTypes.arrayOf(PropTypes.string),
     fieldName: PropTypes.string,
     value: PropTypes.string,
