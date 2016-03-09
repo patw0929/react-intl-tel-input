@@ -3,7 +3,6 @@ import IntlTelInputApp from './IntlTelInputApp';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import * as reducers from '../reducers';
-import shortid from 'shortid';
 import '../styles/intlTelInput.scss';
 
 const reducer = combineReducers(reducers);
@@ -38,7 +37,7 @@ class IntlTelInput extends Component {
     onSelectFlag: PropTypes.func,
   }
 
-  id = this.props.id || shortid.generate();
+  id = this.props.id;
 
   render() {
     return (
