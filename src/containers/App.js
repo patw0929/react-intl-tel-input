@@ -10,11 +10,9 @@ let devtool = window.devToolsExtension ? window.devToolsExtension() : undefined;
 if (process.env.NODE_ENV === 'production') {
   devtool = undefined;
 }
-const store = createStore(reducer, {}, devtool);
 
 class IntlTelInput extends Component {
   static propTypes = {
-    id: PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     css: PropTypes.arrayOf(PropTypes.string),
     fieldName: PropTypes.string,
     countriesData: PropTypes.arrayOf(PropTypes.array),
@@ -37,12 +35,12 @@ class IntlTelInput extends Component {
     onSelectFlag: PropTypes.func,
   }
 
-  id = this.props.id;
+  store = createStore(reducer, {}, devtool);
 
   render() {
     return (
-      <Provider store={store}>
-        <IntlTelInputApp id={this.id}
+      <Provider store={this.store}>
+        <IntlTelInputApp id={'intlTelInput'}
           value={this.props.value}
           countriesData={this.props.countriesData}
           defaultValue={this.props.defaultValue}
