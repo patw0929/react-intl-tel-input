@@ -52,10 +52,10 @@ class DemoComponent extends React.Component {
       <div>
         <IntlTelInput
           onPhoneNumberChange={this.changePhone1}
-          defaultCountry={'auto'}
+          defaultCountry="auto"
           geoIpLookup={lookup}
           css={['intl-tel-input', 'form-control']}
-          utilsScript={'assets/libphonenumber.js'}
+          utilsScript="assets/libphonenumber.js"
         />
         <div>Phone Number: {this.state.phone1}</div>
 
@@ -63,7 +63,7 @@ class DemoComponent extends React.Component {
           onPhoneNumberChange={this.changePhone2}
           defaultCountry={'jp'}
           css={['intl-tel-input', 'form-control']}
-          utilsScript={'assets/libphonenumber.js'}
+          utilsScript="assets/libphonenumber.js"
         />
         <div>Phone Number: {this.state.phone2}</div>
       </div>
