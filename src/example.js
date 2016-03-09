@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import IntlTelInput from 'react-intl-tel-input';
-import { debounce } from 'throttle-debounce';
 
 import 'file?name=libphonenumber.js!./libphonenumber.js';
 import './main.css';
