@@ -27,8 +27,8 @@ class DemoComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        phone1: null,
-        phone2: null,
+      phone1: null,
+      phone2: null,
     };
   }
 
