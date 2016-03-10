@@ -4,10 +4,6 @@ import * as types from '../../src/constants/actionTypes';
 import { intlTelInputData as reducer } from '../../src/reducers/index';
 
 describe('reducer', () => {
-  it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual({});
-  });
-
   it('should handle have initial data', () => {
     expect(reducer(undefined, {})).toEqual({
       countryList: {
