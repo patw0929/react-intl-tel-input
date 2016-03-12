@@ -24,6 +24,13 @@
     "react": "^0.14.0",
     "react-dom": "^0.14.0"
   },
+  "dependencies": {
+    "classnames": "^2.1.2",
+    "cookies-js": "^1.2.1",
+    "react-redux": "4.4.0",
+    "redux": "3.3.1",
+    "underscore.deferred": "^0.4.0"
+  },
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-eslint": "^5.0.0",
@@ -33,8 +40,6 @@
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
-    "classnames": "^2.1.2",
-    "cookies-js": "^1.2.1",
     "css-loader": "~0.9.0",
     "eslint": "^2.2.0",
     "eslint-config-airbnb": "6.0.2",
@@ -57,12 +62,9 @@
     "node-sass": "^3.4.2",
     "react-addons-test-utils": "^0.14.0",
     "react-hot-loader": "^1.0.7",
-    "react-redux": "4.4.0",
-    "redux": "3.3.1",
     "sass-loader": "^1.0.1",
     "style-loader": "~0.8.0",
     "uglify-loader": "^1.3.0",
-    "underscore.deferred": "^0.4.0",
     "url-loader": "~0.5.5",
     "webpack": "^1.12.0",
     "webpack-dev-server": "^1.10.1"
