@@ -24,6 +24,8 @@ class IntlTelInputApp extends Component {
     autoFormat: true,
     // add or remove input placeholder with an example number for the selected country
     autoPlaceholder: true,
+    // allow placeholder number suggestion to be processed before it is set in the field
+    preprocessPlaceholder: null,
     // if there is just a dial code in the input: remove it on blur, and re-add it on focus
     autoHideDialCode: true,
     // default country
@@ -53,6 +55,7 @@ class IntlTelInputApp extends Component {
     allowExtensions: PropTypes.bool,
     autoFormat: PropTypes.bool,
     autoPlaceholder: PropTypes.bool,
+    preprocessPlaceholder: PropTypes.func,
     autoHideDialCode: PropTypes.bool,
     defaultCountry: PropTypes.string,
     geoIpLookup: PropTypes.func,
@@ -753,8 +756,13 @@ class IntlTelInputApp extends Component {
       this.props.autoPlaceholder && this.selectedCountryData) {
       const iso2 = this.selectedCountryData.iso2;
       const numberType = window.intlTelInputUtils.numberType[this.props.numberType || 'FIXED_LINE'];
-      const placeholder = (iso2) ?
+      let placeholder = (iso2) ?
         window.intlTelInputUtils.getExampleNumber(iso2, this.props.nationalMode, numberType) : '';
+
+      if (typeof this.props.preprocessPlaceholder === 'function') {
+        placeholder = this.props.preprocessPlaceholder(placeholder);
+      }
+
       findDOMNode(this.refs.telInput).setAttribute('placeholder', placeholder);
     }
   }
