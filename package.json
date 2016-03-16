@@ -79,18 +79,7 @@
     "example": "grunt serve:example",
     "lint": "eslint ./; true",
     "gh-pages": "grunt gh-pages",
-    "test": "BABEL_JEST_STAGE=0 jest"
-  },
-  "jest": {
-    "scriptPreprocessor": "<rootDir>/preprocessor.js",
-    "unmockedModulePathPatterns": [
-      "react",
-      "react-dom",
-      "react-addons-test-utils"
-    ],
-    "globals": {
-      "__DEV__": true
-    }
+    "test": "./node_modules/.bin/mocha tests/*-test.js --require tests/setup.js --compilers js:babel-register"
   },
   "license": "MIT"
 }
