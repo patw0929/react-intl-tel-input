@@ -27,8 +27,6 @@
   "dependencies": {
     "classnames": "^2.1.2",
     "cookies-js": "^1.2.1",
-    "react-redux": "4.4.0",
-    "redux": "3.3.1",
     "underscore.deferred": "^0.4.0"
   },
   "devDependencies": {
