@@ -17,7 +17,6 @@ class FlagDropDown extends Component {
     preferredCountries: PropTypes.array,
     highlightedCountry: PropTypes.number,
     changeHighlightCountry: PropTypes.func,
-    actions: PropTypes.object,
   };
 
   render() {
@@ -52,7 +51,6 @@ class FlagDropDown extends Component {
           <div className={arrowClass}></div>
         </div>
         <CountryList ref="countryList"
-          actions={this.props.actions}
           isMobile={this.props.isMobile}
           showDropdown={this.props.showDropdown}
           selectFlag={this.props.selectFlag}

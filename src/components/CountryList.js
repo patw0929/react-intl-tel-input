@@ -19,7 +19,6 @@ class CountryList extends Component {
     highlightedCountry: PropTypes.number,
     changeHighlightCountry: PropTypes.func,
     showDropdown: PropTypes.bool,
-    actions: PropTypes.object,
   };
 
   constructor() {

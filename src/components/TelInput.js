@@ -10,7 +10,6 @@ class TelInput extends Component {
     handleInputChange: PropTypes.func,
     handleKeyPress: PropTypes.func,
     handleKeyUp: PropTypes.func,
-    actions: PropTypes.object,
   };
 
   constructor() {
