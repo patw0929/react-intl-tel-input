@@ -1,16 +1,15 @@
 import React from 'react';
-import ReactDOM, { findDOMNode } from 'react-dom';
+import { findDOMNode } from 'react-dom';
 import ReactTestUtils from 'react-addons-test-utils';
 import IntlTelInput from '../src/containers/IntlTelInputApp';
 import TelInput from '../src/components/TelInput';
 import { assert } from 'chai';
 
 describe('TelInput', () => {
-  let renderedComponent,
-    inputElement;
+  let inputComponent;
 
-  before('render element', function() {
-    renderedComponent = ReactTestUtils.renderIntoDocument(
+  before('render element', () => {
+    const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName={'telephone'}
           defaultValue={'0999 123 456'}
@@ -18,33 +17,27 @@ describe('TelInput', () => {
         />
     );
 
-    const inputComponent = ReactTestUtils.findRenderedDOMComponentWithTag(
+    inputComponent = ReactTestUtils.findRenderedComponentWithType(
       renderedComponent,
-      'input'
+      TelInput
     );
-
-    inputElement = findDOMNode(inputComponent);
   });
 
   it('set fieldName as "telephone"', () => {
-    const telInput = ReactTestUtils.findRenderedComponentWithType(renderedComponent, TelInput);
-    assert(telInput.props.fieldName === 'telephone');
+    assert(inputComponent.props.fieldName === 'telephone');
   });
 
   it('set value as "0999 123 456"', () => {
-    const telInput = ReactTestUtils.findRenderedComponentWithType(renderedComponent, TelInput);
-    assert(telInput.props.value === '0999 123 456');
+    assert(inputComponent.props.value === '0999 123 456');
   });
 
   it('set className', () => {
-    const telInput = ReactTestUtils.findRenderedComponentWithType(renderedComponent, TelInput);
-    assert(findDOMNode(telInput).className === 'form-control phoneNumber');
+    assert(findDOMNode(inputComponent).className === 'form-control phoneNumber');
   });
 
   it('change value', () => {
-    const telInput = ReactTestUtils.findRenderedComponentWithType(renderedComponent, TelInput);
-    findDOMNode(telInput).value = '12345';
-    ReactTestUtils.Simulate.change(findDOMNode(telInput));
-    assert(telInput.props.value === '12345');
+    findDOMNode(inputComponent).value = '12345';
+    ReactTestUtils.Simulate.change(findDOMNode(inputComponent));
+    assert(inputComponent.props.value === '12345');
   });
 });
