@@ -108,20 +108,19 @@ export default class IntlTelInputApp extends Component {
 
     this.isGoodBrowser = Boolean(document.createElement('input').setSelectionRange);
 
-    this.processCountryData.call(this);
     this.state = {
       countryList: {
         showDropdown: false,
         highlightedCountry: 0,
       },
       telInput: {
-        value: this.props.value || '',
+        value: '',
         disabled: false,
         readonly: false,
         offsetTop: 0,
         outerHeight: 0,
       },
-      countryCode: this.props.defaultCountry || 'us',
+      countryCode: 'us',
     };
 
     this.selectedCountryData = {};
@@ -166,10 +165,12 @@ export default class IntlTelInputApp extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.changeHighlightCountry = this.changeHighlightCountry.bind(this);
 
-    this.tempCountry = this.getTempCountry(this.props.defaultCountry);
   }
 
   componentDidMount() {
+    this.processCountryData.call(this);
+    this.tempCountry = this.getTempCountry(this.props.defaultCountry);
+
     if (document.readyState === 'complete') {
       this.windowLoaded = true;
     } else {
