@@ -71,6 +71,43 @@ export default class IntlTelInputApp extends Component {
   constructor(props) {
     super(props);
 
+    this.autoCountry = '';
+    this.tempCountry = '';
+    this.startedLoadingAutoCountry = false;
+
+    this.deferreds = [];
+    this.autoCountryDeferred = new _.Deferred();
+    this.utilsScriptDeferred = new _.Deferred();
+
+    this.isMobile = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent);
+    this.preferredCountries = [];
+    this.countries = [];
+    this.countryCodes = {};
+
+    this.windowLoaded = false;
+
+    this.keys = {
+      UP: 38,
+      DOWN: 40,
+      ENTER: 13,
+      ESC: 27,
+      PLUS: 43,
+      A: 65,
+      Z: 90,
+      ZERO: 48,
+      NINE: 57,
+      SPACE: 32,
+      BSPACE: 8,
+      TAB: 9,
+      DEL: 46,
+      CTRL: 17,
+      CMD1: 91, // Chrome
+      CMD2: 224, // FF
+    };
+
+    this.isGoodBrowser = Boolean(document.createElement('input').setSelectionRange);
+
     this.processCountryData.call(this);
     this.state = {
       countryList: {
@@ -332,43 +369,6 @@ export default class IntlTelInputApp extends Component {
     }
     return false;
   }
-
-  autoCountry = '';
-  tempCountry = '';
-  startedLoadingAutoCountry = false;
-
-  deferreds = [];
-  autoCountryDeferred = new _.Deferred();
-  utilsScriptDeferred = new _.Deferred();
-
-  isMobile = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent);
-  preferredCountries = [];
-  countries = [];
-  countryCodes = {};
-
-  windowLoaded = false;
-
-  keys = {
-    UP: 38,
-    DOWN: 40,
-    ENTER: 13,
-    ESC: 27,
-    PLUS: 43,
-    A: 65,
-    Z: 90,
-    ZERO: 48,
-    NINE: 57,
-    SPACE: 32,
-    BSPACE: 8,
-    TAB: 9,
-    DEL: 46,
-    CTRL: 17,
-    CMD1: 91, // Chrome
-    CMD2: 224, // FF
-  };
-
-  isGoodBrowser = Boolean(document.createElement('input').setSelectionRange);
 
   notifyPhoneNumberChange(newNumber) {
     if (typeof this.props.onPhoneNumberChange === 'function') {
