@@ -22,6 +22,7 @@ class IntlTelInput extends Component {
     allowExtensions: PropTypes.bool,
     autoFormat: PropTypes.bool,
     autoPlaceholder: PropTypes.bool,
+    preprocessPlaceholder: PropTypes.func,
     autoHideDialCode: PropTypes.bool,
     defaultCountry: PropTypes.string,
     geoIpLookup: PropTypes.func,
@@ -52,6 +53,7 @@ class IntlTelInput extends Component {
           allowExtensions={this.props.allowExtensions}
           autoFormat={this.props.autoFormat}
           autoPlaceholder={this.props.autoPlaceholder}
+          preprocessPlaceholder={this.props.preprocessPlaceholder}
           autoHideDialCode={this.props.autoHideDialCode}
           defaultCountry={this.props.defaultCountry}
           geoIpLookup={this.props.geoIpLookup}

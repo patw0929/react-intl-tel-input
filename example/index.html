@@ -171,6 +171,11 @@ ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
                 <td>Add or remove input placeholder with an example number for the selected country.</td>
               </tr>
               <tr>
+                <th scope="row">preprocessPlaceholder</th>
+                <td><code>null</code></td>
+                <td>Function callback that can preprocess the `autoPlaceholder` suggestion number. Takes two strings (e.g., placeholder text `(408) 123-1234`, and iso2 `us`) and returns a new string (e.g., `(xxx) xxx-xxxx`).</td>
+              </tr>
+              <tr>
                 <th scope="row">autoHideDialCode</th>
                 <td><code>true</code></td>
                 <td>If there is just a dial code in the input: remove it on blur, and re-add it on focus.</td>
