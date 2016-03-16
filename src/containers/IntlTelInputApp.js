@@ -760,7 +760,7 @@ class IntlTelInputApp extends Component {
         window.intlTelInputUtils.getExampleNumber(iso2, this.props.nationalMode, numberType) : '';
 
       if (typeof this.props.preprocessPlaceholder === 'function') {
-        placeholder = this.props.preprocessPlaceholder(placeholder);
+        placeholder = this.props.preprocessPlaceholder(placeholder, iso2);
       }
 
       findDOMNode(this.refs.telInput).setAttribute('placeholder', placeholder);
