@@ -6,6 +6,7 @@ import TelInput from '../components/TelInput';
 import utils from '../components/utils';
 import _ from 'underscore.deferred';
 import Cookies from 'cookies-js';
+import '../styles/intlTelInput.scss';
 
 export default class IntlTelInputApp extends Component {
   static defaultProps = {
@@ -65,13 +66,12 @@ export default class IntlTelInputApp extends Component {
     onPhoneNumberChange: PropTypes.func,
     onSelectFlag: PropTypes.func,
     disabled: PropTypes.bool,
-    intlTelInputData: PropTypes.object,
-    countryCode: PropTypes.string,
   };
 
   constructor(props) {
     super(props);
 
+    this.processCountryData.call(this);
     this.state = {
       countryList: {
         showDropdown: false,
@@ -86,8 +86,6 @@ export default class IntlTelInputApp extends Component {
       },
       countryCode: this.props.defaultCountry || 'us',
     };
-
-    this.processCountryData.call(this);
 
     this.selectedCountryData = {};
     this.addCountryCode = this.addCountryCode.bind(this);
@@ -144,7 +142,6 @@ export default class IntlTelInputApp extends Component {
     }
 
     this.initRequests();
-
     this.setInitialState();
 
     this.deferreds.push(this.autoCountryDeferred.promise());
@@ -159,7 +156,7 @@ export default class IntlTelInputApp extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.telInput.value !== nextProps.value) {
+    if (nextProps.value !== this.props.value) {
       this.setNumber(nextProps.value);
     }
   }

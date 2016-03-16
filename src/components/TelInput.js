@@ -12,15 +12,6 @@ class TelInput extends Component {
     handleKeyUp: PropTypes.func,
   };
 
-  constructor() {
-    super();
-    this.onChange = this.onChange.bind(this);
-  }
-
-  onChange() {
-    this.props.handleInputChange.call(this);
-  }
-
   render() {
     return (
       <input type="tel" autoComplete="off"
@@ -29,7 +20,7 @@ class TelInput extends Component {
         readOnly={this.props.readonly ? 'readonly' : false}
         name={this.props.fieldName}
         value={this.props.value}
-        onChange={this.onChange}
+        onChange={this.props.handleInputChange}
         onKeyPress={this.props.handleKeyPress}
         onKeyUp={this.props.handleKeyUp}
       />
