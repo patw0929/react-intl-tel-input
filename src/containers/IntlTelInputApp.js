@@ -164,7 +164,6 @@ export default class IntlTelInputApp extends Component {
     this.handleUpDownKey = this.handleUpDownKey.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.changeHighlightCountry = this.changeHighlightCountry.bind(this);
-
   }
 
   componentDidMount() {
