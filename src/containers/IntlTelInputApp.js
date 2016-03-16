@@ -865,7 +865,6 @@ export default class IntlTelInputApp extends Component {
           offsetTop: utils.offset(findDOMNode(this.refs.telInput)).top,
           outerHeight: utils.getOuterHeight(findDOMNode(this.refs.telInput)),
         },
-        countryCode: this.state.countryCode,
       });
     }
   }
@@ -931,7 +930,6 @@ export default class IntlTelInputApp extends Component {
         showDropdown: false,
         highlightedCountry: this.state.countryList.highlightedCountry,
       },
-      telInput: this.state.telInput,
       countryCode,
     }, () => {
       this.updatePlaceholder();
@@ -968,7 +966,6 @@ export default class IntlTelInputApp extends Component {
         const newCursorPos = (this.isGoodBrowser) ? input.selectionStart + 1 : 0;
 
         this.setState({
-          countryList: this.state.countryList,
           telInput: {
             value: `+${val}`,
             disabled: this.state.telInput.disabled,
@@ -976,7 +973,6 @@ export default class IntlTelInputApp extends Component {
             offsetTop: this.state.telInput.offsetTop,
             outerHeight: this.state.telInput.outerHeight,
           },
-          countryCode: this.state.countryCode,
         });
 
         if (this.isGoodBrowser) {
@@ -1005,14 +1001,6 @@ export default class IntlTelInputApp extends Component {
           showDropdown: false,
           highlightedCountry: this.state.countryList.highlightedCountry,
         },
-        telInput: {
-          value: this.state.telInput.value,
-          disabled: this.state.telInput.disabled,
-          readonly: this.state.telInput.readonly,
-          offsetTop: this.state.telInput.offsetTop,
-          outerHeight: this.state.telInput.outerHeight,
-        },
-        countryCode: this.state.countryCode,
       });
     } else if ((e.which >= this.keys.A && e.which <= this.keys.Z) || e.which === this.keys.SPACE) {
       // upper case letters (note: keyup/keydown only return upper case letters)
@@ -1039,8 +1027,6 @@ export default class IntlTelInputApp extends Component {
         showDropdown: false,
         highlightedCountry: this.state.countryList.highlightedCountry,
       },
-      telInput: this.state.telInput,
-      countryCode: this.state.countryCode,
     });
   }
 
@@ -1059,8 +1045,6 @@ export default class IntlTelInputApp extends Component {
             showDropdown: true,
             highlightedCountry: selectedIndex,
           },
-          telInput: this.state.telInput,
-          countryCode: this.state.countryCode,
         });
         this.scrollTo(listItem, true);
         break;
@@ -1080,7 +1064,6 @@ export default class IntlTelInputApp extends Component {
           showDropdown: false,
           highlightedCountry: selectedIndex,
         },
-        telInput: this.state.telInput,
         countryCode,
       }, () => {
         this.selectFlag(this.state.countryCode);
@@ -1094,8 +1077,6 @@ export default class IntlTelInputApp extends Component {
         showDropdown: !!status,
         highlightedCountry: this.state.countryList.highlightedCountry,
       },
-      telInput: this.state.telInput,
-      countryCode: this.state.countryCode,
     });
   }
 
@@ -1121,15 +1102,12 @@ export default class IntlTelInputApp extends Component {
           showDropdown: true,
           highlightedCountry: selectedIndex,
         },
-        telInput: this.state.telInput,
-        countryCode: this.state.countryCode,
       });
     }
   }
 
   handleInputChange(e) {
     this.setState({
-      countryList: this.state.countryList,
       telInput: {
         value: e.target.value,
         disabled: this.state.telInput.disabled,
@@ -1137,7 +1115,6 @@ export default class IntlTelInputApp extends Component {
         offsetTop: this.state.telInput.offsetTop,
         outerHeight: this.state.telInput.outerHeight,
       },
-      countryCode: this.state.countryCode,
     });
   }
 
@@ -1147,8 +1124,6 @@ export default class IntlTelInputApp extends Component {
         showDropdown,
         highlightedCountry: selectedIndex,
       },
-      telInput: this.state.telInput,
-      countryCode: this.state.countryCode,
     });
   }
 
