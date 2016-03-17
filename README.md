@@ -1,6 +1,9 @@
-# React-Intl-Tel-Input [![Build Status](https://travis-ci.org/patw0929/react-intl-tel-input.svg)](https://travis-ci.org/patw0929/react-intl-tel-input)
+# React-Intl-Tel-Input 
 
-Rewrite [International Telephone Input](https://github.com/Bluefieldscom/intl-tel-input) in React.js & Redux.
+[![Build Status](https://travis-ci.org/patw0929/react-intl-tel-input.svg)](https://travis-ci.org/patw0929/react-intl-tel-input)
+[![npm version](https://badge.fury.io/js/react-intl-tel-input.svg)](http://badge.fury.io/js/react-intl-tel-input)
+
+Rewrite [International Telephone Input](https://github.com/jackocnr/intl-tel-input) in React.js.
 
 
 ## Demo & Examples
@@ -9,7 +12,7 @@ Live demo: [patw0929.github.io/react-intl-tel-input](http://patw0929.github.io/r
 
 To build the examples locally, run:
 
-```
+```bash
 npm install
 npm run example
 ```
@@ -23,7 +26,7 @@ The easiest way to use react-intl-tel-input is to install it from NPM and includ
 
 You can also use the standalone build by including `dist/main.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
 
-```
+```bash
 npm install react-intl-tel-input --save
 ```
 
