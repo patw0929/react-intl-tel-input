@@ -381,7 +381,8 @@ export default class IntlTelInputApp extends Component {
   // check if an element is visible within it's container, else scroll until it is
   scrollTo(element, middle) {
     const container = findDOMNode(this.refs.flagDropDown).querySelector('.country-list');
-    const containerHeight = parseFloat(getComputedStyle(container).getPropertyValue('height'), 10);
+    const containerHeight = parseFloat(
+      window.getComputedStyle(container).getPropertyValue('height'), 10);
     const containerTop = utils.offset(container).top;
     const containerBottom = containerTop + containerHeight;
     const elementHeight = utils.getOuterHeight(element);
