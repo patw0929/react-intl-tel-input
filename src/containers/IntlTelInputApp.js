@@ -108,6 +108,8 @@ export default class IntlTelInputApp extends Component {
 
     this.isGoodBrowser = Boolean(document.createElement('input').setSelectionRange);
 
+    this.query = '';
+
     this.state = {
       countryList: {
         showDropdown: false,
@@ -419,8 +421,6 @@ export default class IntlTelInputApp extends Component {
     }
     return false;
   }
-
-  query = '';
 
   // set the initial state of the input value and the selected flag
   setInitialState() {
