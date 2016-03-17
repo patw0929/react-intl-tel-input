@@ -865,6 +865,11 @@ export default class IntlTelInputApp extends Component {
           offsetTop: utils.offset(findDOMNode(this.refs.telInput)).top,
           outerHeight: utils.getOuterHeight(findDOMNode(this.refs.telInput)),
         },
+      }, () => {
+        const highlightItem = findDOMNode(this.refs.flagDropDown).querySelector('.highlight');
+        if (highlightItem) {
+          this.scrollTo(highlightItem, true);
+        }
       });
     }
   }
@@ -951,6 +956,20 @@ export default class IntlTelInputApp extends Component {
       // Allow Main app to do things when a country is selected
       if (typeof this.props.onSelectFlag === 'function') {
         this.props.onSelectFlag(this.selectedCountryData);
+      }
+
+      if (countryCode && countryCode !== 'auto') {
+        const listItem = findDOMNode(this.refs.flagDropDown).querySelector(
+          `.country-list [data-country-code="${countryCode}"]:not(.preferred)`);
+
+        const selectedIndex = utils.retrieveLiIndex(listItem);
+
+        this.setState({
+          countryList: {
+            showDropdown: false,
+            highlightedCountry: selectedIndex,
+          },
+        });
       }
     });
   }
