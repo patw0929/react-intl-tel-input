@@ -81,7 +81,7 @@ const loadJSONP = (url, callback) => {
   script.src = `${url + (url.indexOf('?') + 1 ? '&amp;' : '?')}callback=${callback}`;
   ref.parentNode.insertBefore(script, ref);
   script.onload = () => {
-    this.remove();
+    script.remove();
   };
 };
 
