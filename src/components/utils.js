@@ -121,8 +121,8 @@ export default {
   // retrieve outerHeight of element
   getOuterHeight(element) {
     return element.offsetHeight +
-           parseFloat(getComputedStyle(element).getPropertyValue('margin-top')) +
-           parseFloat(getComputedStyle(element).getPropertyValue('margin-bottom'));
+           parseFloat(window.getComputedStyle(element).getPropertyValue('margin-top')) +
+           parseFloat(window.getComputedStyle(element).getPropertyValue('margin-bottom'));
   },
 
   // find the country data for the given country code

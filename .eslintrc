@@ -6,6 +6,6 @@
   },
   "env": {
     "browser": true,
-    "jasmine": true,
+    "mocha": true,
   },
 }

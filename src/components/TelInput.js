@@ -10,17 +10,7 @@ class TelInput extends Component {
     handleInputChange: PropTypes.func,
     handleKeyPress: PropTypes.func,
     handleKeyUp: PropTypes.func,
-    actions: PropTypes.object,
   };
-
-  constructor() {
-    super();
-    this.onChange = this.onChange.bind(this);
-  }
-
-  onChange() {
-    this.props.handleInputChange.call(this);
-  }
 
   render() {
     return (
@@ -30,7 +20,7 @@ class TelInput extends Component {
         readOnly={this.props.readonly ? 'readonly' : false}
         name={this.props.fieldName}
         value={this.props.value}
-        onChange={this.onChange}
+        onChange={this.props.handleInputChange}
         onKeyPress={this.props.handleKeyPress}
         onKeyUp={this.props.handleKeyUp}
       />

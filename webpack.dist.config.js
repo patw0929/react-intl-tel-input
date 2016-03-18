@@ -20,7 +20,7 @@ module.exports = {
   },
 
   entry: {
-    main: ['./src/containers/App.js']
+    main: ['./src/containers/IntlTelInputApp.js']
   },
 
   externals: {
