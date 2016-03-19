@@ -613,6 +613,11 @@ export default class IntlTelInputApp extends Component {
   }
 
   loadUtils() {
+    if (window.intlTelInputUtils) {
+      this.utilsScriptDeferred.resolve();
+      return;
+    }
+
     const request = new XMLHttpRequest();
     request.open('GET', this.props.utilsScript, true);
 
