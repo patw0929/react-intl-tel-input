@@ -43,7 +43,7 @@ module.exports = {
       'styles': __dirname + '/src/styles',
       'mixins': __dirname + '/src/mixins',
       'components': __dirname + '/src/components/',
-      'react-intl-tel-input': './containers/App.js',
+      'react-intl-tel-input': './containers/IntlTelInputApp.js',
     },
     root: __dirname + '/src',
   },
