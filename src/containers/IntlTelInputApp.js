@@ -5,7 +5,6 @@ import FlagDropDown from '../components/FlagDropDown';
 import TelInput from '../components/TelInput';
 import utils from '../components/utils';
 import _ from 'underscore.deferred';
-import Cookies from 'cookies-js';
 import '../styles/intlTelInput.scss';
 
 export default class IntlTelInputApp extends Component {
@@ -569,10 +568,11 @@ export default class IntlTelInputApp extends Component {
   }
 
   loadAutoCountry() {
-    // check for cookie
-    const cookieAutoCountry = (Cookies) ? Cookies.get('itiAutoCountry') : '';
-    if (cookieAutoCountry) {
-      this.autoCountry = cookieAutoCountry;
+    // check for localStorage
+    const lsAutoCountry =
+      (window.Storage !== undefined) ? window.localStorage.getItem('itiAutoCountry') : '';
+    if (lsAutoCountry) {
+      this.autoCountry = lsAutoCountry;
     }
 
     // 3 options:
@@ -590,10 +590,8 @@ export default class IntlTelInputApp extends Component {
       if (typeof this.props.geoIpLookup === 'function') {
         this.props.geoIpLookup((countryCode) => {
           this.autoCountry = countryCode.toLowerCase();
-          if (Cookies) {
-            Cookies.set('itiAutoCountry', this.autoCountry, {
-              path: '/',
-            });
+          if (window.Storage !== undefined) {
+            window.localStorage.setItem('itiAutoCountry', this.autoCountry);
           }
           // tell all instances the auto country is ready
           // TODO: this should just be the current instances
