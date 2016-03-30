@@ -12,7 +12,7 @@ describe('TelInput', () => {
     const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName={'telephone'}
-          defaultValue={'0999 123 456'}
+          value={'0999 123 456'}
           utilsScript={'../example/assets/libphonenumber.js'}
         />
     );
