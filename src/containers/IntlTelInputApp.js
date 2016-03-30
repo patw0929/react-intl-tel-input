@@ -570,7 +570,7 @@ export default class IntlTelInputApp extends Component {
   loadAutoCountry() {
     // check for localStorage
     const lsAutoCountry =
-      (window.Storage !== undefined) ? window.localStorage.getItem('itiAutoCountry') : '';
+      (window.localStorage !== undefined) ? window.localStorage.getItem('itiAutoCountry') : '';
     if (lsAutoCountry) {
       this.autoCountry = lsAutoCountry;
     }
@@ -590,7 +590,7 @@ export default class IntlTelInputApp extends Component {
       if (typeof this.props.geoIpLookup === 'function') {
         this.props.geoIpLookup((countryCode) => {
           this.autoCountry = countryCode.toLowerCase();
-          if (window.Storage !== undefined) {
+          if (window.localStorage !== undefined) {
             window.localStorage.setItem('itiAutoCountry', this.autoCountry);
           }
           // tell all instances the auto country is ready
