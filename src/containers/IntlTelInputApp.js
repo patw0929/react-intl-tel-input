@@ -49,7 +49,6 @@ export default class IntlTelInputApp extends Component {
     fieldName: PropTypes.string,
     value: PropTypes.string,
     countriesData: PropTypes.arrayOf(PropTypes.array),
-    defaultValue: PropTypes.string,
     allowExtensions: PropTypes.bool,
     autoFormat: PropTypes.bool,
     autoPlaceholder: PropTypes.bool,
@@ -424,7 +423,7 @@ export default class IntlTelInputApp extends Component {
 
   // set the initial state of the input value and the selected flag
   setInitialState() {
-    const val = this.props.defaultValue || '';
+    const val = this.props.value || '';
 
     // Init the flag setting
     this.selectFlag(this.props.defaultCountry || '', false);
