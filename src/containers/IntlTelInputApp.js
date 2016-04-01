@@ -947,13 +947,13 @@ export default class IntlTelInputApp extends Component {
       // focus the input
       if (setFocus) {
         findDOMNode(this.refs.telInput).focus();
-      }
 
-      // fix for FF and IE11 (with nationalMode=false i.e. auto inserting dial code),
-      // who try to put the cursor at the beginning the first time
-      if (this.isGoodBrowser) {
-        const len = this.state.telInput.value.length;
-        findDOMNode(this.refs.telInput).setSelectionRange(len, len);
+        // fix for FF and IE11 (with nationalMode=false i.e. auto inserting dial code),
+        // who try to put the cursor at the beginning the first time
+        if (this.isGoodBrowser) {
+          const len = this.state.telInput.value.length;
+          findDOMNode(this.refs.telInput).setSelectionRange(len, len);
+        }
       }
 
       // Allow Main app to do things when a country is selected
