@@ -580,9 +580,7 @@ export default class IntlTelInputApp extends Component {
     // 2) not already started loading (start)
     // 3) already started loading (do nothing - just wait for loading callback to fire)
     if (this.autoCountry) {
-      setTimeout(() => {
-        this.autoCountryLoaded();
-      }, 100);
+      this.autoCountryLoaded();
     } else if (!this.startedLoadingAutoCountry) {
       // don't do this twice!
       this.startedLoadingAutoCountry = true;
@@ -942,7 +940,9 @@ export default class IntlTelInputApp extends Component {
     }, () => {
       this.updatePlaceholder();
 
-      this.updateDialCode(this.selectedCountryData.dialCode, true);
+      if (this.selectedCountryData.dialCode) {
+        this.updateDialCode(this.selectedCountryData.dialCode, true);
+      }
 
       // focus the input
       if (setFocus) {
