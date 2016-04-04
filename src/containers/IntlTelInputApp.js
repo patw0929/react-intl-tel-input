@@ -580,9 +580,7 @@ export default class IntlTelInputApp extends Component {
     // 2) not already started loading (start)
     // 3) already started loading (do nothing - just wait for loading callback to fire)
     if (this.autoCountry) {
-      setTimeout(() => {
-        this.autoCountryLoaded();
-      }, 100);
+      this.autoCountryLoaded();
     } else if (!this.startedLoadingAutoCountry) {
       // don't do this twice!
       this.startedLoadingAutoCountry = true;
@@ -942,18 +940,20 @@ export default class IntlTelInputApp extends Component {
     }, () => {
       this.updatePlaceholder();
 
-      this.updateDialCode(this.selectedCountryData.dialCode, true);
+      if (this.selectedCountryData.dialCode) {
+        this.updateDialCode(this.selectedCountryData.dialCode, true);
+      }
 
       // focus the input
       if (setFocus) {
         findDOMNode(this.refs.telInput).focus();
-      }
 
-      // fix for FF and IE11 (with nationalMode=false i.e. auto inserting dial code),
-      // who try to put the cursor at the beginning the first time
-      if (this.isGoodBrowser) {
-        const len = this.state.telInput.value.length;
-        findDOMNode(this.refs.telInput).setSelectionRange(len, len);
+        // fix for FF and IE11 (with nationalMode=false i.e. auto inserting dial code),
+        // who try to put the cursor at the beginning the first time
+        if (this.isGoodBrowser) {
+          const len = this.state.telInput.value.length;
+          findDOMNode(this.refs.telInput).setSelectionRange(len, len);
+        }
       }
 
       // Allow Main app to do things when a country is selected
