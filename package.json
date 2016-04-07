@@ -29,9 +29,10 @@
     "underscore.deferred": "^0.4.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.0.0",
     "babel-core": "^6.0.0",
     "babel-eslint": "^6.0.0-beta.6",
-    "babel-jest": "^6.0.0",
+    "babel-istanbul": "^0.5.9",
     "babel-loader": "^6.0.0",
     "babel-plugin-transform-class-properties": "^6.5.2",
     "babel-preset-es2015": "^6.5.0",
