@@ -1,5 +1,5 @@
 language: node_js
 node_js:
   - "4.1.2"
-script:
-  - npm run-script coveralls
+after_success: npm run coverage
+after_script: npm run coveralls

@@ -81,7 +81,8 @@
     "gh-pages": "grunt gh-pages",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register --require ./tests/setup.js --recursive tests/*-test.js",
     "test:watch": "./node_modules/.bin/mocha --compilers js:babel-core/register --require ./tests/setup.js --recursive tests/*-test.js --watch",
-    "coveralls": "node_modules/.bin/babel-node node_modules/.bin/babel-istanbul cover node_modules/.bin/_mocha -- --require ./tests/setup.js --recursive tests/*-test.js"
+    "coverage": "node_modules/.bin/babel-node node_modules/.bin/babel-istanbul cover node_modules/.bin/_mocha -- --require ./tests/setup.js --recursive tests/*-test.js",
+    "coveralls": "cat coverage/lcov.info | coveralls"
   },
   "license": "MIT"
 }
