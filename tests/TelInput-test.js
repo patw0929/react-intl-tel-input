@@ -8,7 +8,7 @@ import { assert } from 'chai';
 describe('TelInput', () => {
   let inputComponent;
 
-  before('render element', () => {
+  beforeEach('render element', () => {
     const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName={'telephone'}

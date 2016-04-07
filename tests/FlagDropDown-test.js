@@ -5,15 +5,16 @@ import IntlTelInput from '../src/containers/IntlTelInputApp';
 import { assert } from 'chai';
 
 describe('FlagDropDown', () => {
+  let renderedComponent;
   let flagComponent;
   let dropDownComponent;
 
-  before('render element', () => {
-    const renderedComponent = ReactTestUtils.renderIntoDocument(
-        <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
-          fieldName={'telephone'}
-          defaultCountry={'tw'}
-        />
+  beforeEach('render element', () => {
+    renderedComponent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        defaultCountry={'tw'}
+      />
     );
 
     flagComponent = ReactTestUtils.findRenderedDOMComponentWithClass(
