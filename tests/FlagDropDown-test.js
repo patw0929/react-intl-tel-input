@@ -49,4 +49,52 @@ describe('FlagDropDown', () => {
     ReactTestUtils.Simulate.click(japanOption);
     assert(findDOMNode(flagComponent).querySelector('.iti-flag').className === 'iti-flag jp');
   });
+
+  it('Set onlyCountries', () => {
+    const parent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        defaultCountry={'tw'}
+        onlyCountries={['tw', 'us', 'kr']}
+      />
+    );
+    const result = [{
+      name: 'South Korea (대한민국)',
+      iso2: 'kr',
+      dialCode: '82',
+      priority: 0,
+      areaCodes: null,
+    }, {
+      name: 'Taiwan (台灣)',
+      iso2: 'tw',
+      dialCode: '886',
+      priority: 0,
+      areaCodes: null,
+    }, {
+      name: 'United States',
+      iso2: 'us',
+      dialCode: '1',
+      priority: 0,
+      areaCodes: null,
+    }];
+
+    assert.deepEqual(parent.refs.flagDropDown.props.countries, result);
+  });
+
+  it('Mouse over on country', () => {
+    ReactTestUtils.Simulate.click(findDOMNode(flagComponent));
+    const options = findDOMNode(dropDownComponent).querySelectorAll(
+      '.country:not([class="preferred"])');
+    const koreaOption = findDOMNode(dropDownComponent).querySelector('[data-country-code="kr"]');
+
+    let index = -1;
+    for (let i = 0, max = options.length; i < max; ++i) {
+      if (options[i] === koreaOption) {
+        index = i;
+      }
+    }
+
+    ReactTestUtils.Simulate.mouseOver(koreaOption);
+    assert(renderedComponent.refs.flagDropDown.props.highlightedCountry === index);
+  });
 });
