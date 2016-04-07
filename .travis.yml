@@ -1,3 +1,6 @@
 language: node_js
 node_js:
   - "4.1.2"
+after_script:
+  - npm run cover
+  - cat ./coverage/lcov.info | coveralls
