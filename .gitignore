@@ -36,3 +36,5 @@ node_modules/
 /src/main.js
 .grunt/
 npm-debug.log
+
+coverage
