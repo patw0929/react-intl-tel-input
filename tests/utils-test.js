@@ -4,28 +4,45 @@ import { assert } from 'chai';
 
 describe('utils', () => {
   it('arraysEqual', () => {
-    const a = ['1', '2', '3'];
-    const b = ['3', '1', '2'];
+    let a = [1, 2, 3];
+    let b = [1, 2, 3];
+    assert(utils.arraysEqual(a, b) === true);
 
+    b = null;
+    assert(utils.arraysEqual(a, b) === false);
+
+    a = ['1', '2', '3'];
+    b = ['3', '1', '2'];
     assert(utils.arraysEqual(a, b) === false);
   });
 
   it('shallowEquals', () => {
-    const a = {
-      x: ['1', '2', '3'],
-      y: 'abc',
-    };
-    const b = {
-      x: ['1', '2', '3'],
-      y: 'abc',
-    };
+    let a = [1, 2, 3];
+    let b = [1, 2, 3];
+    assert(utils.shallowEquals(a, b) === true);
 
+    a = {
+      x: ['1', '2', '3'],
+      y: 'abc',
+    };
+    b = {
+      x: ['1', '2', '3'],
+      y: 'abc',
+    };
+    assert(utils.shallowEquals(a, b) === true);
+
+    a = {
+      a: 1,
+      b: 2,
+    };
+    b = a;
     assert(utils.shallowEquals(a, b) === true);
   });
 
   it('trim', () => {
-    const str = ' Hello World   ';
+    assert(utils.trim(undefined) === '');
 
+    const str = ' Hello World   ';
     assert(utils.trim(str) === 'Hello World');
   });
 
@@ -44,8 +61,10 @@ describe('utils', () => {
     </body></html>`;
     const doc = jsdom.jsdom(DEFAULT_HTML);
     const bListItem = doc.querySelector('.b');
-
     assert(utils.retrieveLiIndex(bListItem) === 1);
+
+    const otherListItem = doc.querySelector('.z');
+    assert(utils.retrieveLiIndex(otherListItem) === -1);
   });
 
   it('getNumeric', () => {
@@ -83,6 +102,9 @@ describe('utils', () => {
       areaCodes: null,
     };
     assert.deepEqual(utils.getCountryData('tw'), result);
+
+    assert(utils.getCountryData('zz', true) === null);
+    assert.deepEqual(utils.getCountryData('zz', false, (country) => `${country}!!`), {});
   });
 
   it('hasClass', () => {
