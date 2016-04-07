@@ -81,6 +81,22 @@ describe('FlagDropDown', () => {
     assert.deepEqual(parent.refs.flagDropDown.props.countries, result);
   });
 
+  it('Set defaultCountry as "auto"', () => {
+    const lookup = (callback) => {
+      callback('jp');
+    };
+
+    const parent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        defaultCountry={'auto'}
+        geoIpLookup={lookup}
+      />
+    );
+
+    assert(parent.state.countryCode === 'jp');
+  });
+
   it('Mouse over on country', () => {
     ReactTestUtils.Simulate.click(findDOMNode(flagComponent));
     const options = findDOMNode(dropDownComponent).querySelectorAll(
