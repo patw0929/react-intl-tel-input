@@ -62,6 +62,10 @@ export default {
   },
 
   retrieveLiIndex(node) {
+    if (!node) {
+      return -1;
+    }
+
     const children = node.parentNode.childNodes;
     let num = 0;
     for (let i = 0, max = children.length; i < max; i++) {
