@@ -6,3 +6,4 @@ node_modules/*
 Gruntfile.js
 package.json
 webpack.*.js
+coverage/*
