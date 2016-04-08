@@ -5,9 +5,10 @@ import { assert } from 'chai';
 describe('utils', () => {
   it('arraysEqual', () => {
     let a = [1, 2, 3];
-    let b = [1, 2, 3];
+    let b = a;
     assert(utils.arraysEqual(a, b) === true);
 
+    a = [1, 2, 3];
     b = null;
     assert(utils.arraysEqual(a, b) === false);
 
@@ -18,7 +19,7 @@ describe('utils', () => {
 
   it('shallowEquals', () => {
     let a = [1, 2, 3];
-    let b = [1, 2, 3];
+    let b = a;
     assert(utils.shallowEquals(a, b) === true);
 
     a = {
@@ -35,8 +36,9 @@ describe('utils', () => {
       a: 1,
       b: 2,
     };
-    b = a;
-    assert(utils.shallowEquals(a, b) === true);
+    b = Object.create(a);
+    b.c = 3;
+    assert(utils.shallowEquals(a, b) === false);
   });
 
   it('trim', () => {
@@ -137,5 +139,22 @@ describe('utils', () => {
     utils.removeClass(element, 'abc');
 
     assert(element.classList.contains('abc') === false);
+  });
+
+  it('getDigitsOnRight', () => {
+    const str = '0912 345 678';
+    assert(utils.getDigitsOnRight(str, 5) === 6);
+  });
+
+  it('getCursorFromLeftChar', () => {
+    const str = '0912 345 678';
+    assert(utils.getCursorFromLeftChar(str, 5, 4) === 4);
+    assert(utils.getCursorFromLeftChar('', 5, 4) === 0);
+  });
+
+  it('getCursorFromDigitsOnRight', () => {
+    const str = '0912 345 678';
+    assert(utils.getCursorFromDigitsOnRight(str, 7) === 3);
+    assert(utils.getCursorFromDigitsOnRight(str, 20) === 0);
   });
 });

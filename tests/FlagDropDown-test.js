@@ -43,11 +43,13 @@ describe('FlagDropDown', () => {
   });
 
   it('Simulate change to Japan flag in dropdown before & after', () => {
+    assert(renderedComponent.state.countryList.showDropdown === false);
     assert(findDOMNode(flagComponent).querySelector('.iti-flag').className === 'iti-flag tw');
     ReactTestUtils.Simulate.click(findDOMNode(flagComponent));
     const japanOption = findDOMNode(dropDownComponent).querySelector('[data-country-code="jp"]');
     ReactTestUtils.Simulate.click(japanOption);
     assert(findDOMNode(flagComponent).querySelector('.iti-flag').className === 'iti-flag jp');
+    assert(renderedComponent.state.countryList.showDropdown === false);
   });
 
   it('Set onlyCountries', () => {
