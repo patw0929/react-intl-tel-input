@@ -40,6 +40,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "6.4.3",
     "chai": "3.4.1",
+    "coveralls": "^2.11.9",
     "css-loader": "~0.9.0",
     "css-modules-require-hook": "^4.0.0",
     "eslint": "^2.2.0",
@@ -82,7 +83,7 @@
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register --require ./tests/setup.js --recursive tests/*-test.js",
     "test:watch": "./node_modules/.bin/mocha --compilers js:babel-core/register --require ./tests/setup.js --recursive tests/*-test.js --watch",
     "coverage": "node_modules/.bin/babel-node node_modules/.bin/babel-istanbul cover node_modules/.bin/_mocha -- --require ./tests/setup.js --recursive tests/*-test.js",
-    "coveralls": "cat coverage/lcov.info | coveralls"
+    "coveralls": "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "license": "MIT"
 }
