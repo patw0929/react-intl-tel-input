@@ -126,9 +126,6 @@ export default class IntlTelInputApp extends Component {
     this.selectedCountryData = {};
     this.addCountryCode = this.addCountryCode.bind(this);
     this.autoCountryLoaded = this.autoCountryLoaded.bind(this);
-    this.getCursorFromLeftChar = this.getCursorFromLeftChar.bind(this);
-    this.getCursorFromDigitsOnRight = this.getCursorFromDigitsOnRight.bind(this);
-    this.getDigitsOnRight = this.getDigitsOnRight.bind(this);
     this.getDialCode = this.getDialCode.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
@@ -246,44 +243,6 @@ export default class IntlTelInputApp extends Component {
     // which is used later for formatting the number before displaying it
     this.updateFlagFromNumber(number);
     this.updateVal(number, format, addSuffix, preventConversion, isAllowedKey);
-  }
-
-  // get the number of numeric digits to the right of the cursor so we can reposition
-  // the cursor correctly after the reformat has happened
-  getDigitsOnRight(val, selectionEnd) {
-    let digitsOnRight = 0;
-    for (let i = selectionEnd, max = val.length; i < max; i++) {
-      if (utils.isNumeric(val.charAt(i))) {
-        digitsOnRight++;
-      }
-    }
-    return digitsOnRight;
-  }
-
-  // we start from the position in guessCursor, and work our way left
-  // until we hit the originalLeftChars or a number to make sure that
-  // after reformatting the cursor has the same char on the left in the case of a delete etc
-  getCursorFromLeftChar(val, guessCursor, originalLeftChars) {
-    for (let i = guessCursor; i > 0; i--) {
-      const leftChar = val.charAt(i - 1);
-      if (utils.isNumeric(leftChar) || val.substr(i - 2, 2) === originalLeftChars) {
-        return i;
-      }
-    }
-    return 0;
-  }
-
-  // after a reformat we need to make sure there are still the same number
-  // of digits to the right of the cursor
-  getCursorFromDigitsOnRight(val, digitsOnRight) {
-    for (let i = val.length - 1; i >= 0; i--) {
-      if (utils.isNumeric(val.charAt(i))) {
-        if (--digitsOnRight === 0) {
-          return i;
-        }
-      }
-    }
-    return 0;
   }
 
   // process preferred countries - iterate through the preferences,
@@ -707,7 +666,7 @@ export default class IntlTelInputApp extends Component {
       // we use the right instead of the left so that
       // A) we dont have to account for the new digit (or multiple digits if paste event),
       // and B) we're always on the right side of formatting suffixes
-      digitsOnRight = this.getDigitsOnRight(val, input.selectionEnd);
+      digitsOnRight = utils.getDigitsOnRight(val, input.selectionEnd);
       // if handling a new number character: insert it in the right place
       if (newNumericChar) {
         // replace any selection they may have made with the new char
@@ -741,11 +700,11 @@ export default class IntlTelInputApp extends Component {
         newCursor = val.length;
       } else {
         // else count in the same number of digits from the right
-        newCursor = this.getCursorFromDigitsOnRight(val, digitsOnRight);
+        newCursor = utils.getCursorFromDigitsOnRight(val, digitsOnRight);
 
         // but if delete/paste etc, keep going left until hit the same left char as before
         if (!newNumericChar) {
-          newCursor = this.getCursorFromLeftChar(val, newCursor, originalLeftChars);
+          newCursor = utils.getCursorFromLeftChar(val, newCursor, originalLeftChars);
         }
       }
       // set the new cursor
