@@ -1,6 +1,7 @@
 import jsdom from 'jsdom';
 import hook from 'css-modules-require-hook';
 import sass from 'node-sass';
+import sinon from 'sinon';
 
 // Define some html to be our basic document
 // JSDOM will consume this and act as if we were in a browser
@@ -16,7 +17,7 @@ global.window = document.defaultView;
 // Allow for things like window.location
 global.navigator = window.navigator;
 
-global.XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+global.XMLHttpRequest = sinon.useFakeXMLHttpRequest();
 
 hook({
   generateScopedName: '[name]__[local]___[hash:base64:5]',
