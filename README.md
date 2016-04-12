@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/patw0929/react-intl-tel-input.svg)](https://travis-ci.org/patw0929/react-intl-tel-input)
 [![npm version](https://badge.fury.io/js/react-intl-tel-input.svg)](http://badge.fury.io/js/react-intl-tel-input)
-[![Coverage Status](https://coveralls.io/repos/github/patw0929/react-intl-tel-input/badge.svg)](https://coveralls.io/github/patw0929/react-intl-tel-input)
+[![Coverage Status](https://coveralls.io/repos/github/patw0929/react-intl-tel-input/badge.svg?branch=master)](https://coveralls.io/github/patw0929/react-intl-tel-input?branch=master)
 
 Rewrite [International Telephone Input](https://github.com/jackocnr/intl-tel-input) in React.js.
 
