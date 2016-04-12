@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.org/patw0929/react-intl-tel-input.svg)](https://travis-ci.org/patw0929/react-intl-tel-input)
 [![npm version](https://badge.fury.io/js/react-intl-tel-input.svg)](http://badge.fury.io/js/react-intl-tel-input)
+[![Coverage Status](https://coveralls.io/repos/github/patw0929/react-intl-tel-input/badge.svg?branch=master)](https://coveralls.io/github/patw0929/react-intl-tel-input?branch=master)
+[![npm](https://img.shields.io/npm/l/express.svg?maxAge=2592000)]()
+
+[![NPM](https://nodei.co/npm/react-intl-tel-input.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-intl-tel-input/)
 
 Rewrite [International Telephone Input](https://github.com/jackocnr/intl-tel-input) in React.js.
 
@@ -53,9 +57,21 @@ Please see the [Demo Page](http://patw0929.github.io/react-intl-tel-input/)
 
 To build, watch and serve the examples (which will also watch the component source), run `npm run example`.
 
+
+## Contributing
+
+To contribute to react-intl-tel-input, clone this repo locally and commit your code on a separate branch. Please write tests for your code, and run the linter before opening a pull-request:
+
+```bash
+npm test
+npm run lint
+```
+
+
 ## Inspired by
 
 [International Telephone Input](https://github.com/jackocnr/intl-tel-input) - [@jackocnr](https://github.com/jackocnr)
+
 
 ## License
 

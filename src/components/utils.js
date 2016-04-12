@@ -62,6 +62,10 @@ export default {
   },
 
   retrieveLiIndex(node) {
+    if (!node) {
+      return -1;
+    }
+
     const children = node.parentNode.childNodes;
     let num = 0;
     for (let i = 0, max = children.length; i < max; i++) {
@@ -169,5 +173,43 @@ export default {
       const reg = new RegExp(`(\\s|^)${className}(\\s|$)`);
       el.className = el.className.replace(reg, ' ');
     }
+  },
+
+  // get the number of numeric digits to the right of the cursor so we can reposition
+  // the cursor correctly after the reformat has happened
+  getDigitsOnRight(val, selectionEnd) {
+    let digitsOnRight = 0;
+    for (let i = selectionEnd, max = val.length; i < max; i++) {
+      if (this.isNumeric(val.charAt(i))) {
+        digitsOnRight++;
+      }
+    }
+    return digitsOnRight;
+  },
+
+  // we start from the position in guessCursor, and work our way left
+  // until we hit the originalLeftChars or a number to make sure that
+  // after reformatting the cursor has the same char on the left in the case of a delete etc
+  getCursorFromLeftChar(val, guessCursor, originalLeftChars) {
+    for (let i = guessCursor; i > 0; i--) {
+      const leftChar = val.charAt(i - 1);
+      if (this.isNumeric(leftChar) || val.substr(i - 2, 2) === originalLeftChars) {
+        return i;
+      }
+    }
+    return 0;
+  },
+
+  // after a reformat we need to make sure there are still the same number
+  // of digits to the right of the cursor
+  getCursorFromDigitsOnRight(val, digitsOnRight) {
+    for (let i = val.length - 1; i >= 0; i--) {
+      if (this.isNumeric(val.charAt(i))) {
+        if (--digitsOnRight === 0) {
+          return i;
+        }
+      }
+    }
+    return 0;
   },
 };
