@@ -225,6 +225,11 @@ ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
                 <td><code>null</code></td>
                 <td>Validation callback function. It returns validation status, input box value and selected country data.</td>
               </tr>
+              <tr>
+                <th scope="row">keepFlagInUnkownNanp</th>
+                <td><code>false</code></td>
+                <td>When user selects NANP country flag first, and then typing number which starts with 1 & the length is greater than 4, the flag will be change to United States if this option is set as false here.</td>
+              </tr>
             </tbody>
           </table>
         </div>
