@@ -41,6 +41,7 @@ export default class IntlTelInputApp extends Component {
     utilsScript: '',
     onPhoneNumberChange: null,
     onSelectFlag: null,
+    fallbackFlagInUnkownNanp: true,
   };
 
   static propTypes = {
@@ -64,6 +65,7 @@ export default class IntlTelInputApp extends Component {
     onPhoneNumberChange: PropTypes.func,
     onSelectFlag: PropTypes.func,
     disabled: PropTypes.bool,
+    fallbackFlagInUnkownNanp: PropTypes.bool,
   };
 
   constructor(props) {
@@ -480,7 +482,10 @@ export default class IntlTelInputApp extends Component {
 
       // if a matching country is not already selected
       // (or this is an unknown NANP area code): choose the first in the list
-      if (!alreadySelected || this.isUnknownNanp(number, dialCode)) {
+      if (
+          !alreadySelected ||
+          (this.props.fallbackFlagInUnkownNanp && this.isUnknownNanp(number, dialCode))
+         ) {
         // if using onlyCountries option, countryCodes[0] may be empty,
         // so we must find the first non-empty index
         for (let j = 0, max = countryCodes.length; j < max; j++) {
