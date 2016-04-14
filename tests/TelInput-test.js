@@ -26,6 +26,7 @@ describe('TelInput', () => {
     renderedComponent = ReactTestUtils.renderIntoDocument(
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
         fieldName={'telephone'}
+        fieldId={'telephone-id'}
         defaultCountry={'tw'}
         value={'0999 123 456'}
         utilsScript={'../example/assets/libphonenumber.js'}
@@ -44,6 +45,10 @@ describe('TelInput', () => {
 
   it('Set fieldName as "telephone"', () => {
     assert(inputComponent.props.fieldName === 'telephone');
+  });
+
+  it('Set fieldId as "telephone-id"', () => {
+    assert(inputComponent.props.fieldId === 'telephone-id');
   });
 
   it('onPhoneNumberChange without utilsScript', () => {

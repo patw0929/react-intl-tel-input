@@ -11,6 +11,7 @@ export default class IntlTelInputApp extends Component {
   static defaultProps = {
     css: ['intl-tel-input', ''],
     fieldName: '',
+    fieldId: '',
     value: '',
     // define the countries that'll be present in the dropdown
     // defaults to the data defined in `AllCountries`
@@ -47,6 +48,7 @@ export default class IntlTelInputApp extends Component {
   static propTypes = {
     css: PropTypes.arrayOf(PropTypes.string),
     fieldName: PropTypes.string,
+    fieldId: PropTypes.string,
     value: PropTypes.string,
     countriesData: PropTypes.arrayOf(PropTypes.array),
     allowExtensions: PropTypes.bool,
@@ -1145,6 +1147,7 @@ export default class IntlTelInputApp extends Component {
           disabled={this.state.telInput.disabled}
           readonly={this.state.telInput.readonly}
           fieldName={this.props.fieldName}
+          fieldId={this.props.fieldId}
           value={this.state.telInput.value}
         />
       </div>
