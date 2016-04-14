@@ -20,7 +20,7 @@ class TelInput extends Component {
         disabled={this.props.disabled ? 'disabled' : false}
         readOnly={this.props.readonly ? 'readonly' : false}
         name={this.props.fieldName}
-        name={this.props.fieldId}
+        id={this.props.fieldId}
         value={this.props.value}
         onChange={this.props.handleInputChange}
         onKeyPress={this.props.handleKeyPress}
