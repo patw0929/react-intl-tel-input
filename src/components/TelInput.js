@@ -6,6 +6,7 @@ class TelInput extends Component {
     disabled: PropTypes.bool,
     readonly: PropTypes.bool,
     fieldName: PropTypes.string,
+    fieldId: PropTypes.string,
     value: PropTypes.string,
     handleInputChange: PropTypes.func,
     handleKeyPress: PropTypes.func,
@@ -19,6 +20,7 @@ class TelInput extends Component {
         disabled={this.props.disabled ? 'disabled' : false}
         readOnly={this.props.readonly ? 'readonly' : false}
         name={this.props.fieldName}
+        name={this.props.fieldId}
         value={this.props.value}
         onChange={this.props.handleInputChange}
         onKeyPress={this.props.handleKeyPress}
