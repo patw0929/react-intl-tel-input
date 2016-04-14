@@ -7,7 +7,7 @@ import sinon from 'sinon';
 import fs from 'fs';
 import { assert } from 'chai';
 
-describe.only('TelInput', () => {
+describe('TelInput', () => {
   let renderedComponent;
   let inputComponent;
   let libphonenumberUtils;
