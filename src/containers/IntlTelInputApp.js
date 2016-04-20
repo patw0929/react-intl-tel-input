@@ -586,14 +586,12 @@ export default class IntlTelInputApp extends Component {
       if (request.status >= 200 && request.status < 400) {
         const data = request.responseText;
 
-        if (data) {
-          if (window.execScript) {
-            window.execScript(data);
-          } else {
-            /* eslint-disable */
-            window.eval(data);
-            /* eslint-enable */
-          }
+        if (data && !document.getElementById('intlTelInputUtils')) {
+          const oBody = document.getElementsByTagName('body')[0];
+          const oScript = document.createElement('script');
+          oScript.id = 'intlTelInputUtils';
+          oScript.text = data;
+          oBody.appendChild(oScript);
         }
 
         this.utilsScriptDeferred.resolve();

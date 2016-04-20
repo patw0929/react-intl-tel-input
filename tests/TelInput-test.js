@@ -1,3 +1,4 @@
+/* eslint-disable no-eval */
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import ReactTestUtils from 'react-addons-test-utils';
@@ -13,6 +14,7 @@ describe('TelInput', () => {
   let libphonenumberUtils;
   let xhr;
   let requests;
+  let getScript;
 
   beforeEach('Render element', () => {
     libphonenumberUtils = fs.readFileSync('./example/assets/libphonenumber.js', 'utf8');
@@ -22,6 +24,9 @@ describe('TelInput', () => {
     xhr.onCreate = (x) => {
       requests.push(x);
     };
+
+    getScript = () =>
+      document.getElementsByTagName('script')[0];
 
     renderedComponent = ReactTestUtils.renderIntoDocument(
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
@@ -78,6 +83,7 @@ describe('TelInput', () => {
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
       libphonenumberUtils);
+    window.eval(getScript().text);
 
     assert(inputComponent.props.value === '0999 123 456');
   });
@@ -122,6 +128,7 @@ describe('TelInput', () => {
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
       libphonenumberUtils);
+    window.eval(getScript().text);
 
     ReactTestUtils.Simulate.keyPress(findDOMNode(inputComponent), {
       key: 'a',
@@ -135,6 +142,7 @@ describe('TelInput', () => {
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
       libphonenumberUtils);
+    window.eval(getScript().text);
 
     const len = findDOMNode(inputComponent).value.length;
     findDOMNode(inputComponent).focus();
@@ -154,6 +162,7 @@ describe('TelInput', () => {
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
       libphonenumberUtils);
+    window.eval(getScript().text);
 
     const parent = ReactTestUtils.renderIntoDocument(
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
@@ -210,6 +219,7 @@ describe('TelInput', () => {
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
       libphonenumberUtils);
+    window.eval(getScript().text);
 
     renderedComponent.componentWillReceiveProps({
       value: '+886912345678',
@@ -221,6 +231,7 @@ describe('TelInput', () => {
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
       libphonenumberUtils);
+    window.eval(getScript().text);
 
     assert(typeof window.intlTelInputUtils === 'object');
     assert(typeof window.intlTelInputUtils.isValidNumber === 'function');
@@ -230,6 +241,7 @@ describe('TelInput', () => {
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
       libphonenumberUtils);
+    window.eval(getScript().text);
 
     let expected = '';
     const onPhoneNumberChange = (isValid, newNumber, countryData, formatted) => {
