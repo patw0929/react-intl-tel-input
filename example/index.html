@@ -141,6 +141,11 @@ ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
                 <td>Value.</td>
               </tr>
               <tr>
+                <th scope="row">preprocessValue</th>
+                <td><code>null</code></td>
+                <td>Function callback that can preprocess the `value` while you type. Takes a string, and returns a new string.</td>
+              </tr>
+              <tr>
                 <th scope="row">fieldName</th>
                 <td><code>''</code></td>
                 <td>It's used as `input` field `name` attribute.</td>

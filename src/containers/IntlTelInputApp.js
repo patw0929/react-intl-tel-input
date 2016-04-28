@@ -13,6 +13,8 @@ export default class IntlTelInputApp extends Component {
     fieldName: '',
     fieldId: '',
     value: '',
+    // preprocess input value before setting state, any normalization can be done here
+    preprocessValue: null,
     // define the countries that'll be present in the dropdown
     // defaults to the data defined in `AllCountries`
     countriesData: null,
@@ -50,6 +52,7 @@ export default class IntlTelInputApp extends Component {
     fieldName: PropTypes.string,
     fieldId: PropTypes.string,
     value: PropTypes.string,
+    preprocessValue: PropTypes.func,
     countriesData: PropTypes.arrayOf(PropTypes.array),
     allowExtensions: PropTypes.bool,
     autoFormat: PropTypes.bool,
@@ -872,6 +875,10 @@ export default class IntlTelInputApp extends Component {
     } else {
       // no autoFormat, so just insert the original value
       formatted = val;
+    }
+
+    if (typeof this.props.preprocessValue === 'function') {
+      formatted = this.props.preprocessValue(formatted);
     }
 
     this.setState({
