@@ -393,7 +393,7 @@ export default class IntlTelInputApp extends Component {
     // if there is a number, and it's valid, we can go ahead and set the flag,
     // else fall back to default
     if (this.getDialCode(val)) {
-      this.updateFlagFromNumber(val);
+      this.updateFlagFromNumber(val, false);
     } else if (this.tempCountry !== 'auto') {
       // check the defaultCountry option, else fall back to the first in the list
       let defaultCountry = this.tempCountry;
@@ -455,7 +455,7 @@ export default class IntlTelInputApp extends Component {
   }
 
   // check if need to select a new flag based on the given number
-  updateFlagFromNumber(number) {
+  updateFlagFromNumber(number, setFocus = true) {
     // if we're in nationalMode and we're on US/Canada,
     // make sure the number starts with a +1 so getDialCode
     // will be able to extract the area code
@@ -506,7 +506,7 @@ export default class IntlTelInputApp extends Component {
 
     if (countryCode !== null && countryCode !== '' &&
       this.state.countryCode !== countryCode) {
-      this.selectFlag(countryCode);
+      this.selectFlag(countryCode, setFocus);
     }
   }
 
