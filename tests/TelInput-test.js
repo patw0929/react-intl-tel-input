@@ -98,6 +98,31 @@ describe('TelInput', () => {
     assert(inputComponent.props.value === '12345');
   });
 
+
+  it('Not focused on render', () => {
+    const initialSelectFlag = IntlTelInput.prototype.selectFlag;
+
+    let focused = false;
+
+    IntlTelInput.prototype.selectFlag = function selectFlag(countryCode, setFocus = true) {
+      focused = focused || setFocus;
+      initialSelectFlag.call(this, countryCode, setFocus);
+    };
+
+    const parent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        value="+886901234567"
+        preferredCountries={['kr', 'jp', 'tw']}
+        utilsScript={'../example/assets/libphonenumber.js'}
+      />
+    );
+
+    IntlTelInput.prototype.selectFlag = initialSelectFlag;
+    assert(!focused, 'the input should not have been focused');
+  });
+
+
   it('Preferred countries', () => {
     const parent = ReactTestUtils.renderIntoDocument(
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
