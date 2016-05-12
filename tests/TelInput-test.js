@@ -109,15 +109,6 @@ describe('TelInput', () => {
       initialSelectFlag.call(this, countryCode, setFocus);
     };
 
-    const parent = ReactTestUtils.renderIntoDocument(
-      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
-        fieldName={'telephone'}
-        value="+886901234567"
-        preferredCountries={['kr', 'jp', 'tw']}
-        utilsScript={'../example/assets/libphonenumber.js'}
-      />
-    );
-
     IntlTelInput.prototype.selectFlag = initialSelectFlag;
     assert(!focused, 'the input should not have been focused');
   });
