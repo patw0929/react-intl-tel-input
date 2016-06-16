@@ -3,41 +3,22 @@
 
 // Array of country objects for the flag dropdown.
 // Each contains a name, country code (ISO 3166-1 alpha-2) and dial code.
+
 // Originally from https://github.com/mledoze/countries
-// then modified using the following JavaScript (NOW OUT OF DATE):
-
-/*
-var result = [];
-_.each(countries, function(c) {
-  // ignore countries without a dial code
-  if (c.callingCode[0].length) {
-    result.push({
-      // var locals contains country names with localised versions in brackets
-      n: _.findWhere(locals, {
-        countryCode: c.cca2
-      }).name,
-      i: c.cca2.toLowerCase(),
-      d: c.callingCode[0]
-    });
-  }
-});
-JSON.stringify(result);
-*/
-
 // then with a couple of manual re-arrangements to be alphabetical
 // then changed Kazakhstan from +76 to +7
 // and Vatican City from +379 to +39 (see issue 50)
 // and Caribean Netherlands from +5997 to +599
 // and Curacao from +5999 to +599
-// Removed: Kosovo, Pitcairn Islands, South Georgia
+// Removed:  Kosovo, Pitcairn Islands, South Georgia
 
 // UPDATE Sept 12th 2015
 // List of regions that have iso2 country codes, which I have chosen to omit:
 // (based on this information: https://en.wikipedia.org/wiki/List_of_country_calling_codes)
-// AQ - Antarctica - all different country codes depending on which "base"
+// AQ - Antarctica - all different country codes depending on which 'base'
 // BV - Bouvet Island - no calling code
 // GS - South Georgia and the South Sandwich Islands -
-//      "inhospitable collection of islands" - same flag and calling code as Falkland Islands
+// 'inhospitable collection of islands' - same flag and calling code as Falkland Islands
 // HM - Heard Island and McDonald Islands - no calling code
 // PN - Pitcairn - tiny population (56), same calling code as New Zealand
 // TF - French Southern Territories - no calling code
@@ -61,7 +42,6 @@ JSON.stringify(result);
 //    Order (if >1 country with same dial code),
 //    Area codes (if >1 country with same dial code)
 // ]
-
 const defaultCountriesData = [
   [
     'Afghanistan (‫افغانستان‬‎)',
@@ -249,10 +229,13 @@ const defaultCountriesData = [
     'ca',
     '1',
     1,
-    ['204', '226', '236', '249', '250', '289', '306', '343', '365', '387', '403',
-     '416', '418', '431', '437', '438', '450', '506', '514', '519', '548', '579',
-     '581', '587', '604', '613', '639', '647', '672', '705', '709', '742', '778',
-     '780', '782', '807', '819', '825', '867', '873', '902', '905'],
+    ['204', '226', '236', '249', '250', '289',
+     '306', '343', '365', '387', '403', '416',
+     '418', '431', '437', '438', '450', '506',
+     '514', '519', '548', '579', '581', '587',
+     '604', '613', '639', '647', '672', '705',
+     '709', '742', '778', '780', '782', '807',
+     '819', '825', '867', '873', '902', '905'],
   ],
   [
     'Cape Verde (Kabu Verdi)',
@@ -641,6 +624,11 @@ const defaultCountriesData = [
     'Kiribati',
     'ki',
     '686',
+  ],
+  [
+    'Kosovo',
+    'xk',
+    '383',
   ],
   [
     'Kuwait (‫الكويت‬‎)',
