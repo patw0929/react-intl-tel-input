@@ -1,24 +1,29 @@
 // rgba is needed for the selected flag hover state to blend in with
 // the border-highlighting some browsers give the input on focus
-$hoverColor: rgba(0, 0, 0, 0.05);
-$greyText: #999;
-$greyBorder: #CCC;
+$hoverColor: rgba(0, 0, 0, 0.05) !default;
+$greyText: #999 !default;
+$greyBorder: #CCC !default;
 
-$flagHeight: 15px;
-$flagWidth: 20px;
-$flagPadding: 8px;
+$flagHeight: 15px !default;
+$flagWidth: 20px !default;
+$flagPadding: 8px !default;
 // this border width is used for the popup and divider, but it is also
 // assumed to be the border width of the input, which we do not control
-$borderWidth: 1px;
+$borderWidth: 1px !default;
 
-$arrowHeight: 4px;
-$arrowWidth: 6px;
-$triangleBorder: 3px;
-$arrowPadding: 4px;
-$arrowColor: #555;
+$arrowHeight: 4px !default;
+$arrowWidth: 6px !default;
+$triangleBorder: 3px !default;
+$arrowPadding: 6px !default;
+$arrowColor: #555 !default;
 
-$inputPadding: 6px;
-$selectedFlagWidth: $flagWidth + $flagPadding + $arrowWidth + (2 * $arrowPadding);
+$inputPadding: 6px !default;
+$selectedFlagWidth: $flagWidth + (2 * $flagPadding) !default;
+$selectedFlagArrowWidth: $flagWidth + $flagPadding + $arrowWidth + (2 * $arrowPadding) !default;
+$selectedFlagArrowDialCodeWidth: $selectedFlagArrowWidth + $flagPadding !default;
+
+// enough space for them to click off to close
+$mobilePopupMargin: 30px;
 
 
 .intl-tel-input {
@@ -60,44 +65,21 @@ $selectedFlagWidth: $flagWidth + $flagPadding + $arrowWidth + (2 * $arrowPadding
     // make space for the selected flag
     // Note: no !important here, as the user may want to tweak this so that the
     // perceived input padding matches their existing styles
-    padding-left: $selectedFlagWidth + $inputPadding;
+    padding-right: $selectedFlagWidth;
 
-    // any margin-left here will push the selected-flag away
-    margin-left: 0;
-
-    // when user presses invalid key, we add a class which instantly adds a bg color,
-    // then when we remove that class, this does a quick fade back to no bg
-    transition: background-color 100ms ease-out;
-  }
-  // when user presses invalid key, add this class temporarily to change bg color
-  input.iti-invalid-key {
-    // override the default transition state to show the change instantly
-    transition: background-color 0;
-    background-color: #FFC7C7;
+    // any margin-right here will push the selected-flag away
+    margin-right: 0;
   }
 
-  .flag-dropdown {
+  .flag-container {
     // positioned over the top of the input
     position: absolute;
     // full height
     top: 0;
     bottom: 0;
+    right: 0;
     // prevent the highlighted child from overlapping the input border
     padding: $borderWidth;
-  }
-  // hover state - show flag is clickable
-  .flag-dropdown:hover {
-    cursor: pointer;
-    .selected-flag {
-      background-color: $hoverColor;
-    }
-  }
-  // disable hover state when input is disabled
-  input[disabled] + .flag-dropdown:hover, input[readonly] + .flag-dropdown:hover {
-    cursor: default;
-    .selected-flag {
-      background-color: transparent;
-    }
   }
 
   .selected-flag {
@@ -118,7 +100,7 @@ $selectedFlagWidth: $flagWidth + $flagPadding + $arrowWidth + (2 * $arrowPadding
       margin: auto;
     }
 
-    .arrow {
+    .iti-arrow {
       position: absolute;
       // split the difference between the flag and the arrow height to verically center
       top: 50%;
@@ -141,14 +123,23 @@ $selectedFlagWidth: $flagWidth + $flagPadding + $arrowWidth + (2 * $arrowPadding
 
   // the dropdown
   .country-list {
-    // override default list styles
-    list-style: none;
     position: absolute;
     // popup so render above everything else
     z-index: 2;
 
-    // inline flags
-    .flag {
+    // override default list styles
+    list-style: none;
+    // in case any container has text-align:center
+    text-align: left;
+
+    // place menu above the input element
+    &.dropup {
+      bottom: 100%;
+      margin-bottom: (-$borderWidth);
+    }
+
+    // dropdown flags need consistent width, so wrap in a container
+    .flag-box {
       display: inline-block;
       width: $flagWidth;
     }
@@ -178,7 +169,7 @@ $selectedFlagWidth: $flagWidth + $flagPadding + $arrowWidth + (2 * $arrowPadding
       border-bottom: $borderWidth solid $greyBorder;
     }
 
-    // each country item in dropdown
+    // each country item in dropdown (we must have separate class to differentiate from dividers)
     .country {
       // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes will overlap, and also looks bad if one country overflows onto 2 lines
       padding: 5px 10px;
@@ -192,28 +183,108 @@ $selectedFlagWidth: $flagWidth + $flagPadding + $arrowWidth + (2 * $arrowPadding
     }
 
     // spacing between country flag, name and dial code
-    .flag, .country-name, .dial-code {
+    .flag-box, .country-name, .dial-code {
       vertical-align: middle;
     }
-    .flag, .country-name {
+    .flag-box, .country-name {
       margin-right: 6px;
     }
   }
 
-  // on mobiles we use a select for the country dropdown
-  select {
+  &.allow-dropdown {
+    input, input[type=text], input[type=tel] {
+      padding-right: $inputPadding;
+      padding-left: $selectedFlagArrowWidth + $inputPadding;
+      margin-left: 0;
+    }
+    .flag-container {
+      right: auto;
+      left: 0;
+    }
+    .selected-flag {
+      width: $selectedFlagArrowWidth;
+    }
+
+    // hover state - show flag is clickable
+    .flag-container:hover {
+      cursor: pointer;
+      .selected-flag {
+        background-color: $hoverColor;
+      }
+    }
+    // disable hover state when input is disabled
+    input[disabled] + .flag-container:hover, input[readonly] + .flag-container:hover {
+      cursor: default;
+      .selected-flag {
+        background-color: transparent;
+      }
+    }
+
+    &.separate-dial-code {
+      .selected-flag {
+        // now that we have digits in this section, it needs this visual separation
+        background-color: $hoverColor;
+        // for vertical centering
+        display: table;
+      }
+      .selected-dial-code {
+        // for vertical centering
+        display: table-cell;
+        vertical-align: middle;
+
+        padding-left: $flagWidth + $flagPadding;
+      }
+
+      // .iti-sdc is for Separate Dial Code, with lengths from 2-5 because shortest is "+1", longest is "+1684"
+      $charLength: 8px;
+      @for $i from 2 through 5 {
+        &.iti-sdc-#{$i} {
+          input, input[type=text], input[type=tel] {
+            padding-left: $selectedFlagArrowDialCodeWidth + $inputPadding + ($i * $charLength);
+          }
+          .selected-flag {
+            width: $selectedFlagArrowDialCodeWidth + ($i * $charLength);
+          }
+        }
+      }
+    }
+  }
+
+  // if dropdownContainer option is set, increase z-index to prevent display issues
+  &.iti-container {
     position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: $selectedFlagWidth;
-    height: 100%;
-    opacity: 0;
+    top: -1000px;
+    left: -1000px;
+    // higher than default Bootstrap modal z-index of 1050
+    z-index: 1060;
+    // to keep styling consistent with .flag-container
+    padding: $borderWidth;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
 
-
+// overrides for mobile popup
+.iti-mobile .intl-tel-input {
+  &.iti-container {
+    top: $mobilePopupMargin;
+    bottom: $mobilePopupMargin;
+    left: $mobilePopupMargin;
+    right: $mobilePopupMargin;
+    position: fixed;
+  }
+  .country-list {
+    max-height: 100%;
+    width: 100%;
+    .country {
+      padding: 10px 10px;
+      // increase line height because dropdown copy is v likely to overflow on mobile and when it does it needs to be well spaced
+      line-height: 1.5em;
+    }
+  }
+}
 
 
 
@@ -228,10 +299,8 @@ $selectedFlagWidth: $flagWidth + $flagPadding + $arrowWidth + (2 * $arrowPadding
   // empty state
   background-color: #DBDBDB;
   background-position: $flagWidth 0;
-}
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-  .iti-flag {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
     background-image: url("../images/flags@2x.png");
   }
 }
