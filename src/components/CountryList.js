@@ -3,15 +3,14 @@ import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import utils from './utils';
 
-
 function partial(fn, ...args) {
   return fn.bind(fn, ...args);
 }
 
 class CountryList extends Component {
   static propTypes = {
-    isMobile: PropTypes.bool,
-    selectFlag: PropTypes.func,
+    dropdownContainer: PropTypes.string,
+    setFlag: PropTypes.func,
     countries: PropTypes.array,
     inputTop: PropTypes.number,
     inputOuterHeight: PropTypes.number,
@@ -24,14 +23,13 @@ class CountryList extends Component {
   constructor() {
     super();
     this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleChangeCountry = this.handleChangeCountry.bind(this);
-    this.selectFlag = this.selectFlag.bind(this);
+    this.setFlag = this.setFlag.bind(this);
     this.appendListItem = this.appendListItem.bind(this);
     this.setDropdownPosition = this.setDropdownPosition.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.showDropdown && !nextProps.isMobile) {
+    if (nextProps.showDropdown) {
       findDOMNode(this.refs.listElement).setAttribute('class', 'country-list v-hide');
       this.setDropdownPosition();
     }
@@ -42,6 +40,9 @@ class CountryList extends Component {
   }
 
   setDropdownPosition() {
+    utils.removeClass(
+      findDOMNode(this.refs.listElement), 'hide');
+
     const inputTop = this.props.inputTop;
     const windowTop = (window.pageYOffset !== undefined) ?
       window.pageYOffset :
@@ -61,20 +62,14 @@ class CountryList extends Component {
     findDOMNode(this.refs.listElement).setAttribute('class', 'country-list');
   }
 
+  setFlag(iso2) {
+    this.props.setFlag(iso2);
+  }
+
   appendListItem(countries, className) {
     const preferredCountriesCount = this.props.preferredCountries.length;
 
     return countries.map((country, index) => {
-      if (this.props.isMobile) {
-        return (
-          <option key={`country-${index}`}
-            data-dial-code={country.dialCode} value={country.iso2}
-          >
-            {`${country.name} +${country.dialCode}`}
-          </option>
-        );
-      }
-
       const actualIndex = (className === 'preferred') ? index : index + preferredCountriesCount;
       const countryClassObj = {
         country: true,
@@ -90,9 +85,9 @@ class CountryList extends Component {
           data-dial-code={country.dialCode}
           data-country-code={country.iso2}
           onMouseOver={this.handleMouseOver}
-          onClick={partial(this.selectFlag, country.iso2)}
+          onClick={partial(this.setFlag, country.iso2)}
         >
-          <div ref="selectedFlag" className="flag">
+          <div ref="selectedFlag" className="flag-box">
             <div ref="selectedFlagInner" className={`iti-flag ${country.iso2}`}></div>
           </div>
 
@@ -103,19 +98,11 @@ class CountryList extends Component {
     });
   }
 
-  selectFlag(iso2) {
-    this.props.selectFlag(iso2);
-  }
-
   handleMouseOver(e) {
     if (e.currentTarget.getAttribute('class').indexOf('country') > -1) {
       const selectedIndex = utils.retrieveLiIndex(e.currentTarget);
       this.props.changeHighlightCountry(true, selectedIndex);
     }
-  }
-
-  handleChangeCountry(e) {
-    this.selectFlag(e.target.value);
   }
 
   render() {
@@ -128,16 +115,6 @@ class CountryList extends Component {
       hide: !this.props.showDropdown,
     });
     let divider = undefined;
-
-    if (this.props.isMobile) {
-      options = this.appendListItem(countries, '');
-
-      return (
-        <select className="iti-mobile-select" onChange={this.handleChangeCountry}>
-          {options}
-        </select>
-      );
-    }
 
     if (preferredCountries.length) {
       preferredOptions = this.appendListItem(preferredCountries, 'preferred');

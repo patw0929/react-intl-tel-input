@@ -1,16 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import CountryList from './CountryList';
+import RootModal from './RootModal';
 import utils from './utils';
 
 class FlagDropDown extends Component {
   static propTypes = {
+    allowDropdown: PropTypes.bool,
+    dropdownContainer: PropTypes.string,
+    separateDialCode: PropTypes.bool,
+    dialCode: PropTypes.string,
     countryCode: PropTypes.string,
     showDropdown: PropTypes.bool,
     clickSelectedFlag: PropTypes.func,
     handleSelectedFlagKeydown: PropTypes.func,
     isMobile: PropTypes.bool,
-    selectFlag: PropTypes.func,
+    setFlag: PropTypes.func,
     countries: PropTypes.array,
     inputTop: PropTypes.number,
     inputOuterHeight: PropTypes.number,
@@ -30,9 +35,19 @@ class FlagDropDown extends Component {
     const titleTip = (selectedCountryData) ?
       `${selectedCountryData.name}: +${selectedCountryData.dialCode}` : 'Unknown';
     const arrowClass = classNames({
-      arrow: true,
+      'iti-arrow': true,
       up: this.props.showDropdown,
     });
+    let genSelectedDialCode = () => '';
+    if (this.props.separateDialCode) {
+      genSelectedDialCode = () =>
+        <div className="selected-dial-code">{this.props.dialCode}</div>;
+    }
+    let genArrow = () => '';
+    if (this.props.allowDropdown) {
+      genArrow = () =>
+        <div className={arrowClass}></div>;
+    }
 
     if (this.props.countryCode) {
       flagClassObj[this.props.countryCode] = true;
@@ -40,27 +55,54 @@ class FlagDropDown extends Component {
 
     flagClass = classNames(flagClassObj);
 
-    return (
-      <div className="flag-dropdown">
-        <div className="selected-flag" tabIndex="0"
-          onClick={this.props.clickSelectedFlag}
-          onKeyDown={this.props.handleSelectedFlagKeydown}
-          title={titleTip}
-        >
-          <div className={flagClass}></div>
-          <div className={arrowClass}></div>
-        </div>
+    let genCountryList = () => '';
+    if (this.props.dropdownContainer) {
+      if (this.props.showDropdown) {
+        genCountryList = () =>
+          <RootModal>
+            <CountryList ref="countryList"
+              dropdownContainer={this.props.dropdownContainer}
+              isMobile={this.props.isMobile}
+              showDropdown={this.props.showDropdown}
+              setFlag={this.props.setFlag}
+              countries={this.props.countries}
+              inputTop={this.props.inputTop}
+              inputOuterHeight={this.props.inputOuterHeight}
+              preferredCountries={this.props.preferredCountries}
+              highlightedCountry={this.props.highlightedCountry}
+              changeHighlightCountry={this.props.changeHighlightCountry}
+            />
+          </RootModal>;
+      }
+    } else {
+      genCountryList = () =>
         <CountryList ref="countryList"
+          dropdownContainer={this.props.dropdownContainer}
           isMobile={this.props.isMobile}
           showDropdown={this.props.showDropdown}
-          selectFlag={this.props.selectFlag}
+          setFlag={this.props.setFlag}
           countries={this.props.countries}
           inputTop={this.props.inputTop}
           inputOuterHeight={this.props.inputOuterHeight}
           preferredCountries={this.props.preferredCountries}
           highlightedCountry={this.props.highlightedCountry}
           changeHighlightCountry={this.props.changeHighlightCountry}
-        />
+        />;
+    }
+
+    return (
+      <div className="flag-container">
+        <div className="selected-flag"
+          tabIndex={this.props.allowDropdown ? '0' : ''}
+          onClick={this.props.clickSelectedFlag}
+          onKeyDown={this.props.handleSelectedFlagKeydown}
+          title={titleTip}
+        >
+          <div className={flagClass}></div>
+          {genSelectedDialCode()}
+          {genArrow()}
+        </div>
+        {genCountryList()}
       </div>
     );
   }
