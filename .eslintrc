@@ -3,6 +3,7 @@
   "extends": "airbnb",
   "rules": {
     "no-param-reassign": 0,
+    "react/sort-comp": 0,
   },
   "env": {
     "browser": true,
