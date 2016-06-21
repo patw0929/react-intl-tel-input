@@ -31,8 +31,6 @@ export default class IntlTelInputApp extends Component {
     formatOnInit: true,
     // display the country dial code next to the selected flag so it's not part of the typed number
     separateDialCode: false,
-    // allow placeholder number suggestion to be processed before it is set in the field
-    preprocessPlaceholder: null,
     // default country
     defaultCountry: '',
     // geoIp lookup function
@@ -67,7 +65,6 @@ export default class IntlTelInputApp extends Component {
     excludeCountries: PropTypes.arrayOf(PropTypes.string),
     formatOnInit: PropTypes.bool,
     separateDialCode: PropTypes.bool,
-    preprocessPlaceholder: PropTypes.func,
     defaultCountry: PropTypes.string,
     geoIpLookup: PropTypes.func,
     nationalMode: PropTypes.bool,
@@ -776,25 +773,6 @@ export default class IntlTelInputApp extends Component {
         this.props.onSelectFlag(this.selectedCountryData);
       }
     });
-  }
-
-  // update the input placeholder to an example number from the currently selected country
-  updatePlaceholder() {
-    if (window.intlTelInputUtils && !this.hadInitialPlaceholder &&
-      this.props.autoPlaceholder && this.selectedCountryData) {
-      const iso2 = this.selectedCountryData.iso2;
-      const numberType = window.intlTelInputUtils.numberType[this.props.numberType || 'FIXED_LINE'];
-      let placeholder = (iso2) ?
-        window.intlTelInputUtils.getExampleNumber(iso2, this.props.nationalMode, numberType) : '';
-
-      if (typeof this.props.preprocessPlaceholder === 'function') {
-        placeholder = this.props.preprocessPlaceholder(placeholder, iso2);
-      }
-
-      this.setState({
-        placeholder,
-      });
-    }
   }
 
   handleOnBlur() {
