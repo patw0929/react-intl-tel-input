@@ -58,8 +58,8 @@ describe('TelInput', () => {
 
   it('onPhoneNumberChange without utilsScript', () => {
     let expected = '';
-    const onPhoneNumberChange = (isValid, newNumber, countryData, formatted) => {
-      expected = `${isValid},${newNumber},${countryData.iso2},${formatted}`;
+    const onPhoneNumberChange = (isValid, newNumber, countryData, fullNumber, ext) => {
+      expected = `${isValid},${newNumber},${countryData.iso2},${fullNumber},${ext}`;
     };
 
     const parent = ReactTestUtils.renderIntoDocument(
@@ -76,7 +76,7 @@ describe('TelInput', () => {
     );
 
     ReactTestUtils.Simulate.change(findDOMNode(input), { target: { value: '+886911222333' } });
-    assert(expected === 'false,+886911222333,tw,false');
+    assert(expected === 'false,+886911222333,tw,+886911222333,');
   });
 
   it('Set value as "0999 123 456"', () => {
@@ -232,10 +232,10 @@ describe('TelInput', () => {
       libphonenumberUtils);
     window.eval(getScript().text);
 
-    renderedComponent.componentWillReceiveProps({
+    renderedComponent.setState({
       value: '+886912345678',
     });
-    assert(findDOMNode(inputComponent).value === '0912 345 678');
+    assert(findDOMNode(inputComponent).value === '+886912345678');
   });
 
   it('utils loaded', () => {
@@ -274,6 +274,6 @@ describe('TelInput', () => {
     );
 
     ReactTestUtils.Simulate.change(findDOMNode(input), { target: { value: '+886911222333' } });
-    assert(expected === 'true,+886911222333,tw,,');
+    assert(expected === 'true,+886911222333,tw,+886 911 222 333,null');
   });
 });

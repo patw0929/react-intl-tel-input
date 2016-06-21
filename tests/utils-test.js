@@ -1,3 +1,4 @@
+import AllCountries from '../src/components/AllCountries';
 import utils from '../src/components/utils';
 import jsdom from 'jsdom';
 import { assert } from 'chai';
@@ -97,10 +98,11 @@ describe('utils', () => {
       priority: 0,
       areaCodes: null,
     };
-    assert.deepEqual(utils.getCountryData('tw'), result);
+    assert.deepEqual(utils.getCountryData(AllCountries.getCountries(), 'tw'), result);
 
-    assert(utils.getCountryData('zz', true) === null);
-    assert.deepEqual(utils.getCountryData('zz', false, (country) => `${country}!!`), {});
+    assert(utils.getCountryData(AllCountries.getCountries(), 'zz', true, true) === null);
+    assert.deepEqual(utils.getCountryData(AllCountries.getCountries(),
+      'zz', false, false, (country) => `${country}!!`), {});
   });
 
   it('hasClass', () => {

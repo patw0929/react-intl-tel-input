@@ -168,7 +168,7 @@ describe('FlagDropDown', () => {
       which: 38,
     });
     document.dispatchEvent(pressUpEvent);
-    assert(renderedComponent.state.highlightedCountry === 211);
+    assert(renderedComponent.state.highlightedCountry === 212);
 
     const pressEnterEvent = new window.KeyboardEvent('keydown', {
       bubbles: true,
@@ -339,13 +339,6 @@ describe('FlagDropDown', () => {
       'country-list'
     );
 
-    assert.deepEqual(expected, {
-      name: 'Taiwan (台灣)',
-      iso2: 'tw',
-      dialCode: '886',
-      priority: 0,
-      areaCodes: null,
-    });
     ReactTestUtils.Simulate.click(findDOMNode(parentFlagComponent));
     const japanOption = findDOMNode(
       parentDropDownComponent).querySelector('[data-country-code="jp"]');
