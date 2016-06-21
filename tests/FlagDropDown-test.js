@@ -277,14 +277,14 @@ describe('FlagDropDown', () => {
     assert(renderedComponent.state.countryCode === 'jp');
   });
 
-  it('preprocessPlaceholder', () => {
+  it('customPlaceholder', () => {
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
       libphonenumberUtils);
 
     let expected = '';
-    const preprocessPlaceholder = (placeholder, iso2) => {
-      expected = `${placeholder},${iso2}`;
+    const customPlaceholder = (placeholder, countryData) => {
+      expected = `${placeholder},${countryData.iso2}`;
     };
 
     const parent = ReactTestUtils.renderIntoDocument(
@@ -292,7 +292,7 @@ describe('FlagDropDown', () => {
         fieldName={'telephone'}
         defaultCountry={'tw'}
         utilsScript={'../example/assets/libphonenumber.js'}
-        preprocessPlaceholder={preprocessPlaceholder}
+        customPlaceholder={customPlaceholder}
       />
     );
 
