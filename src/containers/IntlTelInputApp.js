@@ -395,7 +395,7 @@ export default class IntlTelInputApp extends Component {
     // build instance country array
     this.countries = [];
     for (i = 0; i < AllCountries.getCountries().length; i++) {
-      if (processFunc(AllCountries.getCountries()[i].iso2.indexOf(countryArray))) {
+      if (processFunc(countryArray.indexOf(AllCountries.getCountries()[i].iso2))) {
         this.countries.push(AllCountries.getCountries()[i]);
       }
     }
