@@ -75,12 +75,6 @@ describe('utils', () => {
     assert(utils.getNumeric(str) === '1000');
   });
 
-  it('getClean', () => {
-    const str = '++886912345678';
-
-    assert(utils.getClean(str) === '+886912345678');
-  });
-
   it('startsWith', () => {
     const str = 'Hello World';
 
@@ -139,22 +133,5 @@ describe('utils', () => {
     utils.removeClass(element, 'abc');
 
     assert(element.classList.contains('abc') === false);
-  });
-
-  it('getDigitsOnRight', () => {
-    const str = '0912 345 678';
-    assert(utils.getDigitsOnRight(str, 5) === 6);
-  });
-
-  it('getCursorFromLeftChar', () => {
-    const str = '0912 345 678';
-    assert(utils.getCursorFromLeftChar(str, 5, 4) === 4);
-    assert(utils.getCursorFromLeftChar('', 5, 4) === 0);
-  });
-
-  it('getCursorFromDigitsOnRight', () => {
-    const str = '0912 345 678';
-    assert(utils.getCursorFromDigitsOnRight(str, 7) === 3);
-    assert(utils.getCursorFromDigitsOnRight(str, 20) === 0);
   });
 });

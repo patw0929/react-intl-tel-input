@@ -149,20 +149,6 @@ describe('TelInput', () => {
     assert(parent.state.countryCode === 'af');
   });
 
-  it('Invalid key', () => {
-    requests[0].respond(200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
-    window.eval(getScript().text);
-
-    ReactTestUtils.Simulate.keyPress(findDOMNode(inputComponent), {
-      key: 'a',
-      keyCode: 65,
-      which: 65,
-    });
-    assert(findDOMNode(inputComponent).classList.contains('iti-invalid-key'));
-  });
-
   it('handleKeyUp', () => {
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
@@ -218,7 +204,7 @@ describe('TelInput', () => {
     ReactTestUtils.Simulate.change(findDOMNode(input), {
       target: { value: '+886 999 111 222' },
     });
-    assert(parent.state.telInput.value === '+886 999 111 222');
+    assert(parent.state.value === '+886 999 111 222');
   });
 
   it('Disabled nationalMode and input phone number', () => {
@@ -269,8 +255,8 @@ describe('TelInput', () => {
     window.eval(getScript().text);
 
     let expected = '';
-    const onPhoneNumberChange = (isValid, newNumber, countryData, formatted) => {
-      expected = `${isValid},${newNumber},${countryData.iso2},${formatted}`;
+    const onPhoneNumberChange = (isValid, newNumber, countryData, fullNumber, ext) => {
+      expected = `${isValid},${newNumber},${countryData.iso2},${fullNumber},${ext}`;
     };
 
     const parent = ReactTestUtils.renderIntoDocument(
@@ -288,6 +274,6 @@ describe('TelInput', () => {
     );
 
     ReactTestUtils.Simulate.change(findDOMNode(input), { target: { value: '+886911222333' } });
-    assert(expected === 'true,+886911222333,tw,+886911222333');
+    assert(expected === 'true,+886911222333,tw,,');
   });
 });

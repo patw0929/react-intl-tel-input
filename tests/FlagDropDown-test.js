@@ -73,13 +73,13 @@ describe('FlagDropDown', () => {
   });
 
   it('Simulate change to Japan flag in dropdown before & after', () => {
-    assert(renderedComponent.state.countryList.showDropdown === false);
+    assert(renderedComponent.state.showDropdown === false);
     assert(findDOMNode(flagComponent).querySelector('.iti-flag').className === 'iti-flag tw');
     ReactTestUtils.Simulate.click(findDOMNode(flagComponent));
     const japanOption = findDOMNode(dropDownComponent).querySelector('[data-country-code="jp"]');
     ReactTestUtils.Simulate.click(japanOption);
     assert(findDOMNode(flagComponent).querySelector('.iti-flag').className === 'iti-flag jp');
-    assert(renderedComponent.state.countryList.showDropdown === false);
+    assert(renderedComponent.state.showDropdown === false);
   });
 
   it('Set onlyCountries', () => {
@@ -151,11 +151,11 @@ describe('FlagDropDown', () => {
 
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
-    assert(renderedComponent.state.countryList.showDropdown === true);
+    assert(renderedComponent.state.showDropdown === true);
 
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Tab', keyCode: 9, which: 9 });
-    assert(renderedComponent.state.countryList.showDropdown === false);
+    assert(renderedComponent.state.showDropdown === false);
 
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
@@ -168,7 +168,7 @@ describe('FlagDropDown', () => {
       which: 38,
     });
     document.dispatchEvent(pressUpEvent);
-    assert(renderedComponent.state.countryList.highlightedCountry === 211);
+    assert(renderedComponent.state.highlightedCountry === 211);
 
     const pressEnterEvent = new window.KeyboardEvent('keydown', {
       bubbles: true,
@@ -179,14 +179,14 @@ describe('FlagDropDown', () => {
       which: 13,
     });
     document.dispatchEvent(pressEnterEvent);
-    assert(renderedComponent.state.countryList.showDropdown === false);
+    assert(renderedComponent.state.showDropdown === false);
     assert(findDOMNode(flagComponent).querySelector('.iti-flag').className === 'iti-flag sy');
   });
 
   it('Simulate close the dropdown menu by ESC key', () => {
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
-    assert(renderedComponent.state.countryList.showDropdown === true);
+    assert(renderedComponent.state.showDropdown === true);
 
     const pressEscEvent = new window.KeyboardEvent('keydown', {
       bubbles: true,
@@ -197,13 +197,13 @@ describe('FlagDropDown', () => {
       which: 27,
     });
     document.dispatchEvent(pressEscEvent);
-    assert(renderedComponent.state.countryList.showDropdown === false);
+    assert(renderedComponent.state.showDropdown === false);
   });
 
   it('Simulate close the dropdown menu by clicking on document', () => {
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
-    assert(renderedComponent.state.countryList.showDropdown === true);
+    assert(renderedComponent.state.showDropdown === true);
 
     const clickEvent = new window.MouseEvent('click', {
       view: window,
@@ -211,13 +211,13 @@ describe('FlagDropDown', () => {
       cancelable: true,
     });
     document.querySelector('html').dispatchEvent(clickEvent);
-    assert(renderedComponent.state.countryList.showDropdown === false);
+    assert(renderedComponent.state.showDropdown === false);
   });
 
   it('componentWillUnmount', () => {
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
-    assert(renderedComponent.state.countryList.showDropdown === true);
+    assert(renderedComponent.state.showDropdown === true);
 
     renderedComponent.componentWillUnmount();
 
@@ -227,13 +227,13 @@ describe('FlagDropDown', () => {
       cancelable: true,
     });
     document.querySelector('html').dispatchEvent(clickEvent);
-    assert(renderedComponent.state.countryList.showDropdown === true);
+    assert(renderedComponent.state.showDropdown === true);
   });
 
   it('Simulate search country name in dropdown menu', () => {
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
-    assert(renderedComponent.state.countryList.showDropdown === true);
+    assert(renderedComponent.state.showDropdown === true);
 
     const pressJEvent = new window.KeyboardEvent('keydown', {
       bubbles: true,
@@ -272,8 +272,8 @@ describe('FlagDropDown', () => {
     });
     document.dispatchEvent(pressEnterEvent);
 
-    assert(renderedComponent.state.countryList.showDropdown === false);
-    assert(renderedComponent.state.countryList.highlightedCountry === 108);
+    assert(renderedComponent.state.showDropdown === false);
+    assert(renderedComponent.state.highlightedCountry === 108);
     assert(renderedComponent.state.countryCode === 'jp');
   });
 
