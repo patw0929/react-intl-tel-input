@@ -722,7 +722,6 @@ export default class IntlTelInputApp extends Component {
     if (this.selectedCountryData.iso2) {
       this.defaultCountry = this.selectedCountryData.iso2;
     }
-    // this.selectedFlagInner.attr("class", "iti-flag " + countryCode);
 
     // update the selected country's title attribute
     const title = countryCode ?
@@ -732,7 +731,6 @@ export default class IntlTelInputApp extends Component {
     if (this.props.separateDialCode) {
       dialCode = this.selectedCountryData.dialCode ?
         `+${this.selectedCountryData.dialCode}` : '';
-      // const parent = this.telInput.parent();
 
       if (prevCountry.dialCode) {
         delete this.wrapperClass[`iti-sdc-${(prevCountry.dialCode.length + 1)}`];
@@ -745,10 +743,13 @@ export default class IntlTelInputApp extends Component {
 
     let selectedIndex = 0;
     if (countryCode && countryCode !== 'auto') {
-      const listItem = findDOMNode(this.refs.flagDropDown).querySelector(
-        `.country-list [data-country-code="${countryCode}"]:not(.preferred)`);
+      for (let i = 0, max = this.countries.length; i < max; i++) {
+        if (this.countries[i].iso2 === countryCode) {
+          selectedIndex = i;
+        }
+      }
 
-      selectedIndex = utils.retrieveLiIndex(listItem);
+      selectedIndex += this.preferredCountries.length;
     }
 
     if (this.state.showDropdown) {
