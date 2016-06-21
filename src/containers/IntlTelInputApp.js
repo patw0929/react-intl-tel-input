@@ -228,9 +228,11 @@ export default class IntlTelInputApp extends Component {
       document.removeEventListener('keydown', this.handleDocumentKeyDown);
       this.unbindDocumentClick();
     }
+  }
 
-    if (this.state.value !== nextState.value) {
-      this.notifyPhoneNumberChange(nextState.value);
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.value !== this.state.value) {
+      this.notifyPhoneNumberChange(this.state.value);
     }
   }
 
@@ -949,7 +951,7 @@ export default class IntlTelInputApp extends Component {
   getFullNumber() {
     const prefix = this.props.separateDialCode ?
       `+${this.selectedCountryData.dialCode}` : '';
-    return prefix + findDOMNode(this.refs.telInput).value;
+    return prefix + this.state.value;
   }
 
   // validate the input val - assumes the global function isValidNumber (from utilsScript)
