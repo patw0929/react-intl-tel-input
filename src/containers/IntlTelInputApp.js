@@ -144,7 +144,6 @@ export default class IntlTelInputApp extends Component {
     this.isValidNumber = this.isValidNumber.bind(this);
     this.isUnknownNanp = this.isUnknownNanp.bind(this);
     this.initRequests = this.initRequests.bind(this);
-    this.updateDialCode = this.updateDialCode.bind(this);
     this.updateFlagFromNumber = this.updateFlagFromNumber.bind(this);
     this.updatePlaceholder = this.updatePlaceholder.bind(this);
     this.loadAutoCountry = this.loadAutoCountry.bind(this);
@@ -476,7 +475,6 @@ export default class IntlTelInputApp extends Component {
     // NOTE: if tempCountry is set to auto, that will be handled separately
     // format
     if (val) {
-      // this wont be run after _updateDialCode as that's only called if no val
       this.updateValFromNumber(val, this.props.formatOnInit);
     }
   }
@@ -873,50 +871,6 @@ export default class IntlTelInputApp extends Component {
     } catch (err) {
       // do nothing
     }
-  }
-
-  // replace any existing dial code with the new one
-  // Note: called from _selectListItem and setCountry
-  updateDialCode(newDialCode, hasSelectedListItem) {
-    const inputVal = this.state.value;
-    let newNumber = null;
-
-    // save having to pass this every time
-    newDialCode = `+${newDialCode}`;
-
-    if (inputVal.charAt(0) === '+') {
-      // there's a plus so we're dealing with a replacement
-      // (doesn't matter if nationalMode or not)
-      const prevDialCode = this.getDialCode(inputVal);
-      if (prevDialCode) {
-        // current number contains a valid dial code, so replace it
-        newNumber = inputVal.replace(prevDialCode, newDialCode);
-      } else {
-        // current number contains an invalid dial code, so ditch it
-        // (no way to determine where the invalid dial code ends
-        // and the rest of the number begins)
-        newNumber = newDialCode;
-      }
-    } else if (this.nationalMode || this.props.separateDialCode) {
-      // don't do anything
-      return;
-    } else {
-      // nationalMode is disabled
-      if (inputVal) {
-        // there is an existing value with no dial code: prefix the new dial code
-        newNumber = newDialCode + inputVal;
-      } else if (hasSelectedListItem || !this.options.autoHideDialCode) {
-        // no existing value and either they've just selected a list item,
-        // or autoHideDialCode is disabled: insert new dial code
-        newNumber = newDialCode;
-      } else {
-        return;
-      }
-    }
-
-    this.setState({
-      value: newNumber,
-    });
   }
 
   // try and extract a valid international dial code from a full telephone number
