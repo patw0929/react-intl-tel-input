@@ -27,8 +27,8 @@ class DemoComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      phone1: null,
-      phone2: null,
+      phone1: '',
+      phone2: '',
     };
   }
 
@@ -37,9 +37,9 @@ class DemoComponent extends React.Component {
     this.changePhone2 = this.changeHandler.bind(this, 'phone2');
   }
 
-  changeHandler(name, isValid, value, countryData, number) {
+  changeHandler(name, isValid, value, countryData, number, ext) {
     /* eslint-disable */
-    console.log(isValid, value, countryData, number);
+    console.log(isValid, value, countryData, number, ext);
     /* eslint-enable */
     this.setState({
       [name]: value,

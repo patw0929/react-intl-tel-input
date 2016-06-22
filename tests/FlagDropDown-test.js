@@ -62,6 +62,18 @@ describe('FlagDropDown', () => {
     window.localStorage.clear();
   });
 
+  it('separateDialCode', () => {
+    const parent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        defaultCountry={'tw'}
+        separateDialCode
+      />
+    );
+
+    assert(findDOMNode(parent).className.indexOf('separate-dial-code') > -1);
+  });
+
   it('Set flag className by country', () => {
     assert(findDOMNode(flagComponent).querySelector('.iti-flag').className === 'iti-flag tw');
   });
@@ -73,13 +85,13 @@ describe('FlagDropDown', () => {
   });
 
   it('Simulate change to Japan flag in dropdown before & after', () => {
-    assert(renderedComponent.state.countryList.showDropdown === false);
+    assert(renderedComponent.state.showDropdown === false);
     assert(findDOMNode(flagComponent).querySelector('.iti-flag').className === 'iti-flag tw');
     ReactTestUtils.Simulate.click(findDOMNode(flagComponent));
     const japanOption = findDOMNode(dropDownComponent).querySelector('[data-country-code="jp"]');
     ReactTestUtils.Simulate.click(japanOption);
     assert(findDOMNode(flagComponent).querySelector('.iti-flag').className === 'iti-flag jp');
-    assert(renderedComponent.state.countryList.showDropdown === false);
+    assert(renderedComponent.state.showDropdown === false);
   });
 
   it('Set onlyCountries', () => {
@@ -111,6 +123,17 @@ describe('FlagDropDown', () => {
     }];
 
     assert.deepEqual(parent.refs.flagDropDown.props.countries, result);
+  });
+
+  it('Set excludeCountries', () => {
+    const parent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        defaultCountry={'tw'}
+        excludeCountries={['us', 'kr']}
+      />
+    );
+    assert(parent.refs.flagDropDown.props.countries.length === 241);
   });
 
   it('Set defaultCountry as "auto"', () => {
@@ -151,11 +174,11 @@ describe('FlagDropDown', () => {
 
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
-    assert(renderedComponent.state.countryList.showDropdown === true);
+    assert(renderedComponent.state.showDropdown === true);
 
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Tab', keyCode: 9, which: 9 });
-    assert(renderedComponent.state.countryList.showDropdown === false);
+    assert(renderedComponent.state.showDropdown === false);
 
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
@@ -168,7 +191,7 @@ describe('FlagDropDown', () => {
       which: 38,
     });
     document.dispatchEvent(pressUpEvent);
-    assert(renderedComponent.state.countryList.highlightedCountry === 211);
+    assert(renderedComponent.state.highlightedCountry === 212);
 
     const pressEnterEvent = new window.KeyboardEvent('keydown', {
       bubbles: true,
@@ -179,14 +202,14 @@ describe('FlagDropDown', () => {
       which: 13,
     });
     document.dispatchEvent(pressEnterEvent);
-    assert(renderedComponent.state.countryList.showDropdown === false);
+    assert(renderedComponent.state.showDropdown === false);
     assert(findDOMNode(flagComponent).querySelector('.iti-flag').className === 'iti-flag sy');
   });
 
   it('Simulate close the dropdown menu by ESC key', () => {
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
-    assert(renderedComponent.state.countryList.showDropdown === true);
+    assert(renderedComponent.state.showDropdown === true);
 
     const pressEscEvent = new window.KeyboardEvent('keydown', {
       bubbles: true,
@@ -197,13 +220,13 @@ describe('FlagDropDown', () => {
       which: 27,
     });
     document.dispatchEvent(pressEscEvent);
-    assert(renderedComponent.state.countryList.showDropdown === false);
+    assert(renderedComponent.state.showDropdown === false);
   });
 
   it('Simulate close the dropdown menu by clicking on document', () => {
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
-    assert(renderedComponent.state.countryList.showDropdown === true);
+    assert(renderedComponent.state.showDropdown === true);
 
     const clickEvent = new window.MouseEvent('click', {
       view: window,
@@ -211,13 +234,13 @@ describe('FlagDropDown', () => {
       cancelable: true,
     });
     document.querySelector('html').dispatchEvent(clickEvent);
-    assert(renderedComponent.state.countryList.showDropdown === false);
+    assert(renderedComponent.state.showDropdown === false);
   });
 
   it('componentWillUnmount', () => {
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
-    assert(renderedComponent.state.countryList.showDropdown === true);
+    assert(renderedComponent.state.showDropdown === true);
 
     renderedComponent.componentWillUnmount();
 
@@ -227,13 +250,13 @@ describe('FlagDropDown', () => {
       cancelable: true,
     });
     document.querySelector('html').dispatchEvent(clickEvent);
-    assert(renderedComponent.state.countryList.showDropdown === true);
+    assert(renderedComponent.state.showDropdown === true);
   });
 
   it('Simulate search country name in dropdown menu', () => {
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
-    assert(renderedComponent.state.countryList.showDropdown === true);
+    assert(renderedComponent.state.showDropdown === true);
 
     const pressJEvent = new window.KeyboardEvent('keydown', {
       bubbles: true,
@@ -272,19 +295,19 @@ describe('FlagDropDown', () => {
     });
     document.dispatchEvent(pressEnterEvent);
 
-    assert(renderedComponent.state.countryList.showDropdown === false);
-    assert(renderedComponent.state.countryList.highlightedCountry === 108);
+    assert(renderedComponent.state.showDropdown === false);
+    assert(renderedComponent.state.highlightedCountry === 108);
     assert(renderedComponent.state.countryCode === 'jp');
   });
 
-  it('preprocessPlaceholder', () => {
+  it('customPlaceholder', () => {
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
       libphonenumberUtils);
 
     let expected = '';
-    const preprocessPlaceholder = (placeholder, iso2) => {
-      expected = `${placeholder},${iso2}`;
+    const customPlaceholder = (placeholder, countryData) => {
+      expected = `${placeholder},${countryData.iso2}`;
     };
 
     const parent = ReactTestUtils.renderIntoDocument(
@@ -292,7 +315,7 @@ describe('FlagDropDown', () => {
         fieldName={'telephone'}
         defaultCountry={'tw'}
         utilsScript={'../example/assets/libphonenumber.js'}
-        preprocessPlaceholder={preprocessPlaceholder}
+        customPlaceholder={customPlaceholder}
       />
     );
 
@@ -339,13 +362,6 @@ describe('FlagDropDown', () => {
       'country-list'
     );
 
-    assert.deepEqual(expected, {
-      name: 'Taiwan (台灣)',
-      iso2: 'tw',
-      dialCode: '886',
-      priority: 0,
-      areaCodes: null,
-    });
     ReactTestUtils.Simulate.click(findDOMNode(parentFlagComponent));
     const japanOption = findDOMNode(
       parentDropDownComponent).querySelector('[data-country-code="jp"]');

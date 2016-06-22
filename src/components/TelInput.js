@@ -8,9 +8,10 @@ class TelInput extends Component {
     fieldName: PropTypes.string,
     fieldId: PropTypes.string,
     value: PropTypes.string,
+    placeholder: PropTypes.string,
     handleInputChange: PropTypes.func,
     handleKeyPress: PropTypes.func,
-    handleKeyUp: PropTypes.func,
+    handleOnBlur: PropTypes.func,
   };
 
   render() {
@@ -22,9 +23,9 @@ class TelInput extends Component {
         name={this.props.fieldName}
         id={this.props.fieldId}
         value={this.props.value}
+        placeholder={this.props.placeholder}
         onChange={this.props.handleInputChange}
-        onKeyPress={this.props.handleKeyPress}
-        onKeyUp={this.props.handleKeyUp}
+        onBlur={this.props.handleOnBlur}
       />
     );
   }

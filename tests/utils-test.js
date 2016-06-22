@@ -1,3 +1,4 @@
+import AllCountries from '../src/components/AllCountries';
 import utils from '../src/components/utils';
 import jsdom from 'jsdom';
 import { assert } from 'chai';
@@ -10,6 +11,10 @@ describe('utils', () => {
 
     a = [1, 2, 3];
     b = null;
+    assert(utils.arraysEqual(a, b) === false);
+
+    a = [1, 2, 3];
+    b = [2, 1 ,4 ,5];
     assert(utils.arraysEqual(a, b) === false);
 
     a = ['1', '2', '3'];
@@ -31,6 +36,16 @@ describe('utils', () => {
       y: 'abc',
     };
     assert(utils.shallowEquals(a, b) === true);
+
+    a = {
+      x: ['1', '2', '3'],
+      y: ['1', '3', '4'],
+    };
+    b = {
+      x: ['1', '2', '3'],
+      y: ['4', '2'],
+    };
+    assert(utils.shallowEquals(a, b) === false);
 
     a = {
       a: 1,
@@ -75,12 +90,6 @@ describe('utils', () => {
     assert(utils.getNumeric(str) === '1000');
   });
 
-  it('getClean', () => {
-    const str = '++886912345678';
-
-    assert(utils.getClean(str) === '+886912345678');
-  });
-
   it('startsWith', () => {
     const str = 'Hello World';
 
@@ -103,10 +112,11 @@ describe('utils', () => {
       priority: 0,
       areaCodes: null,
     };
-    assert.deepEqual(utils.getCountryData('tw'), result);
+    assert.deepEqual(utils.getCountryData(AllCountries.getCountries(), 'tw'), result);
 
-    assert(utils.getCountryData('zz', true) === null);
-    assert.deepEqual(utils.getCountryData('zz', false, (country) => `${country}!!`), {});
+    assert(utils.getCountryData(AllCountries.getCountries(), 'zz', true, true) === null);
+    assert.deepEqual(utils.getCountryData(AllCountries.getCountries(),
+      'zz', false, false, (country) => `${country}!!`), {});
   });
 
   it('hasClass', () => {
@@ -139,22 +149,5 @@ describe('utils', () => {
     utils.removeClass(element, 'abc');
 
     assert(element.classList.contains('abc') === false);
-  });
-
-  it('getDigitsOnRight', () => {
-    const str = '0912 345 678';
-    assert(utils.getDigitsOnRight(str, 5) === 6);
-  });
-
-  it('getCursorFromLeftChar', () => {
-    const str = '0912 345 678';
-    assert(utils.getCursorFromLeftChar(str, 5, 4) === 4);
-    assert(utils.getCursorFromLeftChar('', 5, 4) === 0);
-  });
-
-  it('getCursorFromDigitsOnRight', () => {
-    const str = '0912 345 678';
-    assert(utils.getCursorFromDigitsOnRight(str, 7) === 3);
-    assert(utils.getCursorFromDigitsOnRight(str, 20) === 0);
   });
 });
