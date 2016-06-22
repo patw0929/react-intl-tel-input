@@ -62,6 +62,18 @@ describe('FlagDropDown', () => {
     window.localStorage.clear();
   });
 
+  it('separateDialCode', () => {
+    const parent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        defaultCountry={'tw'}
+        separateDialCode
+      />
+    );
+
+    assert(findDOMNode(parent).className.indexOf('separate-dial-code') > -1);
+  });
+
   it('Set flag className by country', () => {
     assert(findDOMNode(flagComponent).querySelector('.iti-flag').className === 'iti-flag tw');
   });
@@ -111,6 +123,17 @@ describe('FlagDropDown', () => {
     }];
 
     assert.deepEqual(parent.refs.flagDropDown.props.countries, result);
+  });
+
+  it('Set excludeCountries', () => {
+    const parent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        defaultCountry={'tw'}
+        excludeCountries={['us', 'kr']}
+      />
+    );
+    assert(parent.refs.flagDropDown.props.countries.length === 241);
   });
 
   it('Set defaultCountry as "auto"', () => {

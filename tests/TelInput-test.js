@@ -149,6 +149,22 @@ describe('TelInput', () => {
     assert(parent.state.countryCode === 'af');
   });
 
+  it('getNumber without utilsScript', () => {
+    const parent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        defaultCountry={'tw'}
+      />
+    );
+
+    assert(parent.getNumber(1) === '');
+  });
+
+  it('setNumber', () => {
+    renderedComponent.setNumber('+810258310015');
+    assert(renderedComponent.state.countryCode === 'jp');
+  });
+
   it('handleKeyUp', () => {
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
@@ -275,5 +291,95 @@ describe('TelInput', () => {
 
     ReactTestUtils.Simulate.change(findDOMNode(input), { target: { value: '+886911222333' } });
     assert(expected === 'true,+886911222333,tw,+886 911 222 333,null');
+  });
+
+  it('Blur and cleaning the empty dialcode', () => {
+    const parent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        defaultCountry={'tw'}
+        utilsScript={'../example/assets/libphonenumber.js'}
+      />
+    );
+
+    const input = ReactTestUtils.findRenderedComponentWithType(
+      parent,
+      TelInput
+    );
+
+    ReactTestUtils.Simulate.change(findDOMNode(input), { target: { value: '+886' } });
+    parent.handleOnBlur();
+    assert(parent.state.value === '');
+  });
+
+  it('has empty value and not nationalMode, not autoHideDialCode and not separateDialCode', () => {
+    const parent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        defaultCountry={'tw'}
+        nationalMode={false}
+        autoHideDialCode={false}
+        separateDialCode={false}
+        utilsScript={'../example/assets/libphonenumber.js'}
+      />
+    );
+
+    assert(parent.state.value === '+886');
+  });
+
+  it('updateFlagFromNumber', () => {
+    const parent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        defaultCountry={'us'}
+        utilsScript={'../example/assets/libphonenumber.js'}
+        nationalMode
+      />
+    );
+
+    const input = ReactTestUtils.findRenderedComponentWithType(
+      parent,
+      TelInput
+    );
+
+    ReactTestUtils.Simulate.change(findDOMNode(input), { target: { value: '9183319436' } });
+    assert(parent.state.countryCode === 'us');
+
+    ReactTestUtils.Simulate.change(findDOMNode(input), { target: { value: '+' } });
+    assert(parent.state.countryCode === 'us');
+  });
+
+  it('isValidNumber', () => {
+    requests[0].respond(200,
+      { 'Content-Type': 'text/javascript' },
+      libphonenumberUtils);
+    window.eval(getScript().text);
+
+    assert(renderedComponent.isValidNumber('0910123456') === true);
+    assert(renderedComponent.isValidNumber('091012345') === false);
+  });
+
+  it('getFullNumber', () => {
+    requests[0].respond(200,
+      { 'Content-Type': 'text/javascript' },
+      libphonenumberUtils);
+    window.eval(getScript().text);
+
+    const parent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        defaultCountry={'tw'}
+        utilsScript={'../example/assets/libphonenumber.js'}
+        separateDialCode
+      />
+    );
+
+    const input = ReactTestUtils.findRenderedComponentWithType(
+      parent,
+      TelInput
+    );
+
+    ReactTestUtils.Simulate.change(findDOMNode(input), { target: { value: '910123456' } });
+    assert(parent.getFullNumber() === '+886910123456');
   });
 });

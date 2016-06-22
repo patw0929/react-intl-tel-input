@@ -13,6 +13,10 @@ describe('utils', () => {
     b = null;
     assert(utils.arraysEqual(a, b) === false);
 
+    a = [1, 2, 3];
+    b = [2, 1 ,4 ,5];
+    assert(utils.arraysEqual(a, b) === false);
+
     a = ['1', '2', '3'];
     b = ['3', '1', '2'];
     assert(utils.arraysEqual(a, b) === false);
@@ -32,6 +36,16 @@ describe('utils', () => {
       y: 'abc',
     };
     assert(utils.shallowEquals(a, b) === true);
+
+    a = {
+      x: ['1', '2', '3'],
+      y: ['1', '3', '4'],
+    };
+    b = {
+      x: ['1', '2', '3'],
+      y: ['4', '2'],
+    };
+    assert(utils.shallowEquals(a, b) === false);
 
     a = {
       a: 1,
