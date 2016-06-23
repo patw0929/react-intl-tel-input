@@ -5,7 +5,7 @@ import sinon from 'sinon';
 
 // Define some html to be our basic document
 // JSDOM will consume this and act as if we were in a browser
-const DEFAULT_HTML = '<html><body></body></html>';
+const DEFAULT_HTML = '<!doctype html><html><body></body></html>';
 
 // Define some variables to make it look like we're a browser
 // First, use JSDOM's fake DOM as the document
