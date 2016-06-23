@@ -3,7 +3,11 @@
   "extends": "airbnb",
   "rules": {
     "no-param-reassign": 0,
+    "no-underscore-dangle": 0,
+    "no-restricted-syntax": 0,
+    "import/no-unresolved": 0,
     "react/sort-comp": 0,
+    "react/jsx-first-prop-new-line": 0,
   },
   "env": {
     "browser": true,
