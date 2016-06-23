@@ -21,8 +21,8 @@
   },
   "main": "dist/main.js",
   "peerDependencies": {
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",
@@ -63,7 +63,7 @@
     "mocha": "2.3.4",
     "mock-local-storage": "^1.0.2",
     "node-sass": "^3.4.2",
-    "react-addons-test-utils": "^0.14.0",
+    "react-addons-test-utils": "^15.1.0",
     "react-hot-loader": "^1.0.7",
     "sass-loader": "^1.0.1",
     "sinon": "^1.17.3",
