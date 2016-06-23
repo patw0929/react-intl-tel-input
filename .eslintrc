@@ -8,6 +8,7 @@
     "import/no-unresolved": 0,
     "react/sort-comp": 0,
     "react/jsx-first-prop-new-line": 0,
+    "react/prefer-stateless-function": 0,
   },
   "env": {
     "browser": true,
