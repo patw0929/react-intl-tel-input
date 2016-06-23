@@ -89,5 +89,6 @@
     "coverage": "node_modules/.bin/babel-node node_modules/.bin/babel-istanbul cover node_modules/.bin/_mocha -- --require ./tests/setup.js ./node_modules/mock-local-storage/lib/mock-localstorage.js --recursive tests/*-test.js",
     "coveralls": "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
+  "engines": { "node": "6.2.2" },
   "license": "MIT"
 }
