@@ -14,7 +14,7 @@ describe('utils', () => {
     assert(utils.arraysEqual(a, b) === false);
 
     a = [1, 2, 3];
-    b = [2, 1 ,4 ,5];
+    b = [2, 1, 4, 5];
     assert(utils.arraysEqual(a, b) === false);
 
     a = ['1', '2', '3'];
