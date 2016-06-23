@@ -2,5 +2,8 @@ language: node_js
 cache: node_modules
 node_js:
   - "6.2.2"
+before_install:
+- |
+  npm install react@^15.1.0 react-dom@^15.1.0
 after_success: npm run coverage
 after_script: npm run coveralls
