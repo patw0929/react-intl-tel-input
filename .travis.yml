@@ -1,5 +1,6 @@
 language: node_js
+cache: node_modules
 node_js:
-  - "4.1.2"
+  - "5.11.1"
 after_success: npm run coverage
 after_script: npm run coveralls
