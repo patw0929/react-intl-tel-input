@@ -1,12 +1,9 @@
 'use strict';
 
-var mountFolder = function (connect, dir) {
-  return connect.static(require('path').resolve(dir));
-};
-
-var webpackExampleConfig = require('./webpack.example.config.js'),
-    webpackDistConfig = require('./webpack.dist.config.js'),
-    webpackDevConfig = require('./webpack.config.js');
+var webpackExampleConfig = require('./webpack.example.config.js');
+var webpackDistConfig = require('./webpack.dist.config.js');
+var webpackDevConfig = require('./webpack.config.js');
+var serveStatic = require('serve-static');
 
 module.exports = function (grunt) {
   // Let *load-grunt-tasks* require everything
@@ -53,7 +50,7 @@ module.exports = function (grunt) {
           keepalive: true,
           middleware: function (connect) {
             return [
-              mountFolder(connect, folders.example)
+              serveStatic(folders.example)
             ];
           }
         }
