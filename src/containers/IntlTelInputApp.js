@@ -76,7 +76,6 @@ export default class IntlTelInputApp extends Component {
     onPhoneNumberChange: PropTypes.func,
     onSelectFlag: PropTypes.func,
     disabled: PropTypes.bool,
-    placeholder: PropTypes.string,
   };
 
   constructor(props) {
@@ -169,8 +168,6 @@ export default class IntlTelInputApp extends Component {
   }
 
   componentDidMount() {
-    this.hadInitialPlaceholder = Boolean(this.props.placeholder);
-
     this.autoHideDialCode = this.props.autoHideDialCode;
     this.allowDropdown = this.props.allowDropdown;
     this.nationalMode = this.props.nationalMode;
@@ -217,6 +214,10 @@ export default class IntlTelInputApp extends Component {
     });
 
     document.addEventListener('keydown', this.handleDocumentKeyDown);
+  }
+
+  componentWillReceiveProps(newProps) {
+    console.log(newProps);
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -809,7 +810,7 @@ export default class IntlTelInputApp extends Component {
   // update the input placeholder to an
   // example number from the currently selected country
   updatePlaceholder() {
-    if (window.intlTelInputUtils && !this.hadInitialPlaceholder &&
+    if (window.intlTelInputUtils &&
         this.props.autoPlaceholder && this.selectedCountryData) {
       const numberType = window.intlTelInputUtils.numberType[this.props.numberType];
       let placeholder = this.selectedCountryData.iso2 ?
