@@ -1042,6 +1042,9 @@ export default class IntlTelInputApp extends Component {
 
     let wrapperClass = classNames(this.wrapperClass);
 
+    const titleTip = (this.selectedCountryData) ?
+      `${this.selectedCountryData.name}: +${this.selectedCountryData.dialCode}` : 'Unknown';
+
     return (
       <div className={wrapperClass}>
         <FlagDropDown ref="flagDropDown"
@@ -1061,6 +1064,7 @@ export default class IntlTelInputApp extends Component {
           inputOuterHeight={this.state.outerHeight}
           preferredCountries={this.preferredCountries}
           highlightedCountry={this.state.highlightedCountry}
+          titleTip={titleTip}
         />
         <TelInput ref="telInput"
           handleInputChange={this.handleInputChange}

@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import CountryList from './CountryList';
 import RootModal from './RootModal';
-import utils from './utils';
 
 class FlagDropDown extends Component {
   static propTypes = {
@@ -22,6 +21,7 @@ class FlagDropDown extends Component {
     preferredCountries: PropTypes.array,
     highlightedCountry: PropTypes.number,
     changeHighlightCountry: PropTypes.func,
+    titleTip: PropTypes.string,
   };
 
   render() {
@@ -29,11 +29,6 @@ class FlagDropDown extends Component {
       'iti-flag': true,
     };
     let flagClass = undefined;
-    const selectedCountryData =
-      (this.props.countryCode && this.props.countryCode !== 'auto') ?
-      utils.getCountryData(this.props.countryCode, false) : {};
-    const titleTip = (selectedCountryData) ?
-      `${selectedCountryData.name}: +${selectedCountryData.dialCode}` : 'Unknown';
     const arrowClass = classNames({
       'iti-arrow': true,
       up: this.props.showDropdown,
@@ -96,7 +91,7 @@ class FlagDropDown extends Component {
           tabIndex={this.props.allowDropdown ? '0' : ''}
           onClick={this.props.clickSelectedFlag}
           onKeyDown={this.props.handleSelectedFlagKeydown}
-          title={titleTip}
+          title={this.props.titleTip}
         >
           <div className={flagClass}></div>
           {genSelectedDialCode()}
