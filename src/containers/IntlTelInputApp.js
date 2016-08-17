@@ -121,7 +121,7 @@ export default class IntlTelInputApp extends Component {
       showDropdown: false,
       highlightedCountry: 0,
       value: '',
-      disabled: false,
+      disabled: this.props.disabled,
       readonly: false,
       offsetTop: 0,
       outerHeight: 0,
