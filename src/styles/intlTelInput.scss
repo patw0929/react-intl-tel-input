@@ -290,18 +290,21 @@ $mobilePopupMargin: 30px;
 
 @import "sprite";
 
+$intl-tel-input-sprite-path: "../images/flags.png";
+$intl-tel-input-sprite-2x-path: "../images/flags@2x.png";
+
 .iti-flag {
   width: $flagWidth;
   height: $flagHeight;
   box-shadow: 0px 0px 1px 0px #888;
-  background-image: url("../images/flags.png");
+  background-image: url($intl-tel-input-sprite-path);
   background-repeat: no-repeat;
   // empty state
   background-color: #DBDBDB;
   background-position: $flagWidth 0;
 
   @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-    background-image: url("../images/flags@2x.png");
+    background-image: url($intl-tel-input-sprite-2x-path);
   }
 }
 
