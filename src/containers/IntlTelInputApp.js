@@ -8,6 +8,8 @@ import utils from '../components/utils';
 import _ from 'underscore.deferred';
 import '../styles/intlTelInput.scss';
 
+const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
+
 export default class IntlTelInputApp extends Component {
   static defaultProps = {
     css: ['intl-tel-input', ''],
@@ -771,7 +773,10 @@ export default class IntlTelInputApp extends Component {
       // Allow Main app to do things when a country is selected
       if (!isInit && prevCountry.iso2 !== countryCode &&
           typeof this.props.onSelectFlag === 'function') {
-        this.props.onSelectFlag(this.selectedCountryData);
+        const number = phoneUtil.parse(this.state.value);
+        const regionCode = this.selectedCountryData.iso2;
+        const status = phoneUtil.isValidNumberForRegion(number, regionCode);
+        this.props.onSelectFlag(status, this.state.value, this.selectedCountryData);
       }
     });
   }
