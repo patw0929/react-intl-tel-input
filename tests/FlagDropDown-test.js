@@ -339,8 +339,8 @@ describe('FlagDropDown', () => {
 
   it('onSelectFlag', () => {
     let expected = '';
-    const onSelectFlag = (countryData) => {
-      expected = countryData;
+    const onSelectFlag = (status, currentNumber, countryData) => {
+      expected = Object.assign({}, { status, currentNumber, ...countryData });
     };
 
     const parent = ReactTestUtils.renderIntoDocument(
@@ -366,7 +366,10 @@ describe('FlagDropDown', () => {
     const japanOption = findDOMNode(
       parentDropDownComponent).querySelector('[data-country-code="jp"]');
     ReactTestUtils.Simulate.click(japanOption);
+
     assert.deepEqual(expected, {
+      status: false,
+      currentNumber: '',
       name: 'Japan (日本)',
       iso2: 'jp',
       dialCode: '81',

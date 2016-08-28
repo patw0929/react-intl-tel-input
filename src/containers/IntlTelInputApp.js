@@ -8,8 +8,6 @@ import utils from '../components/utils';
 import _ from 'underscore.deferred';
 import '../styles/intlTelInput.scss';
 
-const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
-
 export default class IntlTelInputApp extends Component {
   static defaultProps = {
     css: ['intl-tel-input', ''],
@@ -144,6 +142,7 @@ export default class IntlTelInputApp extends Component {
     this.scrollTo = this.scrollTo.bind(this);
     this.notifyPhoneNumberChange = this.notifyPhoneNumberChange.bind(this);
     this.isValidNumber = this.isValidNumber.bind(this);
+    this.isValidNumberForRegion = this.isValidNumberForRegion.bind(this);
     this.isUnknownNanp = this.isUnknownNanp.bind(this);
     this.initRequests = this.initRequests.bind(this);
     this.updateFlagFromNumber = this.updateFlagFromNumber.bind(this);
@@ -773,10 +772,10 @@ export default class IntlTelInputApp extends Component {
       // Allow Main app to do things when a country is selected
       if (!isInit && prevCountry.iso2 !== countryCode &&
           typeof this.props.onSelectFlag === 'function') {
-        const number = phoneUtil.parse(this.state.value);
+        const currentNumber = this.state.value;
         const regionCode = this.selectedCountryData.iso2;
-        const status = phoneUtil.isValidNumberForRegion(number, regionCode);
-        this.props.onSelectFlag(status, this.state.value, this.selectedCountryData);
+        const status = this.isValidNumberForRegion(currentNumber, regionCode);
+        this.props.onSelectFlag(status, currentNumber, this.selectedCountryData);
       }
     });
   }
@@ -921,6 +920,15 @@ export default class IntlTelInputApp extends Component {
 
     if (window.intlTelInputUtils) {
       return window.intlTelInputUtils.isValidNumber(val, countryCode);
+    }
+    return false;
+  }
+
+  isValidNumberForRegion(number, regionCode) {
+    const val = utils.trim(number);
+
+    if (window.intlTelInputUtils) {
+      return window.intlTelInputUtils.isValidNumberForRegion(val, regionCode);
     }
     return false;
   }
