@@ -312,6 +312,36 @@ describe('TelInput', () => {
     assert(parent.state.value === '');
   });
 
+  it('onPhoneNumberBlur', () => {
+    requests[0].respond(200,
+      { 'Content-Type': 'text/javascript' },
+      libphonenumberUtils);
+    window.eval(getScript().text);
+
+    let expected = '';
+    const onPhoneNumberBlur = (isValid, newNumber, countryData, fullNumber, ext) => {
+      expected = `${isValid},${newNumber},${countryData.iso2},${fullNumber},${ext}`;
+    };
+
+    const parent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        fieldName={'telephone'}
+        defaultCountry={'tw'}
+        utilsScript={'../example/assets/libphonenumber.js'}
+        onPhoneNumberBlur={onPhoneNumberBlur}
+      />
+    );
+
+    const input = ReactTestUtils.findRenderedComponentWithType(
+      parent,
+      TelInput
+    );
+
+    ReactTestUtils.Simulate.change(findDOMNode(input), { target: { value: '+886911222333' } });
+    ReactTestUtils.Simulate.blur(findDOMNode(input));
+    assert(expected === 'true,+886911222333,tw,+886 911 222 333,null');
+  });
+
   it('has empty value and not nationalMode, not autoHideDialCode and not separateDialCode', () => {
     const parent = ReactTestUtils.renderIntoDocument(
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
