@@ -107,11 +107,12 @@ import IntlTelInput from 'react-intl-tel-input';
 import 'file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js';
 import './node_modules/react-intl-tel-input/dist/main.css';
 
-const changeHandler = (status, value, countryData, number, id) => {
+const handler = (status, value, countryData, number, id) => {
   console.log(status, value, countryData, number, id);
 };
 
-ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
+ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={handler}
+                              onPhoneNumberBlur={handler}
                               css={['intl-tel-input', 'form-control']}
                               utilsScript={'libphonenumber.js'} /&gt;, document.getElementById('content'));
 </code></pre>
@@ -243,7 +244,12 @@ ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={changeHandler}
               <tr>
                 <th scope="row">onPhoneNumberChange</th>
                 <td><code>null</code></td>
-                <td>Validation callback function. It returns validation status, input box value and selected country data.</td>
+                <td>Optional validation callback function. It returns validation status, input box value and selected country data.</td>
+              </tr>
+              <tr>
+                <th scope="row">onPhoneNumberBlur</th>
+                <td><code>null</code></td>
+                <td>Optional validation callback function. It returns validation status, input box value and selected country data.</td>
               </tr>
             </tbody>
           </table>
