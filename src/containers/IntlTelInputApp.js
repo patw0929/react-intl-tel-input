@@ -48,6 +48,7 @@ export default class IntlTelInputApp extends Component {
     // specify the path to the libphonenumber script to enable validation/formatting
     utilsScript: '',
     onPhoneNumberChange: null,
+    onPhoneNumberBlur: null,
     onSelectFlag: null,
     disabled: false,
   };
@@ -74,6 +75,7 @@ export default class IntlTelInputApp extends Component {
     preferredCountries: PropTypes.arrayOf(PropTypes.string),
     utilsScript: PropTypes.string,
     onPhoneNumberChange: PropTypes.func,
+    onPhoneNumberBlur: PropTypes.func,
     onSelectFlag: PropTypes.func,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
@@ -778,6 +780,14 @@ export default class IntlTelInputApp extends Component {
 
   handleOnBlur() {
     this.removeEmptyDialCode();
+    if (typeof this.props.onPhoneNumberBlur === 'function') {
+      const value = this.state.value;
+      const isValid = this.isValidNumber(value);
+      const fullNumber = this.formatFullNumber(value);
+      this.props.onPhoneNumberBlur(
+        isValid, value, this.selectedCountryData,
+        fullNumber, this.getExtension());
+    }
   }
 
   bindDocumentClick() {
@@ -920,14 +930,18 @@ export default class IntlTelInputApp extends Component {
     return false;
   }
 
+  formatFullNumber(number) {
+    return window.intlTelInputUtils
+      ? this.getNumber(window.intlTelInputUtils.numberFormat.INTERNATIONAL)
+      : number;
+  }
+
   notifyPhoneNumberChange(newNumber) {
     if (typeof this.props.onPhoneNumberChange === 'function') {
-      const result = this.isValidNumber(newNumber);
-      const fullNumber = window.intlTelInputUtils ?
-        this.getNumber(window.intlTelInputUtils.numberFormat.INTERNATIONAL) :
-        newNumber;
+      const isValid = this.isValidNumber(newNumber);
+      const fullNumber = this.formatFullNumber(newNumber);
       this.props.onPhoneNumberChange(
-        result, newNumber, this.selectedCountryData,
+        isValid, newNumber, this.selectedCountryData,
         fullNumber, this.getExtension());
     }
   }

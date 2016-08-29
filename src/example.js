@@ -23,6 +23,12 @@ const lookup = (callback) => {
   };
 };
 
+function log(...args) {
+  /* eslint-disable */
+  console.log(args);
+  /* eslint-enable */
+}
+
 class DemoComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -38,12 +44,14 @@ class DemoComponent extends React.Component {
   }
 
   changeHandler(name, isValid, value, countryData, number, ext) {
-    /* eslint-disable */
-    console.log(isValid, value, countryData, number, ext);
-    /* eslint-enable */
+    log(isValid, value, countryData, number, ext);
     this.setState({
       [name]: value,
     });
+  }
+
+  blurHandler(isValid, value, countryData, number, ext) {
+    log(isValid, value, countryData, number, ext);
   }
 
   render() {
@@ -51,6 +59,7 @@ class DemoComponent extends React.Component {
       <div>
         <IntlTelInput
           onPhoneNumberChange={this.changePhone1}
+          onPhoneNumberBlur={this.blurHandler}
           defaultCountry={'auto'}
           value={this.state.phone1}
           geoIpLookup={lookup}
@@ -61,6 +70,7 @@ class DemoComponent extends React.Component {
 
         <IntlTelInput
           onPhoneNumberChange={this.changePhone2}
+          onPhoneNumberBlur={this.blurHandler}
           defaultCountry={'jp'}
           value={this.state.phone2}
           css={['intl-tel-input', 'form-control']}
