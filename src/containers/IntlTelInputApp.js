@@ -172,7 +172,7 @@ export default class IntlTelInputApp extends Component {
   }
 
   componentDidMount() {
-    this.hadInitialPlaceholder = Boolean(this.props.placeholder);
+    this.initialPlaceholder = this.props.placeholder;
 
     this.autoHideDialCode = this.props.autoHideDialCode;
     this.allowDropdown = this.props.allowDropdown;
@@ -831,8 +831,11 @@ export default class IntlTelInputApp extends Component {
   // update the input placeholder to an
   // example number from the currently selected country
   updatePlaceholder() {
-    if (window.intlTelInputUtils && !this.hadInitialPlaceholder &&
-        this.props.autoPlaceholder && this.selectedCountryData) {
+    if (this.initialPlaceholder) {
+      this.setState({
+        placeholder: this.initialPlaceholder
+      });
+    } else if (window.intlTelInputUtils && this.props.autoPlaceholder && this.selectedCountryData) {
       const numberType = window.intlTelInputUtils.numberType[this.props.numberType];
       let placeholder = this.selectedCountryData.iso2 ?
         window.intlTelInputUtils.getExampleNumber(this.selectedCountryData.iso2,
