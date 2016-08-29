@@ -238,6 +238,14 @@ export default class IntlTelInputApp extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.value !== nextProps.value) {
+      this.setState({
+        value: nextProps.value,
+      });
+    }
+  }
+
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
     this.unbindDocumentClick();

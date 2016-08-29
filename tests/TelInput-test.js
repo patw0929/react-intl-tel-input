@@ -1,6 +1,6 @@
 /* eslint-disable no-eval */
 import React from 'react';
-import { findDOMNode } from 'react-dom';
+import { findDOMNode, render } from 'react-dom';
 import ReactTestUtils from 'react-addons-test-utils';
 import IntlTelInput from '../src/containers/IntlTelInputApp';
 import TelInput from '../src/components/TelInput';
@@ -411,5 +411,27 @@ describe('TelInput', () => {
 
     ReactTestUtils.Simulate.change(findDOMNode(input), { target: { value: '910123456' } });
     assert(parent.getFullNumber() === '+886910123456');
+  });
+
+  it('should change input value on value prop change', () => {
+    const node = document.createElement('div');
+    const component = render(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        value={'0999 123 456'}
+      />
+    , node);
+
+    render(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        value={'foo bar'}
+      />
+    , node);
+
+    inputComponent = ReactTestUtils.findRenderedComponentWithType(
+      component,
+      TelInput
+    );
+
+    assert.equal(inputComponent.props.value, 'foo bar');
   });
 });
