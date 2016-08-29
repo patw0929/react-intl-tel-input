@@ -115,8 +115,6 @@ export default class IntlTelInputApp extends Component {
       TAB: 9,
     };
 
-    this.isGoodBrowser = Boolean(document.createElement('input').setSelectionRange);
-
     this.query = '';
 
     this.state = {
