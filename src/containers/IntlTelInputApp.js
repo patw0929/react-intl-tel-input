@@ -833,7 +833,7 @@ export default class IntlTelInputApp extends Component {
   updatePlaceholder() {
     if (this.initialPlaceholder) {
       this.setState({
-        placeholder: this.initialPlaceholder
+        placeholder: this.initialPlaceholder,
       });
     } else if (window.intlTelInputUtils && this.props.autoPlaceholder && this.selectedCountryData) {
       const numberType = window.intlTelInputUtils.numberType[this.props.numberType];

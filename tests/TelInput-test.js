@@ -435,7 +435,7 @@ describe('TelInput', () => {
     assert.equal(inputComponent.props.value, 'foo bar');
   });
 
-  it('should render custom placeholder', function() {
+  it('should render custom placeholder', () => {
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
       libphonenumberUtils);
@@ -445,8 +445,8 @@ describe('TelInput', () => {
     const component = render(
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
         utilsScript={'../example/assets/libphonenumber.js'}
-        placeholder={ 'foo' }
-        customPlaceholder={ () => 'bar' }
+        placeholder={'foo'}
+        customPlaceholder={() => 'bar'}
       />
     , node);
 
