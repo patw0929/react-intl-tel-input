@@ -434,4 +434,27 @@ describe('TelInput', () => {
 
     assert.equal(inputComponent.props.value, 'foo bar');
   });
+
+  it('should render custom placeholder', () => {
+    requests[0].respond(200,
+      { 'Content-Type': 'text/javascript' },
+      libphonenumberUtils);
+    window.eval(getScript().text);
+
+    const node = document.createElement('div');
+    const component = render(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        utilsScript={'../example/assets/libphonenumber.js'}
+        placeholder={'foo'}
+        customPlaceholder={() => 'bar'}
+      />
+    , node);
+
+    const input = ReactTestUtils.findRenderedComponentWithType(
+      component,
+      TelInput
+    );
+
+    assert.equal(input.props.placeholder, 'foo');
+  });
 });
