@@ -51,7 +51,7 @@ export default class IntlTelInputApp extends Component {
     onPhoneNumberBlur: null,
     onSelectFlag: null,
     disabled: false,
-    autoFocus: false
+    autoFocus: false,
   };
 
   static propTypes = {
@@ -80,7 +80,7 @@ export default class IntlTelInputApp extends Component {
     onSelectFlag: PropTypes.func,
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
-    autoFocus: PropTypes.bool
+    autoFocus: PropTypes.bool,
   };
 
   constructor(props) {
