@@ -12,6 +12,7 @@ class TelInput extends Component {
     handleInputChange: PropTypes.func,
     handleKeyPress: PropTypes.func,
     handleOnBlur: PropTypes.func,
+    autoFocus: PropTypes.bool
   };
 
   render() {
@@ -26,6 +27,7 @@ class TelInput extends Component {
         placeholder={this.props.placeholder}
         onChange={this.props.handleInputChange}
         onBlur={this.props.handleOnBlur}
+        autoFocus={this.props.autoFocus}
       />
     );
   }

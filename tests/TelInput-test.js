@@ -1,5 +1,6 @@
 /* eslint-disable no-eval */
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { findDOMNode, render } from 'react-dom';
 import ReactTestUtils from 'react-addons-test-utils';
 import IntlTelInput from '../src/containers/IntlTelInputApp';
@@ -456,5 +457,40 @@ describe('TelInput', () => {
     );
 
     assert.equal(input.props.placeholder, 'foo');
+  });
+
+  it('should focus input when autoFocus set to true', () => {
+    const node = document.createElement('div');
+    const component = render(
+      <IntlTelInput
+        css={['intl-tel-input', 'foo']}
+        autoFocus={ true }
+      />
+    , node);
+
+    const input = ReactTestUtils.findRenderedDOMComponentWithClass(
+      component,
+      'foo'
+    );
+
+    const inputDOMNode = ReactDOM.findDOMNode(input);
+
+    assert.equal(document.activeElement, inputDOMNode);
+  });
+
+  it('should not focus input when autoFocus set to false', () => {
+    const node = document.createElement('div');
+    const component = render(
+      <IntlTelInput css={['intl-tel-input', 'foo']} />
+    , node);
+
+    const input = ReactTestUtils.findRenderedDOMComponentWithClass(
+      component,
+      'foo'
+    );
+
+    const inputDOMNode = ReactDOM.findDOMNode(input);
+
+    assert.notEqual(document.activeElement, inputDOMNode);
   });
 });
