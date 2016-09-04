@@ -457,4 +457,39 @@ describe('TelInput', () => {
 
     assert.equal(input.props.placeholder, 'foo');
   });
+
+  it('should focus input when autoFocus set to true', () => {
+    const node = document.createElement('div');
+    const component = render(
+      <IntlTelInput
+        css={['intl-tel-input', 'foo']}
+        autoFocus
+      />
+    , node);
+
+    const input = ReactTestUtils.findRenderedDOMComponentWithClass(
+      component,
+      'foo'
+    );
+
+    const inputDOMNode = findDOMNode(input);
+
+    assert.equal(document.activeElement, inputDOMNode);
+  });
+
+  it('should not focus input when autoFocus set to false', () => {
+    const node = document.createElement('div');
+    const component = render(
+      <IntlTelInput css={['intl-tel-input', 'foo']} />
+    , node);
+
+    const input = ReactTestUtils.findRenderedDOMComponentWithClass(
+      component,
+      'foo'
+    );
+
+    const inputDOMNode = findDOMNode(input);
+
+    assert.notEqual(document.activeElement, inputDOMNode);
+  });
 });
