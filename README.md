@@ -46,6 +46,14 @@ import './node_modules/react-intl-tel-input/dist/main.css';
   utilsScript={'libphonenumber.js'}>Example</IntlTelInput>
 ```
 
+### Heads up: CSS Sourcemaps
+
+As noted [in the readme for style-loader](https://github.com/webpack/style-loader#recommended-configuration), if your webpack configuration for style-loader includes the option to enable sourcemaps, the flag images used by this component will not load.
+
+> **Note** about source maps support and assets referenced with `url`: when style loader is used with ?sourceMap option, the CSS modules will be generated as `Blob`s, so relative paths don't work (they would be relative to `chrome:blob` or `chrome:devtools`). In order for assets to maintain correct paths setting `output.publicPath` property of webpack configuration must be set, so that absolute paths are generated.
+
+Because of this, we recommend you disable sourcemaps for the CSS include in this module.
+
 ### Properties
 
 Please see the [Demo Page](http://patw0929.github.io/react-intl-tel-input/)
