@@ -81,6 +81,7 @@ export default class IntlTelInputApp extends Component {
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
     autoFocus: PropTypes.bool,
+    style: PropTypes.object,
   };
 
   constructor(props) {
@@ -1073,6 +1074,7 @@ export default class IntlTelInputApp extends Component {
   render() {
     this.wrapperClass[this.props.css[0]] = true;
     const inputClass = this.props.css[1];
+    const wrapperStyle = Object.assign({}, this.props.style || {});
 
     if (this.state.showDropdown) {
       this.wrapperClass.expanded = true;
@@ -1084,7 +1086,7 @@ export default class IntlTelInputApp extends Component {
       `${this.selectedCountryData.name}: +${this.selectedCountryData.dialCode}` : 'Unknown';
 
     return (
-      <div className={wrapperClass}>
+      <div className={wrapperClass} style={wrapperStyle}>
         <FlagDropDown ref="flagDropDown"
           allowDropdown={this.allowDropdown}
           dropdownContainer={this.dropdownContainer}
