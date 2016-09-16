@@ -492,4 +492,24 @@ describe('TelInput', () => {
 
     assert.notEqual(document.activeElement, inputDOMNode);
   });
+
+  it('defaults to a plain input if a renderer is not specified', () => {
+    assert.equal(inputComponent._reactInternalInstance._renderedComponent._tag, 'input');
+  });
+
+  it('allows the user to pass in an alternate renderer', () => {
+    const renderedComponent = ReactTestUtils.renderIntoDocument(
+      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+        inputRenderer={( props ) => React.createElement('textarea', props)}
+      />
+    );
+
+    const inputComponent = ReactTestUtils.findRenderedComponentWithType(
+      renderedComponent,
+      TelInput
+    );
+
+    assert.equal(inputComponent._reactInternalInstance._renderedComponent._tag, 'textarea');
+  });
+
 });

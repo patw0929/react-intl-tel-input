@@ -81,6 +81,7 @@ export default class IntlTelInputApp extends Component {
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
     autoFocus: PropTypes.bool,
+    inputRenderer: PropTypes.func,
   };
 
   constructor(props) {
@@ -1070,9 +1071,14 @@ export default class IntlTelInputApp extends Component {
     });
   }
 
+  defaultInputRenderer(props) {
+    return React.createElement('input', props);
+  }
+
   render() {
     this.wrapperClass[this.props.css[0]] = true;
     const inputClass = this.props.css[1];
+    const inputRenderer = this.props.inputRenderer || this.defaultInputRenderer;
 
     if (this.state.showDropdown) {
       this.wrapperClass.expanded = true;
@@ -1115,6 +1121,7 @@ export default class IntlTelInputApp extends Component {
           value={this.state.value}
           placeholder={this.state.placeholder}
           autoFocus={this.props.autoFocus}
+          renderer={inputRenderer}
         />
       </div>
     );
