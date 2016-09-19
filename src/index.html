@@ -117,6 +117,16 @@ ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={handler}
                               utilsScript={'libphonenumber.js'} /&gt;, document.getElementById('content'));
 </code></pre>
 
+        <h3>Styling</h3>
+
+        <pre><code class="javascript">import React from 'react';
+import ReactDOM from 'react-dom';
+import IntlTelInput from 'react-intl-tel-input';
+
+ReactDOM.render(&lt;IntlTelInput style={{ width: '100%', backgroundColor: 'red' }}
+                              /&gt;, document.getElementById('content'));
+</code></pre>
+
         <hr>
 
         <h2>Props</h2>
@@ -135,6 +145,11 @@ ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={handler}
                 <th scope="row">css</th>
                 <td><code>['intl-tel-input', '']</code></td>
                 <td>CSS classnames. First one is for the component wrapper, and second one is for text input.</td>
+              </tr>
+              <tr>
+                <th scope="row">style</th>
+                <td><code>{}</code></td>
+                <td>Style object for the wrapper div. Useful for setting 100% width on the wrapper, etc.</td>
               </tr>
               <tr>
                 <th scope="row">value</th>
