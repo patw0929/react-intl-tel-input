@@ -249,6 +249,7 @@ export default class IntlTelInputApp extends Component {
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
+    window.removeEventListener('scroll', this.handleWindowScroll);
     this.unbindDocumentClick();
   }
 
@@ -1002,7 +1003,7 @@ export default class IntlTelInputApp extends Component {
     this.setState({
       showDropdown: false,
     }, () => {
-      window.removeEventListener('scroll', this.handleDocumentScroll);
+      window.removeEventListener('scroll', this.handleWindowScroll);
     });
   }
 
