@@ -4,6 +4,7 @@ import { findDOMNode, render } from 'react-dom';
 import ReactTestUtils from 'react-addons-test-utils';
 import IntlTelInput from '../src/containers/IntlTelInputApp';
 import TelInput from '../src/components/TelInput';
+import FlagDropDown from '../src/components/FlagDropDown';
 import sinon from 'sinon';
 import fs from 'fs';
 import { assert } from 'chai';
@@ -494,5 +495,36 @@ describe('TelInput', () => {
     const inputDOMNode = findDOMNode(input);
 
     assert.notEqual(document.activeElement, inputDOMNode);
+  });
+
+  context('when mobile useragent', () => {
+    let defaultUserAgent;
+    const findFlagDropdown = (parentComponent) => ReactTestUtils.findRenderedComponentWithType(
+      parentComponent,
+      FlagDropDown
+    );
+
+    before('set useragent to mobile', () => {
+      defaultUserAgent = navigator.userAgent;
+      navigator.__defineGetter__('userAgent', () => 'iPhone');
+    });
+
+    after('restore previous useragent', () => {
+      navigator.__defineGetter__('userAgent', () => defaultUserAgent);
+    });
+
+    it('sets FlagDropDown "dropdowncontainer" prop to "body"', () => {
+      const flagDropdown = findFlagDropdown(renderedComponent);
+      assert.equal(flagDropdown.props.dropdownContainer, 'body');
+    });
+
+    it('sets FlagDropDown "isMobile" prop to true', () => {
+      const flagDropdown = findFlagDropdown(renderedComponent);
+      assert.equal(flagDropdown.props.isMobile, true);
+    });
+
+    it('sets "iti-mobile" class to "body"', () => {
+      assert.include(document.body.className, 'iti-mobile');
+    });
   });
 });
