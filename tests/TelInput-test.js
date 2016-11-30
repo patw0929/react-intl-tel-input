@@ -16,8 +16,11 @@ describe('TelInput', () => {
   let requests;
   let getScript;
 
-  beforeEach('Render element', () => {
+  before('Read utils file', () => {
     libphonenumberUtils = fs.readFileSync('./example/assets/libphonenumber.js', 'utf8');
+  });
+
+  beforeEach('Render element', () => {
     xhr = sinon.useFakeXMLHttpRequest();
     window.intlTelInputUtils = undefined;
     requests = [];
