@@ -8,6 +8,9 @@ import utils from '../components/utils';
 import _ from 'underscore.deferred';
 import '../styles/intlTelInput.scss';
 
+const mobileUserAgentRegexp =
+  /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+
 export default class IntlTelInputApp extends Component {
   static defaultProps = {
     css: ['intl-tel-input', ''],
@@ -98,8 +101,7 @@ export default class IntlTelInputApp extends Component {
     this.utilsScriptDeferred = new _.Deferred();
 
     this.isOpening = false;
-    this.isMobile = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent);
+    this.isMobile = mobileUserAgentRegexp.test(navigator.userAgent);
     this.preferredCountries = [];
     this.countries = [];
     this.countryCodes = {};
