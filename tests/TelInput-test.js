@@ -526,5 +526,17 @@ describe('TelInput', () => {
     it('sets "iti-mobile" class to "body"', () => {
       assert.include(document.body.className, 'iti-mobile');
     });
+
+    it(`does not set FlagDropDown "dropdowncontainer" to "body"
+       when "useMobileFullscreenDropdown" set to false`, () => {
+      renderedComponent = ReactTestUtils.renderIntoDocument(
+        <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+          utilsScript={'../example/assets/libphonenumber.js'}
+          useMobileFullscreenDropdown={false}
+        />
+      );
+      const flagDropdown = findFlagDropdown(renderedComponent);
+      assert.equal(flagDropdown.props.dropdownContainer, '');
+    });
   });
 });

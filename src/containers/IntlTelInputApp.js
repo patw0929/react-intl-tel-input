@@ -55,6 +55,8 @@ export default class IntlTelInputApp extends Component {
     onSelectFlag: null,
     disabled: false,
     autoFocus: false,
+    // whether to use fullscreen flag dropdown for mobile useragents
+    useMobileFullscreenDropdown: true,
   };
 
   static propTypes = {
@@ -85,6 +87,7 @@ export default class IntlTelInputApp extends Component {
     placeholder: PropTypes.string,
     autoFocus: PropTypes.bool,
     style: PropTypes.object,
+    useMobileFullscreenDropdown: PropTypes.bool,
   };
 
   constructor(props) {
@@ -305,7 +308,7 @@ export default class IntlTelInputApp extends Component {
     this.wrapperClass['allow-dropdown'] = this.allowDropdown;
     this.wrapperClass['separate-dial-code'] = this.props.separateDialCode;
 
-    if (this.isMobile) {
+    if (this.isMobile && this.props.useMobileFullscreenDropdown) {
       utils.addClass(document.querySelector('body'), 'iti-mobile');
       // on mobile, we want a full screen dropdown, so we must append it to the body
       this.dropdownContainer = 'body';
