@@ -52,6 +52,7 @@ export default class IntlTelInputApp extends Component {
     onSelectFlag: null,
     disabled: false,
     autoFocus: false,
+    autoComplete: 'off',
   };
 
   static propTypes = {
@@ -81,6 +82,7 @@ export default class IntlTelInputApp extends Component {
     disabled: PropTypes.bool,
     placeholder: PropTypes.string,
     autoFocus: PropTypes.bool,
+    autoComplete: PropTypes.string,
     style: PropTypes.object,
   };
 
@@ -1118,6 +1120,7 @@ export default class IntlTelInputApp extends Component {
           value={this.state.value}
           placeholder={this.state.placeholder}
           autoFocus={this.props.autoFocus}
+          autoComplete={this.props.autoComplete}
         />
       </div>
     );
