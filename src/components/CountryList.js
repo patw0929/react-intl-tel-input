@@ -18,6 +18,7 @@ class CountryList extends Component {
     highlightedCountry: PropTypes.number,
     changeHighlightCountry: PropTypes.func,
     showDropdown: PropTypes.bool,
+    isMobile: PropTypes.bool,
   };
 
   constructor() {
@@ -84,7 +85,7 @@ class CountryList extends Component {
           className={countryClass}
           data-dial-code={country.dialCode}
           data-country-code={country.iso2}
-          onMouseOver={this.handleMouseOver}
+          onMouseOver={this.props.isMobile ? undefined : this.handleMouseOver}
           onClick={partial(this.setFlag, country.iso2)}
         >
           <div ref="selectedFlag" className="flag-box">

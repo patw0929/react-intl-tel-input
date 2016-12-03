@@ -161,6 +161,7 @@ $mobilePopupMargin: 30px;
 
     max-height: 200px;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 
     // the divider below the preferred countries
     .divider {
@@ -200,6 +201,7 @@ $mobilePopupMargin: 30px;
     .flag-container {
       right: auto;
       left: 0;
+      width: 100%;
     }
     .selected-flag {
       width: $selectedFlagArrowWidth;
@@ -278,6 +280,7 @@ $mobilePopupMargin: 30px;
   .country-list {
     max-height: 100%;
     width: 100%;
+    -webkit-overflow-scrolling: touch;
     .country {
       padding: 10px 10px;
       // increase line height because dropdown copy is v likely to overflow on mobile and when it does it needs to be well spaced
