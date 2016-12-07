@@ -13,11 +13,12 @@ class TelInput extends Component {
     handleKeyPress: PropTypes.func,
     handleOnBlur: PropTypes.func,
     autoFocus: PropTypes.bool,
+    autoComplete: PropTypes.string,
   };
 
   render() {
     return (
-      <input type="tel" autoComplete="off"
+      <input type="tel" autoComplete={this.props.autoComplete}
         className={this.props.className}
         disabled={this.props.disabled ? 'disabled' : false}
         readOnly={this.props.readonly ? 'readonly' : false}
@@ -32,5 +33,6 @@ class TelInput extends Component {
     );
   }
 }
+
 
 export default TelInput;
