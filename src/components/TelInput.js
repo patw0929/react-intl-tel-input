@@ -14,11 +14,15 @@ class TelInput extends Component {
     handleOnBlur: PropTypes.func,
     autoFocus: PropTypes.bool,
     autoComplete: PropTypes.string,
+    inputProps: PropTypes.object,
   };
 
   render() {
     return (
-      <input type="tel" autoComplete={this.props.autoComplete}
+      <input
+        {...this.props.inputProps}
+        type="tel"
+        autoComplete={this.props.autoComplete}
         className={this.props.className}
         disabled={this.props.disabled ? 'disabled' : false}
         readOnly={this.props.readonly ? 'readonly' : false}
