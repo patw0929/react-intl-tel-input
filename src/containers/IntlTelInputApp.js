@@ -58,6 +58,8 @@ export default class IntlTelInputApp extends Component {
     // whether to use fullscreen flag dropdown for mobile useragents
     useMobileFullscreenDropdown: true,
     autoComplete: 'off',
+    // pass through arbitrary props to the tel input element
+    telInputProps: {},
   };
 
   static propTypes = {
@@ -90,6 +92,7 @@ export default class IntlTelInputApp extends Component {
     autoComplete: PropTypes.string,
     style: PropTypes.object,
     useMobileFullscreenDropdown: PropTypes.bool,
+    telInputProps: PropTypes.object,
   };
 
   constructor(props) {
@@ -1126,6 +1129,7 @@ export default class IntlTelInputApp extends Component {
           placeholder={this.state.placeholder}
           autoFocus={this.props.autoFocus}
           autoComplete={this.props.autoComplete}
+          inputProps={this.props.telInputProps}
         />
       </div>
     );
