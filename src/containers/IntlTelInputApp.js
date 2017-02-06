@@ -16,7 +16,7 @@ export default class IntlTelInputApp extends Component {
     css: ['intl-tel-input', ''],
     fieldName: '',
     fieldId: '',
-    value: '',
+    defaultValue: '',
     // define the countries that'll be present in the dropdown
     // defaults to the data defined in `AllCountries`
     countriesData: null,
@@ -67,6 +67,7 @@ export default class IntlTelInputApp extends Component {
     fieldName: PropTypes.string,
     fieldId: PropTypes.string,
     value: PropTypes.string,
+    defaultValue: PropTypes.string,
     countriesData: PropTypes.arrayOf(PropTypes.array),
     allowDropdown: PropTypes.bool,
     autoHideDialCode: PropTypes.bool,
@@ -133,7 +134,7 @@ export default class IntlTelInputApp extends Component {
     this.state = {
       showDropdown: false,
       highlightedCountry: 0,
-      value: '',
+      value: props.value || props.defaultValue,
       disabled: props.disabled,
       readonly: false,
       offsetTop: 0,
@@ -240,12 +241,6 @@ export default class IntlTelInputApp extends Component {
     } else {
       document.removeEventListener('keydown', this.handleDocumentKeyDown);
       this.unbindDocumentClick();
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.value !== this.state.value) {
-      this.notifyPhoneNumberChange(this.state.value);
     }
   }
 
@@ -470,7 +465,7 @@ export default class IntlTelInputApp extends Component {
 
   // set the initial state of the input value and the selected flag
   setInitialState() {
-    const val = this.props.value || '';
+    const val = this.props.defaultValue || '';
 
     // if we already have a dial code we can go ahead and set the flag, else fall back to default
     if (this.getDialCode(val)) {
@@ -1067,12 +1062,19 @@ export default class IntlTelInputApp extends Component {
     this.isOpening = false;
   }
 
+  // Either notify phoneNumber changed if component is controlled
+  // or udpate the state and notify change if component is uncontrolled
   handleInputChange(e) {
-    this.setState({
-      value: e.target.value,
-    }, () => {
-      this.updateFlagFromNumber(this.state.value);
-    });
+    if (this.props.value !== undefined) {
+      this.notifyPhoneNumberChange(e.target.value);
+    } else {
+      this.setState({
+        value: e.target.value,
+      }, () => {
+        this.updateFlagFromNumber(this.state.value);
+        this.notifyPhoneNumberChange(this.state.value);
+      });
+    }
   }
 
   changeHighlightCountry(showDropdown, selectedIndex) {
@@ -1095,6 +1097,8 @@ export default class IntlTelInputApp extends Component {
 
     const titleTip = (this.selectedCountryData) ?
       `${this.selectedCountryData.name}: +${this.selectedCountryData.dialCode}` : 'Unknown';
+
+    const value = this.props.value !== undefined ? this.props.value : this.state.value;
 
     return (
       <div className={wrapperClass} style={wrapperStyle}>
@@ -1125,7 +1129,7 @@ export default class IntlTelInputApp extends Component {
           readonly={this.state.readonly}
           fieldName={this.props.fieldName}
           fieldId={this.props.fieldId}
-          value={this.state.value}
+          value={value}
           placeholder={this.state.placeholder}
           autoFocus={this.props.autoFocus}
           autoComplete={this.props.autoComplete}
