@@ -37,7 +37,7 @@ describe('TelInput', () => {
         fieldName={'telephone'}
         fieldId={'telephone-id'}
         defaultCountry={'tw'}
-        value={'0999 123 456'}
+        defaultValue={'0999 123 456'}
         utilsScript={'../example/assets/libphonenumber.js'}
       />
     );
@@ -95,13 +95,6 @@ describe('TelInput', () => {
   it('Set className', () => {
     assert(findDOMNode(inputComponent).className === 'form-control phoneNumber');
   });
-
-  it('Change value', () => {
-    findDOMNode(inputComponent).value = '12345';
-    ReactTestUtils.Simulate.change(findDOMNode(inputComponent));
-    assert(inputComponent.props.value === '12345');
-  });
-
 
   it('Not focused on render', () => {
     const initialSelectFlag = IntlTelInput.prototype.selectFlag;
@@ -200,7 +193,7 @@ describe('TelInput', () => {
         fieldName={'telephone'}
         nationalMode={false}
         defaultCountry={'tw'}
-        value={'+886999111222345'}
+        defaultValue={'+886999111222345'}
         utilsScript={'../example/assets/libphonenumber.js'}
       />
     );
@@ -244,18 +237,6 @@ describe('TelInput', () => {
 
     ReactTestUtils.Simulate.change(findDOMNode(input), { target: { value: '+886901234567' } });
     assert(findDOMNode(input).value === '+886901234567');
-  });
-
-  it('Change props value', () => {
-    requests[0].respond(200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
-    window.eval(getScript().text);
-
-    renderedComponent.setState({
-      value: '+886912345678',
-    });
-    assert(findDOMNode(inputComponent).value === '+886912345678');
   });
 
   it('utils loaded', () => {
@@ -417,28 +398,6 @@ describe('TelInput', () => {
     assert(parent.getFullNumber() === '+886910123456');
   });
 
-  it('should change input value on value prop change', () => {
-    const node = document.createElement('div');
-    const component = render(
-      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
-        value={'0999 123 456'}
-      />
-    , node);
-
-    render(
-      <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
-        value={'foo bar'}
-      />
-    , node);
-
-    inputComponent = ReactTestUtils.findRenderedComponentWithType(
-      component,
-      TelInput
-    );
-
-    assert.equal(inputComponent.props.value, 'foo bar');
-  });
-
   it('should render custom placeholder', () => {
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
@@ -537,6 +496,94 @@ describe('TelInput', () => {
       );
       const flagDropdown = findFlagDropdown(renderedComponent);
       assert.equal(flagDropdown.props.dropdownContainer, '');
+    });
+  });
+
+  describe('controlled', () => {
+    beforeEach(() => {
+      renderedComponent = ReactTestUtils.renderIntoDocument(
+        <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+                      fieldName={'telephone'}
+                      fieldId={'telephone-id'}
+                      defaultCountry={'tw'}
+                      value={'0999 123 456'}
+                      utilsScript={'../example/assets/libphonenumber.js'}
+        />
+      );
+
+      inputComponent = ReactTestUtils.findRenderedComponentWithType(
+        renderedComponent,
+        TelInput
+      );
+    });
+
+    it('should set the value', () => {
+      assert(renderedComponent.state.value === '0999 123 456');
+    });
+
+    it('should not change input value if value is constrained by parent', () => {
+      findDOMNode(inputComponent).value = '12345';
+      ReactTestUtils.Simulate.change(findDOMNode(inputComponent));
+      assert(renderedComponent.state.value === '0999 123 456');
+    });
+
+    it('should change input value on value prop change', () => {
+      const node = document.createElement('div');
+      const component = render(
+        <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+                      value={'0999 123 456'}
+        />
+        , node);
+
+      render(
+        <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+                      value={'foo bar'}
+        />
+        , node);
+
+      inputComponent = ReactTestUtils.findRenderedComponentWithType(
+        component,
+        TelInput
+      );
+
+      assert.equal(inputComponent.props.value, 'foo bar');
+    });
+  });
+
+  describe('uncontrolled', () => {
+    beforeEach(() => {
+      renderedComponent = ReactTestUtils.renderIntoDocument(
+        <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
+                      fieldName={'telephone'}
+                      fieldId={'telephone-id'}
+                      defaultCountry={'tw'}
+                      utilsScript={'../example/assets/libphonenumber.js'}
+        />
+      );
+
+      inputComponent = ReactTestUtils.findRenderedComponentWithType(
+        renderedComponent,
+        TelInput
+      );
+    });
+
+    it('should change value', () => {
+      findDOMNode(inputComponent).value = '12345';
+      ReactTestUtils.Simulate.change(findDOMNode(inputComponent));
+      assert(inputComponent.props.value === '12345');
+      assert(renderedComponent.state.value === '12345');
+    });
+
+    it('should change props value', () => {
+      requests[0].respond(200,
+        { 'Content-Type': 'text/javascript' },
+        libphonenumberUtils);
+      window.eval(getScript().text);
+
+      renderedComponent.setState({
+        value: '+886912345678',
+      });
+      assert(findDOMNode(inputComponent).value === '+886912345678');
     });
   });
 });
