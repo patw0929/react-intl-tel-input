@@ -503,11 +503,11 @@ describe('TelInput', () => {
     beforeEach(() => {
       renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
-                      fieldName={'telephone'}
-                      fieldId={'telephone-id'}
-                      defaultCountry={'tw'}
-                      value={'0999 123 456'}
-                      utilsScript={'../example/assets/libphonenumber.js'}
+          fieldName={'telephone'}
+          fieldId={'telephone-id'}
+          defaultCountry={'tw'}
+          value={'0999 123 456'}
+          utilsScript={'../example/assets/libphonenumber.js'}
         />
       );
 
@@ -531,13 +531,13 @@ describe('TelInput', () => {
       const node = document.createElement('div');
       const component = render(
         <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
-                      value={'0999 123 456'}
+          value={'0999 123 456'}
         />
         , node);
 
       render(
         <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
-                      value={'foo bar'}
+          value={'foo bar'}
         />
         , node);
 
@@ -554,10 +554,10 @@ describe('TelInput', () => {
     beforeEach(() => {
       renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
-                      fieldName={'telephone'}
-                      fieldId={'telephone-id'}
-                      defaultCountry={'tw'}
-                      utilsScript={'../example/assets/libphonenumber.js'}
+          fieldName={'telephone'}
+          fieldId={'telephone-id'}
+          defaultCountry={'tw'}
+          utilsScript={'../example/assets/libphonenumber.js'}
         />
       );
 
