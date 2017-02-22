@@ -1136,7 +1136,7 @@ export default class IntlTelInputApp extends Component {
           readonly={this.state.readonly}
           fieldName={this.props.fieldName}
           fieldId={this.props.fieldId}
-          value={this.props.value || this.state.value}
+          value={value}
           placeholder={this.state.placeholder}
           autoFocus={this.props.autoFocus}
           autoComplete={this.props.autoComplete}
