@@ -491,10 +491,11 @@ export default class IntlTelInputApp extends Component {
       }
     }
 
+    const doNotify = true;
     // NOTE: if tempCountry is set to auto, that will be handled separately
     // format
     if (val) {
-      this.updateValFromNumber(val, this.props.formatOnInit);
+      this.updateValFromNumber(val, this.props.formatOnInit, doNotify);
     }
   }
 
@@ -641,8 +642,9 @@ export default class IntlTelInputApp extends Component {
   }
 
   // update the input's value to the given val (format first if possible)
+  // if doNotify is true, calls notifyPhoneNumberChange with the formatted value
   // NOTE: this is called from _setInitialState, handleUtils and setNumber
-  updateValFromNumber(number, doFormat) {
+  updateValFromNumber(number, doFormat, doNotify = false) {
     if (doFormat && window.intlTelInputUtils && this.selectedCountryData) {
       const format = !this.props.separateDialCode &&
         (this.nationalMode || number.charAt(0) !== '+') ?
@@ -658,6 +660,10 @@ export default class IntlTelInputApp extends Component {
       showDropdown: false,
       value: number,
     }, () => {
+      if (doNotify) {
+        this.notifyPhoneNumberChange(this.state.value);
+      }
+
       this.unbindDocumentClick();
     });
   }
@@ -1130,7 +1136,7 @@ export default class IntlTelInputApp extends Component {
           readonly={this.state.readonly}
           fieldName={this.props.fieldName}
           fieldId={this.props.fieldId}
-          value={value}
+          value={this.props.value || this.state.value}
           placeholder={this.state.placeholder}
           autoFocus={this.props.autoFocus}
           autoComplete={this.props.autoComplete}

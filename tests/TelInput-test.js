@@ -557,6 +557,7 @@ describe('TelInput', () => {
           fieldName={'telephone'}
           fieldId={'telephone-id'}
           defaultCountry={'tw'}
+          defaultValue={'54321'}
           utilsScript={'../example/assets/libphonenumber.js'}
         />
       );
@@ -565,6 +566,11 @@ describe('TelInput', () => {
         renderedComponent,
         TelInput
       );
+    });
+
+    it('should initialize state with defaultValue', () => {
+      assert(inputComponent.props.value === '54321');
+      assert(renderedComponent.state.value === '54321');
     });
 
     it('should change value', () => {
