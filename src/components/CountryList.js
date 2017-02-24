@@ -112,20 +112,24 @@ class CountryList extends Component {
   }
 
   getCloseRowAndButton() {
-    console.log('Rendering close button'. this.props.closeButtonIcn);
+    console.log('Rendering close button', this.props.closeButtonIcn);
+    let closeButton;
     if (this.props.closeButtonIcn) {
       const closeButtonStyle = {
         backgroundColor: 'transparent',
-        backgroundImage: 'url(' + this.props.closeButtonIcn + ')',
+        backgroundImage: `url('${this.props.closeButtonIcn}')`,
         backgroundSize: '100% 100%',
-        border: 0
+        border: 0,
       };
-      return (
-        <li>Select your location <button style={closeButtonStyle} onClick={this.handleCloseClick}/></li>
+      closeButton = (
+        <li>Select your location
+          <button style={closeButtonStyle} onClick={this.handleCloseClick} />
+        </li>
       );
     } else {
-      return null;
+      closeButton = null;
     }
+    return closeButton;
   }
 
   render() {
