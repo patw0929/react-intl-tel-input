@@ -60,6 +60,8 @@ export default class IntlTelInputApp extends Component {
     autoComplete: 'off',
     // pass through arbitrary props to the tel input element
     telInputProps: {},
+    // sets a close button
+    closeButtonIcn: null,
   };
 
   static propTypes = {
@@ -1103,9 +1105,6 @@ export default class IntlTelInputApp extends Component {
 
     return (
       <div className={wrapperClass} style={wrapperStyle}>
-        {this.isMobile &&
-            <div>Extra div</div>
-        }
         <FlagDropDown ref="flagDropDown"
           allowDropdown={this.allowDropdown}
           dropdownContainer={this.dropdownContainer}
@@ -1124,6 +1123,7 @@ export default class IntlTelInputApp extends Component {
           preferredCountries={this.preferredCountries}
           highlightedCountry={this.state.highlightedCountry}
           titleTip={titleTip}
+          closeButtonIcn={this.closeButtonIcn}
         />
         <TelInput ref="telInput"
           handleInputChange={this.handleInputChange}
