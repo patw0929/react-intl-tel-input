@@ -1103,6 +1103,9 @@ export default class IntlTelInputApp extends Component {
 
     return (
       <div className={wrapperClass} style={wrapperStyle}>
+        {this.isMobile &&
+            <div>Extra div</div>
+        }
         <FlagDropDown ref="flagDropDown"
           allowDropdown={this.allowDropdown}
           dropdownContainer={this.dropdownContainer}
