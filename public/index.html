@@ -51,84 +51,6 @@
 
         <hr>
 
-        <h2>Syntax</h2>
-
-        <h3>General</h3>
-
-        <pre><code class="javascript">import React from 'react';
-import ReactDOM from 'react-dom';
-import IntlTelInput from 'react-intl-tel-input';
-import 'file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js';
-import './node_modules/react-intl-tel-input/dist/main.css';
-
-ReactDOM.render(&lt;IntlTelInput preferredCountries={['tw']}
-                              css={['intl-tel-input', 'form-control']}
-                              utilsScript={'libphonenumber.js'} /&gt;,
-                              document.getElementById('content'));
-</code></pre>
-
-        <h3>Demo: Lookup user's country</h3>
-
-        <pre><code class="javascript">import React from 'react';
-import ReactDOM from 'react-dom';
-import IntlTelInput from 'react-intl-tel-input';
-import 'file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js';
-import './node_modules/react-intl-tel-input/dist/main.css';
-
-const loadJSONP = (url, callback) => {
-  const ref = window.document.getElementsByTagName('script')[0];
-  const script = window.document.createElement('script');
-  script.src = `${url + (url.indexOf('?') + 1 ? '&amp;' : '?')}callback=${callback}`;
-  ref.parentNode.insertBefore(script, ref);
-  script.onload = () => {
-    script.remove();
-  };
-};
-
-const lookup = (callback) => {
-  loadJSONP('http://ipinfo.io', 'sendBack');
-  window.sendBack = (resp) => {
-    const countryCode = (resp &amp;&amp; resp.country) ? resp.country : '';
-    callback(countryCode);
-  }
-};
-
-ReactDOM.render(&lt;IntlTelInput defaultCountry={'auto'}
-                              geoIpLookup={lookup}
-                              css={['intl-tel-input', 'form-control']}
-                              utilsScript={'libphonenumber.js'} /&gt;, document.getElementById('content'));
-</code></pre>
-
-        <h3>Validation callback</h3>
-
-        <pre><code class="javascript">import React from 'react';
-import ReactDOM from 'react-dom';
-import IntlTelInput from 'react-intl-tel-input';
-import 'file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/libphonenumber.js';
-import './node_modules/react-intl-tel-input/dist/main.css';
-
-const handler = (status, value, countryData, number, id) => {
-  console.log(status, value, countryData, number, id);
-};
-
-ReactDOM.render(&lt;IntlTelInput onPhoneNumberChange={handler}
-                              onPhoneNumberBlur={handler}
-                              css={['intl-tel-input', 'form-control']}
-                              utilsScript={'libphonenumber.js'} /&gt;, document.getElementById('content'));
-</code></pre>
-
-        <h3>Styling</h3>
-
-        <pre><code class="javascript">import React from 'react';
-import ReactDOM from 'react-dom';
-import IntlTelInput from 'react-intl-tel-input';
-
-ReactDOM.render(&lt;IntlTelInput style={{ width: '100%', backgroundColor: 'red' }}
-                              /&gt;, document.getElementById('content'));
-</code></pre>
-
-        <hr>
-
         <h2>Props</h2>
 
         <div class="table-responsive">
@@ -320,9 +242,6 @@ ReactDOM.render(&lt;IntlTelInput style={{ width: '100%', backgroundColor: 'red' 
 
   <script src="https://unpkg.com/react@15/dist/react.js"></script>
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
-  <script>
-    __REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__
-  </script>
   <!-- <script type="text/javascript" src="assets/example.js"></script> -->
   <!--[if gte IE 9]><!-->
   <script>hljs.initHighlightingOnLoad();</script>

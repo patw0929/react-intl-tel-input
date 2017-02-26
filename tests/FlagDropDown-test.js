@@ -1,7 +1,7 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import ReactTestUtils from 'react-addons-test-utils';
-import IntlTelInput from '../src/containers/IntlTelInputApp';
+import IntlTelInput from '../src/components/IntlTelInputApp';
 import sinon from 'sinon';
 import fs from 'fs';
 import { assert } from 'chai';
@@ -15,7 +15,7 @@ describe('FlagDropDown', () => {
   let requests;
 
   beforeEach('render element', () => {
-    libphonenumberUtils = fs.readFileSync('./example/assets/libphonenumber.js', 'utf8');
+    libphonenumberUtils = fs.readFileSync('./src/libphonenumber.js', 'utf8');
     xhr = sinon.useFakeXMLHttpRequest();
     window.intlTelInputUtils = undefined;
     requests = [];
@@ -27,7 +27,7 @@ describe('FlagDropDown', () => {
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
         fieldName={'telephone'}
         defaultCountry={'tw'}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
       />
     );
 
@@ -314,7 +314,7 @@ describe('FlagDropDown', () => {
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
         fieldName={'telephone'}
         defaultCountry={'tw'}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
         customPlaceholder={customPlaceholder}
       />
     );
@@ -347,7 +347,7 @@ describe('FlagDropDown', () => {
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
         fieldName={'telephone'}
         defaultCountry={'tw'}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
         onSelectFlag={onSelectFlag}
       />
     );

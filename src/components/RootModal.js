@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 class RootModal extends Component {
   static propTypes = {
-    children: PropTypes.object,
+    children: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   };
 
   componentDidMount() {

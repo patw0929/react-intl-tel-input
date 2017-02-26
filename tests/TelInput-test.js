@@ -18,7 +18,7 @@ describe('TelInput', () => {
   let getScript;
 
   before('Read utils file', () => {
-    libphonenumberUtils = fs.readFileSync('./example/assets/libphonenumber.js', 'utf8');
+    libphonenumberUtils = fs.readFileSync('./src/libphonenumber.js', 'utf8');
   });
 
   beforeEach('Render element', () => {
@@ -38,7 +38,7 @@ describe('TelInput', () => {
         fieldId={'telephone-id'}
         defaultCountry={'tw'}
         defaultValue={'0999 123 456'}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
       />
     );
 
@@ -111,7 +111,7 @@ describe('TelInput', () => {
         fieldName={'telephone'}
         value="+886901234567"
         preferredCountries={['kr', 'jp', 'tw']}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
       />
     );
 
@@ -126,7 +126,7 @@ describe('TelInput', () => {
         fieldName={'telephone'}
         defaultCountry={'zz'}
         preferredCountries={['kr', 'jp', 'tw']}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
       />
     );
 
@@ -139,7 +139,7 @@ describe('TelInput', () => {
         fieldName={'telephone'}
         preferredCountries={[]}
         defaultCountry={'zz'}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
       />
     );
 
@@ -194,7 +194,7 @@ describe('TelInput', () => {
         nationalMode={false}
         defaultCountry={'tw'}
         defaultValue={'+886999111222345'}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
       />
     );
 
@@ -226,7 +226,7 @@ describe('TelInput', () => {
         fieldName={'telephone'}
         nationalMode={false}
         defaultCountry={'tw'}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
       />
     );
 
@@ -264,7 +264,7 @@ describe('TelInput', () => {
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
         fieldName={'telephone'}
         defaultCountry={'tw'}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
         onPhoneNumberChange={onPhoneNumberChange}
       />
     );
@@ -283,7 +283,7 @@ describe('TelInput', () => {
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
         fieldName={'telephone'}
         defaultCountry={'tw'}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
       />
     );
 
@@ -312,7 +312,7 @@ describe('TelInput', () => {
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
         fieldName={'telephone'}
         defaultCountry={'tw'}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
         onPhoneNumberBlur={onPhoneNumberBlur}
       />
     );
@@ -335,7 +335,7 @@ describe('TelInput', () => {
         nationalMode={false}
         autoHideDialCode={false}
         separateDialCode={false}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
       />
     );
 
@@ -347,7 +347,7 @@ describe('TelInput', () => {
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
         fieldName={'telephone'}
         defaultCountry={'us'}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
         nationalMode
       />
     );
@@ -384,7 +384,7 @@ describe('TelInput', () => {
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
         fieldName={'telephone'}
         defaultCountry={'tw'}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
         separateDialCode
       />
     );
@@ -407,7 +407,7 @@ describe('TelInput', () => {
     const node = document.createElement('div');
     const component = render(
       <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
-        utilsScript={'../example/assets/libphonenumber.js'}
+        utilsScript={'../src/libphonenumber.js'}
         placeholder={'foo'}
         customPlaceholder={() => 'bar'}
       />
@@ -490,7 +490,7 @@ describe('TelInput', () => {
        when "useMobileFullscreenDropdown" set to false`, () => {
       renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput css={['intl-tel-input', 'form-control phoneNumber']}
-          utilsScript={'../example/assets/libphonenumber.js'}
+          utilsScript={'../src/libphonenumber.js'}
           useMobileFullscreenDropdown={false}
         />
       );
@@ -507,7 +507,7 @@ describe('TelInput', () => {
           fieldId={'telephone-id'}
           defaultCountry={'tw'}
           value={'0999 123 456'}
-          utilsScript={'../example/assets/libphonenumber.js'}
+          utilsScript={'../src/libphonenumber.js'}
         />
       );
 
@@ -557,7 +557,7 @@ describe('TelInput', () => {
           fieldName={'telephone'}
           fieldId={'telephone-id'}
           defaultCountry={'tw'}
-          utilsScript={'../example/assets/libphonenumber.js'}
+          utilsScript={'../src/libphonenumber.js'}
         />
       );
 
