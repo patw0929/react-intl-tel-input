@@ -11,7 +11,10 @@ describe('RootModal', function () { // eslint-disable-line func-names
       return mount(
         <RootModal>
           <div>foo</div>
-        </RootModal>
+        </RootModal>,
+        {
+          attachTo: document.body,
+        },
       );
     };
   });
@@ -37,5 +40,12 @@ describe('RootModal', function () { // eslint-disable-line func-names
     });
     expect(subject.instance().modalTarget.classList[0]).toBe('intl-tel-input');
     expect(subject.instance().modalTarget.classList[1]).toBe('iti-container');
+  });
+
+  it('should not has a modalTarget in body', () => {
+    const subject = this.makeSubject();
+
+    subject.unmount();
+    expect(document.body.querySelector('.iti-container')).toBeNull();
   });
 });
