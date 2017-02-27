@@ -38,7 +38,7 @@ module.exports = {
   appBuild: resolveApp('example'),
   appDist: resolveApp('dist'),
   appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
+  appHtml: resolveApp('src/index.html'),
   appExampleJs: resolveApp('src/example.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
