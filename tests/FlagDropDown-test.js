@@ -237,7 +237,7 @@ describe('FlagDropDown', () => {
     assert(renderedComponent.state.showDropdown === false);
   });
 
-  //TODO: Add a test to simulate closing on the mobile design
+  // TODO: Add a test to simulate closing on the mobile design
 
   it('componentWillUnmount', () => {
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),

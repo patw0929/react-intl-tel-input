@@ -21,7 +21,7 @@ class CountryList extends Component {
     changeHighlightCountry: PropTypes.func,
     showDropdown: PropTypes.bool,
     isMobile: PropTypes.bool,
-    handleCloseClick: PropTypes.func
+    handleCloseClick: PropTypes.func,
   };
 
   constructor() {

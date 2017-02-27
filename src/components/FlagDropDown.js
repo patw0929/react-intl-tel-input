@@ -24,7 +24,7 @@ class FlagDropDown extends Component {
     highlightedCountry: PropTypes.number,
     changeHighlightCountry: PropTypes.func,
     titleTip: PropTypes.string,
-    handleCloseClick: PropTypes.func
+    handleCloseClick: PropTypes.func,
   };
 
   render() {
