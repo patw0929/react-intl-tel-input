@@ -29,6 +29,7 @@ class CountryList extends Component {
     this.setFlag = this.setFlag.bind(this);
     this.appendListItem = this.appendListItem.bind(this);
     this.setDropdownPosition = this.setDropdownPosition.bind(this);
+    this.handleCloseClick = this.handleCloseClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -108,8 +109,8 @@ class CountryList extends Component {
     }
   }
 
-  handleCloseClick() {
-    console.log('Clicking close');
+  handleCloseClick(e) {
+    console.log('Clicking close', e);
   }
 
   getCloseRowAndButton() {
@@ -120,10 +121,12 @@ class CountryList extends Component {
         top: '10px',
         right: '10px'
       };
+      console.log('Close click handler', this.handleCloseClick);
       closeButton = (
         <li className="closeButton">
           <span>{this.props.closeButtonText}</span>
-          <img src={this.props.closeButtonIcn} style={closeButtonStyle} onClick={this.handleCloseClick} />
+          <img src={this.props.closeButtonIcn}
+            style={closeButtonStyle} onClick={this.handleCloseClick} />
         </li>
       );
     } else {

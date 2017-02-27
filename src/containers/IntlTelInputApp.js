@@ -1059,14 +1059,10 @@ export default class IntlTelInputApp extends Component {
     if (e.target.getAttribute('class') === null ||
       (e.target.getAttribute('class') &&
        e.target.getAttribute('class').indexOf('country') === -1)) {
-      this.isOpening = false;
     }
 
-    if (!this.isOpening) {
-      this.toggleDropdown(false);
-    }
     this.isOpening = false;
-  }
+}
 
   // Either notify phoneNumber changed if component is controlled
   // or udpate the state and notify change if component is uncontrolled
