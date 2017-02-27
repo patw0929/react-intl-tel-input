@@ -1,4 +1,4 @@
-/* eslint-disable react/no-find-dom-node */
+/* eslint-disable react/no-find-dom-node, no-eval */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
@@ -13,6 +13,7 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
   let libphonenumberUtils;
   let xhr;
   let requests;
+  let getScript;
 
   beforeEach(() => {
     jest.resetModules();
@@ -22,6 +23,9 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     requests = [];
     xhr.onCreate = (req) => { requests.push(req); };
     window.intlTelInputUtils = undefined;
+
+    getScript = () =>
+      document.getElementsByTagName('script')[0];
 
     this.params = {
       css: ['intl-tel-input', 'form-control phoneNumber'],
@@ -457,5 +461,18 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
       priority: 0,
       areaCodes: null,
     });
+  });
+
+  it('should output formatted number with formatNumber function', () => {
+    this.params.format = true;
+    this.params.nationalMode = true;
+    const subject = this.makeSubject();
+
+    requests[0].respond(200,
+      { 'Content-Type': 'text/javascript' },
+      libphonenumberUtils);
+    window.eval(getScript().text);
+
+    expect(subject.instance().formatNumber('+886 912 345 678')).toBe('0912 345 678');
   });
 });
