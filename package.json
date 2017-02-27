@@ -72,7 +72,9 @@
     "jasmine-reporters": "^2.2.0",
     "jest": "^18.1.0",
     "jsdom": "^9.2.1",
+    "lint-staged": "^3.2.6",
     "node-sass": "^4.2.0",
+    "pre-commit": "^1.2.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dev-utils": "^0.4.2",
     "react-hot-loader": "^1.3.0",
@@ -91,11 +93,24 @@
     "build": "node scripts/build.js",
     "start": "node scripts/start.js",
     "deploy": "gh-pages -d dist",
-    "lint": "eslint ./; true",
+    "lint-staged": "lint-staged",
+    "lint-pass": "echo '\\033[4;32m♡' No any errors! let\'s commit it! ♡' \\033[0m'",
+    "lint": "yarn run eslint",
+    "eslint": "eslint src",
     "test": "TZ=Asia/Taipei node scripts/test.js --env=jsdom",
     "coverage": "yarn run test -- --coverage",
     "coveralls": "NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
+  "lint-staged": {
+    "*.js": [
+      "jest --findRelatedTests",
+      "eslint --max-warnings 0"
+    ]
+  },
+  "pre-commit": [
+    "lint-staged",
+    "lint-pass"
+  ],
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.js",
