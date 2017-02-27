@@ -158,7 +158,7 @@ class CountryList extends Component {
 
     return (
       <ul ref="listElement" className={className}>
-        {this.getCloseRowAndButton()}
+        {this.props.isMobile && this.getCloseRowAndButton()}
         {preferredOptions}
         {divider}
         {options}
