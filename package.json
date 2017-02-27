@@ -94,7 +94,7 @@
     "start": "node scripts/start.js",
     "deploy": "gh-pages -d dist",
     "lint-staged": "lint-staged",
-    "lint-pass": "echo '\\033[4;32m♡' No any errors! let\'s commit it! ♡' \\033[0m'",
+    "lint-pass": "echo '\\033[4;32m♡' No any errors! Go go go! ♡' \\033[0m'",
     "lint": "yarn run eslint",
     "eslint": "eslint src",
     "test": "TZ=Asia/Taipei node scripts/test.js --env=jsdom",
