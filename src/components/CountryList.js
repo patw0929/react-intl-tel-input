@@ -116,6 +116,11 @@ class CountryList extends Component {
     let closeButton;
     if (this.props.closeButtonIcn) {
       const closeButtonStyle = {
+        width: '20px',
+        height: '20px',
+        position: 'absolute',
+        top: '20px',
+        right: '20px',
         backgroundColor: 'transparent',
         backgroundImage: `url('${this.props.closeButtonIcn}')`,
         backgroundSize: '100% 100%',
