@@ -26,7 +26,9 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "underscore.deferred": "^0.4.0"
+    "underscore.deferred": "^0.4.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
