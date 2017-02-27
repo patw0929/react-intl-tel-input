@@ -119,14 +119,15 @@ class CountryList extends Component {
       const closeButtonStyle = {
         position: 'absolute',
         top: '10px',
-        right: '10px'
+        right: '10px',
       };
-      console.log('Close click handler', this.handleCloseClick);
       closeButton = (
         <li className="closeButton">
           <span>{this.props.closeButtonText}</span>
           <img src={this.props.closeButtonIcn}
-            style={closeButtonStyle} onClick={this.handleCloseClick} />
+            role="presentation" style={closeButtonStyle}
+            onClick={this.handleCloseClick}
+          />
         </li>
       );
     } else {

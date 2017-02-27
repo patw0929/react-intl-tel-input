@@ -98,7 +98,7 @@ export default class IntlTelInputApp extends Component {
     useMobileFullscreenDropdown: PropTypes.bool,
     telInputProps: PropTypes.object,
     closeButtonText: PropTypes.string,
-    closeButtonIcn: PropTypes.string
+    closeButtonIcn: PropTypes.string,
   };
 
   constructor(props) {
@@ -1054,15 +1054,10 @@ export default class IntlTelInputApp extends Component {
     }
   }
 
-  handleDocumentClick(e) {
+  handleDocumentClick() {
     // Click at the outside of country list
-    if (e.target.getAttribute('class') === null ||
-      (e.target.getAttribute('class') &&
-       e.target.getAttribute('class').indexOf('country') === -1)) {
-    }
-
     this.isOpening = false;
-}
+  }
 
   // Either notify phoneNumber changed if component is controlled
   // or udpate the state and notify change if component is uncontrolled
