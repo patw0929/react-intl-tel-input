@@ -241,6 +241,12 @@ export default class IntlTelInputApp extends Component {
         value: nextProps.value,
       });
     }
+
+    if (this.props.disabled !== nextProps.disabled) {
+      this.setState({
+        disabled: nextProps.disabled,
+      });
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
