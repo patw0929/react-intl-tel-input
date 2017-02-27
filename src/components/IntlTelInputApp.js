@@ -1065,6 +1065,7 @@ export default class IntlTelInputApp extends Component {
   // or udpate the state and notify change if component is uncontrolled
   handleInputChange(e) {
     if (this.props.value !== undefined) {
+      this.updateFlagFromNumber(e.target.value);
       this.notifyPhoneNumberChange(e.target.value);
     } else {
       this.setState({
