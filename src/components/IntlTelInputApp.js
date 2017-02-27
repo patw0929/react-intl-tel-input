@@ -60,6 +60,8 @@ export default class IntlTelInputApp extends Component {
     autoComplete: 'off',
     // pass through arbitrary props to the tel input element
     telInputProps: {},
+    // always format the number
+    format: false,
   };
 
   static propTypes = {
@@ -94,6 +96,7 @@ export default class IntlTelInputApp extends Component {
     style: StylePropTypes,
     useMobileFullscreenDropdown: PropTypes.bool,
     telInputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    format: PropTypes.bool,
   };
 
   constructor(props) {
@@ -181,6 +184,7 @@ export default class IntlTelInputApp extends Component {
     this.handleUpDownKey = this.handleUpDownKey.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.changeHighlightCountry = this.changeHighlightCountry.bind(this);
+    this.formatNumber = this.formatNumber.bind(this);
   }
 
   componentDidMount() {
@@ -711,6 +715,20 @@ export default class IntlTelInputApp extends Component {
     }
   }
 
+  formatNumber(number) {
+    if (window.intlTelInputUtils && this.selectedCountryData) {
+      const format = !this.props.separateDialCode &&
+        (this.nationalMode || number.charAt(0) !== '+') ?
+          window.intlTelInputUtils.numberFormat.NATIONAL :
+          window.intlTelInputUtils.numberFormat.INTERNATIONAL;
+
+      number = window.intlTelInputUtils.formatNumber(number,
+        this.selectedCountryData.iso2, format);
+    }
+
+    return number;
+  }
+
   // update the input's value to the given val (format first if possible)
   // if doNotify is true, calls notifyPhoneNumberChange with the formatted value
   // NOTE: this is called from _setInitialState, handleUtils and setNumber
@@ -1175,6 +1193,8 @@ export default class IntlTelInputApp extends Component {
           autoFocus={ this.props.autoFocus }
           autoComplete={ this.props.autoComplete }
           inputProps={ this.props.telInputProps }
+          formatNumber={ this.formatNumber }
+          format={ this.props.format }
         />
       </div>
     );
