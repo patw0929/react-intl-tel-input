@@ -1,9 +1,10 @@
 language: node_js
-cache: node_modules
+cache:
+  yarn: true
+  directories:
+    - node_modules
 node_js:
   - "7.2.1"
-before_install:
-- |
-  yarn add react@^15.4.2 react-dom@^15.4.2 --peer
+before_script: yarn add react@^15.4.2 react-dom@^15.4.2 --peer
 after_success: yarn run coverage
 after_script: yarn run coveralls
