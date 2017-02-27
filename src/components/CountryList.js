@@ -21,6 +21,7 @@ class CountryList extends Component {
     changeHighlightCountry: PropTypes.func,
     showDropdown: PropTypes.bool,
     isMobile: PropTypes.bool,
+    handleCloseClick: PropTypes.func
   };
 
   constructor() {
@@ -29,7 +30,6 @@ class CountryList extends Component {
     this.setFlag = this.setFlag.bind(this);
     this.appendListItem = this.appendListItem.bind(this);
     this.setDropdownPosition = this.setDropdownPosition.bind(this);
-    this.handleCloseClick = this.handleCloseClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -109,10 +109,6 @@ class CountryList extends Component {
     }
   }
 
-  handleCloseClick(e) {
-    console.log('Clicking close', e);
-  }
-
   getCloseRowAndButton() {
     let closeButton;
     if (this.props.closeButtonIcn) {
@@ -126,7 +122,7 @@ class CountryList extends Component {
           <span>{this.props.closeButtonText}</span>
           <img src={this.props.closeButtonIcn}
             role="presentation" style={closeButtonStyle}
-            onClick={this.handleCloseClick}
+            onClick={this.props.handleCloseClick}
           />
         </li>
       );

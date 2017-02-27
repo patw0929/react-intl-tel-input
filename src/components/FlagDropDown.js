@@ -24,6 +24,7 @@ class FlagDropDown extends Component {
     highlightedCountry: PropTypes.number,
     changeHighlightCountry: PropTypes.func,
     titleTip: PropTypes.string,
+    handleCloseClick: PropTypes.func
   };
 
   render() {
@@ -70,6 +71,7 @@ class FlagDropDown extends Component {
               preferredCountries={this.props.preferredCountries}
               highlightedCountry={this.props.highlightedCountry}
               changeHighlightCountry={this.props.changeHighlightCountry}
+              handleCloseClick={this.props.handleCloseClick}
             />
           </RootModal>;
       }
@@ -88,6 +90,7 @@ class FlagDropDown extends Component {
           preferredCountries={this.props.preferredCountries}
           highlightedCountry={this.props.highlightedCountry}
           changeHighlightCountry={this.props.changeHighlightCountry}
+          handleCloseClick={this.props.handleCloseClick}
         />;
     }
 

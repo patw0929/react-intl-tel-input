@@ -187,6 +187,7 @@ export default class IntlTelInputApp extends Component {
     this.handleUpDownKey = this.handleUpDownKey.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.changeHighlightCountry = this.changeHighlightCountry.bind(this);
+    this.handleCloseClick = this.handleCloseClick.bind(this);
   }
 
   componentDidMount() {
@@ -1069,6 +1070,10 @@ export default class IntlTelInputApp extends Component {
     this.isOpening = false;
   }
 
+  handleCloseClick() {
+    this.toggleDropdown(false);
+  }
+
   // Either notify phoneNumber changed if component is controlled
   // or udpate the state and notify change if component is uncontrolled
   handleInputChange(e) {
@@ -1129,6 +1134,7 @@ export default class IntlTelInputApp extends Component {
           titleTip={titleTip}
           closeButtonText={this.props.closeButtonText}
           closeButtonIcn={this.props.closeButtonIcn}
+          handleCloseClick={this.handleCloseClick}
         />
         <TelInput ref="telInput"
           handleInputChange={this.handleInputChange}
