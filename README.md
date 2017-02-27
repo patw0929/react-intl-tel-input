@@ -1,4 +1,4 @@
-# React-Intl-Tel-Input 
+# React-Intl-Tel-Input
 
 [![Build Status](https://travis-ci.org/patw0929/react-intl-tel-input.svg)](https://travis-ci.org/patw0929/react-intl-tel-input)
 [![npm version](https://badge.fury.io/js/react-intl-tel-input.svg)](http://badge.fury.io/js/react-intl-tel-input)
@@ -18,7 +18,14 @@ To build the examples locally, run:
 
 ```bash
 npm install
-npm run example
+npm start
+```
+
+or
+
+```bash
+yarn
+yarn start
 ```
 
 Then open [`localhost:8000`](http://localhost:8000) in a browser.
@@ -34,6 +41,12 @@ You can also use the standalone build by including `dist/main.js` in your page. 
 npm install react-intl-tel-input --save
 ```
 
+or
+
+```bash
+yarn add react-intl-tel-input
+```
+
 
 ## Usage
 
@@ -43,7 +56,7 @@ import 'file?name=libphonenumber.js!./node_modules/react-intl-tel-input/dist/lib
 import './node_modules/react-intl-tel-input/dist/main.css';
 
 <IntlTelInput css={['intl-tel-input', 'form-control']}
-  utilsScript={'libphonenumber.js'}>Example</IntlTelInput>
+  utilsScript={'libphonenumber.js'} />
 ```
 
 ### Heads up: CSS Sourcemaps
@@ -63,8 +76,19 @@ Please see the [Demo Page](http://patw0929.github.io/react-intl-tel-input/)
 
 **NOTE:** The source code for the component is in `src`. A UMD bundle is also built to `dist`, which can be included without the need for any build system.
 
-To build, watch and serve the examples (which will also watch the component source), run `npm run example`.
+To build, watch and serve the examples (which will also watch the component source), run `npm start`.
 
+If you want to build to the bundle file to `dist/` folder, please run:
+
+```bash
+npm run build
+```
+
+or
+
+```bash
+yarn run build
+```
 
 ## Contributing
 
@@ -75,6 +99,12 @@ npm test
 npm run lint
 ```
 
+or
+
+```bash
+yarn test
+yarn run lint
+```
 
 ## Inspired by
 
@@ -85,4 +115,4 @@ npm run lint
 
 MIT
 
-Copyright (c) 2015-2016 patw.
+Copyright (c) 2015-2017 patw.
