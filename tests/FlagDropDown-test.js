@@ -223,7 +223,7 @@ describe('FlagDropDown', () => {
     assert(renderedComponent.state.showDropdown === false);
   });
 
-  it('Clicking on document should not close the dropdown menu', () => {
+  it('Simulate closing the dropdown menu by clicking on document', () => {
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
     assert(renderedComponent.state.showDropdown === true);
@@ -234,8 +234,10 @@ describe('FlagDropDown', () => {
       cancelable: true,
     });
     document.querySelector('html').dispatchEvent(clickEvent);
-    assert(renderedComponent.state.showDropdown === true);
+    assert(renderedComponent.state.showDropdown === false);
   });
+
+  //TODO: Add a test to simulate closing on the mobile design
 
   it('componentWillUnmount', () => {
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),

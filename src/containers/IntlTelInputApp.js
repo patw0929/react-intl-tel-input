@@ -1054,7 +1054,17 @@ export default class IntlTelInputApp extends Component {
     }
   }
 
-  handleDocumentClick() {
+  handleDocumentClick(e) {
+    if (e.target.getAttribute('class') === null ||
+      (e.target.getAttribute('class') &&
+        e.target.getAttribute('class').indexOf('country') === -1)) {
+      this.isOpening = false;
+    }
+
+    if (!this.isOpening && !this.isMobile) {
+      this.toggleDropdown(false);
+    }
+
     // Click at the outside of country list
     this.isOpening = false;
   }
