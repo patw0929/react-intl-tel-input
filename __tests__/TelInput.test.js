@@ -1,4 +1,4 @@
-/* eslint-disable no-eval */
+/* eslint-disable no-eval, no-restricted-properties */
 import React from 'react';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
@@ -115,10 +115,10 @@ describe('TelInput', function () { // eslint-disable-line func-names
       value: '+886901234567',
       preferredCountries: ['kr', 'jp', 'tw'],
     };
-    const subject = this.makeSubject();
+    this.makeSubject();
 
     IntlTelInput.prototype.selectFlag = initialSelectFlag;
-    // expect(!focused).toBe('the input should not have been focused');
+    expect(focused).toBeFalsy();
   });
 
 
@@ -436,6 +436,15 @@ describe('TelInput', function () { // eslint-disable-line func-names
   });
 
   describe('uncontrolled', () => {
+    it('should initialize state with defaultValue', () => {
+      this.params.defaultValue = '54321';
+      const subject = this.makeSubject();
+      const inputComponent = subject.find(TelInput);
+
+      expect(inputComponent.props().value).toBe('54321');
+      expect(subject.state().value).toBe('54321');
+    });
+
     it('should change value', () => {
       this.params.defaultValue = '';
       const subject = this.makeSubject();
