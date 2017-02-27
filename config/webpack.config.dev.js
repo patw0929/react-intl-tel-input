@@ -13,8 +13,6 @@ var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 var getClientEnvironment = require('./env');
-var path = require('path');
-// var eslintrcPath = path.resolve(__dirname, '.eslintrc');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -87,12 +85,8 @@ module.exports = {
         include: paths.appSrc,
         exclude: /libphonenumber\.js/,
         loader: 'babel-loader',
-        options: require('./babel.dev')
+        options: require('./babel.dev') // eslint-disable-line global-require
       },
-      // {
-      //   test: /libphonenumber\.js/,
-      //   loader: 'file-loader?name=libphonenumber.js!./libphonenumber.js',
-      // },
       {
         test: /\.scss$/,
         use: [
