@@ -5,6 +5,7 @@ import RootModal from './RootModal';
 
 class FlagDropDown extends Component {
   static propTypes = {
+    closeButtonText: PropTypes.string,
     closeButtonIcn: PropTypes.string,
     allowDropdown: PropTypes.bool,
     dropdownContainer: PropTypes.string,
@@ -57,6 +58,7 @@ class FlagDropDown extends Component {
         genCountryList = () =>
           <RootModal>
             <CountryList ref="countryList"
+              closeButtonText={this.props.closeButtonText}
               closeButtonIcn={this.props.closeButtonIcn}
               dropdownContainer={this.props.dropdownContainer}
               isMobile={this.props.isMobile}
@@ -74,6 +76,7 @@ class FlagDropDown extends Component {
     } else {
       genCountryList = () =>
         <CountryList ref="countryList"
+          closeButtonText={this.props.closeButtonText}
           closeButtonIcn={this.props.closeButtonIcn}
           dropdownContainer={this.props.dropdownContainer}
           isMobile={this.props.isMobile}

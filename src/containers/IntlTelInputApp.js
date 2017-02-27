@@ -61,7 +61,8 @@ export default class IntlTelInputApp extends Component {
     // pass through arbitrary props to the tel input element
     telInputProps: {},
     // sets a close button
-    closeButtonIcn: null,
+    closeButtonText: null,
+    closeButtonIcn: {},
   };
 
   static propTypes = {
@@ -96,6 +97,7 @@ export default class IntlTelInputApp extends Component {
     style: PropTypes.object,
     useMobileFullscreenDropdown: PropTypes.bool,
     telInputProps: PropTypes.object,
+    closeButtonText: PropTypes.string,
     closeButtonIcn: PropTypes.string
   };
 
@@ -1124,6 +1126,7 @@ export default class IntlTelInputApp extends Component {
           preferredCountries={this.preferredCountries}
           highlightedCountry={this.state.highlightedCountry}
           titleTip={titleTip}
+          closeButtonText={this.props.closeButtonText}
           closeButtonIcn={this.props.closeButtonIcn}
         />
         <TelInput ref="telInput"

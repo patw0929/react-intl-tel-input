@@ -9,6 +9,7 @@ function partial(fn, ...args) {
 
 class CountryList extends Component {
   static propTypes = {
+    closeButtonText: PropTypes.string,
     closeButtonIcn: PropTypes.string,
     dropdownContainer: PropTypes.string,
     setFlag: PropTypes.func,
@@ -112,7 +113,6 @@ class CountryList extends Component {
   }
 
   getCloseRowAndButton() {
-    console.log('Rendering close button', this.props.closeButtonIcn);
     let closeButton;
     if (this.props.closeButtonIcn) {
       const closeButtonStyle = {
@@ -127,7 +127,7 @@ class CountryList extends Component {
         border: 0,
       };
       closeButton = (
-        <li>Select your location
+        <li>{this.props.closeButtonText}
           <button style={closeButtonStyle} onClick={this.handleCloseClick} />
         </li>
       );
