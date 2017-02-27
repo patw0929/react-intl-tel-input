@@ -4,6 +4,6 @@ node_js:
   - "7.2.1"
 before_install:
 - |
-  npm install react@^15.4.2 react-dom@^15.4.2
-after_success: npm run coverage
-after_script: npm run coveralls
+  yarn add react@^15.4.2 react-dom@^15.4.2 --peer
+after_success: yarn run coverage
+after_script: yarn run coveralls
