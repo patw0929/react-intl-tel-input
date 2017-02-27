@@ -116,19 +116,14 @@ class CountryList extends Component {
     let closeButton;
     if (this.props.closeButtonIcn) {
       const closeButtonStyle = {
-        width: '20px',
-        height: '20px',
         position: 'absolute',
-        top: '20px',
-        right: '20px',
-        backgroundColor: 'transparent',
-        backgroundImage: `url('${this.props.closeButtonIcn}')`,
-        backgroundSize: '100% 100%',
-        border: 0,
+        top: '10px',
+        right: '10px'
       };
       closeButton = (
-        <li>{this.props.closeButtonText}
-          <button style={closeButtonStyle} onClick={this.handleCloseClick} />
+        <li className="closeButton">
+          <span>{this.props.closeButtonText}</span>
+          <img src={this.props.closeButtonIcn} style={closeButtonStyle} onClick={this.handleCloseClick} />
         </li>
       );
     } else {
