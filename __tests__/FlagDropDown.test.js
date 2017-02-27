@@ -431,8 +431,8 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
 
   it('onSelectFlag', () => {
     let expected = '';
-    const onSelectFlag = (status, currentNumber, countryData) => {
-      expected = Object.assign({}, { status, currentNumber, ...countryData });
+    const onSelectFlag = (currentNumber, countryData) => {
+      expected = Object.assign({}, { currentNumber, ...countryData });
     };
 
     this.params.onSelectFlag = onSelectFlag;
@@ -450,7 +450,6 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     japanOption.simulate('click');
 
     expect(expected).toEqual({
-      status: false,
       currentNumber: '',
       name: 'Japan (日本)',
       iso2: 'jp',

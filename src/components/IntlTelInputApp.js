@@ -157,7 +157,6 @@ export default class IntlTelInputApp extends Component {
     this.scrollTo = this.scrollTo.bind(this);
     this.notifyPhoneNumberChange = this.notifyPhoneNumberChange.bind(this);
     this.isValidNumber = this.isValidNumber.bind(this);
-    this.isValidNumberForRegion = this.isValidNumberForRegion.bind(this);
     this.isUnknownNanp = this.isUnknownNanp.bind(this);
     this.initRequests = this.initRequests.bind(this);
     this.updateFlagFromNumber = this.updateFlagFromNumber.bind(this);
@@ -370,10 +369,8 @@ export default class IntlTelInputApp extends Component {
       if (!isInit && prevCountry.iso2 !== countryCode &&
           typeof this.props.onSelectFlag === 'function') {
         const currentNumber = this.state.value;
-        const regionCode = this.selectedCountryData.iso2;
-        const status = this.isValidNumberForRegion(currentNumber, regionCode);
 
-        this.props.onSelectFlag(status, currentNumber, this.selectedCountryData);
+        this.props.onSelectFlag(currentNumber, this.selectedCountryData);
       }
     });
   }
@@ -954,16 +951,6 @@ export default class IntlTelInputApp extends Component {
 
     if (window.intlTelInputUtils) {
       return window.intlTelInputUtils.isValidNumber(val, countryCode);
-    }
-
-    return false;
-  }
-
-  isValidNumberForRegion = (number, regionCode) => {
-    const val = utils.trim(number);
-
-    if (window.intlTelInputUtils) {
-      return window.intlTelInputUtils.isValidNumberForRegion(val, regionCode);
     }
 
     return false;
