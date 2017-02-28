@@ -1,7 +1,28 @@
 import jsdom from 'jsdom';
-import hook from 'css-modules-require-hook';
-import sass from 'node-sass';
 import sinon from 'sinon';
+
+// localStorage
+class LocalStorageMock {
+  constructor() {
+    this.store = {};
+  }
+
+  clear() {
+    this.store = {};
+  }
+
+  getItem(key) {
+    return this.store[key];
+  }
+
+  setItem(key, value) {
+    this.store[key] = value.toString();
+  }
+}
+
+window.localStorage = new LocalStorageMock();
+window.__SERVER__ = false;
+window.__DEVELOPMENT__ = false;
 
 // Define some html to be our basic document
 // JSDOM will consume this and act as if we were in a browser
@@ -18,13 +39,3 @@ global.window = document.defaultView;
 global.navigator = window.navigator;
 
 global.XMLHttpRequest = sinon.useFakeXMLHttpRequest();
-
-hook({
-  generateScopedName: '[name]__[local]___[hash:base64:5]',
-  extensions: ['.scss', '.css'],
-  preprocessCss: (data, filename) =>
-    sass.renderSync({
-      data,
-      file: filename,
-    }).css,
-});

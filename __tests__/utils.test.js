@@ -1,31 +1,32 @@
+import jsdom from 'jsdom';
 import AllCountries from '../src/components/AllCountries';
 import utils from '../src/components/utils';
-import jsdom from 'jsdom';
-import { assert } from 'chai';
 
 describe('utils', () => {
   it('arraysEqual', () => {
     let a = [1, 2, 3];
     let b = a;
-    assert(utils.arraysEqual(a, b) === true);
+
+    expect(utils.arraysEqual(a, b)).toBeTruthy();
 
     a = [1, 2, 3];
     b = null;
-    assert(utils.arraysEqual(a, b) === false);
+    expect(utils.arraysEqual(a, b)).toBeFalsy();
 
     a = [1, 2, 3];
     b = [2, 1, 4, 5];
-    assert(utils.arraysEqual(a, b) === false);
+    expect(utils.arraysEqual(a, b)).toBeFalsy();
 
     a = ['1', '2', '3'];
     b = ['3', '1', '2'];
-    assert(utils.arraysEqual(a, b) === false);
+    expect(utils.arraysEqual(a, b)).toBeFalsy();
   });
 
   it('shallowEquals', () => {
     let a = [1, 2, 3];
     let b = a;
-    assert(utils.shallowEquals(a, b) === true);
+
+    expect(utils.shallowEquals(a, b)).toBeTruthy();
 
     a = {
       x: ['1', '2', '3'],
@@ -35,7 +36,7 @@ describe('utils', () => {
       x: ['1', '2', '3'],
       y: 'abc',
     };
-    assert(utils.shallowEquals(a, b) === true);
+    expect(utils.shallowEquals(a, b)).toBeTruthy();
 
     a = {
       x: ['1', '2', '3'],
@@ -45,7 +46,7 @@ describe('utils', () => {
       x: ['1', '2', '3'],
       y: ['4', '2'],
     };
-    assert(utils.shallowEquals(a, b) === false);
+    expect(utils.shallowEquals(a, b)).toBeFalsy();
 
     a = {
       a: 1,
@@ -53,20 +54,20 @@ describe('utils', () => {
     };
     b = Object.create(a);
     b.c = 3;
-    assert(utils.shallowEquals(a, b) === false);
+    expect(utils.shallowEquals(a, b)).toBeFalsy();
   });
 
   it('trim', () => {
-    assert(utils.trim(undefined) === '');
+    expect(utils.trim(undefined)).toBe('');
 
     const str = ' Hello World   ';
-    assert(utils.trim(str) === 'Hello World');
+    expect(utils.trim(str)).toBe('Hello World');
   });
 
   it('isNumeric', () => {
     const num = 1.2;
 
-    assert(utils.isNumeric(num) === true);
+    expect(utils.isNumeric(num)).toBeTruthy();
   });
 
   it('retrieveLiIndex', () => {
@@ -78,30 +79,31 @@ describe('utils', () => {
     </body></html>`;
     const doc = jsdom.jsdom(DEFAULT_HTML);
     const bListItem = doc.querySelector('.b');
-    assert(utils.retrieveLiIndex(bListItem) === 1);
+
+    expect(utils.retrieveLiIndex(bListItem)).toBe(1);
 
     const otherListItem = doc.querySelector('.z');
-    assert(utils.retrieveLiIndex(otherListItem) === -1);
+    expect(utils.retrieveLiIndex(otherListItem)).toBe(-1);
   });
 
   it('getNumeric', () => {
     const str = 'Hello 1000 World';
 
-    assert(utils.getNumeric(str) === '1000');
+    expect(utils.getNumeric(str)).toBe('1000');
   });
 
   it('startsWith', () => {
     const str = 'Hello World';
 
-    assert(utils.startsWith(str, 'H') === true);
+    expect(utils.startsWith(str, 'H')).toBeTruthy();
   });
 
   it('isWindow', () => {
-    assert(utils.isWindow(global.window) === true);
+    expect(utils.isWindow(global.window)).toBeTruthy();
   });
 
   it('getWindow', () => {
-    assert(utils.getWindow(global.window) === global.window);
+    expect(utils.getWindow(global.window)).toBe(global.window);
   });
 
   it('getCountryData', () => {
@@ -112,11 +114,11 @@ describe('utils', () => {
       priority: 0,
       areaCodes: null,
     };
-    assert.deepEqual(utils.getCountryData(AllCountries.getCountries(), 'tw'), result);
 
-    assert(utils.getCountryData(AllCountries.getCountries(), 'zz', true, true) === null);
-    assert.deepEqual(utils.getCountryData(AllCountries.getCountries(),
-      'zz', false, false, (country) => `${country}!!`), {});
+    expect(utils.getCountryData(AllCountries.getCountries(), 'tw')).toEqual(result);
+    expect(utils.getCountryData(AllCountries.getCountries(), 'zz', true, true)).toBeNull();
+    expect(utils.getCountryData(AllCountries.getCountries(),
+      'zz', false, false, (country) => `${country}!!`)).toEqual({});
   });
 
   it('hasClass', () => {
@@ -126,7 +128,7 @@ describe('utils', () => {
     const doc = jsdom.jsdom(DEFAULT_HTML);
     const element = doc.querySelector('.abc');
 
-    assert(utils.hasClass(element, 'cde') === true);
+    expect(utils.hasClass(element, 'cde')).toBeTruthy();
   });
 
   it('addClass', () => {
@@ -135,9 +137,10 @@ describe('utils', () => {
     </body></html>`;
     const doc = jsdom.jsdom(DEFAULT_HTML);
     const element = doc.querySelector('.abc');
+
     utils.addClass(element, 'efg');
 
-    assert(element.classList.contains('efg') === true);
+    expect(element.classList.contains('efg')).toBeTruthy();
   });
 
   it('removeClass', () => {
@@ -146,8 +149,9 @@ describe('utils', () => {
     </body></html>`;
     const doc = jsdom.jsdom(DEFAULT_HTML);
     const element = doc.querySelector('.abc');
+
     utils.removeClass(element, 'abc');
 
-    assert(element.classList.contains('abc') === false);
+    expect(element.classList.contains('abc')).toBeFalsy();
   });
 });

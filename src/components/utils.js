@@ -1,3 +1,4 @@
+/* eslint-disable */
 import AllCountries from './AllCountries';
 
 export default {
@@ -20,6 +21,7 @@ export default {
         return false;
       }
     }
+
     return true;
   },
 
@@ -51,9 +53,11 @@ export default {
   trim(str) {
     // Make sure we trim BOM and NBSP
     const rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+
     if (!str) {
       return '';
     }
+
     return str.replace(rtrim, '');
   },
 
@@ -68,15 +72,17 @@ export default {
 
     const children = node.parentNode.childNodes;
     let num = 0;
+
     for (let i = 0, max = children.length; i < max; i++) {
       if (children[i] === node) {
         return num;
       }
 
       if (children[i].nodeType === 1 && children[i].tagName.toLowerCase() === 'li') {
-        num++;
+        num += 1;
       }
     }
+
     return -1;
   },
 
@@ -99,8 +105,8 @@ export default {
   },
 
   offset(elem) {
-    let docElem = undefined;
-    let win = undefined;
+    let docElem = null;
+    let win = null;
     let box = { top: 0, left: 0 };
     const doc = elem && elem.ownerDocument;
 
@@ -111,6 +117,7 @@ export default {
     }
 
     win = this.getWindow(doc);
+
     return {
       top: box.top + win.pageYOffset - docElem.clientTop,
       left: box.left + win.pageXOffset - docElem.clientLeft,
@@ -128,9 +135,10 @@ export default {
   // the ignoreOnlyCountriesOption is only used during init()
   // while parsing the onlyCountries array
   getCountryData(countries, countryCode, ignoreOnlyCountriesOption,
-                 allowFail, errorHandler) {
+    allowFail, errorHandler) {
     const countryList = ignoreOnlyCountriesOption ?
       AllCountries.getCountries() : countries;
+
     for (let i = 0; i < countryList.length; i++) {
       if (countryList[i].iso2 === countryCode) {
         return countryList[i];
@@ -170,6 +178,7 @@ export default {
       el.classList.remove(className);
     } else if (this.hasClass(el, className)) {
       const reg = new RegExp(`(\\s|^)${className}(\\s|$)`);
+
       el.className = el.className.replace(reg, ' ');
     }
   },

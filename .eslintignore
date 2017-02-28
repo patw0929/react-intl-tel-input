@@ -1,9 +1,10 @@
-dist/*
-example/*
-test/*
+build/**
+dist/**
+example/**
+test/**
 src/libphonenumber.js
 node_modules/*
-Gruntfile.js
+eslintrc.js
 package.json
 webpack.*.js
 coverage/*
