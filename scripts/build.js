@@ -53,19 +53,21 @@ function getDifferenceLabel(currentSize, previousSize) {
 // First, read the current file sizes in build directory.
 // This lets us display how much they changed later.
 recursive(paths.appBuild, (err, fileNames) => {
-  var previousSizeMap = (fileNames || [])
-    .filter(fileName => /\.(js|css)$/.test(fileName))
+  const previousSizeMap = (fileNames || [])
+    .filter((fileName) => /\.(js|css)$/.test(fileName))
     .reduce((memo, fileName) => {
-      var contents = fs.readFileSync(fileName);
-      var key = removeFileNameHash(fileName);
+      const contents = fs.readFileSync(fileName);
+      const key = removeFileNameHash(fileName);
+
       memo[key] = gzipSize(contents);
+
       return memo;
     }, {});
 
   // Remove all content but keep the directory so that
   // if you're in it, you don't end up in Trash
-  rimrafSync(paths.appBuild + '/*');
-  rimrafSync(paths.appDist + '/*');
+  rimrafSync(`${paths.appBuild}/*`);
+  rimrafSync(`${paths.appDist}/*`);
 
   // Start the webpack build
   build(previousSizeMap);
@@ -73,29 +75,34 @@ recursive(paths.appBuild, (err, fileNames) => {
 
 // Print a detailed summary of build files.
 function printFileSizes(stats, previousSizeMap) {
-  var assets = stats.toJson().assets
-    .filter(asset => /\.(js|css)$/.test(asset.name))
-    .map(asset => {
-      var fileContents = fs.readFileSync(paths.appBuild + '/' + asset.name);
-      var size = gzipSize(fileContents);
-      var previousSize = previousSizeMap[removeFileNameHash(asset.name)];
-      var difference = getDifferenceLabel(size, previousSize);
+  const assets = stats.toJson().assets
+    .filter((asset) => /\.(js|css)$/.test(asset.name))
+    .map((asset) => {
+      const fileContents = fs.readFileSync(`${paths.appBuild}/${asset.name}`);
+      const size = gzipSize(fileContents);
+      const previousSize = previousSizeMap[removeFileNameHash(asset.name)];
+      const difference = getDifferenceLabel(size, previousSize);
+
       return {
         folder: path.join('build', path.dirname(asset.name)),
         name: path.basename(asset.name),
-        size: size,
-        sizeLabel: filesize(size) + (difference ? ' (' + difference + ')' : '')
+        sizeLabel: filesize(size) + (difference ? ' (' + difference + ')' : ''),
+        size,
       };
     });
+
   assets.sort((a, b) => b.size - a.size);
-  var longestSizeLabelLength = Math.max.apply(null,
-    assets.map(a => stripAnsi(a.sizeLabel).length)
+  const longestSizeLabelLength = Math.max.apply(null,
+    assets.map((a) => stripAnsi(a.sizeLabel).length)
   );
-  assets.forEach(asset => {
-    var sizeLabel = asset.sizeLabel;
-    var sizeLength = stripAnsi(sizeLabel).length;
+
+  assets.forEach((asset) => {
+    let sizeLabel = asset.sizeLabel;
+    const sizeLength = stripAnsi(sizeLabel).length;
+
     if (sizeLength < longestSizeLabelLength) {
-      var rightPadding = ' '.repeat(longestSizeLabelLength - sizeLength);
+      const rightPadding = ' '.repeat(longestSizeLabelLength - sizeLength);
+
       sizeLabel += rightPadding;
     }
     console.log(
@@ -126,9 +133,10 @@ function build(previousSizeMap) {
     // Copy static files to dist folder
     copyToDistFolder();
 
-    var openCommand = process.platform === 'win32' ? 'start' : 'open';
-    var homepagePath = require(paths.appPackageJson).homepage;
-    var publicPath = config.output.publicPath;
+    const openCommand = process.platform === 'win32' ? 'start' : 'open';
+    const homepagePath = require(paths.appPackageJson).homepage;
+    const publicPath = config.output.publicPath;
+
     if (homepagePath && homepagePath.indexOf('.github.io/') !== -1) {
       // "homepage": "http://user.github.io/project"
       console.log('The project was built assuming it is hosted at ' + chalk.green(publicPath) + '.');
@@ -162,13 +170,13 @@ function build(previousSizeMap) {
       } else {
         // no homepage
         console.log('To override this, specify the ' + chalk.green('homepage') + ' in your '  + chalk.cyan('package.json') + '.');
-        console.log('For example, add this to build it for GitHub Pages:')
+        console.log('For example, add this to build it for GitHub Pages:');
         console.log();
         console.log('  ' + chalk.green('"homepage"') + chalk.cyan(': ') + chalk.green('"http://myname.github.io/myapp"') + chalk.cyan(','));
         console.log();
       }
       console.log('The ' + chalk.cyan('build') + ' folder is ready to be deployed.');
-      console.log('You may also serve it locally with a static server:')
+      console.log('You may also serve it locally with a static server:');
       console.log();
       console.log('  ' + chalk.cyan('npm') +  ' install -g pushstate-server');
       console.log('  ' + chalk.cyan('pushstate-server') + ' build');
@@ -179,18 +187,15 @@ function build(previousSizeMap) {
 }
 
 function copyToDistFolder() {
-  const COPY_FILES = [
-    'libphonenumber.js', 'main.js', 'flags.png', 'flags@2x.png', 'main.css'
-  ];
-
-  fs.copySync(paths.appBuild + '/static/', paths.appDist, {
+  fs.copySync(`${paths.appBuild}/`, paths.appDist, {
     filter: (file) => {
-      console.log(path.basename(file));
-      if (path.basename(file) in COPY_FILES) {
-        return false;
+      const target = path.basename(file);
+
+      if (target !== 'index.html' && target !== 'example.js') {
+        return true;
       }
 
-      return true;
+      return false;
     },
   });
 }
