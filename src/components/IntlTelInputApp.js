@@ -1082,15 +1082,17 @@ export default class IntlTelInputApp extends Component {
   // Either notify phoneNumber changed if component is controlled
   // or udpate the state and notify change if component is uncontrolled
   handleInputChange(e) {
+    const value = this.props.format ? this.formatNumber(e.target.value) : e.target.value;
+
     if (this.props.value !== undefined) {
-      this.updateFlagFromNumber(e.target.value);
-      this.notifyPhoneNumberChange(e.target.value);
+      this.updateFlagFromNumber(value);
+      this.notifyPhoneNumberChange(value);
     } else {
       this.setState({
-        value: e.target.value,
+        value,
       }, () => {
-        this.updateFlagFromNumber(this.state.value);
-        this.notifyPhoneNumberChange(this.state.value);
+        this.updateFlagFromNumber(value);
+        this.notifyPhoneNumberChange(value);
       });
     }
   }
@@ -1193,8 +1195,6 @@ export default class IntlTelInputApp extends Component {
           autoFocus={ this.props.autoFocus }
           autoComplete={ this.props.autoComplete }
           inputProps={ this.props.telInputProps }
-          formatNumber={ this.formatNumber }
-          format={ this.props.format }
         />
       </div>
     );

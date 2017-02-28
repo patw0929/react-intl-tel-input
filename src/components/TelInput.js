@@ -15,8 +15,6 @@ class TelInput extends Component {
     autoComplete: PropTypes.string,
     inputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     refCallback: PropTypes.func.isRequired,
-    formatNumber: PropTypes.func.isRequired,
-    format: PropTypes.bool,
   };
 
   render() {
@@ -31,7 +29,7 @@ class TelInput extends Component {
         readOnly={ this.props.readonly ? 'readonly' : false }
         name={ this.props.fieldName }
         id={ this.props.fieldId }
-        value={ this.props.format ? this.props.formatNumber(this.props.value) : this.props.value }
+        value={ this.props.value }
         placeholder={ this.props.placeholder }
         onChange={ this.props.handleInputChange }
         onBlur={ this.props.handleOnBlur }
