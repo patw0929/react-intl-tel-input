@@ -88,12 +88,12 @@ class CountryList extends Component {
       return (
         this.props.isMobile ?
           <MobileCountryContent {...country}
-            index={index}
+            key={`country-${index}`}
             countryClass={countryClass}
             handleClick={partial(this.setFlag, country.iso2)}
           /> :
           <CountryContent {...country}
-            index={index}
+            key={`country-${index}`}
             countryClass={countryClass}
             handleMouseOver={this.handleMouseOver}
             handleClick={partial(this.setFlag, country.iso2)}

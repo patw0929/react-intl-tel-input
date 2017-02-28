@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 
 class CountryContent extends Component {
   static propTypes = {
-    index: PropTypes.number,
     countryClass: PropTypes.string,
     iso2: PropTypes.string,
     name: PropTypes.string,
@@ -17,14 +16,12 @@ class CountryContent extends Component {
       dialCode,
       name,
       iso2,
-      index,
       handleMouseOver,
       handleClick,
     } = this.props;
 
     return (
-      <li key={`country-${index}`}
-        className={countryClass}
+      <li className={countryClass}
         data-dial-code={dialCode}
         data-country-code={iso2}
         onMouseOver={handleMouseOver}
