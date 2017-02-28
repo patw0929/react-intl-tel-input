@@ -118,7 +118,7 @@ module.exports = {
       '../dist/main.css'
     ),
     new CopyWebpackPlugin([
-      { from: 'src/libphonenumber.js', to: 'static' },
+      { from: 'src/libphonenumber.js', to: './' },
     ]),
     new InterpolateHtmlPlugin({
       PUBLIC_URL: publicUrl,

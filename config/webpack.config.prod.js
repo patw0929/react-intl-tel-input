@@ -10,7 +10,7 @@ var getClientEnvironment = require('./env');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
-var publicPath = '/';
+var publicPath = '';
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing shlash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
@@ -28,21 +28,36 @@ module.exports = {
   // Don't attempt to continue if there are any errors.
   bail: true,
   devtool: false,
-  entry: [
-    require.resolve('./polyfills'),
-    paths.appExampleJs
-  ],
+  entry: {
+    main: './src/components/IntlTelInputApp.js',
+    example: [
+      require.resolve('./polyfills'),
+      './src/example.js',
+    ],
+  },
 
   output: {
     path: paths.appBuild,
     pathinfo: true,
-    filename: 'static/main.js',
-    publicPath: publicPath
+    filename: '[name].js',
+    publicPath: publicPath,
+    library: 'IntlTelInput',
+    libraryTarget: 'umd'
   },
 
   externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM'
+    'react': {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react'
+    },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs2: 'react-dom',
+      commonjs: 'react-dom',
+      amd: 'react-dom'
+    }
   },
 
   resolve: {
@@ -54,7 +69,6 @@ module.exports = {
     alias: {
       'react-intl-tel-input': './components/IntlTelInputApp.js',
     },
-    // root: __dirname + '/src',
   },
   module: {
     rules: [
@@ -78,7 +92,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]'
+          name: 'media/[name].[hash:8].[ext]'
         }
       },
       {
@@ -108,7 +122,7 @@ module.exports = {
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: [
-          'file-loader?name=static/[name].[ext]',
+          'file-loader?name=[name].[ext]',
           'image-webpack-loader?{progressive:true, optimizationLevel: 3, interlaced: false, pngquant:{quality: "30-40", speed: 1}}'
         ]
       }
@@ -127,6 +141,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
+      chunks: ['example'],
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -141,7 +156,7 @@ module.exports = {
       }
     }),
     new CopyWebpackPlugin([
-      { from: 'src/libphonenumber.js', to: 'static' },
+      { from: 'src/libphonenumber.js', to: './' },
     ]),
     new webpack.DefinePlugin(env),
     // Minify the code.
@@ -166,7 +181,7 @@ module.exports = {
         screw_ie8: true
       }
     }),
-    new ExtractTextPlugin('static/[name].css'),
+    new ExtractTextPlugin('main.css'),
   ],
   node: {
     fs: 'empty',
