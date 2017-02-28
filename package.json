@@ -92,7 +92,7 @@
   "scripts": {
     "build": "node scripts/build.js",
     "start": "node scripts/start.js",
-    "deploy": "gh-pages -d dist",
+    "deploy": "gh-pages -d example",
     "lint-staged": "lint-staged",
     "lint-pass": "echo '\\033[4;32m♡' No any errors! Go go go! ♡' \\033[0m'",
     "lint": "yarn run eslint",
