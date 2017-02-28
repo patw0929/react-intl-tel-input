@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import utils from './utils';
+import CountryContent from './CountryContent';
+import MobileCountryContent from './MobileCountryContent';
 
 function partial(fn, ...args) {
   return fn.bind(fn, ...args);
@@ -84,20 +86,18 @@ class CountryList extends Component {
       countryClass = classNames(countryClassObj);
 
       return (
-        <li key={`country-${index}`}
-          className={countryClass}
-          data-dial-code={country.dialCode}
-          data-country-code={country.iso2}
-          onMouseOver={this.props.isMobile ? undefined : this.handleMouseOver}
-          onClick={partial(this.setFlag, country.iso2)}
-        >
-          <div ref="selectedFlag" className="flag-box">
-            <div ref="selectedFlagInner" className={`iti-flag ${country.iso2}`}></div>
-          </div>
-
-          <span className="country-name">{country.name}</span>
-          <span className="dial-code">+{country.dialCode}</span>
-        </li>
+        this.props.isMobile ?
+          <MobileCountryContent {...country}
+            index={index}
+            countryClass={countryClass}
+            handleClick={partial(this.setFlag, country.iso2)}
+          /> :
+          <CountryContent {...country}
+            index={index}
+            countryClass={countryClass}
+            handleMouseOver={this.handleMouseOver}
+            handleClick={partial(this.setFlag, country.iso2)}
+          />
       );
     });
   }
