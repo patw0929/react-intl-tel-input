@@ -223,7 +223,7 @@ describe('FlagDropDown', () => {
     assert(renderedComponent.state.showDropdown === false);
   });
 
-  it('Simulate closing the dropdown menu by clicking on document', () => {
+  it('Simulate close the dropdown menu by clicking on document', () => {
     ReactTestUtils.Simulate.keyDown(findDOMNode(flagComponent),
       { key: 'Enter', keyCode: 13, which: 13 });
     assert(renderedComponent.state.showDropdown === true);
