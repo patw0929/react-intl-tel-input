@@ -1,7 +1,7 @@
 {
-  "name": "react-intl-tel-input",
-  "version": "4.0.1",
-  "description": "Telephone input component. Rewrite intl-tel-input in React.js.",
+  "name": "@edume/react-intl-tel-input",
+  "version": "4.0.2",
+  "description": "Telephone input component. Rewrite intl-tel-input in React.js. Slightly different design with a close button",
   "author": "patw",
   "keywords": [
     "react",
@@ -14,10 +14,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/patw0929/react-intl-tel-input"
+    "url": "https://github.com/edume/react-intl-tel-input"
   },
   "bugs": {
-    "url": "https://github.com/patw0929/react-intl-tel-input/issues"
+    "url": "https://github.com/edume/react-intl-tel-input/issues"
   },
   "main": "dist/main.js",
   "peerDependencies": {
