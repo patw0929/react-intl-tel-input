@@ -30,7 +30,6 @@ Desktop.ini
 $RECYCLE.BIN/
 
 # App specific
-dist/
 node_modules/
 .tmp
 /src/main.js
