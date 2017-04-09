@@ -65,23 +65,22 @@ class CountryList extends Component {
     this.props.setFlag(iso2);
   }
 
-  appendListItem(countries, className) {
+  appendListItem(countries, isPreferred = false) {
     const preferredCountriesCount = this.props.preferredCountries.length;
 
     return countries.map((country, index) => {
-      const actualIndex = (className === 'preferred') ? index : index + preferredCountriesCount;
+      const actualIndex = isPreferred ? index : index + preferredCountriesCount;
       const countryClassObj = {
         country: true,
         highlight: (this.props.highlightedCountry === actualIndex),
+        preferred: isPreferred,
       };
-      let countryClass = null;
-
-      countryClassObj[className] = true;
-      countryClass = classNames(countryClassObj);
+      const countryClass = classNames(countryClassObj);
+      const keyPrefix = isPreferred ? 'pref-' : '';
 
       return (
         <li
-          key={ country.iso2 }
+          key={ `${keyPrefix}${country.iso2}` }
           className={ countryClass }
           data-dial-code={ country.dialCode }
           data-country-code={ country.iso2 }
@@ -125,13 +124,13 @@ class CountryList extends Component {
     let divider = null;
 
     if (preferredCountries.length) {
-      preferredOptions = this.appendListItem(preferredCountries, 'preferred');
+      preferredOptions = this.appendListItem(preferredCountries, true);
       divider = (
         <div className="divider" />
       );
     }
 
-    options = this.appendListItem(countries, '');
+    options = this.appendListItem(countries);
 
     return (
       <ul
