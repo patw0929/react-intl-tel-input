@@ -535,7 +535,7 @@ export default class IntlTelInputApp extends Component {
 
   // set the initial state of the input value and the selected flag
   setInitialState() {
-    const val = this.props.defaultValue || '';
+    const val = this.props.value || this.props.defaultValue || '';
 
     // if we already have a dial code we can go ahead and set the flag, else fall back to default
     if (this.getDialCode(val)) {
