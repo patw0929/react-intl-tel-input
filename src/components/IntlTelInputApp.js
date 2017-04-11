@@ -380,31 +380,31 @@ export default class IntlTelInputApp extends Component {
   }
 
   // get the extension from the current number
-  getExtension() {
+  getExtension(number) {
     if (window.intlTelInputUtils) {
       return window.intlTelInputUtils.getExtension(
-        this.getFullNumber(), this.selectedCountryData.iso2);
+        this.getFullNumber(number), this.selectedCountryData.iso2);
     }
 
     return '';
   }
 
   // format the number to the given format
-  getNumber(format) {
+  getNumber(number, format) {
     if (window.intlTelInputUtils) {
       return window.intlTelInputUtils.formatNumber(
-        this.getFullNumber(), this.selectedCountryData.iso2, format);
+        this.getFullNumber(number), this.selectedCountryData.iso2, format);
     }
 
     return '';
   }
 
   // get the input val, adding the dial code if separateDialCode is enabled
-  getFullNumber() {
+  getFullNumber(number) {
     const prefix = this.props.separateDialCode ?
       `+${this.selectedCountryData.dialCode}` : '';
 
-    return prefix + this.state.value;
+    return prefix + number;
   }
 
   // try and extract a valid international dial code from a full telephone number
@@ -828,7 +828,7 @@ export default class IntlTelInputApp extends Component {
 
       this.props.onPhoneNumberBlur(
         isValid, value, this.selectedCountryData,
-        fullNumber, this.getExtension());
+        fullNumber, this.getExtension(value));
     }
   }
 
@@ -976,7 +976,7 @@ export default class IntlTelInputApp extends Component {
 
   formatFullNumber(number) {
     return window.intlTelInputUtils
-      ? this.getNumber(window.intlTelInputUtils.numberFormat.INTERNATIONAL)
+      ? this.getNumber(number, window.intlTelInputUtils.numberFormat.INTERNATIONAL)
       : number;
   }
 
@@ -987,7 +987,7 @@ export default class IntlTelInputApp extends Component {
 
       this.props.onPhoneNumberChange(
         isValid, newNumber, this.selectedCountryData,
-        fullNumber, this.getExtension());
+        fullNumber, this.getExtension(newNumber));
     }
   }
 

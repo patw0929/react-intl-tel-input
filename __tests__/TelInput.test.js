@@ -337,7 +337,7 @@ describe('TelInput', function () { // eslint-disable-line func-names
     window.eval(getScript().text);
 
     inputComponent.simulate('change', { target: { value: '910123456' } });
-    expect(subject.instance().getFullNumber()).toBe('+886910123456');
+    expect(subject.instance().getFullNumber(910123456)).toBe('+886910123456');
   });
 
   it('should render custom placeholder', () => {
