@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import _ from 'underscore.deferred';
 import StylePropTypes from 'react-style-proptype';
@@ -11,94 +12,7 @@ import '../styles/intlTelInput.scss';
 const mobileUserAgentRegexp =
   /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
 
-export default class IntlTelInputApp extends Component {
-  static defaultProps = {
-    css: ['intl-tel-input', ''],
-    fieldName: '',
-    fieldId: '',
-    defaultValue: '',
-    // define the countries that'll be present in the dropdown
-    // defaults to the data defined in `AllCountries`
-    countriesData: null,
-    // whether or not to allow the dropdown
-    allowDropdown: true,
-    // if there is just a dial code in the input: remove it on blur, and re-add it on focus
-    autoHideDialCode: true,
-    // add or remove input placeholder with an example number for the selected country
-    autoPlaceholder: true,
-    // modify the auto placeholder
-    customPlaceholder: null,
-    // don't display these countries
-    excludeCountries: [],
-    // format the input value during initialisation
-    formatOnInit: true,
-    // display the country dial code next to the selected flag so it's not part of the typed number
-    separateDialCode: false,
-    // default country
-    defaultCountry: '',
-    // geoIp lookup function
-    geoIpLookup: null,
-    // don't insert international dial codes
-    nationalMode: true,
-    // number type to use for placeholders
-    numberType: 'MOBILE',
-    // function which can catch the "no this default country" exception
-    noCountryDataHandler: null,
-    // display only these countries
-    onlyCountries: [],
-    // the countries at the top of the list. defaults to united states and united kingdom
-    preferredCountries: ['us', 'gb'],
-    // specify the path to the libphonenumber script to enable validation/formatting
-    utilsScript: '',
-    onPhoneNumberChange: null,
-    onPhoneNumberBlur: null,
-    onSelectFlag: null,
-    disabled: false,
-    autoFocus: false,
-    // whether to use fullscreen flag dropdown for mobile useragents
-    useMobileFullscreenDropdown: true,
-    autoComplete: 'off',
-    // pass through arbitrary props to the tel input element
-    telInputProps: {},
-    // always format the number
-    format: false,
-  };
-
-  static propTypes = {
-    css: PropTypes.arrayOf(PropTypes.string),
-    fieldName: PropTypes.string,
-    fieldId: PropTypes.string,
-    value: PropTypes.string,
-    defaultValue: PropTypes.string,
-    countriesData: PropTypes.arrayOf(PropTypes.array),
-    allowDropdown: PropTypes.bool,
-    autoHideDialCode: PropTypes.bool,
-    autoPlaceholder: PropTypes.bool,
-    customPlaceholder: PropTypes.func,
-    excludeCountries: PropTypes.arrayOf(PropTypes.string),
-    formatOnInit: PropTypes.bool,
-    separateDialCode: PropTypes.bool,
-    defaultCountry: PropTypes.string,
-    geoIpLookup: PropTypes.func,
-    nationalMode: PropTypes.bool,
-    numberType: PropTypes.string,
-    noCountryDataHandler: PropTypes.func,
-    onlyCountries: PropTypes.arrayOf(PropTypes.string),
-    preferredCountries: PropTypes.arrayOf(PropTypes.string),
-    utilsScript: PropTypes.string,
-    onPhoneNumberChange: PropTypes.func,
-    onPhoneNumberBlur: PropTypes.func,
-    onSelectFlag: PropTypes.func,
-    disabled: PropTypes.bool,
-    placeholder: PropTypes.string,
-    autoFocus: PropTypes.bool,
-    autoComplete: PropTypes.string,
-    style: StylePropTypes,
-    useMobileFullscreenDropdown: PropTypes.bool,
-    telInputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-    format: PropTypes.bool,
-  };
-
+class IntlTelInputApp extends Component {
   constructor(props) {
     super(props);
 
@@ -1200,3 +1114,92 @@ export default class IntlTelInputApp extends Component {
     );
   }
 }
+
+IntlTelInputApp.propTypes = {
+  css: PropTypes.arrayOf(PropTypes.string),
+  fieldName: PropTypes.string,
+  fieldId: PropTypes.string,
+  value: PropTypes.string,
+  defaultValue: PropTypes.string,
+  countriesData: PropTypes.arrayOf(PropTypes.array),
+  allowDropdown: PropTypes.bool,
+  autoHideDialCode: PropTypes.bool,
+  autoPlaceholder: PropTypes.bool,
+  customPlaceholder: PropTypes.func,
+  excludeCountries: PropTypes.arrayOf(PropTypes.string),
+  formatOnInit: PropTypes.bool,
+  separateDialCode: PropTypes.bool,
+  defaultCountry: PropTypes.string,
+  geoIpLookup: PropTypes.func,
+  nationalMode: PropTypes.bool,
+  numberType: PropTypes.string,
+  noCountryDataHandler: PropTypes.func,
+  onlyCountries: PropTypes.arrayOf(PropTypes.string),
+  preferredCountries: PropTypes.arrayOf(PropTypes.string),
+  utilsScript: PropTypes.string,
+  onPhoneNumberChange: PropTypes.func,
+  onPhoneNumberBlur: PropTypes.func,
+  onSelectFlag: PropTypes.func,
+  disabled: PropTypes.bool,
+  placeholder: PropTypes.string,
+  autoFocus: PropTypes.bool,
+  autoComplete: PropTypes.string,
+  style: StylePropTypes,
+  useMobileFullscreenDropdown: PropTypes.bool,
+  telInputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  format: PropTypes.bool,
+};
+
+IntlTelInputApp.defaultProps = {
+  css: ['intl-tel-input', ''],
+  fieldName: '',
+  fieldId: '',
+  defaultValue: '',
+  // define the countries that'll be present in the dropdown
+  // defaults to the data defined in `AllCountries`
+  countriesData: null,
+  // whether or not to allow the dropdown
+  allowDropdown: true,
+  // if there is just a dial code in the input: remove it on blur, and re-add it on focus
+  autoHideDialCode: true,
+  // add or remove input placeholder with an example number for the selected country
+  autoPlaceholder: true,
+  // modify the auto placeholder
+  customPlaceholder: null,
+  // don't display these countries
+  excludeCountries: [],
+  // format the input value during initialisation
+  formatOnInit: true,
+  // display the country dial code next to the selected flag so it's not part of the typed number
+  separateDialCode: false,
+  // default country
+  defaultCountry: '',
+  // geoIp lookup function
+  geoIpLookup: null,
+  // don't insert international dial codes
+  nationalMode: true,
+  // number type to use for placeholders
+  numberType: 'MOBILE',
+  // function which can catch the "no this default country" exception
+  noCountryDataHandler: null,
+  // display only these countries
+  onlyCountries: [],
+  // the countries at the top of the list. defaults to united states and united kingdom
+  preferredCountries: ['us', 'gb'],
+  // specify the path to the libphonenumber script to enable validation/formatting
+  utilsScript: '',
+  onPhoneNumberChange: null,
+  onPhoneNumberBlur: null,
+  onSelectFlag: null,
+  disabled: false,
+  autoFocus: false,
+  // whether to use fullscreen flag dropdown for mobile useragents
+  useMobileFullscreenDropdown: true,
+  autoComplete: 'off',
+  // pass through arbitrary props to the tel input element
+  telInputProps: {},
+  // always format the number
+  format: false,
+};
+
+export default IntlTelInputApp;

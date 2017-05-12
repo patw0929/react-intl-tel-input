@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import utils from './utils';
 
@@ -7,18 +8,6 @@ function partial(fn, ...args) {
 }
 
 class CountryList extends Component {
-  static propTypes = {
-    setFlag: PropTypes.func,
-    countries: PropTypes.arrayOf(PropTypes.object),
-    inputTop: PropTypes.number,
-    inputOuterHeight: PropTypes.number,
-    preferredCountries: PropTypes.arrayOf(PropTypes.object),
-    highlightedCountry: PropTypes.number,
-    changeHighlightCountry: PropTypes.func,
-    showDropdown: PropTypes.bool,
-    isMobile: PropTypes.bool,
-  };
-
   constructor() {
     super();
     this.handleMouseOver = this.handleMouseOver.bind(this);
@@ -144,5 +133,17 @@ class CountryList extends Component {
     );
   }
 }
+
+CountryList.propTypes = {
+  setFlag: PropTypes.func,
+  countries: PropTypes.arrayOf(PropTypes.object),
+  inputTop: PropTypes.number,
+  inputOuterHeight: PropTypes.number,
+  preferredCountries: PropTypes.arrayOf(PropTypes.object),
+  highlightedCountry: PropTypes.number,
+  changeHighlightCountry: PropTypes.func,
+  showDropdown: PropTypes.bool,
+  isMobile: PropTypes.bool,
+};
 
 export default CountryList;
