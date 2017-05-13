@@ -1,22 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class TelInput extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-    readonly: PropTypes.bool,
-    fieldName: PropTypes.string,
-    fieldId: PropTypes.string,
-    value: PropTypes.string,
-    placeholder: PropTypes.string,
-    handleInputChange: PropTypes.func,
-    handleOnBlur: PropTypes.func,
-    autoFocus: PropTypes.bool,
-    autoComplete: PropTypes.string,
-    inputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-    refCallback: PropTypes.func.isRequired,
-  };
-
   render() {
     return (
       <input
@@ -38,5 +23,21 @@ class TelInput extends Component {
     );
   }
 }
+
+TelInput.propTypes = {
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  readonly: PropTypes.bool,
+  fieldName: PropTypes.string,
+  fieldId: PropTypes.string,
+  value: PropTypes.string,
+  placeholder: PropTypes.string,
+  handleInputChange: PropTypes.func,
+  handleOnBlur: PropTypes.func,
+  autoFocus: PropTypes.bool,
+  autoComplete: PropTypes.string,
+  inputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  refCallback: PropTypes.func.isRequired,
+};
 
 export default TelInput;

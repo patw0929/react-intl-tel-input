@@ -1,11 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
 class RootModal extends Component {
-  static propTypes = {
-    children: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  };
-
   componentDidMount() {
     this.modalTarget = document.createElement('div');
     this.modalTarget.className = 'intl-tel-input iti-container';
@@ -33,5 +30,9 @@ class RootModal extends Component {
     return <noscript />;
   }
 }
+
+RootModal.propTypes = {
+  children: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+};
 
 export default RootModal;

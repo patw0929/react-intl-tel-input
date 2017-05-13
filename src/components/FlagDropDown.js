@@ -1,30 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import CountryList from './CountryList';
 import RootModal from './RootModal';
 
 class FlagDropDown extends Component {
-  static propTypes = {
-    allowDropdown: PropTypes.bool,
-    dropdownContainer: PropTypes.string,
-    separateDialCode: PropTypes.bool,
-    dialCode: PropTypes.string,
-    countryCode: PropTypes.string,
-    showDropdown: PropTypes.bool,
-    clickSelectedFlag: PropTypes.func,
-    handleSelectedFlagKeydown: PropTypes.func,
-    isMobile: PropTypes.bool,
-    setFlag: PropTypes.func,
-    countries: PropTypes.arrayOf(PropTypes.object),
-    inputTop: PropTypes.number,
-    inputOuterHeight: PropTypes.number,
-    preferredCountries: PropTypes.arrayOf(PropTypes.object),
-    highlightedCountry: PropTypes.number,
-    changeHighlightCountry: PropTypes.func,
-    titleTip: PropTypes.string,
-    refCallback: PropTypes.func.isRequired,
-  };
-
   render() {
     const flagClassObj = {
       'iti-flag': true,
@@ -112,5 +92,26 @@ class FlagDropDown extends Component {
     );
   }
 }
+
+FlagDropDown.propTypes = {
+  allowDropdown: PropTypes.bool,
+  dropdownContainer: PropTypes.string,
+  separateDialCode: PropTypes.bool,
+  dialCode: PropTypes.string,
+  countryCode: PropTypes.string,
+  showDropdown: PropTypes.bool,
+  clickSelectedFlag: PropTypes.func,
+  handleSelectedFlagKeydown: PropTypes.func,
+  isMobile: PropTypes.bool,
+  setFlag: PropTypes.func,
+  countries: PropTypes.arrayOf(PropTypes.object),
+  inputTop: PropTypes.number,
+  inputOuterHeight: PropTypes.number,
+  preferredCountries: PropTypes.arrayOf(PropTypes.object),
+  highlightedCountry: PropTypes.number,
+  changeHighlightCountry: PropTypes.func,
+  titleTip: PropTypes.string,
+  refCallback: PropTypes.func.isRequired,
+};
 
 export default FlagDropDown;
