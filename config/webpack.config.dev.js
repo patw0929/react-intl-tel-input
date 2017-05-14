@@ -53,7 +53,6 @@ module.exports = {
     alias: {
       'react-intl-tel-input': './components/IntlTelInputApp.js',
     },
-    // root: __dirname + '/src',
   },
   module: {
     rules: [

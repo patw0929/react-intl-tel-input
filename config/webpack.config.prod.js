@@ -34,6 +34,8 @@ module.exports = {
       require.resolve('./polyfills'),
       './src/example.js',
     ],
+    index: './src/index.js',
+    withStyle: './src/withStyle.js',
   },
 
   output: {
