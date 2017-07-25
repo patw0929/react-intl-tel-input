@@ -1,5 +1,6 @@
 # React-Intl-Tel-Input
 
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Build Status](https://travis-ci.org/patw0929/react-intl-tel-input.svg)](https://travis-ci.org/patw0929/react-intl-tel-input)
 [![npm version](https://badge.fury.io/js/react-intl-tel-input.svg)](http://badge.fury.io/js/react-intl-tel-input)
 [![Coverage Status](https://coveralls.io/repos/github/patw0929/react-intl-tel-input/badge.svg?branch=master)](https://coveralls.io/github/patw0929/react-intl-tel-input?branch=master)
@@ -9,6 +10,15 @@
 
 Rewrite [International Telephone Input](https://github.com/jackocnr/intl-tel-input) in React.js.
 
+
+## Collaborators Wanted!
+
+Due to the long commuting time, I have no much time to maintain this project often. 😣
+
+So If anybody else is willing to take on the work of bug fixes, integrating pull requests, etc.
+Please let me know. 🙌
+
+I hope we can maintain the project together, and make this project better! 💪
 
 ## Demo & Examples
 
