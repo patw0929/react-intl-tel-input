@@ -999,18 +999,12 @@ class IntlTelInputApp extends Component {
   // or udpate the state and notify change if component is uncontrolled
   handleInputChange(e) {
     const value = this.props.format ? this.formatNumber(e.target.value) : e.target.value;
-
-    if (this.props.value !== undefined) {
+    this.setState({
+      value,
+    }, () => {
       this.updateFlagFromNumber(value);
       this.notifyPhoneNumberChange(value);
-    } else {
-      this.setState({
-        value,
-      }, () => {
-        this.updateFlagFromNumber(value);
-        this.notifyPhoneNumberChange(value);
-      });
-    }
+    });
   }
 
   changeHighlightCountry(showDropdown, selectedIndex) {
@@ -1073,7 +1067,7 @@ class IntlTelInputApp extends Component {
     const titleTip = (this.selectedCountryData) ?
       `${this.selectedCountryData.name}: +${this.selectedCountryData.dialCode}` : 'Unknown';
 
-    const value = this.props.value !== undefined ? this.props.value : this.state.value;
+    const value = this.state.value;
 
     return (
       <div className={ wrapperClass } style={ wrapperStyle }>
