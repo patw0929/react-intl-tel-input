@@ -154,8 +154,10 @@ class IntlTelInputApp extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.value !== nextProps.value) {
+      const value = nextProps.format ? this.formatNumber(nextProps.value) : nextProps.value;
+      this.updateFlagFromNumber(value);
       this.setState({
-        value: nextProps.value,
+        value,
       });
     }
 
