@@ -41,6 +41,10 @@ class DemoComponent extends Component {
   componentWillMount() {
     this.changePhone1 = this.changeHandler.bind(this, 'phone1');
     this.changePhone2 = this.changeHandler.bind(this, 'phone2');
+    this.blurHandler1 = this.blurHandler.bind(this, 'phone1');
+    this.blurHandler2 = this.blurHandler.bind(this, 'phone2');
+    this.selectFlagHandler1 = this.selectFlagHandler.bind(this, 'phone1');
+    this.selectFlagHandler2 = this.selectFlagHandler.bind(this, 'phone2');
   }
 
   changeHandler(name, isValid, value, countryData, number, ext) {
@@ -50,8 +54,18 @@ class DemoComponent extends Component {
     });
   }
 
-  blurHandler = (isValid, value, countryData, number, ext) => {
+  blurHandler(name, isValid, value, countryData, number, ext) {
     log(isValid, value, countryData, number, ext);
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  selectFlagHandler(name, currentNumber, selectedCountryData) {
+    log(currentNumber, selectedCountryData);
+    this.setState({
+      [name]: currentNumber,
+    });
   }
 
   render() {
@@ -59,7 +73,8 @@ class DemoComponent extends Component {
       <div>
         <IntlTelInput
           onPhoneNumberChange={ this.changePhone1 }
-          onPhoneNumberBlur={ this.blurHandler }
+          onPhoneNumberBlur={ this.blurHandler1 }
+          onSelectFlag={ this.selectFlagHandler1 }
           defaultCountry={ 'auto' }
           value={ this.state.phone1 }
           geoIpLookup={ lookup }
@@ -71,7 +86,8 @@ class DemoComponent extends Component {
 
         <IntlTelInput
           onPhoneNumberChange={ this.changePhone2 }
-          onPhoneNumberBlur={ this.blurHandler }
+          onPhoneNumberBlur={ this.blurHandler2 }
+          onSelectFlag={ this.selectFlagHandler2 }
           defaultCountry={ 'jp' }
           value={ this.state.phone2 }
           css={ ['intl-tel-input', 'form-control'] }
