@@ -852,6 +852,10 @@ class IntlTelInputApp extends Component {
   // Note: called from _setFlag
   updateDialCode(newDialCode, hasSelectedListItem) {
     const currentNumber = this.state.value;
+
+    if (!newDialCode) {
+      return currentNumber;
+    }
     let newNumber = currentNumber;
 
     // save having to pass this every time
