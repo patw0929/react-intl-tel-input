@@ -737,8 +737,8 @@ class IntlTelInputApp extends Component {
     this.removeEmptyDialCode();
     if (typeof this.props.onPhoneNumberBlur === 'function') {
       const value = this.state.value;
-      const isValid = this.isValidNumber(value);
       const fullNumber = this.formatFullNumber(value);
+      const isValid = this.isValidNumber(fullNumber);
 
       this.props.onPhoneNumberBlur(
         isValid, value, this.selectedCountryData,
@@ -896,8 +896,8 @@ class IntlTelInputApp extends Component {
 
   notifyPhoneNumberChange(newNumber) {
     if (typeof this.props.onPhoneNumberChange === 'function') {
-      const isValid = this.isValidNumber(newNumber);
       const fullNumber = this.formatFullNumber(newNumber);
+      const isValid = this.isValidNumber(fullNumber);
 
       this.props.onPhoneNumberChange(
         isValid, newNumber, this.selectedCountryData,
