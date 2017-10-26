@@ -879,6 +879,10 @@ class IntlTelInputApp extends Component {
       newNumber = newDialCode;
     }
 
+    if (newNumber !== currentNumber) {
+      this.notifyPhoneNumberChange(newNumber);
+    }
+
     return newNumber;
   }
 
