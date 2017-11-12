@@ -72,6 +72,7 @@ class IntlTelInputApp extends Component {
     this.setInitialState = this.setInitialState.bind(this);
     this.setNumber = this.setNumber.bind(this);
     this.scrollTo = this.scrollTo.bind(this);
+    this.updateDialCode = this.updateDialCode.bind(this);
     this.notifyPhoneNumberChange = this.notifyPhoneNumberChange.bind(this);
     this.isValidNumber = this.isValidNumber.bind(this);
     this.isUnknownNanp = this.isUnknownNanp.bind(this);
@@ -269,7 +270,10 @@ class IntlTelInputApp extends Component {
       this.tel.focus();
     }
 
+    const newNumber = this.updateDialCode(this.selectedCountryData.dialCode, !isInit);
+
     this.setState({
+      value: newNumber,
       showDropdown: false,
       highlightedCountry: selectedIndex,
       countryCode,
@@ -737,8 +741,8 @@ class IntlTelInputApp extends Component {
     this.removeEmptyDialCode();
     if (typeof this.props.onPhoneNumberBlur === 'function') {
       const value = this.state.value;
-      const isValid = this.isValidNumber(value);
       const fullNumber = this.formatFullNumber(value);
+      const isValid = this.isValidNumber(fullNumber);
 
       this.props.onPhoneNumberBlur(
         isValid, value, this.selectedCountryData,
@@ -844,6 +848,48 @@ class IntlTelInputApp extends Component {
     }
   }
 
+  // replace any existing dial code with the new one
+  // Note: called from _setFlag
+  updateDialCode(newDialCode, hasSelectedListItem) {
+    const currentNumber = this.state.value;
+
+    if (!newDialCode) {
+      return currentNumber;
+    }
+    let newNumber = currentNumber;
+
+    // save having to pass this every time
+    newDialCode = `+${newDialCode}`;
+
+    if (currentNumber.charAt(0) === '+') {
+      // there's a plus so we're dealing with a replacement (doesn't matter if nationalMode or not)
+      const prevDialCode = this.getDialCode(currentNumber);
+
+      if (prevDialCode) {
+        // current number contains a valid dial code, so replace it
+        newNumber = currentNumber.replace(prevDialCode, newDialCode);
+      } else {
+        // current number contains an invalid dial code, so ditch it
+        // (no way to determine where the invalid dial code ends and the rest of the number begins)
+        newNumber = newDialCode;
+      }
+    } else if (this.nationalMode || this.separateDialCode) {
+      // don't do anything
+    } else if (currentNumber) { // nationalMode is disabled
+      // there is an existing value with no dial code: prefix the new dial code
+      newNumber = newDialCode + currentNumber;
+    } else if (hasSelectedListItem || !this.autoHideDialCode) {
+      // no existing value and either they've just selected a list item, or autoHideDialCode is disabled: insert new dial code
+      newNumber = newDialCode;
+    }
+
+    if (newNumber !== currentNumber) {
+      this.notifyPhoneNumberChange(newNumber);
+    }
+
+    return newNumber;
+  }
+
   generateMarkup() {
     this.wrapperClass['allow-dropdown'] = this.allowDropdown;
     this.wrapperClass['separate-dial-code'] = this.props.separateDialCode;
@@ -896,8 +942,8 @@ class IntlTelInputApp extends Component {
 
   notifyPhoneNumberChange(newNumber) {
     if (typeof this.props.onPhoneNumberChange === 'function') {
-      const isValid = this.isValidNumber(newNumber);
       const fullNumber = this.formatFullNumber(newNumber);
+      const isValid = this.isValidNumber(fullNumber);
 
       this.props.onPhoneNumberChange(
         isValid, newNumber, this.selectedCountryData,
