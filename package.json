@@ -21,9 +21,9 @@
   },
   "main": "dist/main.js",
   "peerDependencies": {
+    "prop-types": "~15.5.8",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "prop-types": "~15.5.8"
+    "react-dom": "^15.4.2"
   },
   "dependencies": {
     "classnames": "^2.2.5",
