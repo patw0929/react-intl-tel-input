@@ -475,4 +475,17 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
 
     expect(subject.instance().formatNumber('+886 912 345 678')).toBe('0912 345 678');
   });
+
+  it('should highlight country from preferred list', async () => {
+    const { defaultCountry } = this.params;
+
+    this.params = {
+      ...this.params,
+      preferredCountries: ['us', 'gb', defaultCountry],
+    };
+    const subject = await this.makeSubject();
+
+    expect(defaultCountry).toBeTruthy();
+    expect(subject.state().highlightedCountry).toBe(2);
+  });
 });

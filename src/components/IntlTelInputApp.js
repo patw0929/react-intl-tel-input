@@ -257,13 +257,13 @@ class IntlTelInputApp extends Component {
     let selectedIndex = 0;
 
     if (countryCode && countryCode !== 'auto') {
-      for (let i = 0, max = this.countries.length; i < max; i++) {
-        if (this.countries[i].iso2 === countryCode) {
-          selectedIndex = i;
-        }
-      }
+      selectedIndex = this.preferredCountries.findIndex((country) => country.iso2 === countryCode);
 
-      selectedIndex += this.preferredCountries.length;
+      if (selectedIndex === -1) {
+        selectedIndex = this.countries.findIndex((country) => country.iso2 === countryCode);
+        if (selectedIndex === -1) selectedIndex = 0;
+        selectedIndex += this.preferredCountries.length;
+      }
     }
 
     if (this.state.showDropdown) {
