@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+ <testsuite name="FlagDropDown" timestamp="2018-01-23T16:02:33" hostname="localhost" time="6.241" errors="0" tests="13" skipped="0" disabled="0" failures="0">
+  <testcase classname="FlagDropDown" name="should be rendered" time="0.659" />
+  <testcase classname="FlagDropDown" name="should load country &quot;jp&quot; from localStorage" time="0.251" />
+  <testcase classname="FlagDropDown" name="should has .separate-dial-code class when with separateDialCode = true" time="0.329" />
+  <testcase classname="FlagDropDown" name="should has &quot;tw&quot; in class name" time="0.428" />
+  <testcase classname="FlagDropDown" name="should not has .hide class after clicking flag component" time="0.649" />
+  <testcase classname="FlagDropDown" name="Simulate change to Japan flag in dropdown before &amp; after" time="0.378" />
+  <testcase classname="FlagDropDown" name="Set onlyCountries" time="0.011" />
+  <testcase classname="FlagDropDown" name="Set excludeCountries" time="0.184" />
+  <testcase classname="FlagDropDown" name="Set defaultCountry as &quot;auto&quot;" time="0.225" />
+  <testcase classname="FlagDropDown" name="customPlaceholder" time="0.266" />
+  <testcase classname="FlagDropDown" name="onSelectFlag" time="0.235" />
+  <testcase classname="FlagDropDown" name="should output formatted number with formatNumber function" time="0.159" />
+  <testcase classname="FlagDropDown" name="should highlight country from preferred list" time="0.14" />
+ </testsuite>
+ <testsuite name="FlagDropDown.with original ReactTestUtils" timestamp="2018-01-23T16:02:36" hostname="localhost" time="2.325" errors="0" tests="6" skipped="0" disabled="0" failures="0">
+  <testcase classname="FlagDropDown.with original ReactTestUtils" name="Mouse over on country" time="0.323" />
+  <testcase classname="FlagDropDown.with original ReactTestUtils" name="Simulate change to flag in dropdown by up and down key" time="0.865" />
+  <testcase classname="FlagDropDown.with original ReactTestUtils" name="Simulate close the dropdown menu by ESC key" time="0.229" />
+  <testcase classname="FlagDropDown.with original ReactTestUtils" name="Simulate close the dropdown menu by clicking on document" time="0.257" />
+  <testcase classname="FlagDropDown.with original ReactTestUtils" name="componentWillUnmount" time="0.205" />
+  <testcase classname="FlagDropDown.with original ReactTestUtils" name="Simulate search country name in dropdown menu" time="0.446" />
+ </testsuite>
+</testsuites>
