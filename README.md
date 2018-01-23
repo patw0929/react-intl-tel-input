@@ -125,4 +125,4 @@ yarn run lint
 
 MIT
 
-Copyright (c) 2015-2017 patw.
+Copyright (c) 2015-2018 patw.
