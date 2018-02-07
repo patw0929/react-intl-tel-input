@@ -177,6 +177,12 @@ class IntlTelInputApp extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.value !== prevProps.value) {
+      this.updateFlagFromNumber(this.props.value);
+    }
+  }
+
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
     window.removeEventListener('scroll', this.handleWindowScroll);

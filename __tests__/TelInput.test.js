@@ -428,6 +428,19 @@ describe('TelInput', function () { // eslint-disable-line func-names
 
     it('should change input value on value prop change', () => {
       const subject = this.makeSubject();
+      const flagComponent = subject.find(FlagDropDown);
+
+      subject.setProps({ value: '+447598455159' });
+
+      expect(flagComponent.props().highlightedCountry).toBe(1);
+
+      subject.setProps({ value: '+1(201) 555-0129' });
+
+      expect(flagComponent.props().highlightedCountry).toBe(0);
+    });
+
+    it('should update country flag when value updates', () => {
+      const subject = this.makeSubject();
       const inputComponent = subject.find(TelInput);
 
       subject.setProps({ value: 'foo bar' });
