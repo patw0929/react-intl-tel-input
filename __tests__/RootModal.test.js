@@ -1,7 +1,10 @@
 /* eslint-disable no-eval */
 import React from 'react';
-import { mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import RootModal from '../src/components/RootModal';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('RootModal', function () { // eslint-disable-line func-names
   beforeEach(() => {

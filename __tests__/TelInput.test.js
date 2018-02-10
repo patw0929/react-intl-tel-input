@@ -1,11 +1,14 @@
 /* eslint-disable no-eval, no-restricted-properties */
 import React from 'react';
-import { mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import sinon from 'sinon';
 import fs from 'fs';
 import IntlTelInput from '../src/components/IntlTelInputApp';
 import TelInput from '../src/components/TelInput';
 import FlagDropDown from '../src/components/FlagDropDown';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('TelInput', function () { // eslint-disable-line func-names
   let libphonenumberUtils;
@@ -181,7 +184,10 @@ describe('TelInput', function () { // eslint-disable-line func-names
     inputComponent.simulate('change', {
       target: { value: '0999 123 45' },
     });
-    expect(inputComponent.props().value).toBe('0999 123 45');
+
+    const changedInputComponent = subject.find(TelInput);
+
+    expect(changedInputComponent.props().value).toBe('0999 123 45');
   });
 
   it('ensurePlus', () => {
@@ -221,7 +227,10 @@ describe('TelInput', function () { // eslint-disable-line func-names
     const inputComponent = subject.find(TelInput);
 
     inputComponent.simulate('change', { target: { value: '+886901234567' } });
-    expect(inputComponent.props().value).toBe('+886901234567');
+
+    const changedInputComponent = subject.find(TelInput);
+
+    expect(changedInputComponent.props().value).toBe('+886901234567');
   });
 
   it('utils loaded', () => {
@@ -428,10 +437,12 @@ describe('TelInput', function () { // eslint-disable-line func-names
 
     it('should change input value on value prop change', () => {
       const subject = this.makeSubject();
-      const inputComponent = subject.find(TelInput);
 
       subject.setProps({ value: 'foo bar' });
-      expect(inputComponent.props().value).toBe('foo bar');
+
+      const changedInputComponent = subject.find(TelInput);
+
+      expect(changedInputComponent.props().value).toBe('foo bar');
     });
   });
 
@@ -451,13 +462,15 @@ describe('TelInput', function () { // eslint-disable-line func-names
       const inputComponent = subject.find(TelInput);
 
       inputComponent.simulate('change', { target: { value: '12345' } });
-      expect(inputComponent.props().value).toBe('12345');
+
+      const changedInputComponent = subject.find(TelInput);
+
+      expect(changedInputComponent.props().value).toBe('12345');
       expect(subject.state().value).toBe('12345');
     });
 
     it('should change props value', () => {
       const subject = this.makeSubject();
-      const inputComponent = subject.find(TelInput);
 
       requests[0].respond(200,
         { 'Content-Type': 'text/javascript' },
@@ -467,7 +480,10 @@ describe('TelInput', function () { // eslint-disable-line func-names
       subject.setState({
         value: '+886912345678',
       });
-      expect(inputComponent.props().value).toBe('+886912345678');
+
+      const changedInputComponent = subject.find(TelInput);
+
+      expect(changedInputComponent.props().value).toBe('+886912345678');
     });
   });
 });

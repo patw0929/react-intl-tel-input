@@ -1,13 +1,16 @@
 /* eslint-disable react/no-find-dom-node, no-eval */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount } from 'enzyme';
-import ReactTestUtils from 'react-addons-test-utils';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import ReactTestUtils from 'react-dom/test-utils';
 import sinon from 'sinon';
 import fs from 'fs';
 import IntlTelInput from '../src/components/IntlTelInputApp';
 import FlagDropDown from '../src/components/FlagDropDown';
 import CountryList from '../src/components/CountryList';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('FlagDropDown', function () { // eslint-disable-line func-names
   let libphonenumberUtils;
@@ -93,7 +96,10 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
 
     expect(countryListComponent.find('.country-list.hide').length).toBeTruthy();
     flagComponent.find('.selected-flag').simulate('click');
-    expect(countryListComponent.find('.country-list.hide').length).toBeFalsy();
+
+    const changedCountryListComponent = subject.find(CountryList);
+
+    expect(changedCountryListComponent.find('.country-list.hide').length).toBeFalsy();
   });
 
   it('Simulate change to Japan flag in dropdown before & after', () => {
