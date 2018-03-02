@@ -446,6 +446,16 @@ describe('TelInput', function () { // eslint-disable-line func-names
       subject.setProps({ value: 'foo bar' });
       expect(inputComponent.props().value).toBe('foo bar');
     });
+
+    it('should be able to delete country code after input field has been populated with number', () => {
+      const subject = this.makeSubject();
+
+      subject.setProps({ value: '+447598455159' });
+
+      subject.setProps({ value: '+' });
+
+      expect(subject.state().value).toBe('+');
+    });
   });
 
   describe('uncontrolled', () => {
