@@ -435,11 +435,34 @@ describe('TelInput', function () { // eslint-disable-line func-names
     it('should change input value on value prop change', () => {
       const subject = this.makeSubject();
 
+      subject.setProps({ value: '+447598455159' });
+      subject.update();
+
+      expect(subject.find(FlagDropDown).props().highlightedCountry).toBe(1);
+
+      subject.setProps({ value: '+1(201) 555-0129' });
+      subject.update();
+
+      expect(subject.find(FlagDropDown).props().highlightedCountry).toBe(0);
+    });
+
+    it('should update country flag when value updates', () => {
+      const subject = this.makeSubject();
+
       subject.setProps({ value: 'foo bar' });
+      subject.update();
 
-      const changedInputComponent = subject.find(TelInput);
+      expect(subject.find(TelInput).props().value).toBe('foo bar');
+    });
 
-      expect(changedInputComponent.props().value).toBe('foo bar');
+    it('should be able to delete country code after input field has been populated with number', () => {
+      const subject = this.makeSubject();
+
+      subject.setProps({ value: '+447598455159' });
+
+      subject.setProps({ value: '+' });
+
+      expect(subject.state().value).toBe('+');
     });
   });
 

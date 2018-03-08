@@ -177,6 +177,12 @@ class IntlTelInputApp extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.value !== prevProps.value) {
+      this.updateFlagFromNumber(this.props.value);
+    }
+  }
+
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
     window.removeEventListener('scroll', this.handleWindowScroll);
@@ -720,9 +726,6 @@ class IntlTelInputApp extends Component {
       // Note: use getNumeric here because the number has not been
       // formatted yet, so could contain bad chars
       countryCode = null;
-    } else if (!number || number === '+') {
-      // empty, or just a plus, so default
-      countryCode = this.defaultCountry;
     }
 
     if (countryCode !== null) {
