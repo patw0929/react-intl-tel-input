@@ -1,16 +1,13 @@
 /* eslint-disable react/no-find-dom-node, no-eval */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
 import ReactTestUtils from 'react-dom/test-utils';
 import sinon from 'sinon';
 import fs from 'fs';
 import IntlTelInput from '../src/components/IntlTelInputApp';
 import FlagDropDown from '../src/components/FlagDropDown';
 import CountryList from '../src/components/CountryList';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('FlagDropDown', function () { // eslint-disable-line func-names
   let libphonenumberUtils;

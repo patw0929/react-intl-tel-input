@@ -1,14 +1,11 @@
 /* eslint-disable no-eval, no-restricted-properties */
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
 import sinon from 'sinon';
 import fs from 'fs';
 import IntlTelInput from '../src/components/IntlTelInputApp';
 import TelInput from '../src/components/TelInput';
 import FlagDropDown from '../src/components/FlagDropDown';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('TelInput', function () { // eslint-disable-line func-names
   let libphonenumberUtils;
