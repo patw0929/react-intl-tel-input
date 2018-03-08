@@ -57,6 +57,13 @@ or
 yarn add react-intl-tel-input
 ```
 
+## Compatibility
+
+| react-intl-tel-input version | react version |
+| --- | --- |
+| `5.x.x+` | `^16.2.0` |
+| `4.x.x`  | `^15.0.0` |
+
 
 ## Usage
 
