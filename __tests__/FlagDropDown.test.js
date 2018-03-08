@@ -1,8 +1,8 @@
 /* eslint-disable react/no-find-dom-node, no-eval */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
 import { mount } from 'enzyme';
-import ReactTestUtils from 'react-addons-test-utils';
 import sinon from 'sinon';
 import fs from 'fs';
 import IntlTelInput from '../src/components/IntlTelInputApp';
@@ -89,11 +89,12 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
   it('should not has .hide class after clicking flag component', () => {
     const subject = this.makeSubject();
     const flagComponent = subject.find(FlagDropDown);
-    const countryListComponent = subject.find(CountryList);
 
-    expect(countryListComponent.find('.country-list.hide').length).toBeTruthy();
+    expect(subject.find(CountryList).find('.country-list.hide').length).toBeTruthy();
     flagComponent.find('.selected-flag').simulate('click');
-    expect(countryListComponent.find('.country-list.hide').length).toBeFalsy();
+
+    subject.update();
+    expect(subject.find(CountryList).find('.country-list.hide').length).toBeFalsy();
   });
 
   it('Simulate change to Japan flag in dropdown before & after', () => {
