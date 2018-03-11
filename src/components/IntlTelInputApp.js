@@ -165,6 +165,12 @@ class IntlTelInputApp extends Component {
         disabled: nextProps.disabled,
       });
     }
+
+    if (this.props.placeholder !== nextProps.placeholder) {
+      this.setState({
+        placeholder: nextProps.placeholder,
+      });
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
