@@ -272,7 +272,7 @@ class IntlTelInputApp extends Component {
       }
     }
 
-    if (this.state.showDropdown) {
+    if (this.tel && this.state.showDropdown) {
       this.tel.focus();
     }
 
@@ -555,7 +555,7 @@ class IntlTelInputApp extends Component {
   }
 
   cap(number) {
-    const max = this.tel.getAttribute('maxlength');
+    const max = this.tel ? this.tel.getAttribute('maxlength') : number;
 
     return max && number.length > max ? number.substr(0, max) : number;
   }
