@@ -103,8 +103,6 @@ class IntlTelInputApp extends Component {
   }
 
   componentDidMount() {
-    this.initialPlaceholder = this.props.placeholder;
-
     this.autoHideDialCode = this.props.autoHideDialCode;
     this.allowDropdown = this.props.allowDropdown;
     this.nationalMode = this.props.nationalMode;
@@ -170,6 +168,13 @@ class IntlTelInputApp extends Component {
       this.setState({
         placeholder: nextProps.placeholder,
       });
+    }
+    
+    if (
+      typeof nextProps.customPlaceholder === 'function' &&
+      this.props.customPlaceholder !== nextProps.customPlaceholder
+    ) {
+      this.updatePlaceholder(nextProps);
     }
   }
 
@@ -293,7 +298,7 @@ class IntlTelInputApp extends Component {
       dialCode,
     }, () => {
       // and the input's placeholder
-      this.updatePlaceholder();
+      this.updatePlaceholder(this.props);
 
       // update the active list item
       this.wrapperClass.active = false;
@@ -788,21 +793,17 @@ class IntlTelInputApp extends Component {
 
   // update the input placeholder to an
   // example number from the currently selected country
-  updatePlaceholder() {
-    if (this.initialPlaceholder) {
-      this.setState({
-        placeholder: this.initialPlaceholder,
-      });
-    } else if (window.intlTelInputUtils && this.props.autoPlaceholder && this.selectedCountryData) {
-      const numberType = window.intlTelInputUtils.numberType[this.props.numberType];
+  updatePlaceholder(props = this.props) {
+    if (window.intlTelInputUtils && props.autoPlaceholder && this.selectedCountryData) {
+      const numberType = window.intlTelInputUtils.numberType[props.numberType];
       let placeholder = this.selectedCountryData.iso2 ?
         window.intlTelInputUtils.getExampleNumber(this.selectedCountryData.iso2,
           this.nationalMode, numberType) : '';
 
-      placeholder = this.beforeSetNumber(placeholder);
+      placeholder = this.beforeSetNumber(placeholder, props);
 
-      if (typeof this.props.customPlaceholder === 'function') {
-        placeholder = this.props.customPlaceholder(placeholder, this.selectedCountryData);
+      if (typeof props.customPlaceholder === 'function') {
+        placeholder = props.customPlaceholder(placeholder, this.selectedCountryData);
       }
 
       this.setState({
@@ -961,7 +962,7 @@ class IntlTelInputApp extends Component {
   }
 
   // remove the dial code if separateDialCode is enabled
-  beforeSetNumber(number) {
+  beforeSetNumber(number, props = this.props) {
     if (this.props.separateDialCode) {
       let dialCode = this.getDialCode(number);
 
@@ -1160,7 +1161,11 @@ class IntlTelInputApp extends Component {
           fieldName={ this.props.fieldName }
           fieldId={ this.props.fieldId }
           value={ value }
-          placeholder={ this.state.placeholder }
+          placeholder={
+            this.props.placeholder !== undefined
+              ? this.props.placeholder
+              : this.state.placeholder
+          }
           autoFocus={ this.props.autoFocus }
           autoComplete={ this.props.autoComplete }
           inputProps={ this.props.telInputProps }
