@@ -163,7 +163,7 @@ class IntlTelInputApp extends Component {
         disabled: nextProps.disabled,
       });
     }
-    
+
     if (
       typeof nextProps.customPlaceholder === 'function' &&
       this.props.customPlaceholder !== nextProps.customPlaceholder
@@ -957,7 +957,7 @@ class IntlTelInputApp extends Component {
 
   // remove the dial code if separateDialCode is enabled
   beforeSetNumber(number, props = this.props) {
-    if (this.props.separateDialCode) {
+    if (props.separateDialCode) {
       let dialCode = this.getDialCode(number);
 
       if (dialCode) {
