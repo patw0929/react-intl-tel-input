@@ -5,5 +5,9 @@ cache:
     - node_modules
 node_js:
   - "8.9.1"
+script:
+  - yarn test
+  - yarn lint
+  - yarn build
 after_success: yarn run coverage
 after_script: yarn run coveralls
