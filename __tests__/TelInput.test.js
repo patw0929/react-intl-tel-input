@@ -482,6 +482,11 @@ describe('TelInput', function () { // eslint-disable-line func-names
     it('should change input placeholder on customPlaceholder prop change', () => {
       const subject = this.makeSubject();
 
+      requests[0].respond(200,
+        { 'Content-Type': 'text/javascript' },
+        libphonenumberUtils);
+      window.eval(getScript().text);
+
       subject.setProps({ customPlaceholder: () => 'Phone number' });
       subject.update();
 
