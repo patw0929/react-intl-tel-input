@@ -1178,6 +1178,7 @@ IntlTelInputApp.propTypes = {
   countriesData: PropTypes.arrayOf(PropTypes.array),
   allowDropdown: PropTypes.bool,
   autoHideDialCode: PropTypes.bool,
+  // eslint-disable-next-line react/no-unused-prop-types
   autoPlaceholder: PropTypes.bool,
   customPlaceholder: PropTypes.func,
   excludeCountries: PropTypes.arrayOf(PropTypes.string),
@@ -1186,6 +1187,7 @@ IntlTelInputApp.propTypes = {
   defaultCountry: PropTypes.string,
   geoIpLookup: PropTypes.func,
   nationalMode: PropTypes.bool,
+  // eslint-disable-next-line react/no-unused-prop-types
   numberType: PropTypes.string,
   noCountryDataHandler: PropTypes.func,
   onlyCountries: PropTypes.arrayOf(PropTypes.string),
