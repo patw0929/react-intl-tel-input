@@ -478,6 +478,20 @@ describe('TelInput', function () { // eslint-disable-line func-names
 
       expect(subject.find(TelInput).props().placeholder).toBe('Your phone');
     });
+
+    it('should change input placeholder on customPlaceholder prop change', () => {
+      const subject = this.makeSubject();
+
+      subject.setProps({ customPlaceholder: () => 'Phone number' });
+      subject.update();
+
+      expect(subject.find(TelInput).props().placeholder).toBe('Phone number');
+
+      subject.setProps({ customPlaceholder: () => 'Your phone' });
+      subject.update();
+
+      expect(subject.find(TelInput).props().placeholder).toBe('Your phone');
+    });
   });
 
   describe('uncontrolled', () => {
