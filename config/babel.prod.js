@@ -28,6 +28,8 @@ module.exports = {
       // You can safely remove this after ejecting:
       moduleName: path.dirname(require.resolve('babel-runtime/package'))
     }],
+    // Get rid of proptypes in dist.
+    require.resolve('babel-plugin-transform-react-remove-prop-types'),
     // Optimization: hoist JSX that never changes out of render()
     // Disabled because of issues:
     // * https://github.com/facebookincubator/create-react-app/issues/525
