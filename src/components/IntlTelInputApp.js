@@ -877,7 +877,7 @@ class IntlTelInputApp extends Component {
         // (no way to determine where the invalid dial code ends and the rest of the number begins)
         newNumber = newDialCode;
       }
-    } else if (this.nationalMode || this.separateDialCode) {
+    } else if (this.nationalMode || this.props.separateDialCode) {
       // don't do anything
     } else if (currentNumber) { // nationalMode is disabled
       // there is an existing value with no dial code: prefix the new dial code
@@ -929,7 +929,9 @@ class IntlTelInputApp extends Component {
   // validate the input val - assumes the global function isValidNumber (from utilsScript)
   isValidNumber(number) {
     const val = utils.trim(number);
-    const countryCode = (this.nationalMode) ? this.selectedCountryData.iso2 : '';
+    const countryCode = (
+      this.nationalMode || this.props.separateDialCode
+    ) ? this.selectedCountryData.iso2 : '';
 
     if (window.intlTelInputUtils) {
       return window.intlTelInputUtils.isValidNumber(val, countryCode);
