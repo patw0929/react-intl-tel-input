@@ -646,10 +646,17 @@ class IntlTelInputApp extends Component {
 
   formatNumber(number) {
     if (window.intlTelInputUtils && this.selectedCountryData) {
-      const format = !this.props.separateDialCode &&
-        (this.nationalMode || number.charAt(0) !== '+') ?
-          window.intlTelInputUtils.numberFormat.NATIONAL :
-          window.intlTelInputUtils.numberFormat.INTERNATIONAL;
+      let format = window.intlTelInputUtils.numberFormat.INTERNATIONAL;
+
+      if (
+        /* eslint-disable no-mixed-operators */
+        !this.props.separateDialCode &&
+        this.nationalMode ||
+        number.charAt(0) !== '+'
+        /* eslint-enable no-mixed-operators */
+      ) {
+        format = window.intlTelInputUtils.numberFormat.NATIONAL;
+      }
 
       number = window.intlTelInputUtils.formatNumber(number,
         this.selectedCountryData.iso2, format);
