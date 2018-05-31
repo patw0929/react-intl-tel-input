@@ -157,7 +157,7 @@ class IntlTelInputApp extends Component {
         value: nextProps.value,
       });
     } else if (this.props.defaultValue !== nextProps.defaultValue) {
-       this.setState({
+      this.setState({
         value: nextProps.defaultValue,
       });
     }
