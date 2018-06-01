@@ -1138,8 +1138,6 @@ class IntlTelInputApp extends Component {
     const titleTip = (this.selectedCountryData) ?
       `${this.selectedCountryData.name}: +${this.selectedCountryData.dialCode}` : 'Unknown';
 
-    const value = this.props.value !== undefined ? this.props.value : this.state.value;
-
     return (
       <div className={ wrapperClass } style={ wrapperStyle }>
         <FlagDropDown
@@ -1171,7 +1169,7 @@ class IntlTelInputApp extends Component {
           readonly={ this.state.readonly }
           fieldName={ this.props.fieldName }
           fieldId={ this.props.fieldId }
-          value={ value }
+          value={ this.state.value }
           placeholder={
             this.props.placeholder !== undefined
               ? this.props.placeholder
