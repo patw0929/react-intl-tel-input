@@ -679,7 +679,7 @@ class IntlTelInputApp extends Component {
     number = this.beforeSetNumber(number);
 
     this.setState(
-      prevState => {
+      (prevState) => {
         if (prevState.showDropDown || prevState.value !== number) {
           if (doNotify) {
             this.notifyPhoneNumberChange(number);
