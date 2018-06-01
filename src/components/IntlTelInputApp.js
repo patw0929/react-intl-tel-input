@@ -181,6 +181,7 @@ class IntlTelInputApp extends Component {
       this.props.value !== prevProps.value ||
       this.props.defaultValue !== prevProps.defaultValue
     ) {
+      this.tempCountry = 'auto';
       this.setInitialState();
     }
   }
