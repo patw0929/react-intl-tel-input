@@ -152,16 +152,6 @@ class IntlTelInputApp extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.value !== nextProps.value) {
-      this.setState({
-        value: nextProps.value,
-      });
-    } else if (this.props.defaultValue !== nextProps.defaultValue) {
-      this.setState({
-        value: nextProps.defaultValue,
-      });
-    }
-
     if (this.props.disabled !== nextProps.disabled) {
       this.setState({
         disabled: nextProps.disabled,
@@ -187,8 +177,11 @@ class IntlTelInputApp extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.value !== prevProps.value) {
-      this.updateFlagFromNumber(this.props.value);
+    if (
+      this.props.value !== prevProps.value ||
+      this.props.defaultValue !== prevProps.defaultValue
+    ) {
+      this.setInitialState();
     }
   }
 
@@ -467,6 +460,8 @@ class IntlTelInputApp extends Component {
   }
 
   // set the initial state of the input value and the selected flag
+  // called in componentDidMount (once at first, then once when the scripts have finished loading)
+  // and in componentDidUpdate (when props controlling state.value have changed)
   setInitialState() {
     const val = this.props.value || this.props.defaultValue || '';
 
@@ -497,9 +492,7 @@ class IntlTelInputApp extends Component {
 
     // NOTE: if tempCountry is set to auto, that will be handled separately
     // format
-    if (val) {
-      this.updateValFromNumber(val, this.props.formatOnInit, doNotify);
-    }
+    this.updateValFromNumber(val, this.props.formatOnInit, doNotify);
   }
 
   initRequests() {
@@ -685,16 +678,25 @@ class IntlTelInputApp extends Component {
 
     number = this.beforeSetNumber(number);
 
-    this.setState({
-      showDropdown: false,
-      value: number,
-    }, () => {
-      if (doNotify) {
-        this.notifyPhoneNumberChange(this.state.value);
-      }
+    this.setState(
+      prevState => {
+        if (prevState.showDropDown || prevState.value !== number) {
+          if (doNotify) {
+            this.notifyPhoneNumberChange(number);
+          }
 
-      this.unbindDocumentClick();
-    });
+          return {
+            showDropdown: false,
+            value: number,
+          };
+        }
+
+        return null;
+      },
+      () => {
+        this.unbindDocumentClick();
+      },
+    );
   }
 
   // check if need to select a new flag based on the given number
