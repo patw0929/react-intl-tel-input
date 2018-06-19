@@ -182,4 +182,14 @@ export default {
       el.className = el.className.replace(reg, ' ');
     }
   },
+  findIndex(items, predicate) {
+    var index = -1;
+    items.some((item, i) => {
+        if (predicate(item)) {
+          index = i;
+          return true;
+        }
+    });
+    return index;
+  },
 };

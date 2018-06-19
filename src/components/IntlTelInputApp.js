@@ -268,10 +268,10 @@ class IntlTelInputApp extends Component {
     let selectedIndex = 0;
 
     if (countryCode && countryCode !== 'auto') {
-      selectedIndex = this.preferredCountries.findIndex((country) => country.iso2 === countryCode);
+      selectedIndex = utils.findIndex(this.preferredCountries, (country) => country.iso2 === countryCode);
 
       if (selectedIndex === -1) {
-        selectedIndex = this.countries.findIndex((country) => country.iso2 === countryCode);
+        selectedIndex = utils.findIndex(this.countries, (country) => country.iso2 === countryCode);
         if (selectedIndex === -1) selectedIndex = 0;
         selectedIndex += this.preferredCountries.length;
       }

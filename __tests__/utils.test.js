@@ -156,4 +156,21 @@ describe('utils', () => {
 
     expect(element.classList.contains('abc')).toBeFalsy();
   });
+
+  it('findIndex', () => {
+    let array = [];
+    let predicate = () => true;
+
+    expect(utils.findIndex(array, predicate)).toEqual(-1);
+
+    array = [1, 2, 3];
+    predicate = (item) => item === 2;
+
+    expect(utils.findIndex(array, predicate)).toEqual(1);
+
+    array = [1, 2, 3];
+    predicate = (item) => item === 4;
+
+    expect(utils.findIndex(array, predicate)).toEqual(-1);
+  });
 });
