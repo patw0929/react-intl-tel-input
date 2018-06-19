@@ -61,6 +61,7 @@ describe('utils', () => {
     expect(utils.trim(undefined)).toBe('');
 
     const str = ' Hello World   ';
+
     expect(utils.trim(str)).toBe('Hello World');
   });
 
@@ -83,6 +84,7 @@ describe('utils', () => {
     expect(utils.retrieveLiIndex(bListItem)).toBe(1);
 
     const otherListItem = doc.querySelector('.z');
+
     expect(utils.retrieveLiIndex(otherListItem)).toBe(-1);
   });
 
