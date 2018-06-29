@@ -1121,9 +1121,7 @@ class IntlTelInputApp extends Component {
     const inputClass = this.props.css[1];
     const wrapperStyle = Object.assign({}, this.props.style || {});
 
-    if (this.state.showDropdown) {
-      this.wrapperClass.expanded = true;
-    }
+    this.wrapperClass.expanded = this.state.showDropdown;
 
     const wrapperClass = classNames(this.wrapperClass);
 
