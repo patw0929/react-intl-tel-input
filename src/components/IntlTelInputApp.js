@@ -61,6 +61,7 @@ class IntlTelInputApp extends Component {
       title: '',
       countryCode: 'us',
       dialCode: '',
+      cursorPosition: (props.value || props.defaultValue).length,
     };
 
     this.selectedCountryData = {};
@@ -1055,14 +1056,24 @@ class IntlTelInputApp extends Component {
   // Either notify phoneNumber changed if component is controlled
   // or udpate the state and notify change if component is uncontrolled
   handleInputChange(e) {
+    let cursorPosition = e.target.selectionStart;
+    const previousValue = e.target.value;
+    const previousStringBeforeCursor = previousValue === '' ? previousValue : previousValue.substring(0, cursorPosition);
     const value = this.props.format ? this.formatNumber(e.target.value) : e.target.value;
 
+    cursorPosition = utils.getCursorPositionAfterFormating(previousStringBeforeCursor, previousValue, value);
+
     if (this.props.value !== undefined) {
-      this.updateFlagFromNumber(value);
-      this.notifyPhoneNumberChange(value);
+      this.setState({
+        cursorPosition,
+      }, () => {
+        this.updateFlagFromNumber(value);
+        this.notifyPhoneNumberChange(value);
+      });
     } else {
       this.setState({
         value,
+        cursorPosition,
       }, () => {
         this.updateFlagFromNumber(value);
         this.notifyPhoneNumberChange(value);
@@ -1170,6 +1181,7 @@ class IntlTelInputApp extends Component {
           autoFocus={ this.props.autoFocus }
           autoComplete={ this.props.autoComplete }
           inputProps={ this.props.telInputProps }
+          cursorPosition={ this.state.cursorPosition }
         />
       </div>
     );
