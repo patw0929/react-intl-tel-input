@@ -79,7 +79,6 @@ class DemoComponent extends Component {
           value={ this.state.phone1 }
           geoIpLookup={ lookup }
           css={ ['intl-tel-input', 'form-control'] }
-          utilsScript="libphonenumber.js"
           format
         />
         <div>Phone Number: {this.state.phone1 }</div>
@@ -91,7 +90,6 @@ class DemoComponent extends Component {
           defaultCountry={ 'jp' }
           value={ this.state.phone2 }
           css={ ['intl-tel-input', 'form-control'] }
-          utilsScript="libphonenumber.js"
         />
         <div>Phone Number: {this.state.phone2}</div>
       </div>

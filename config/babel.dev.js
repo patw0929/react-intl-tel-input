@@ -6,9 +6,17 @@ module.exports = {
   // This is a feature of `babel-loader` for webpack (not Babel itself).
   // It enables caching results in OS temporary directory for faster rebuilds.
   cacheDirectory: true,
+  env: {
+    test: {
+      plugins: [
+        // to enable dynamic import in tests
+        require.resolve('babel-plugin-dynamic-import-node')
+      ]
+    }
+  },
   presets: [
     // Latest stable ECMAScript features
-    ['latest'],
+    ['env'],
     // JSX, Flow
     require.resolve('babel-preset-react'),
   ],
@@ -17,6 +25,8 @@ module.exports = {
     require.resolve('babel-plugin-transform-class-properties'),
     // { ...todo, completed: true }
     require.resolve('babel-plugin-transform-object-rest-spread'),
+    // to enable import() [dynamic import]
+    require.resolve('babel-plugin-syntax-dynamic-import'),
     // function* () { yield 42; yield 43; }
     [require.resolve('babel-plugin-transform-regenerator'), {
       // Async functions are converted to generators by babel-preset-latest
