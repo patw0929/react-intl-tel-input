@@ -2,11 +2,26 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class TelInput extends Component {
+  constructor(props) {
+    super(props);
+
+    this.refHandler = this.refHandler.bind(this);
+  }
+
+  componentDidUpdate() {
+    this.tel.setSelectionRange(this.props.cursorPosition, this.props.cursorPosition);
+  }
+
+  refHandler(element) {
+    this.tel = element;
+    this.props.refCallback(element);
+  }
+
   render() {
     return (
       <input
         { ...this.props.inputProps }
-        ref={ this.props.refCallback }
+        ref={ this.refHandler }
         type="tel"
         autoComplete={ this.props.autoComplete }
         className={ this.props.className }
@@ -38,6 +53,7 @@ TelInput.propTypes = {
   autoComplete: PropTypes.string,
   inputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   refCallback: PropTypes.func.isRequired,
+  cursorPosition: PropTypes.number,
 };
 
 export default TelInput;
