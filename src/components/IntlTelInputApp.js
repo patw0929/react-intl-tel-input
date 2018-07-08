@@ -829,7 +829,7 @@ class IntlTelInputApp extends Component {
     try {
       const container = this.flagDropDown.querySelector('.country-list');
       const containerHeight = parseFloat(
-        window.getComputedStyle(container).getPropertyValue('height'), 10);
+        window.getComputedStyle(container).getPropertyValue('height'));
       const containerTop = utils.offset(container).top;
       const containerBottom = containerTop + containerHeight;
       const elementHeight = utils.getOuterHeight(element);
