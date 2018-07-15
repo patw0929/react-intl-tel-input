@@ -512,7 +512,10 @@ class IntlTelInputApp extends Component {
         });
       }
     } else {
-      this.utilsScriptDeferred.resolve();
+      import('../libphonenumber').then(() => {
+        this.loadUtils();
+        this.utilsScriptDeferred.resolve();
+      });
     }
 
     if (this.tempCountry === 'auto') {
