@@ -173,7 +173,7 @@ class IntlTelInputApp extends Component {
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
     if (nextState.showDropdown) {
       document.addEventListener('keydown', this.handleDocumentKeyDown);
       this.bindDocumentClick();
@@ -181,6 +181,8 @@ class IntlTelInputApp extends Component {
       document.removeEventListener('keydown', this.handleDocumentKeyDown);
       this.unbindDocumentClick();
     }
+
+    return true;
   }
 
   componentDidUpdate(prevProps) {
