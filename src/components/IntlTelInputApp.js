@@ -517,17 +517,11 @@ class IntlTelInputApp extends Component {
         this.utilsScriptDeferred.resolve();
       });
     }
-    if (this.props.defaultCountry === 'auto') {
-      console.log(this.state.countryCode);
-    }
 
     if (this.tempCountry === 'auto') {
       this.loadAutoCountry();
     } else {
       this.autoCountryDeferred.resolve();
-    }
-    if (this.props.defaultCountry === 'auto') {
-      console.log(this.state.countryCode);
     }
   }
 

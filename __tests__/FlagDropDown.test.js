@@ -65,8 +65,10 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     };
     const subject = await this.makeSubject();
 
-    expect(subject.state().countryCode).toBe('jp');
-    window.localStorage.clear();
+    subject.instance().utilsScriptDeferred.then(() => {
+      expect(subject.state().countryCode).toBe('jp');
+      window.localStorage.clear();
+    });
   });
 
   it('should has .separate-dial-code class when with separateDialCode = true', () => {
@@ -160,7 +162,9 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     };
     const subject = await this.makeSubject();
 
-    expect(subject.state().countryCode).toBe('jp');
+    subject.instance().utilsScriptDeferred.then(() => {
+      expect(subject.state().countryCode).toBe('jp');
+    });
   });
 
   describe('with original ReactTestUtils', () => {
