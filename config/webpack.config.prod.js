@@ -2,7 +2,6 @@
 
 var webpack = require('webpack');
 var paths = require('./paths');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
@@ -161,9 +160,6 @@ module.exports = {
         minifyURLs: true
       }
     }),
-    new CopyWebpackPlugin([
-      { from: 'src/libphonenumber.js', to: './' },
-    ]),
     new webpack.DefinePlugin(env),
     // Minify the code.
     new webpack.optimize.UglifyJsPlugin({
