@@ -13,6 +13,25 @@ const mobileUserAgentRegexp =
   /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
 
 class IntlTelInputApp extends Component {
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    let newState = null;
+
+    if (nextProps.value && prevState.value !== nextProps.value) {
+      newState = {
+        value: nextProps.value,
+      };
+    }
+
+    if (nextProps.disabled && prevState.disabled !== nextProps.disabled) {
+      newState = {
+        disabled: nextProps.disabled,
+      };
+    }
+
+    return newState;
+  }
+
   constructor(props) {
     super(props);
 
@@ -152,27 +171,6 @@ class IntlTelInputApp extends Component {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.value !== nextProps.value) {
-      this.setState({
-        value: nextProps.value,
-      });
-    }
-
-    if (this.props.disabled !== nextProps.disabled) {
-      this.setState({
-        disabled: nextProps.disabled,
-      });
-    }
-
-    if (
-      typeof nextProps.customPlaceholder === 'function' &&
-      this.props.customPlaceholder !== nextProps.customPlaceholder
-    ) {
-      this.updatePlaceholder(nextProps);
-    }
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
     if (nextState.showDropdown) {
       document.addEventListener('keydown', this.handleDocumentKeyDown);
@@ -188,6 +186,13 @@ class IntlTelInputApp extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.value !== prevProps.value) {
       this.updateFlagFromNumber(this.props.value);
+    }
+
+    if (
+      typeof this.props.customPlaceholder === 'function' &&
+      prevProps.customPlaceholder !== this.props.customPlaceholder
+    ) {
+      this.updatePlaceholder(this.props);
     }
   }
 
