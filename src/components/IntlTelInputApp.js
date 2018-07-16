@@ -519,7 +519,7 @@ class IntlTelInputApp extends Component {
         });
       }
     } else {
-      import(/* webpackChunkName: "libphonenumber" */ '../libphonenumber').then(() => {
+      import(/* webpackMode: "lazy-once", webpackChunkName: "libphonenumber" */ '../libphonenumber').then(() => {
         this.loadUtils();
         this.utilsScriptDeferred.resolve();
       });
