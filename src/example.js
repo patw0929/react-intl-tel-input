@@ -36,9 +36,6 @@ class DemoComponent extends Component {
       phone1: '',
       phone2: '',
     };
-  }
-
-  componentWillMount() {
     this.changePhone1 = this.changeHandler.bind(this, 'phone1');
     this.changePhone2 = this.changeHandler.bind(this, 'phone2');
     this.blurHandler1 = this.blurHandler.bind(this, 'phone1');

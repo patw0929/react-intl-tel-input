@@ -16,15 +16,15 @@ class CountryList extends Component {
     this.setDropdownPosition = this.setDropdownPosition.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.showDropdown) {
+  shouldComponentUpdate(nextProps) {
+    const shouldUpdate = !utils.shallowEquals(this.props, nextProps);
+
+    if (shouldUpdate && nextProps.showDropdown) {
       this.listElement.setAttribute('class', 'country-list v-hide');
       this.setDropdownPosition();
     }
-  }
 
-  shouldComponentUpdate(nextProps) {
-    return !utils.shallowEquals(this.props, nextProps);
+    return shouldUpdate;
   }
 
   setDropdownPosition() {
