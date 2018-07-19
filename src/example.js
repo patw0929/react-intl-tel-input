@@ -36,9 +36,6 @@ class DemoComponent extends Component {
       phone1: '',
       phone2: '',
     };
-  }
-
-  componentWillMount() {
     this.changePhone1 = this.changeHandler.bind(this, 'phone1');
     this.changePhone2 = this.changeHandler.bind(this, 'phone2');
     this.blurHandler1 = this.blurHandler.bind(this, 'phone1');
@@ -79,7 +76,6 @@ class DemoComponent extends Component {
           value={ this.state.phone1 }
           geoIpLookup={ lookup }
           css={ ['intl-tel-input', 'form-control'] }
-          utilsScript="libphonenumber.js"
           format
         />
         <div>Phone Number: {this.state.phone1 }</div>
@@ -91,7 +87,6 @@ class DemoComponent extends Component {
           defaultCountry={ 'jp' }
           value={ this.state.phone2 }
           css={ ['intl-tel-input', 'form-control'] }
-          utilsScript="libphonenumber.js"
         />
         <div>Phone Number: {this.state.phone2}</div>
       </div>

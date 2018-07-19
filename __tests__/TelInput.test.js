@@ -497,6 +497,19 @@ describe('TelInput', function () { // eslint-disable-line func-names
 
       expect(subject.find(TelInput).props().placeholder).toBe('Your phone');
     });
+
+    it('should set "expanded" class to wrapper only when flags are open', () => {
+      const subject = this.makeSubject();
+      const flagComponent = subject.find(FlagDropDown).find('.selected-flag');
+
+      flagComponent.simulate('click');
+      expect(subject.instance().wrapperClass.expanded).toBe(true);
+
+      const taiwanOption = subject.find(FlagDropDown).find('[data-country-code="tw"]');
+
+      taiwanOption.simulate('click');
+      expect(subject.instance().wrapperClass.expanded).toBe(false);
+    });
   });
 
   describe('uncontrolled', () => {

@@ -10,8 +10,10 @@ class RootModal extends Component {
     this._render();
   }
 
-  componentWillUpdate() {
+  shouldComponentUpdate() {
     this._render();
+
+    return false;
   }
 
   componentWillUnmount() {

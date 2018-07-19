@@ -5,7 +5,7 @@ module.exports = {
   babelrc: false,
   presets: [
     // Latest stable ECMAScript features
-    ['latest', { es2015: { 'modules': false } }],
+    ['env', { es2015: { 'modules': false } }],
     // JSX, Flow
     require.resolve('babel-preset-react')
   ],
@@ -36,5 +36,7 @@ module.exports = {
     // * https://phabricator.babeljs.io/search/query/pCNlnC2xzwzx/
     // TODO: Enable again when these issues are resolved.
     // require.resolve('babel-plugin-transform-react-constant-elements')
+    // to enable import() [dynamic import]
+    require.resolve('babel-plugin-syntax-dynamic-import'),
   ]
 };
