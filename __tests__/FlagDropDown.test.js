@@ -8,6 +8,7 @@ import fs from 'fs';
 import IntlTelInput from '../src/components/IntlTelInputApp';
 import FlagDropDown from '../src/components/FlagDropDown';
 import CountryList from '../src/components/CountryList';
+import TelInput from '../src/components/TelInput';
 
 describe('FlagDropDown', function () { // eslint-disable-line func-names
   let libphonenumberUtils;
@@ -440,26 +441,31 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
 
   it('onSelectFlag', () => {
     let expected = '';
-    const onSelectFlag = (currentNumber, countryData) => {
-      expected = Object.assign({}, { currentNumber, ...countryData });
+    const onSelectFlag = (currentNumber, countryData, fullNumber, isValid) => {
+      expected = Object.assign({}, { currentNumber, fullNumber, isValid, ...countryData });
     };
 
     this.params.onSelectFlag = onSelectFlag;
     const subject = this.makeSubject();
     const flagComponent = subject.find(FlagDropDown);
+    const inputComponent = subject.find(TelInput);
     const countryListComponent = subject.find(CountryList);
 
     requests[0].respond(200,
       { 'Content-Type': 'text/javascript' },
       libphonenumberUtils);
+    window.eval(getScript().text);
 
+    inputComponent.simulate('change', { target: { value: '+8109012345678' } });
     flagComponent.simulate('click');
     const japanOption = countryListComponent.find('[data-country-code="jp"]');
 
     japanOption.simulate('click');
 
     expect(expected).toEqual({
-      currentNumber: '',
+      currentNumber: '+8109012345678',
+      fullNumber: '+81 90-1234-5678',
+      isValid: true,
       name: 'Japan (日本)',
       iso2: 'jp',
       dialCode: '81',
