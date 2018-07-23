@@ -58,8 +58,8 @@ class DemoComponent extends Component {
     });
   }
 
-  selectFlagHandler(name, currentNumber, selectedCountryData) {
-    log(currentNumber, selectedCountryData);
+  selectFlagHandler(name, currentNumber, selectedCountryData, fullNumber, isValid) {
+    log(currentNumber, selectedCountryData, fullNumber, isValid);
     this.setState({
       [name]: currentNumber,
     });
