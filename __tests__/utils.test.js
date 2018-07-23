@@ -61,6 +61,7 @@ describe('utils', () => {
     expect(utils.trim(undefined)).toBe('');
 
     const str = ' Hello World   ';
+
     expect(utils.trim(str)).toBe('Hello World');
   });
 
@@ -83,6 +84,7 @@ describe('utils', () => {
     expect(utils.retrieveLiIndex(bListItem)).toBe(1);
 
     const otherListItem = doc.querySelector('.z');
+
     expect(utils.retrieveLiIndex(otherListItem)).toBe(-1);
   });
 
@@ -153,5 +155,48 @@ describe('utils', () => {
     utils.removeClass(element, 'abc');
 
     expect(element.classList.contains('abc')).toBeFalsy();
+  });
+
+  it('findIndex', () => {
+    let array = [];
+    let predicate = () => true;
+
+    expect(utils.findIndex(array, predicate)).toEqual(-1);
+
+    array = [1, 2, 3];
+    predicate = (item) => item === 2;
+
+    expect(utils.findIndex(array, predicate)).toEqual(1);
+
+    array = [1, 2, 3];
+    predicate = (item) => item === 4;
+
+    expect(utils.findIndex(array, predicate)).toEqual(-1);
+  });
+
+  it('getCursorPositionAfterFormating', () => {
+    let previousStringBeforeCursor = '9123';
+    let previousString = '912345';
+    let nextString = '912345';
+
+    expect(utils.getCursorPositionAfterFormating(previousStringBeforeCursor, previousString, nextString)).toEqual(4);
+
+    previousStringBeforeCursor = '0912 345';
+    previousString = '0912 345 678';
+    nextString = '91234678';
+
+    expect(utils.getCursorPositionAfterFormating(previousStringBeforeCursor, previousString, nextString)).toEqual(5);
+
+    previousStringBeforeCursor = '91234';
+    previousString = '91234678';
+    nextString = '0912 345 678';
+
+    expect(utils.getCursorPositionAfterFormating(previousStringBeforeCursor, previousString, nextString)).toEqual(7);
+
+    previousStringBeforeCursor = '(201) 5';
+    previousString = '(201) 55-01';
+    nextString = '201-5501';
+
+    expect(utils.getCursorPositionAfterFormating(previousStringBeforeCursor, previousString, nextString)).toEqual(5);
   });
 });

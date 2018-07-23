@@ -182,4 +182,57 @@ export default {
       el.className = el.className.replace(reg, ' ');
     }
   },
+  findIndex(items, predicate) {
+    let index = -1;
+
+    items.some((item, i) => {
+        if (predicate(item)) {
+          index = i;
+
+          return true;
+        }
+    });
+
+    return index;
+  },
+
+  // Get the location of cursor after formatting is done on the phone number
+  getCursorPositionAfterFormating(prevBeforeCursor, prev, next) {
+    if (prev === next) {
+      return prevBeforeCursor.length;
+    }
+    let cursorShift = 0;
+
+    if (prev.length > next.length) {
+      for (let i = 0, j = 0; i < prevBeforeCursor.length && j < next.length; i += 1) {
+        if (prevBeforeCursor[i] !== next[j]) {
+          if (isNaN(next[j]) && !isNaN(prevBeforeCursor[i])) {
+            i -= 1;
+            j += 1;
+            cursorShift += 1;
+          } else {
+            cursorShift -= 1;
+          }
+        } else {
+          j += 1;
+        }
+      }
+    } else {
+      for (let i = 0, j = 0; i < prevBeforeCursor.length && j < next.length; j += 1) {
+        if (prevBeforeCursor[i] !== next[j]) {
+          if (isNaN(prevBeforeCursor[i]) && !isNaN(next[j])) {
+            j -= 1;
+            i += 1;
+            cursorShift -= 1;
+          } else {
+            cursorShift += 1;
+          }
+        } else {
+          i += 1;
+        }
+      }
+    }
+
+    return prevBeforeCursor.length + cursorShift;
+  }
 };
