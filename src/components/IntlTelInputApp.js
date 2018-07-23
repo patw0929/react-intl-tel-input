@@ -311,7 +311,15 @@ class IntlTelInputApp extends Component {
           typeof this.props.onSelectFlag === 'function') {
         const currentNumber = this.state.value;
 
-        this.props.onSelectFlag(currentNumber, this.selectedCountryData);
+        const fullNumber = this.formatFullNumber(currentNumber);
+        const isValid = this.isValidNumber(fullNumber);
+
+        this.props.onSelectFlag(
+          currentNumber,
+          this.selectedCountryData,
+          fullNumber,
+          isValid,
+        );
       }
     });
   }
