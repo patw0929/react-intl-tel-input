@@ -17,12 +17,6 @@ class IntlTelInputApp extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     let newState = null;
 
-    if (nextProps.value && prevState.value !== nextProps.value) {
-      newState = {
-        value: nextProps.value,
-      };
-    }
-
     if (nextProps.disabled && prevState.disabled !== nextProps.disabled) {
       newState = {
         disabled: nextProps.disabled,
@@ -1088,7 +1082,7 @@ class IntlTelInputApp extends Component {
 
     cursorPosition = utils.getCursorPositionAfterFormating(previousStringBeforeCursor, previousValue, value);
 
-    if (this.props.value !== undefined) {
+    if (this.state.value !== undefined) {
       this.setState({
         cursorPosition,
       }, () => {
