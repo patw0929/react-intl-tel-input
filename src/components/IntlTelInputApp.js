@@ -1082,7 +1082,7 @@ class IntlTelInputApp extends Component {
 
     cursorPosition = utils.getCursorPositionAfterFormating(previousStringBeforeCursor, previousValue, value);
 
-    if (this.state.value !== undefined) {
+    if (this.props.value !== undefined) {
       this.setState({
         cursorPosition,
       }, () => {
