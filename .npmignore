@@ -5,5 +5,3 @@
 # override above and include followings
 
 !dist/**/*
-!LICENSE
-!README.md
