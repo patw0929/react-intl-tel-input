@@ -60,6 +60,7 @@
     "eslint": "^3.13.0",
     "eslint-config-airbnb": "~14.0.0",
     "eslint-config-airbnb-base": "~11.0.1",
+    "eslint-config-prettier": "^3.0.1",
     "eslint-loader": "1.6.1",
     "eslint-plugin-flowtype": "^2.29.2",
     "eslint-plugin-import": "^2.0.1",
@@ -107,18 +108,30 @@
     "eslint": "eslint src",
     "test": "TZ=Asia/Taipei node scripts/test.js --env=jsdom",
     "coverage": "yarn run test -- --coverage",
-    "coveralls": "NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls": "NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "prettier:all": "prettier --write '*.js' 'src/**/*.js' 'config/**/*.js'"
   },
   "lint-staged": {
-    "*.js": [
-      "jest --findRelatedTests",
-      "eslint --max-warnings 0"
-    ]
+    "linters": {
+      "*.js": [
+        "yarn prettier --write",
+        "git add",
+        "yarn eslint"
+      ],
+      "src/**/*.js": [
+        "yarn jest --bail --findRelatedTests"
+      ]
+    }
   },
   "pre-commit": [
     "lint-staged",
     "lint-pass"
   ],
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.js",
