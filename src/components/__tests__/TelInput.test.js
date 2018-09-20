@@ -3,9 +3,9 @@ import React from 'react';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import fs from 'fs';
-import IntlTelInput from '../src/components/IntlTelInputApp';
-import TelInput from '../src/components/TelInput';
-import FlagDropDown from '../src/components/FlagDropDown';
+import IntlTelInput from '../IntlTelInputApp';
+import TelInput from '../TelInput';
+import FlagDropDown from '../FlagDropDown';
 
 describe('TelInput', function () { // eslint-disable-line func-names
   let libphonenumberUtils;

@@ -29,27 +29,23 @@ module.exports = {
   entry: [
     require.resolve('react-dev-utils/webpackHotDevClient'),
     require.resolve('./polyfills'),
-    paths.appExampleJs
+    paths.appExampleJs,
   ],
 
   output: {
     path: paths.appBuild,
     pathinfo: true,
     filename: 'static/js/bundle.js',
-    publicPath: publicPath
+    publicPath: publicPath,
   },
 
   externals: {
     react: 'React',
-    'react-dom': 'ReactDOM'
+    'react-dom': 'ReactDOM',
   },
 
   resolve: {
-    modules: [
-      'src',
-      'node_modules',
-      ...paths.nodePaths,
-    ],
+    modules: ['src', 'node_modules', ...paths.nodePaths],
     alias: {
       'react-intl-tel-input': './components/IntlTelInputApp.js',
     },
@@ -72,20 +68,20 @@ module.exports = {
           /\.scss$/,
           /\.json$/,
           /\.png$/,
-          /\.svg$/
+          /\.svg$/,
         ],
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]'
-        }
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
       },
       {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         exclude: /libphonenumber\.js/,
         loader: 'babel-loader',
-        options: require('./babel.dev') // eslint-disable-line global-require
+        options: require('./babel.dev'), // eslint-disable-line global-require
       },
       {
         test: /\.scss$/,
@@ -97,19 +93,16 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader' },
-        ],
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use: [
           'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack-loader?{progressive:true, optimizationLevel: 3, interlaced: false, pngquant:{quality: "30-40", speed: 1}}'
-        ]
-      }
-    ]
+          'image-webpack-loader?{progressive:true, optimizationLevel: 3, interlaced: false, pngquant:{quality: "30-40", speed: 1}}',
+        ],
+      },
+    ],
   },
 
   plugins: [
@@ -117,9 +110,7 @@ module.exports = {
       /^\.\/main\.css$/,
       '../dist/main.css'
     ),
-    new CopyWebpackPlugin([
-      { from: 'src/libphonenumber.js', to: './' },
-    ]),
+    new CopyWebpackPlugin([{ from: 'src/libphonenumber.js', to: './' }]),
     new InterpolateHtmlPlugin({
       PUBLIC_URL: publicUrl,
     }),
@@ -135,6 +126,6 @@ module.exports = {
   node: {
     fs: 'empty',
     net: 'empty',
-    tls: 'empty'
-  }
+    tls: 'empty',
+  },
 };
