@@ -88,6 +88,7 @@ class IntlTelInputApp extends Component {
     this.autoCountryLoaded = this.autoCountryLoaded.bind(this);
     this.getDialCode = this.getDialCode.bind(this);
     this.handleOnBlur = this.handleOnBlur.bind(this);
+    this.handleOnFocus = this.handleOnFocus.bind(this);
     this.handleSelectedFlagKeydown = this.handleSelectedFlagKeydown.bind(this);
     this.setInitialState = this.setInitialState.bind(this);
     this.setNumber = this.setNumber.bind(this);
@@ -784,6 +785,18 @@ class IntlTelInputApp extends Component {
     }
   }
 
+  handleOnFocus() {
+    if (typeof this.props.onPhoneNumberFocus === 'function') {
+      const value = this.state.value;
+      const fullNumber = this.formatFullNumber(value);
+      const isValid = this.isValidNumber(fullNumber);
+
+      this.props.onPhoneNumberFocus(
+        isValid, value, this.selectedCountryData,
+        fullNumber, this.getExtension(value));
+    }
+  }
+
   bindDocumentClick() {
     this.isOpening = true;
     document.querySelector('html').addEventListener('click', this.handleDocumentClick);
@@ -1185,6 +1198,7 @@ class IntlTelInputApp extends Component {
           refCallback={ this.setTelRef }
           handleInputChange={ this.handleInputChange }
           handleOnBlur={ this.handleOnBlur }
+          handleOnFocus={ this.handleOnFocus }
           className={ inputClass }
           disabled={ this.state.disabled }
           readonly={ this.state.readonly }
@@ -1232,6 +1246,7 @@ IntlTelInputApp.propTypes = {
   utilsScript: PropTypes.string,
   onPhoneNumberChange: PropTypes.func,
   onPhoneNumberBlur: PropTypes.func,
+  onPhoneNumberFocus: PropTypes.func,
   onSelectFlag: PropTypes.func,
   disabled: PropTypes.bool,
   placeholder: PropTypes.string,
@@ -1283,6 +1298,7 @@ IntlTelInputApp.defaultProps = {
   utilsScript: '',
   onPhoneNumberChange: null,
   onPhoneNumberBlur: null,
+  onPhoneNumberFocus: null,
   onSelectFlag: null,
   disabled: false,
   autoFocus: false,
