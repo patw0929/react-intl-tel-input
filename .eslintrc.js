@@ -72,10 +72,6 @@ module.exports = {
           '**/*.test.js', // tests where the extension denotes that it is a test
           '**/webpack.config.js', // webpack config
           '**/webpack.config.*.js', // webpack config
-          '**/rollup.config.js', // rollup config
-          '**/gulpfile.js', // gulp config
-          '**/gulpfile.*.js', // gulp config
-          '**/Gruntfile', // grunt config
           'config/jest/**',
           'src/testUtils/**',
           '*.js',
