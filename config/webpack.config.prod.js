@@ -40,6 +40,7 @@ module.exports = {
     path: paths.appBuild,
     pathinfo: true,
     filename: '[name].js',
+    chunkFilename: '[name].bundle.js',
     publicPath: publicPath,
     library: 'IntlTelInput',
     libraryTarget: 'umd',
