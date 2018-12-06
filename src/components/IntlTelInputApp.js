@@ -903,7 +903,7 @@ class IntlTelInputApp extends Component {
             this.scrollTo(highlightItem, true);
           }
         }
-      });
+      );
     } else if (this.state.showDropdown) {
       // need to hide dropdown when click on opened flag button
       this.toggleDropdown(false);

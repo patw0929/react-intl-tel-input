@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies,import/no-dynamic-require,global-require */
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.NODE_ENV = 'production';
 
@@ -7,18 +8,18 @@ process.env.NODE_ENV = 'production';
 // https://github.com/motdotla/dotenv
 require('dotenv').config({silent: true});
 
-var chalk = require('chalk');
-var fs = require('fs-extra');
-var path = require('path');
-var filesize = require('filesize');
-var gzipSize = require('gzip-size').sync;
-var rimrafSync = require('rimraf').sync;
-var webpack = require('webpack');
-var config = require('../config/webpack.config.prod');
-var paths = require('../config/paths');
-var checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
-var recursive = require('recursive-readdir');
-var stripAnsi = require('strip-ansi');
+const chalk = require('chalk');
+const fs = require('fs-extra');
+const path = require('path');
+const filesize = require('filesize');
+const gzipSize = require('gzip-size').sync;
+const rimrafSync = require('rimraf').sync;
+const webpack = require('webpack');
+const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
+const recursive = require('recursive-readdir');
+const stripAnsi = require('strip-ansi');
+const config = require('../config/webpack.config.prod');
+const paths = require('../config/paths');
 
 // Warn and crash if required files are missing
 if (!checkRequiredFiles([paths.appHtml, paths.appExampleJs])) {
@@ -36,18 +37,20 @@ function removeFileNameHash(fileName) {
 // Input: 1024, 2048
 // Output: "(+1 KB)"
 function getDifferenceLabel(currentSize, previousSize) {
-  var FIFTY_KILOBYTES = 1024 * 50;
-  var difference = currentSize - previousSize;
-  var fileSize = !Number.isNaN(difference) ? filesize(difference) : 0;
+  const FIFTY_KILOBYTES = 1024 * 50;
+  const difference = currentSize - previousSize;
+  const fileSize = !Number.isNaN(difference) ? filesize(difference) : 0;
+
   if (difference >= FIFTY_KILOBYTES) {
-    return chalk.red('+' + fileSize);
-  } else if (difference < FIFTY_KILOBYTES && difference > 0) {
-    return chalk.yellow('+' + fileSize);
-  } else if (difference < 0) {
+    return chalk.red(`+${  fileSize}`);
+  } if (difference < FIFTY_KILOBYTES && difference > 0) {
+    return chalk.yellow(`+${  fileSize}`);
+  } if (difference < 0) {
     return chalk.green(fileSize);
-  } else {
-    return '';
   }
+
+  return '';
+
 }
 
 // First, read the current file sizes in build directory.
@@ -70,6 +73,7 @@ recursive(paths.appBuild, (err, fileNames) => {
   rimrafSync(`${paths.appDist}/*`);
 
   // Start the webpack build
+  // eslint-disable-next-line no-use-before-define
   build(previousSizeMap);
 });
 
@@ -86,7 +90,7 @@ function printFileSizes(stats, previousSizeMap) {
       return {
         folder: path.join('build', path.dirname(asset.name)),
         name: path.basename(asset.name),
-        sizeLabel: filesize(size) + (difference ? ' (' + difference + ')' : ''),
+        sizeLabel: filesize(size) + (difference ? ` (${  difference  })` : ''),
         size,
       };
     });
@@ -106,8 +110,8 @@ function printFileSizes(stats, previousSizeMap) {
       sizeLabel += rightPadding;
     }
     console.log(
-      '  ' + sizeLabel +
-      '  ' + chalk.dim(asset.folder + path.sep) + chalk.cyan(asset.name)
+      `  ${  sizeLabel
+      }  ${  chalk.dim(asset.folder + path.sep)  }${chalk.cyan(asset.name)}`
     );
   });
 }
@@ -131,6 +135,7 @@ function build(previousSizeMap) {
     console.log();
 
     // Copy static files to dist folder
+    // eslint-disable-next-line no-use-before-define
     copyToDistFolder();
 
     const openCommand = process.platform === 'win32' ? 'start' : 'open';
@@ -139,48 +144,48 @@ function build(previousSizeMap) {
 
     if (homepagePath && homepagePath.indexOf('.github.io/') !== -1) {
       // "homepage": "http://user.github.io/project"
-      console.log('The project was built assuming it is hosted at ' + chalk.green(publicPath) + '.');
-      console.log('You can control this with the ' + chalk.green('homepage') + ' field in your '  + chalk.cyan('package.json') + '.');
+      console.log(`The project was built assuming it is hosted at ${  chalk.green(publicPath)  }.`);
+      console.log(`You can control this with the ${  chalk.green('homepage')  } field in your ${   chalk.cyan('package.json')  }.`);
       console.log();
-      console.log('The ' + chalk.cyan('build') + ' folder is ready to be deployed.');
-      console.log('To publish it at ' + chalk.green(homepagePath) + ', run:');
+      console.log(`The ${  chalk.cyan('build')  } folder is ready to be deployed.`);
+      console.log(`To publish it at ${  chalk.green(homepagePath)  }, run:`);
       console.log();
-      console.log('  ' + chalk.cyan('git') + ' commit -am ' + chalk.yellow('"Save local changes"'));
-      console.log('  ' + chalk.cyan('git') + ' checkout -B gh-pages');
-      console.log('  ' + chalk.cyan('git') + ' add -f build');
-      console.log('  ' + chalk.cyan('git') + ' commit -am ' + chalk.yellow('"Rebuild website"'));
-      console.log('  ' + chalk.cyan('git') + ' filter-branch -f --prune-empty --subdirectory-filter build');
-      console.log('  ' + chalk.cyan('git') + ' push -f origin gh-pages');
-      console.log('  ' + chalk.cyan('git') + ' checkout -');
+      console.log(`  ${  chalk.cyan('git')  } commit -am ${  chalk.yellow('"Save local changes"')}`);
+      console.log(`  ${  chalk.cyan('git')  } checkout -B gh-pages`);
+      console.log(`  ${  chalk.cyan('git')  } add -f build`);
+      console.log(`  ${  chalk.cyan('git')  } commit -am ${  chalk.yellow('"Rebuild website"')}`);
+      console.log(`  ${  chalk.cyan('git')  } filter-branch -f --prune-empty --subdirectory-filter build`);
+      console.log(`  ${  chalk.cyan('git')  } push -f origin gh-pages`);
+      console.log(`  ${  chalk.cyan('git')  } checkout -`);
       console.log();
     } else if (publicPath !== '/') {
       // "homepage": "http://mywebsite.com/project"
-      console.log('The project was built assuming it is hosted at ' + chalk.green(publicPath) + '.');
-      console.log('You can control this with the ' + chalk.green('homepage') + ' field in your '  + chalk.cyan('package.json') + '.');
+      console.log(`The project was built assuming it is hosted at ${  chalk.green(publicPath)  }.`);
+      console.log(`You can control this with the ${  chalk.green('homepage')  } field in your ${   chalk.cyan('package.json')  }.`);
       console.log();
-      console.log('The ' + chalk.cyan('build') + ' folder is ready to be deployed.');
+      console.log(`The ${  chalk.cyan('build')  } folder is ready to be deployed.`);
       console.log();
     } else {
       // no homepage or "homepage": "http://mywebsite.com"
       console.log('The project was built assuming it is hosted at the server root.');
       if (homepagePath) {
         // "homepage": "http://mywebsite.com"
-        console.log('You can control this with the ' + chalk.green('homepage') + ' field in your '  + chalk.cyan('package.json') + '.');
+        console.log(`You can control this with the ${  chalk.green('homepage')  } field in your ${   chalk.cyan('package.json')  }.`);
         console.log();
       } else {
         // no homepage
-        console.log('To override this, specify the ' + chalk.green('homepage') + ' in your '  + chalk.cyan('package.json') + '.');
+        console.log(`To override this, specify the ${  chalk.green('homepage')  } in your ${   chalk.cyan('package.json')  }.`);
         console.log('For example, add this to build it for GitHub Pages:');
         console.log();
-        console.log('  ' + chalk.green('"homepage"') + chalk.cyan(': ') + chalk.green('"http://myname.github.io/myapp"') + chalk.cyan(','));
+        console.log(`  ${  chalk.green('"homepage"')  }${chalk.cyan(': ')  }${chalk.green('"http://myname.github.io/myapp"')  }${chalk.cyan(',')}`);
         console.log();
       }
-      console.log('The ' + chalk.cyan('build') + ' folder is ready to be deployed.');
+      console.log(`The ${  chalk.cyan('build')  } folder is ready to be deployed.`);
       console.log('You may also serve it locally with a static server:');
       console.log();
-      console.log('  ' + chalk.cyan('npm') +  ' install -g pushstate-server');
-      console.log('  ' + chalk.cyan('pushstate-server') + ' build');
-      console.log('  ' + chalk.cyan(openCommand) + ' http://localhost:9000');
+      console.log(`  ${  chalk.cyan('npm')   } install -g pushstate-server`);
+      console.log(`  ${  chalk.cyan('pushstate-server')  } build`);
+      console.log(`  ${  chalk.cyan(openCommand)  } http://localhost:9000`);
       console.log();
     }
   });
