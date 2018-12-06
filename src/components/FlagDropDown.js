@@ -66,7 +66,7 @@ export default class FlagDropDown extends Component {
               }}
               dropdownContainer={this.props.dropdownContainer}
               isMobile={this.props.isMobile}
-              showDropdown={this.props.showDropdown}
+              showDropdown={this.props.allowDropdown && this.props.showDropdown}
               setFlag={this.props.setFlag}
               countries={this.props.countries}
               inputTop={this.props.inputTop}
@@ -86,7 +86,7 @@ export default class FlagDropDown extends Component {
           }}
           dropdownContainer={this.props.dropdownContainer}
           isMobile={this.props.isMobile}
-          showDropdown={this.props.showDropdown}
+          showDropdown={this.props.allowDropdown && this.props.showDropdown}
           setFlag={this.props.setFlag}
           countries={this.props.countries}
           inputTop={this.props.inputTop}
