@@ -555,10 +555,10 @@ class IntlTelInputApp extends Component {
         });
       }
     } else {
-      import('../libphonenumber').then(() => {
+      import(/* webpackChunkName: "libphonenumber" */ 'libphonenumber').then(() => {
         this.loadUtils();
         this.utilsScriptDeferred.resolve();
-      });
+      }).catch(() => 'An error occurred while loading the component');
     }
 
     if (this.tempCountry === 'auto') {
