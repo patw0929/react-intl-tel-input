@@ -6,18 +6,18 @@ process.env.NODE_ENV = 'production';
 // if this file is missing. dotenv will never modify any environment variables
 // that have already been set.
 // https://github.com/motdotla/dotenv
-require('dotenv').config({silent: true});
+require('dotenv').config({ silent: true });
 
 const chalk = require('chalk');
 const fs = require('fs-extra');
 const path = require('path');
-const filesize = require('filesize');
+// const filesize = require('filesize');
 const gzipSize = require('gzip-size').sync;
 const rimrafSync = require('rimraf').sync;
 const webpack = require('webpack');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const recursive = require('recursive-readdir');
-const stripAnsi = require('strip-ansi');
+// const stripAnsi = require('strip-ansi');
 const config = require('../config/webpack.config.prod');
 const paths = require('../config/paths');
 
@@ -36,22 +36,21 @@ function removeFileNameHash(fileName) {
 
 // Input: 1024, 2048
 // Output: "(+1 KB)"
-function getDifferenceLabel(currentSize, previousSize) {
-  const FIFTY_KILOBYTES = 1024 * 50;
-  const difference = currentSize - previousSize;
-  const fileSize = !Number.isNaN(difference) ? filesize(difference) : 0;
+// function getDifferenceLabel(currentSize, previousSize) {
+//   const FIFTY_KILOBYTES = 1024 * 50;
+//   const difference = currentSize - previousSize;
+//   const fileSize = !Number.isNaN(difference) ? filesize(difference) : 0;
 
-  if (difference >= FIFTY_KILOBYTES) {
-    return chalk.red(`+${  fileSize}`);
-  } if (difference < FIFTY_KILOBYTES && difference > 0) {
-    return chalk.yellow(`+${  fileSize}`);
-  } if (difference < 0) {
-    return chalk.green(fileSize);
-  }
+//   if (difference >= FIFTY_KILOBYTES) {
+//     return chalk.red(`+${  fileSize}`);
+//   } if (difference < FIFTY_KILOBYTES && difference > 0) {
+//     return chalk.yellow(`+${  fileSize}`);
+//   } if (difference < 0) {
+//     return chalk.green(fileSize);
+//   }
 
-  return '';
-
-}
+//   return '';
+// }
 
 // First, read the current file sizes in build directory.
 // This lets us display how much they changed later.
@@ -78,48 +77,48 @@ recursive(paths.appBuild, (err, fileNames) => {
 });
 
 // Print a detailed summary of build files.
-function printFileSizes(stats, previousSizeMap) {
-  const assets = stats.toJson().assets
-    .filter((asset) => /\.(js|css)$/.test(asset.name))
-    .map((asset) => {
-      const fileContents = fs.readFileSync(`${paths.appBuild}/${asset.name}`);
-      const size = gzipSize(fileContents);
-      const previousSize = previousSizeMap[removeFileNameHash(asset.name)];
-      const difference = getDifferenceLabel(size, previousSize);
+// function printFileSizes(stats, previousSizeMap) {
+//   const assets = stats.toJson().assets
+//     .filter((asset) => /\.(js|css)$/.test(asset.name))
+//     .map((asset) => {
+//       const fileContents = fs.readFileSync(`${paths.appBuild}/${asset.name}`);
+//       const size = gzipSize(fileContents);
+//       const previousSize = previousSizeMap[removeFileNameHash(asset.name)];
+//       const difference = getDifferenceLabel(size, previousSize);
 
-      return {
-        folder: path.join('dist', path.dirname(asset.name)),
-        name: path.basename(asset.name),
-        sizeLabel: filesize(size) + (difference ? ` (${  difference  })` : ''),
-        size,
-      };
-    });
+//       return {
+//         folder: path.join('dist', path.dirname(asset.name)),
+//         name: path.basename(asset.name),
+//         sizeLabel: filesize(size) + (difference ? ` (${  difference  })` : ''),
+//         size,
+//       };
+//     });
 
-  assets.sort((a, b) => b.size - a.size);
-  const longestSizeLabelLength = Math.max.apply(null,
-    assets.map((a) => stripAnsi(a.sizeLabel).length)
-  );
+//   assets.sort((a, b) => b.size - a.size);
+//   const longestSizeLabelLength = Math.max.apply(null,
+//     assets.map((a) => stripAnsi(a.sizeLabel).length)
+//   );
 
-  assets.forEach((asset) => {
-    let sizeLabel = asset.sizeLabel;
-    const sizeLength = stripAnsi(sizeLabel).length;
+//   assets.forEach((asset) => {
+//     let sizeLabel = asset.sizeLabel;
+//     const sizeLength = stripAnsi(sizeLabel).length;
 
-    if (sizeLength < longestSizeLabelLength) {
-      const rightPadding = ' '.repeat(longestSizeLabelLength - sizeLength);
+//     if (sizeLength < longestSizeLabelLength) {
+//       const rightPadding = ' '.repeat(longestSizeLabelLength - sizeLength);
 
-      sizeLabel += rightPadding;
-    }
-    console.log(
-      `  ${  sizeLabel
-      }  ${chalk.dim(asset.folder + path.sep)}${chalk.cyan(asset.name)}`
-    );
-  });
-}
+//       sizeLabel += rightPadding;
+//     }
+//     console.log(
+//       `  ${  sizeLabel
+//       }  ${chalk.dim(asset.folder + path.sep)}${chalk.cyan(asset.name)}`
+//     );
+//   });
+// }
 
 // Create the production build and print the deployment instructions.
-function build(previousSizeMap) {
+function build(/* previousSizeMap */) {
   console.log('Creating an optimized production build...');
-  webpack(config).run((err, stats) => {
+  webpack(config).run((err) => {
     if (err) {
       console.error('Failed to create a production build. Reason:');
       console.error(err.message || err);
@@ -129,10 +128,10 @@ function build(previousSizeMap) {
     console.log(chalk.green('Compiled successfully.'));
     console.log();
 
-    console.log('File sizes after gzip:');
-    console.log();
-    printFileSizes(stats, previousSizeMap);
-    console.log();
+    // console.log('File sizes after gzip:');
+    // console.log();
+    // printFileSizes(stats, previousSizeMap);
+    // console.log();
 
     // Copy static files to dist folder
     // eslint-disable-next-line no-use-before-define

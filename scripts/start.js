@@ -17,7 +17,6 @@ const clearConsole = require('react-dev-utils/clearConsole');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const openBrowser = require('react-dev-utils/openBrowser');
-const prompt = require('react-dev-utils/prompt');
 const config = require('../config/webpack.config.dev');
 const paths = require('../config/paths');
 
@@ -243,7 +242,7 @@ function runDevServer(host, port, protocol) {
     clearConsole();
     console.log(chalk.cyan('Starting the development server...'));
     console.log();
-    
+
     return openBrowser(`${protocol  }://${  host  }:${  port  }/`);
   });
 }
@@ -266,13 +265,4 @@ detect(DEFAULT_PORT).then(port => {
   }
 
   clearConsole();
-  const question =
-    `${chalk.yellow(`Something is already running on port ${  DEFAULT_PORT  }.`)
-    }\n\nWould you like to run the app on another port instead?`;
-
-  prompt(question, true).then(shouldChangePort => {
-    if (shouldChangePort) {
-      run(port);
-    }
-  });
 });
