@@ -8,7 +8,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const safeParser = require('postcss-safe-parser');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const getClientEnvironment = require('./env');
 
