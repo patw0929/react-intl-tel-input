@@ -104,22 +104,22 @@
     "deploy": "gh-pages -d example",
     "lint-staged": "lint-staged",
     "lint-pass": "echo '\\033[4;32m♡' No any errors! Go go go! ♡' \\033[0m'",
-    "lint": "yarn run eslint",
+    "lint": "\"$npm_execpath\" run eslint",
     "eslint": "eslint src",
     "test": "TZ=Asia/Taipei node scripts/test.js --env=jsdom",
-    "coverage": "yarn run test -- --coverage",
+    "coverage": "\"$npm_execpath\" run test -- --coverage",
     "coveralls": "NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "prettier:all": "prettier --write 'src/example.js' 'src/components/**/*.js' 'config/**/*.js'"
   },
   "lint-staged": {
     "linters": {
       "*.js": [
-        "yarn prettier --write",
+        "\"$npm_execpath\" prettier --write",
         "git add",
-        "yarn eslint"
+        "\"$npm_execpath\" eslint"
       ],
       "src/**/*.js": [
-        "yarn jest --bail --findRelatedTests"
+        "\"$npm_execpath\" jest --bail --findRelatedTests"
       ]
     }
   },
