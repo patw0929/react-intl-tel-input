@@ -6366,6 +6366,11 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+libphonenumber-js-utils@^8.9.9:
+  version "8.9.9"
+  resolved "https://registry.yarnpkg.com/libphonenumber-js-utils/-/libphonenumber-js-utils-8.9.9.tgz#956a37ce067a3c95e0c8d13456c32d7c8d09edad"
+  integrity sha512-QpV7qQzSdtWxcyJe+cRzhDHIqNufnyLelNw4vuZKKqhdsSR+EjbRzImgZTHamp9xGH3n508DHhWqDNTGgZicTQ==
+
 lint-staged@^3.2.6:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-3.3.1.tgz#b725d98a2be1f82cb228069fab682f503c95234d"
