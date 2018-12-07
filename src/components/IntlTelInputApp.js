@@ -555,7 +555,7 @@ class IntlTelInputApp extends Component {
         });
       }
     } else {
-      import(/* webpackChunkName: "libphonenumber" */ 'libphonenumber').then(() => {
+      import('libphonenumber-js-utils').then(() => {
         this.loadUtils();
         this.utilsScriptDeferred.resolve();
       }).catch(() => 'An error occurred while loading the component');
