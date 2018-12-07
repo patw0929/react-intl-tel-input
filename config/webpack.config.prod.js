@@ -65,6 +65,12 @@ module.exports = {
       commonjs: 'prop-types',
       amd: 'prop-types',
     },
+    'libphonenumber-js-utils': {
+      root: 'intlTelInputUtils',
+      commonjs2: 'libphonenumber-js-utils',
+      commonjs: 'libphonenumber-js-utils',
+      amd: 'libphonenumber-js-utils',
+    },
   },
 
   resolve: {
