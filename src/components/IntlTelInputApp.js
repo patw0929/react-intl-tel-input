@@ -808,6 +808,9 @@ class IntlTelInputApp extends Component {
           this.scrollTo(highlightItem, true);
         }
       });
+    } else if (this.state.showDropdown) {
+      // need to hide dropdown when click on opened flag button
+      this.toggleDropdown(false);
     }
   }
 
@@ -1059,9 +1062,15 @@ class IntlTelInputApp extends Component {
 
   handleDocumentClick(e) {
     // Click at the outside of country list
-    if (e.target.getAttribute('class') === null ||
-      (e.target.getAttribute('class') &&
-       e.target.getAttribute('class').indexOf('country') === -1)) {
+    // and outside of flag button
+    const targetClass = e.target.getAttribute('class');
+
+    if (targetClass === null ||
+      (targetClass &&
+      targetClass.indexOf('country') === -1 &&
+      targetClass.indexOf('selected-flag') === -1 &&
+      targetClass.indexOf('iti-flag') === -1 &&
+      targetClass.indexOf('iti-arrow') === -1)) {
       this.isOpening = false;
     }
 
