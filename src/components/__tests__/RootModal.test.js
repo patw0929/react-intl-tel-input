@@ -27,8 +27,6 @@ describe('RootModal', function () { // eslint-disable-line func-names
   it('should has parent element which has specific className', () => {
     const subject = this.makeSubject();
 
-    console.log(subject);
-
     expect(subject.instance().modalTarget.classList[0]).toBe('intl-tel-input');
     expect(subject.instance().modalTarget.classList[1]).toBe('iti-container');
   });
