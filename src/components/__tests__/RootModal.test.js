@@ -1,7 +1,6 @@
-/* eslint-disable no-eval */
 import React from 'react';
 import { mount } from 'enzyme';
-import RootModal from '../src/components/RootModal';
+import RootModal from '../RootModal';
 
 describe('RootModal', function () { // eslint-disable-line func-names
   beforeEach(() => {
@@ -25,7 +24,7 @@ describe('RootModal', function () { // eslint-disable-line func-names
     expect(subject.find('noscript').length).toBeTruthy();
   });
 
-  it('should has parent element which has specific className"', () => {
+  it('should has parent element which has specific className', () => {
     const subject = this.makeSubject();
 
     expect(subject.instance().modalTarget.classList[0]).toBe('intl-tel-input');

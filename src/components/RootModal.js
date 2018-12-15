@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
-class RootModal extends Component {
+export default class RootModal extends Component {
+  static propTypes = {
+    children: PropTypes.node,
+  };
+
   componentDidMount() {
     this.modalTarget = document.createElement('div');
     this.modalTarget.className = 'intl-tel-input iti-container';
@@ -22,19 +26,10 @@ class RootModal extends Component {
   }
 
   _render() {
-    ReactDOM.render(
-      <div>{this.props.children}</div>,
-      this.modalTarget
-    );
+    ReactDOM.render(<div>{this.props.children}</div>, this.modalTarget);
   }
 
   render() {
     return <noscript />;
   }
 }
-
-RootModal.propTypes = {
-  children: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-};
-
-export default RootModal;

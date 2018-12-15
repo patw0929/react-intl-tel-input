@@ -1,5 +1,3 @@
-/* globals resolveOwn:false */
-
 var path = require('path');
 var fs = require('fs');
 
@@ -30,7 +28,7 @@ function resolveApp(relativePath) {
 const nodePaths = (process.env.NODE_PATH || '')
   .split(process.platform === 'win32' ? ';' : ':')
   .filter(Boolean)
-  .filter((folder) => !path.isAbsolute(folder))
+  .filter(folder => !path.isAbsolute(folder))
   .map(resolveApp);
 
 // config after eject: we're in ./config/

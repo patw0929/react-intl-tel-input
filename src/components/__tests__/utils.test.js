@@ -1,6 +1,6 @@
 import jsdom from 'jsdom';
-import AllCountries from '../src/components/AllCountries';
-import utils from '../src/components/utils';
+import AllCountries from '../AllCountries';
+import utils from '../utils';
 
 describe('utils', () => {
   it('arraysEqual', () => {

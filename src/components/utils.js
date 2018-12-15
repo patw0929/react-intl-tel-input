@@ -78,7 +78,10 @@ export default {
         return num;
       }
 
-      if (children[i].nodeType === 1 && children[i].tagName.toLowerCase() === 'li') {
+      if (
+        children[i].nodeType === 1 &&
+        children[i].tagName.toLowerCase() === 'li'
+      ) {
         num += 1;
       }
     }
@@ -93,7 +96,7 @@ export default {
 
   // check if (uppercase) string a starts with string b
   startsWith(a, b) {
-    return (a.substr(0, b.length).toUpperCase() === b);
+    return a.substr(0, b.length).toUpperCase() === b;
   },
 
   isWindow(obj) {
@@ -126,18 +129,30 @@ export default {
 
   // retrieve outerHeight of element
   getOuterHeight(element) {
-    return element.offsetHeight +
-           parseFloat(window.getComputedStyle(element).getPropertyValue('margin-top')) +
-           parseFloat(window.getComputedStyle(element).getPropertyValue('margin-bottom'));
+    return (
+      element.offsetHeight +
+      parseFloat(
+        window.getComputedStyle(element).getPropertyValue('margin-top')
+      ) +
+      parseFloat(
+        window.getComputedStyle(element).getPropertyValue('margin-bottom')
+      )
+    );
   },
 
   // find the country data for the given country code
   // the ignoreOnlyCountriesOption is only used during init()
   // while parsing the onlyCountries array
-  getCountryData(countries, countryCode, ignoreOnlyCountriesOption,
-    allowFail, errorHandler) {
-    const countryList = ignoreOnlyCountriesOption ?
-      AllCountries.getCountries() : countries;
+  getCountryData(
+    countries,
+    countryCode,
+    ignoreOnlyCountriesOption,
+    allowFail,
+    errorHandler
+  ) {
+    const countryList = ignoreOnlyCountriesOption
+      ? AllCountries.getCountries()
+      : countries;
 
     for (let i = 0; i < countryList.length; i++) {
       if (countryList[i].iso2 === countryCode) {
@@ -182,15 +197,16 @@ export default {
       el.className = el.className.replace(reg, ' ');
     }
   },
+
   findIndex(items, predicate) {
     let index = -1;
 
     items.some((item, i) => {
-        if (predicate(item)) {
-          index = i;
+      if (predicate(item)) {
+        index = i;
 
-          return true;
-        }
+        return true;
+      }
     });
 
     return index;
@@ -204,7 +220,11 @@ export default {
     let cursorShift = 0;
 
     if (prev.length > next.length) {
-      for (let i = 0, j = 0; i < prevBeforeCursor.length && j < next.length; i += 1) {
+      for (
+        let i = 0, j = 0;
+        i < prevBeforeCursor.length && j < next.length;
+        i += 1
+      ) {
         if (prevBeforeCursor[i] !== next[j]) {
           if (isNaN(next[j]) && !isNaN(prevBeforeCursor[i])) {
             i -= 1;
@@ -218,7 +238,11 @@ export default {
         }
       }
     } else {
-      for (let i = 0, j = 0; i < prevBeforeCursor.length && j < next.length; j += 1) {
+      for (
+        let i = 0, j = 0;
+        i < prevBeforeCursor.length && j < next.length;
+        j += 1
+      ) {
         if (prevBeforeCursor[i] !== next[j]) {
           if (isNaN(prevBeforeCursor[i]) && !isNaN(next[j])) {
             j -= 1;
@@ -234,5 +258,5 @@ export default {
     }
 
     return prevBeforeCursor.length + cursorShift;
-  }
+  },
 };

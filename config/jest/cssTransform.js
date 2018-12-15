@@ -8,7 +8,8 @@ module.exports = {
       module.exports = idObj;
     `;
   },
-  getCacheKey(fileData, filename) { // eslint-disable-line no-unused-vars
+  getCacheKey() {
+    // eslint-disable-line no-unused-vars
     // The output is always the same.
     return 'cssTransform';
   },

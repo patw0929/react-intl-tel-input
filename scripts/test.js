@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies,import/no-dynamic-require,global-require */
 process.env.NODE_ENV = 'test';
 process.env.PUBLIC_URL = '';
 

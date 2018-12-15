@@ -5,10 +5,10 @@ import ReactTestUtils from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import fs from 'fs';
-import IntlTelInput from '../src/components/IntlTelInputApp';
-import FlagDropDown from '../src/components/FlagDropDown';
-import CountryList from '../src/components/CountryList';
-import TelInput from '../src/components/TelInput';
+import IntlTelInput from '../IntlTelInputApp';
+import FlagDropDown from '../FlagDropDown';
+import CountryList from '../CountryList';
+import TelInput from '../TelInput';
 
 describe('FlagDropDown', function () { // eslint-disable-line func-names
   let libphonenumberUtils;
@@ -172,10 +172,10 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     it('Mouse over on country', () => {
       const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput
-          css={ ['intl-tel-input', 'form-control phoneNumber'] }
-          fieldName={ 'telephone' }
-          defaultCountry={ 'tw' }
-          utilsScript={ 'assets/libphonenumber.js' }
+          css={['intl-tel-input', 'form-control phoneNumber']}
+          fieldName="telephone"
+          defaultCountry="tw"
+          utilsScript="assets/libphonenumber.js"
         />
       );
 
@@ -210,9 +210,9 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
       const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput
           css={ ['intl-tel-input', 'form-control phoneNumber'] }
-          fieldName={ 'telephone' }
-          defaultCountry={ 'tw' }
-          utilsScript={ 'assets/libphonenumber.js' }
+          fieldName="telephone"
+          defaultCountry="tw"
+          utilsScript="assets/libphonenumber.js"
         />
       );
 
@@ -264,9 +264,9 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
       const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput
           css={ ['intl-tel-input', 'form-control phoneNumber'] }
-          fieldName={ 'telephone' }
-          defaultCountry={ 'tw' }
-          utilsScript={ 'assets/libphonenumber.js' }
+          fieldName="telephone"
+          defaultCountry="tw"
+          utilsScript="assets/libphonenumber.js"
         />
       );
 
@@ -296,9 +296,9 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
       const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput
           css={ ['intl-tel-input', 'form-control phoneNumber'] }
-          fieldName={ 'telephone' }
-          defaultCountry={ 'tw' }
-          utilsScript={ 'assets/libphonenumber.js' }
+          fieldName="telephone"
+          defaultCountry="tw"
+          utilsScript="assets/libphonenumber.js"
         />
       );
 
@@ -325,9 +325,9 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
       const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput
           css={ ['intl-tel-input', 'form-control phoneNumber'] }
-          fieldName={ 'telephone' }
-          defaultCountry={ 'tw' }
-          utilsScript={ 'assets/libphonenumber.js' }
+          fieldName="telephone"
+          defaultCountry="tw"
+          utilsScript="assets/libphonenumber.js"
         />
       );
 
@@ -356,9 +356,9 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
       const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput
           css={ ['intl-tel-input', 'form-control phoneNumber'] }
-          fieldName={ 'telephone' }
-          defaultCountry={ 'tw' }
-          utilsScript={ 'assets/libphonenumber.js' }
+          fieldName="telephone"
+          defaultCountry="tw"
+          utilsScript="assets/libphonenumber.js"
         />
       );
 
