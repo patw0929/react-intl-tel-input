@@ -10,7 +10,8 @@ import FlagDropDown from '../FlagDropDown';
 import CountryList from '../CountryList';
 import TelInput from '../TelInput';
 
-describe('FlagDropDown', function () { // eslint-disable-line func-names
+describe('FlagDropDown', function() {
+  // eslint-disable-line func-names
   let libphonenumberUtils;
   let xhr;
   let requests;
@@ -22,11 +23,12 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     libphonenumberUtils = fs.readFileSync('./src/libphonenumber.js', 'utf8');
     xhr = sinon.useFakeXMLHttpRequest();
     requests = [];
-    xhr.onCreate = (req) => { requests.push(req); };
+    xhr.onCreate = req => {
+      requests.push(req);
+    };
     window.intlTelInputUtils = undefined;
 
-    getScript = () =>
-      document.getElementsByTagName('script')[0];
+    getScript = () => document.getElementsByTagName('script')[0];
 
     this.params = {
       css: ['intl-tel-input', 'form-control phoneNumber'],
@@ -36,11 +38,7 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     };
 
     this.makeSubject = () => {
-      return mount(
-        <IntlTelInput
-          { ...this.params }
-        />
-      );
+      return mount(<IntlTelInput {...this.params} />);
     };
   });
 
@@ -93,11 +91,15 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     const subject = this.makeSubject();
     const flagComponent = subject.find(FlagDropDown);
 
-    expect(subject.find(CountryList).find('.country-list.hide').length).toBeTruthy();
+    expect(
+      subject.find(CountryList).find('.country-list.hide').length
+    ).toBeTruthy();
     flagComponent.find('.selected-flag').simulate('click');
 
     subject.update();
-    expect(subject.find(CountryList).find('.country-list.hide').length).toBeFalsy();
+    expect(
+      subject.find(CountryList).find('.country-list.hide').length
+    ).toBeFalsy();
   });
 
   it('Simulate change to Japan flag in dropdown before & after', () => {
@@ -119,25 +121,29 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     const subject = this.makeSubject();
     const flagComponent = subject.find(FlagDropDown);
 
-    const result = [{
-      name: 'South Korea (대한민국)',
-      iso2: 'kr',
-      dialCode: '82',
-      priority: 0,
-      areaCodes: null,
-    }, {
-      name: 'Taiwan (台灣)',
-      iso2: 'tw',
-      dialCode: '886',
-      priority: 0,
-      areaCodes: null,
-    }, {
-      name: 'United States',
-      iso2: 'us',
-      dialCode: '1',
-      priority: 0,
-      areaCodes: null,
-    }];
+    const result = [
+      {
+        name: 'South Korea (대한민국)',
+        iso2: 'kr',
+        dialCode: '82',
+        priority: 0,
+        areaCodes: null,
+      },
+      {
+        name: 'Taiwan (台灣)',
+        iso2: 'tw',
+        dialCode: '886',
+        priority: 0,
+        areaCodes: null,
+      },
+      {
+        name: 'United States',
+        iso2: 'us',
+        dialCode: '1',
+        priority: 0,
+        areaCodes: null,
+      },
+    ];
 
     expect(flagComponent.props().countries).toEqual(result);
   });
@@ -151,7 +157,7 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
   });
 
   it('Set defaultCountry as "auto"', async () => {
-    const lookup = (callback) => {
+    const lookup = callback => {
       callback('jp');
     };
 
@@ -191,8 +197,11 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
 
       ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(flagComponent));
       const options = ReactDOM.findDOMNode(dropDownComponent).querySelectorAll(
-        '.country:not([class="preferred"])');
-      const koreaOption = ReactDOM.findDOMNode(dropDownComponent).querySelector('[data-country-code="kr"]');
+        '.country:not([class="preferred"])'
+      );
+      const koreaOption = ReactDOM.findDOMNode(dropDownComponent).querySelector(
+        '[data-country-code="kr"]'
+      );
 
       let index = -1;
 
@@ -209,7 +218,7 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     it('Simulate change to flag in dropdown by up and down key', () => {
       const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput
-          css={ ['intl-tel-input', 'form-control phoneNumber'] }
+          css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
           utilsScript="assets/libphonenumber.js"
@@ -221,18 +230,29 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
         'selected-flag'
       );
 
-      expect(ReactDOM.findDOMNode(flagComponent).querySelector('.iti-flag').className).toBe('iti-flag tw');
+      expect(
+        ReactDOM.findDOMNode(flagComponent).querySelector('.iti-flag').className
+      ).toBe('iti-flag tw');
 
-      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent),
-        { key: 'Enter', keyCode: 13, which: 13 });
+      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent), {
+        key: 'Enter',
+        keyCode: 13,
+        which: 13,
+      });
       expect(renderedComponent.state.showDropdown).toBeTruthy();
 
-      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent),
-        { key: 'Tab', keyCode: 9, which: 9 });
+      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent), {
+        key: 'Tab',
+        keyCode: 9,
+        which: 9,
+      });
       expect(renderedComponent.state.showDropdown).toBeFalsy();
 
-      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent),
-        { key: 'Enter', keyCode: 13, which: 13 });
+      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent), {
+        key: 'Enter',
+        keyCode: 13,
+        which: 13,
+      });
 
       const pressUpEvent = new window.KeyboardEvent('keydown', {
         bubbles: true,
@@ -257,13 +277,16 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
 
       document.dispatchEvent(pressEnterEvent);
       expect(renderedComponent.state.showDropdown).toBeFalsy();
-      expect(ReactDOM.findDOMNode(flagComponent).querySelector('.iti-flag').className === 'iti-flag sy');
+      expect(
+        ReactDOM.findDOMNode(flagComponent).querySelector('.iti-flag')
+          .className === 'iti-flag sy'
+      );
     });
 
     it('Simulate close the dropdown menu by ESC key', () => {
       const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput
-          css={ ['intl-tel-input', 'form-control phoneNumber'] }
+          css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
           utilsScript="assets/libphonenumber.js"
@@ -275,8 +298,11 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
         'selected-flag'
       );
 
-      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent),
-        { key: 'Enter', keyCode: 13, which: 13 });
+      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent), {
+        key: 'Enter',
+        keyCode: 13,
+        which: 13,
+      });
       expect(renderedComponent.state.showDropdown).toBeTruthy();
 
       const pressEscEvent = new window.KeyboardEvent('keydown', {
@@ -295,7 +321,7 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     it('Simulate close the dropdown menu by clicking on document', () => {
       const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput
-          css={ ['intl-tel-input', 'form-control phoneNumber'] }
+          css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
           utilsScript="assets/libphonenumber.js"
@@ -307,8 +333,11 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
         'selected-flag'
       );
 
-      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent),
-        { key: 'Enter', keyCode: 13, which: 13 });
+      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent), {
+        key: 'Enter',
+        keyCode: 13,
+        which: 13,
+      });
       expect(renderedComponent.state.showDropdown).toBeTruthy();
 
       const clickEvent = new window.MouseEvent('click', {
@@ -324,7 +353,7 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     it('componentWillUnmount', () => {
       const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput
-          css={ ['intl-tel-input', 'form-control phoneNumber'] }
+          css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
           utilsScript="assets/libphonenumber.js"
@@ -336,8 +365,11 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
         'selected-flag'
       );
 
-      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent),
-        { key: 'Enter', keyCode: 13, which: 13 });
+      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent), {
+        key: 'Enter',
+        keyCode: 13,
+        which: 13,
+      });
       expect(renderedComponent.state.showDropdown).toBeTruthy();
 
       renderedComponent.componentWillUnmount();
@@ -355,7 +387,7 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     it('Simulate search country name in dropdown menu', () => {
       const renderedComponent = ReactTestUtils.renderIntoDocument(
         <IntlTelInput
-          css={ ['intl-tel-input', 'form-control phoneNumber'] }
+          css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
           utilsScript="assets/libphonenumber.js"
@@ -367,8 +399,11 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
         'selected-flag'
       );
 
-      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent),
-        { key: 'Enter', keyCode: 13, which: 13 });
+      ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent), {
+        key: 'Enter',
+        keyCode: 13,
+        which: 13,
+      });
       expect(renderedComponent.state.showDropdown).toBe(true);
 
       const pressJEvent = new window.KeyboardEvent('keydown', {
@@ -427,9 +462,11 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     const flagComponent = subject.find(FlagDropDown);
     const countryListComponent = subject.find(CountryList);
 
-    requests[0].respond(200,
+    requests[0].respond(
+      200,
       { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
+      libphonenumberUtils
+    );
 
     expect(expected).toBe('0912 345 678,tw');
     flagComponent.simulate('click');
@@ -442,7 +479,10 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
   it('onSelectFlag', () => {
     let expected = '';
     const onSelectFlag = (currentNumber, countryData, fullNumber, isValid) => {
-      expected = Object.assign({}, { currentNumber, fullNumber, isValid, ...countryData });
+      expected = Object.assign(
+        {},
+        { currentNumber, fullNumber, isValid, ...countryData }
+      );
     };
 
     this.params.onSelectFlag = onSelectFlag;
@@ -451,9 +491,11 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     const inputComponent = subject.find(TelInput);
     const countryListComponent = subject.find(CountryList);
 
-    requests[0].respond(200,
+    requests[0].respond(
+      200,
       { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
+      libphonenumberUtils
+    );
     window.eval(getScript().text);
 
     inputComponent.simulate('change', { target: { value: '+8109012345678' } });
@@ -479,12 +521,16 @@ describe('FlagDropDown', function () { // eslint-disable-line func-names
     this.params.nationalMode = true;
     const subject = this.makeSubject();
 
-    requests[0].respond(200,
+    requests[0].respond(
+      200,
       { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
+      libphonenumberUtils
+    );
     window.eval(getScript().text);
 
-    expect(subject.instance().formatNumber('+886 912 345 678')).toBe('0912 345 678');
+    expect(subject.instance().formatNumber('+886 912 345 678')).toBe(
+      '0912 345 678'
+    );
   });
 
   it('should highlight country from preferred list', async () => {
