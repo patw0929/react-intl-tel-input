@@ -7,8 +7,8 @@ import IntlTelInput from '../IntlTelInputApp';
 import TelInput from '../TelInput';
 import FlagDropDown from '../FlagDropDown';
 
+// eslint-disable-next-line func-names
 describe('TelInput', function() {
-  // eslint-disable-line func-names
   let libphonenumberUtils;
   let getScript;
   let xhr;

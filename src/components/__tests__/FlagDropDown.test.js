@@ -10,8 +10,8 @@ import FlagDropDown from '../FlagDropDown';
 import CountryList from '../CountryList';
 import TelInput from '../TelInput';
 
+// eslint-disable-next-line func-names
 describe('FlagDropDown', function() {
-  // eslint-disable-line func-names
   let libphonenumberUtils;
   let xhr;
   let requests;

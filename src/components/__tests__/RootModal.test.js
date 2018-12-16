@@ -2,8 +2,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import RootModal from '../RootModal';
 
+// eslint-disable-next-line func-names
 describe('RootModal', function() {
-  // eslint-disable-line func-names
   beforeEach(() => {
     jest.resetModules();
 
