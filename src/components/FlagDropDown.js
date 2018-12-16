@@ -27,33 +27,37 @@ export default class FlagDropDown extends Component {
   };
 
   genSelectedDialCode = () => {
-    const { separateDialCode, dialCode } = this.props
+    const { separateDialCode, dialCode } = this.props;
 
-    return separateDialCode ? <div className="selected-dial-code">{dialCode}</div> : ''
-  }
+    return separateDialCode ? (
+      <div className="selected-dial-code">{dialCode}</div>
+    ) : (
+      ''
+    );
+  };
 
   genArrow = () => {
-    const { allowDropdown, showDropdown } = this.props
+    const { allowDropdown, showDropdown } = this.props;
     const arrowClass = classNames({
       'iti-arrow': true,
       up: showDropdown,
-    })
+    });
 
-    return allowDropdown ? <div className={arrowClass} /> : ''
-  }
+    return allowDropdown ? <div className={arrowClass} /> : '';
+  };
 
   genFlagClassName = () => {
-    const { countryCode } = this.props
+    const { countryCode } = this.props;
     const flagClassObj = {
       'iti-flag': true,
-    }
+    };
 
     if (countryCode) {
       flagClassObj[countryCode] = true;
     }
 
-    return classNames(flagClassObj)
-  }
+    return classNames(flagClassObj);
+  };
 
   genCountryList = () => {
     const {
@@ -68,7 +72,7 @@ export default class FlagDropDown extends Component {
       preferredCountries,
       highlightedCountry,
       changeHighlightCountry,
-    } = this.props
+    } = this.props;
 
     return (
       <CountryList
@@ -86,8 +90,8 @@ export default class FlagDropDown extends Component {
         highlightedCountry={highlightedCountry}
         changeHighlightCountry={changeHighlightCountry}
       />
-    )
-  }
+    );
+  };
 
   render() {
     const {
@@ -98,7 +102,7 @@ export default class FlagDropDown extends Component {
       titleTip,
       dropdownContainer,
       showDropdown,
-    } = this.props
+    } = this.props;
 
     return (
       <div ref={refCallback} className="flag-container">
@@ -113,11 +117,11 @@ export default class FlagDropDown extends Component {
           {this.genSelectedDialCode()}
           {this.genArrow()}
         </div>
-        {
-          (dropdownContainer && showDropdown)
-            ? <RootModal>{this.genCountryList()}</RootModal>
-            : this.genCountryList()
-        }
+        {dropdownContainer && showDropdown ? (
+          <RootModal>{this.genCountryList()}</RootModal>
+        ) : (
+          this.genCountryList()
+        )}
       </div>
     );
   }
