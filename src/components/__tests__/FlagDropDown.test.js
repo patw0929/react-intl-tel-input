@@ -3,8 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
 import { mount } from 'enzyme';
-import sinon from 'sinon';
-import fs from 'fs';
 import IntlTelInput from '../IntlTelInputApp';
 import FlagDropDown from '../FlagDropDown';
 import CountryList from '../CountryList';
@@ -12,38 +10,18 @@ import TelInput from '../TelInput';
 
 // eslint-disable-next-line func-names
 describe('FlagDropDown', function() {
-  let libphonenumberUtils;
-  let xhr;
-  let requests;
-  let getScript;
-
   beforeEach(() => {
     jest.resetModules();
-
-    libphonenumberUtils = fs.readFileSync('./src/libphonenumber.js', 'utf8');
-    xhr = sinon.useFakeXMLHttpRequest();
-    requests = [];
-    xhr.onCreate = req => {
-      requests.push(req);
-    };
-    window.intlTelInputUtils = undefined;
-
-    getScript = () => document.getElementsByTagName('script')[0];
 
     this.params = {
       css: ['intl-tel-input', 'form-control phoneNumber'],
       fieldName: 'telephone',
       defaultCountry: 'tw',
-      utilsScript: 'assets/libphonenumber.js',
     };
 
     this.makeSubject = () => {
       return mount(<IntlTelInput {...this.params} />);
     };
-  });
-
-  afterEach(() => {
-    xhr.restore();
   });
 
   it('should be rendered', () => {
@@ -59,7 +37,6 @@ describe('FlagDropDown', function() {
     window.localStorage.setItem('itiAutoCountry', 'jp');
     this.params = {
       ...this.params,
-      utilsScript: '',
       defaultCountry: 'auto',
     };
     const subject = await this.makeSubject();
@@ -163,7 +140,6 @@ describe('FlagDropDown', function() {
 
     this.params = {
       ...this.params,
-      utilsScript: '',
       defaultCountry: 'auto',
       geoIpLookup: lookup,
     };
@@ -181,7 +157,6 @@ describe('FlagDropDown', function() {
           css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
-          utilsScript="assets/libphonenumber.js"
         />
       );
 
@@ -221,7 +196,6 @@ describe('FlagDropDown', function() {
           css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
-          utilsScript="assets/libphonenumber.js"
         />
       );
 
@@ -289,7 +263,6 @@ describe('FlagDropDown', function() {
           css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
-          utilsScript="assets/libphonenumber.js"
         />
       );
 
@@ -324,7 +297,6 @@ describe('FlagDropDown', function() {
           css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
-          utilsScript="assets/libphonenumber.js"
         />
       );
 
@@ -356,7 +328,6 @@ describe('FlagDropDown', function() {
           css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
-          utilsScript="assets/libphonenumber.js"
         />
       );
 
@@ -390,7 +361,6 @@ describe('FlagDropDown', function() {
           css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
-          utilsScript="assets/libphonenumber.js"
         />
       );
 
@@ -462,12 +432,6 @@ describe('FlagDropDown', function() {
     const flagComponent = subject.find(FlagDropDown);
     const countryListComponent = subject.find(CountryList);
 
-    requests[0].respond(
-      200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils
-    );
-
     expect(expected).toBe('0912 345 678,tw');
     flagComponent.simulate('click');
     const japanOption = countryListComponent.find('[data-country-code="jp"]');
@@ -491,13 +455,6 @@ describe('FlagDropDown', function() {
     const inputComponent = subject.find(TelInput);
     const countryListComponent = subject.find(CountryList);
 
-    requests[0].respond(
-      200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils
-    );
-    window.eval(getScript().text);
-
     inputComponent.simulate('change', { target: { value: '+8109012345678' } });
     flagComponent.simulate('click');
     const japanOption = countryListComponent.find('[data-country-code="jp"]');
@@ -520,13 +477,6 @@ describe('FlagDropDown', function() {
     this.params.format = true;
     this.params.nationalMode = true;
     const subject = this.makeSubject();
-
-    requests[0].respond(
-      200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils
-    );
-    window.eval(getScript().text);
 
     expect(subject.instance().formatNumber('+886 912 345 678')).toBe(
       '0912 345 678'
