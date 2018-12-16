@@ -115,8 +115,8 @@
     "linters": {
       "*.js": [
         "yarn prettier --write",
-        "git add",
-        "yarn eslint"
+        "yarn run eslint -- --fix",
+        "git add"
       ],
       "src/**/*.js": [
         "yarn run test -- --bail --findRelatedTests"
