@@ -7,7 +7,8 @@ import IntlTelInput from '../IntlTelInputApp';
 import TelInput from '../TelInput';
 import FlagDropDown from '../FlagDropDown';
 
-describe('TelInput', function () { // eslint-disable-line func-names
+describe('TelInput', function() {
+  // eslint-disable-line func-names
   let libphonenumberUtils;
   let getScript;
   let xhr;
@@ -26,12 +27,13 @@ describe('TelInput', function () { // eslint-disable-line func-names
 
     xhr = sinon.useFakeXMLHttpRequest();
     requests = [];
-    xhr.onCreate = (req) => { requests.push(req); };
+    xhr.onCreate = req => {
+      requests.push(req);
+    };
     document.body.innerHTML = '<div id="root"></div>';
     window.intlTelInputUtils = undefined;
 
-    getScript = () =>
-      document.getElementsByTagName('script')[0];
+    getScript = () => document.getElementsByTagName('script')[0];
 
     this.params = {
       css: ['intl-tel-input', 'form-control phoneNumber'],
@@ -42,13 +44,9 @@ describe('TelInput', function () { // eslint-disable-line func-names
       utilsScript: 'assets/libphonenumber.js',
     };
     this.makeSubject = () => {
-      return mount(
-        <IntlTelInput
-          { ...this.params }
-        />, {
-          attachTo: document.querySelector('#root'),
-        },
-      );
+      return mount(<IntlTelInput {...this.params} />, {
+        attachTo: document.querySelector('#root'),
+      });
     };
   });
 
@@ -68,8 +66,16 @@ describe('TelInput', function () { // eslint-disable-line func-names
 
   it('onPhoneNumberChange without utilsScript', () => {
     let expected = '';
-    const onPhoneNumberChange = (isValid, newNumber, countryData, fullNumber, ext) => {
-      expected = `${isValid},${newNumber},${countryData.iso2},${fullNumber},${ext}`;
+    const onPhoneNumberChange = (
+      isValid,
+      newNumber,
+      countryData,
+      fullNumber,
+      ext
+    ) => {
+      expected = `${isValid},${newNumber},${
+        countryData.iso2
+      },${fullNumber},${ext}`;
     };
 
     this.params.utilsScript = '';
@@ -85,9 +91,11 @@ describe('TelInput', function () { // eslint-disable-line func-names
     const subject = await this.makeSubject();
     const inputComponent = subject.find(TelInput);
 
-    requests[0].respond(200,
+    requests[0].respond(
+      200,
       { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
+      libphonenumberUtils
+    );
     window.eval(getScript().text);
 
     expect(inputComponent.props().value).toBe('0999 123 456');
@@ -97,7 +105,9 @@ describe('TelInput', function () { // eslint-disable-line func-names
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
 
-    expect(inputComponent.find('.form-control.phoneNumber').length).toBeTruthy();
+    expect(
+      inputComponent.find('.form-control.phoneNumber').length
+    ).toBeTruthy();
   });
 
   it('should not focused on render', () => {
@@ -105,7 +115,10 @@ describe('TelInput', function () { // eslint-disable-line func-names
 
     let focused = false;
 
-    IntlTelInput.prototype.selectFlag = function selectFlag(countryCode, setFocus = true) {
+    IntlTelInput.prototype.selectFlag = function selectFlag(
+      countryCode,
+      setFocus = true
+    ) {
       focused = focused || setFocus;
       initialSelectFlag.call(this, countryCode, setFocus);
     };
@@ -120,7 +133,6 @@ describe('TelInput', function () { // eslint-disable-line func-names
     IntlTelInput.prototype.selectFlag = initialSelectFlag;
     expect(focused).toBeFalsy();
   });
-
 
   it('should has "kr" in preferred countries state', () => {
     this.params = {
@@ -166,9 +178,11 @@ describe('TelInput', function () { // eslint-disable-line func-names
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
 
-    requests[0].respond(200,
+    requests[0].respond(
+      200,
       { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
+      libphonenumberUtils
+    );
     window.eval(getScript().text);
 
     inputComponent.simulate('focus');
@@ -196,9 +210,11 @@ describe('TelInput', function () { // eslint-disable-line func-names
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
 
-    requests[0].respond(200,
+    requests[0].respond(
+      200,
       { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
+      libphonenumberUtils
+    );
     window.eval(getScript().text);
 
     inputComponent.simulate('focus');
@@ -232,9 +248,11 @@ describe('TelInput', function () { // eslint-disable-line func-names
 
   it('utils loaded', () => {
     this.makeSubject();
-    requests[0].respond(200,
+    requests[0].respond(
+      200,
       { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
+      libphonenumberUtils
+    );
     window.eval(getScript().text);
 
     expect(typeof window.intlTelInputUtils === 'object');
@@ -243,17 +261,27 @@ describe('TelInput', function () { // eslint-disable-line func-names
 
   it('onPhoneNumberChange', () => {
     let expected = '';
-    const onPhoneNumberChange = (isValid, newNumber, countryData, fullNumber, ext) => {
-      expected = `${isValid},${newNumber},${countryData.iso2},${fullNumber},${ext}`;
+    const onPhoneNumberChange = (
+      isValid,
+      newNumber,
+      countryData,
+      fullNumber,
+      ext
+    ) => {
+      expected = `${isValid},${newNumber},${
+        countryData.iso2
+      },${fullNumber},${ext}`;
     };
 
     this.params.onPhoneNumberChange = onPhoneNumberChange;
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
 
-    requests[0].respond(200,
+    requests[0].respond(
+      200,
       { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
+      libphonenumberUtils
+    );
     window.eval(getScript().text);
 
     inputComponent.simulate('change', { target: { value: '+886911222333' } });
@@ -271,17 +299,27 @@ describe('TelInput', function () { // eslint-disable-line func-names
 
   it('onPhoneNumberBlur', () => {
     let expected = '';
-    const onPhoneNumberBlur = (isValid, newNumber, countryData, fullNumber, ext) => {
-      expected = `${isValid},${newNumber},${countryData.iso2},${fullNumber},${ext}`;
+    const onPhoneNumberBlur = (
+      isValid,
+      newNumber,
+      countryData,
+      fullNumber,
+      ext
+    ) => {
+      expected = `${isValid},${newNumber},${
+        countryData.iso2
+      },${fullNumber},${ext}`;
     };
 
     this.params.onPhoneNumberBlur = onPhoneNumberBlur;
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
 
-    requests[0].respond(200,
+    requests[0].respond(
+      200,
       { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
+      libphonenumberUtils
+    );
     window.eval(getScript().text);
 
     inputComponent.simulate('change', { target: { value: '+886911222333' } });
@@ -320,9 +358,11 @@ describe('TelInput', function () { // eslint-disable-line func-names
   it('isValidNumber', () => {
     const subject = this.makeSubject();
 
-    requests[0].respond(200,
+    requests[0].respond(
+      200,
       { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
+      libphonenumberUtils
+    );
     window.eval(getScript().text);
 
     expect(subject.instance().isValidNumber('0910123456')).toBeTruthy();
@@ -337,9 +377,11 @@ describe('TelInput', function () { // eslint-disable-line func-names
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
 
-    requests[0].respond(200,
+    requests[0].respond(
+      200,
       { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
+      libphonenumberUtils
+    );
     window.eval(getScript().text);
 
     inputComponent.simulate('change', { target: { value: '910123456' } });
@@ -351,9 +393,11 @@ describe('TelInput', function () { // eslint-disable-line func-names
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
 
-    requests[0].respond(200,
+    requests[0].respond(
+      200,
       { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils);
+      libphonenumberUtils
+    );
     window.eval(getScript().text);
 
     expect(inputComponent.props().placeholder).toBe('foo');
@@ -482,9 +526,11 @@ describe('TelInput', function () { // eslint-disable-line func-names
     it('should change input placeholder on customPlaceholder prop change', () => {
       const subject = this.makeSubject();
 
-      requests[0].respond(200,
+      requests[0].respond(
+        200,
         { 'Content-Type': 'text/javascript' },
-        libphonenumberUtils);
+        libphonenumberUtils
+      );
       window.eval(getScript().text);
 
       subject.setProps({ customPlaceholder: () => 'Phone number' });
@@ -505,7 +551,9 @@ describe('TelInput', function () { // eslint-disable-line func-names
       flagComponent.simulate('click');
       expect(subject.instance().wrapperClass.expanded).toBe(true);
 
-      const taiwanOption = subject.find(FlagDropDown).find('[data-country-code="tw"]');
+      const taiwanOption = subject
+        .find(FlagDropDown)
+        .find('[data-country-code="tw"]');
 
       taiwanOption.simulate('click');
       expect(subject.instance().wrapperClass.expanded).toBe(false);
@@ -538,9 +586,11 @@ describe('TelInput', function () { // eslint-disable-line func-names
     it('should change props value', () => {
       const subject = this.makeSubject();
 
-      requests[0].respond(200,
+      requests[0].respond(
+        200,
         { 'Content-Type': 'text/javascript' },
-        libphonenumberUtils);
+        libphonenumberUtils
+      );
       window.eval(getScript().text);
 
       subject.setState({

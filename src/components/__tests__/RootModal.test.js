@@ -2,7 +2,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import RootModal from '../RootModal';
 
-describe('RootModal', function () { // eslint-disable-line func-names
+describe('RootModal', function() {
+  // eslint-disable-line func-names
   beforeEach(() => {
     jest.resetModules();
 
@@ -13,7 +14,7 @@ describe('RootModal', function () { // eslint-disable-line func-names
         </RootModal>,
         {
           attachTo: document.body,
-        },
+        }
       );
     };
   });

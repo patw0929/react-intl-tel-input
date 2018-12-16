@@ -26,10 +26,10 @@ export default class TelInput extends Component {
     );
   }
 
-  refHandler = (element) => {
+  refHandler = element => {
     this.tel = element;
     this.props.refCallback(element);
-  }
+  };
 
   render() {
     return (

@@ -115,11 +115,11 @@
     "linters": {
       "*.js": [
         "yarn prettier --write",
-        "git add",
-        "yarn eslint"
+        "yarn run eslint -- --fix",
+        "git add"
       ],
       "src/**/*.js": [
-        "yarn jest --bail --findRelatedTests"
+        "yarn run test -- --bail --findRelatedTests"
       ]
     }
   },
@@ -162,9 +162,6 @@
   },
   "engines": {
     "node": ">=6.2.2"
-  },
-  "eslintConfig": {
-    "extends": "./config/eslint.js"
   },
   "license": "MIT"
 }

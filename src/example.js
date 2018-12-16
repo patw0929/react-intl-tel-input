@@ -86,7 +86,7 @@ class DemoComponent extends Component {
           format
         />
         <div>
-Phone Number:
+          Phone Number:
           {this.state.phone1}
         </div>
 
@@ -99,7 +99,7 @@ Phone Number:
           css={['intl-tel-input', 'form-control']}
         />
         <div>
-Phone Number:
+          Phone Number:
           {this.state.phone2}
         </div>
       </div>

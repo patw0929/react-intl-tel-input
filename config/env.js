@@ -18,7 +18,8 @@ function getClientEnvironment(publicUrl) {
         env[key] = JSON.stringify(process.env[key]); // eslint-disable-line no-param-reassign
 
         return env;
-      }, {
+      },
+      {
         // Useful for determining whether we’re running in production mode.
         // Most importantly, it switches React into the correct mode.
         NODE_ENV: NODE_ENV,

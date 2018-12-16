@@ -62,11 +62,11 @@ export default class CountryList extends Component {
 
     this.listElement.style.top = cssTop;
     this.listElement.setAttribute('class', 'country-list');
-  }
+  };
 
-  setFlag = (iso2) => {
+  setFlag = iso2 => {
     this.props.setFlag(iso2);
-  }
+  };
 
   appendListItem = (countries, isPreferred = false) => {
     const preferredCountriesCount = this.props.preferredCountries.length;
@@ -106,21 +106,21 @@ export default class CountryList extends Component {
 
           <span className="country-name">{country.name}</span>
           <span className="dial-code">
-            +
++
             {country.dialCode}
           </span>
         </li>
       );
     });
-  }
+  };
 
-  handleMouseOver = (e) => {
+  handleMouseOver = e => {
     if (e.currentTarget.getAttribute('class').indexOf('country') > -1) {
       const selectedIndex = utils.retrieveLiIndex(e.currentTarget);
 
       this.props.changeHighlightCountry(true, selectedIndex);
     }
-  }
+  };
 
   render() {
     let options = '';
