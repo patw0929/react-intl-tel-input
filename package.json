@@ -163,8 +163,5 @@
   "engines": {
     "node": ">=6.2.2"
   },
-  "eslintConfig": {
-    "extends": "./config/eslint.js"
-  },
   "license": "MIT"
 }
