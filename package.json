@@ -119,7 +119,7 @@
         "yarn eslint"
       ],
       "src/**/*.js": [
-        "yarn jest --bail --findRelatedTests"
+        "yarn run test -- --bail --findRelatedTests"
       ]
     }
   },
