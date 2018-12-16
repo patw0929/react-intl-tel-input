@@ -19,12 +19,6 @@ export default class TelInput extends Component {
     cursorPosition: PropTypes.number,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.refHandler = this.refHandler.bind(this);
-  }
-
   componentDidUpdate() {
     this.tel.setSelectionRange(
       this.props.cursorPosition,
@@ -32,7 +26,7 @@ export default class TelInput extends Component {
     );
   }
 
-  refHandler(element) {
+  refHandler = (element) => {
     this.tel = element;
     this.props.refCallback(element);
   }
