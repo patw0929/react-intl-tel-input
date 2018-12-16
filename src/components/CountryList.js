@@ -20,14 +20,6 @@ export default class CountryList extends Component {
     isMobile: PropTypes.bool,
   };
 
-  constructor() {
-    super();
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.setFlag = this.setFlag.bind(this);
-    this.appendListItem = this.appendListItem.bind(this);
-    this.setDropdownPosition = this.setDropdownPosition.bind(this);
-  }
-
   shouldComponentUpdate(nextProps) {
     const shouldUpdate = !utils.shallowEquals(this.props, nextProps);
 
@@ -39,7 +31,7 @@ export default class CountryList extends Component {
     return shouldUpdate;
   }
 
-  setDropdownPosition() {
+  setDropdownPosition = () => {
     utils.removeClass(this.listElement, 'hide');
 
     const inputTop = this.props.inputTop;
@@ -72,11 +64,11 @@ export default class CountryList extends Component {
     this.listElement.setAttribute('class', 'country-list');
   }
 
-  setFlag(iso2) {
+  setFlag = (iso2) => {
     this.props.setFlag(iso2);
   }
 
-  appendListItem(countries, isPreferred = false) {
+  appendListItem = (countries, isPreferred = false) => {
     const preferredCountriesCount = this.props.preferredCountries.length;
 
     return countries.map((country, index) => {
@@ -122,7 +114,7 @@ export default class CountryList extends Component {
     });
   }
 
-  handleMouseOver(e) {
+  handleMouseOver = (e) => {
     if (e.currentTarget.getAttribute('class').indexOf('country') > -1) {
       const selectedIndex = utils.retrieveLiIndex(e.currentTarget);
 
