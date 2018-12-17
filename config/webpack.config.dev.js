@@ -7,7 +7,6 @@
 
 const webpack = require('webpack');
 const paths = require('./paths');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
@@ -59,7 +58,6 @@ module.exports = {
         loader: 'eslint-loader',
         enforce: 'pre',
         include: paths.appSrc,
-        exclude: /libphonenumber\.js/,
       },
       {
         exclude: [
@@ -80,7 +78,6 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
-        exclude: /libphonenumber\.js/,
         loader: 'babel-loader',
       },
       {
@@ -118,7 +115,6 @@ module.exports = {
       /^\.\/main\.css$/,
       '../dist/main.css'
     ),
-    new CopyWebpackPlugin([{ from: 'src/libphonenumber.js', to: './' }]),
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
