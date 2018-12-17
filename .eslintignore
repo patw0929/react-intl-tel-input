@@ -1,7 +1,6 @@
 dist/**
 example/**
 test/**
-src/libphonenumber.js
 node_modules/*
 package.json
 webpack.*.js

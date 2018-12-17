@@ -85,7 +85,6 @@ module.exports = {
         loader: 'eslint-loader',
         enforce: 'pre',
         include: paths.appSrc,
-        exclude: /libphonenumber\.js/,
       },
       {
         exclude: [
@@ -106,7 +105,6 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
-        exclude: /libphonenumber\.js/,
         loader: 'babel-loader',
       },
       {
@@ -196,7 +194,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'main.css',
     }),
-    new CopyWebpackPlugin([{ from: 'src/libphonenumber.js', to: './' }]),
   ],
   node: {
     fs: 'empty',

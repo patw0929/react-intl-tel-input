@@ -137,8 +137,7 @@
       "src/**/*.js",
       "!**/__mocks__/**",
       "!**/__tests__/**",
-      "!src/example.js",
-      "!src/libphonenumber.js"
+      "!src/example.js"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js",
