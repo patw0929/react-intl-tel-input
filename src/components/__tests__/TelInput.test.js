@@ -1,39 +1,16 @@
 /* eslint-disable no-eval, no-restricted-properties */
 import React from 'react';
 import { mount } from 'enzyme';
-import sinon from 'sinon';
-import fs from 'fs';
 import IntlTelInput from '../IntlTelInputApp';
 import TelInput from '../TelInput';
 import FlagDropDown from '../FlagDropDown';
 
 // eslint-disable-next-line func-names
 describe('TelInput', function() {
-  let libphonenumberUtils;
-  let getScript;
-  let xhr;
-  let requests;
-
-  beforeAll(() => {
-    libphonenumberUtils = fs.readFileSync('./src/libphonenumber.js', 'utf8');
-  });
-
-  afterAll(() => {
-    xhr.restore();
-  });
-
   beforeEach(() => {
     jest.resetModules();
 
-    xhr = sinon.useFakeXMLHttpRequest();
-    requests = [];
-    xhr.onCreate = req => {
-      requests.push(req);
-    };
     document.body.innerHTML = '<div id="root"></div>';
-    window.intlTelInputUtils = undefined;
-
-    getScript = () => document.getElementsByTagName('script')[0];
 
     this.params = {
       css: ['intl-tel-input', 'form-control phoneNumber'],
@@ -41,7 +18,6 @@ describe('TelInput', function() {
       fieldId: 'telephone-id',
       defaultCountry: 'tw',
       defaultValue: '0999 123 456',
-      utilsScript: 'assets/libphonenumber.js',
     };
     this.makeSubject = () => {
       return mount(<IntlTelInput {...this.params} />, {
@@ -64,7 +40,7 @@ describe('TelInput', function() {
     expect(inputComponent.props().fieldId).toBe('telephone-id');
   });
 
-  it('onPhoneNumberChange without utilsScript', () => {
+  it('onPhoneNumberChange without libphonenumber', () => {
     let expected = '';
     const onPhoneNumberChange = (
       isValid,
@@ -78,7 +54,8 @@ describe('TelInput', function() {
       },${fullNumber},${ext}`;
     };
 
-    this.params.utilsScript = '';
+    window.intlTelInputUtils = undefined;
+
     this.params.onPhoneNumberChange = onPhoneNumberChange;
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
@@ -90,13 +67,6 @@ describe('TelInput', function() {
   it('should set value as "0999 123 456"', async () => {
     const subject = await this.makeSubject();
     const inputComponent = subject.find(TelInput);
-
-    requests[0].respond(
-      200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils
-    );
-    window.eval(getScript().text);
 
     expect(inputComponent.props().value).toBe('0999 123 456');
   });
@@ -157,10 +127,11 @@ describe('TelInput', function() {
     expect(subject.state().countryCode).toBe('af');
   });
 
-  it('getNumber without utilsScript', () => {
+  it('getNumber without libphonenumber', () => {
+    window.intlTelInputUtils = undefined;
+
     this.params = {
       ...this.params,
-      utilsScript: null,
     };
     const subject = this.makeSubject();
 
@@ -177,13 +148,6 @@ describe('TelInput', function() {
   it('handleKeyUp', () => {
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
-
-    requests[0].respond(
-      200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils
-    );
-    window.eval(getScript().text);
 
     inputComponent.simulate('focus');
     inputComponent.simulate('keyDown', { keyCode: 35 });
@@ -209,13 +173,6 @@ describe('TelInput', function() {
     };
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
-
-    requests[0].respond(
-      200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils
-    );
-    window.eval(getScript().text);
 
     inputComponent.simulate('focus');
     inputComponent.simulate('keyDown', { keyCode: 35 });
@@ -248,12 +205,6 @@ describe('TelInput', function() {
 
   it('utils loaded', () => {
     this.makeSubject();
-    requests[0].respond(
-      200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils
-    );
-    window.eval(getScript().text);
 
     expect(typeof window.intlTelInputUtils === 'object');
     expect(typeof window.intlTelInputUtils.isValidNumber === 'function');
@@ -276,13 +227,6 @@ describe('TelInput', function() {
     this.params.onPhoneNumberChange = onPhoneNumberChange;
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
-
-    requests[0].respond(
-      200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils
-    );
-    window.eval(getScript().text);
 
     inputComponent.simulate('change', { target: { value: '+886911222333' } });
     expect(expected).toBe('true,+886911222333,tw,+886 911 222 333,null');
@@ -314,13 +258,6 @@ describe('TelInput', function() {
     this.params.onPhoneNumberBlur = onPhoneNumberBlur;
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
-
-    requests[0].respond(
-      200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils
-    );
-    window.eval(getScript().text);
 
     inputComponent.simulate('change', { target: { value: '+886911222333' } });
     inputComponent.simulate('blur');
@@ -358,13 +295,6 @@ describe('TelInput', function() {
   it('isValidNumber', () => {
     const subject = this.makeSubject();
 
-    requests[0].respond(
-      200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils
-    );
-    window.eval(getScript().text);
-
     expect(subject.instance().isValidNumber('0910123456')).toBeTruthy();
     expect(subject.instance().isValidNumber('091012345')).toBeFalsy();
   });
@@ -377,13 +307,6 @@ describe('TelInput', function() {
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
 
-    requests[0].respond(
-      200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils
-    );
-    window.eval(getScript().text);
-
     inputComponent.simulate('change', { target: { value: '910123456' } });
     expect(subject.instance().getFullNumber(910123456)).toBe('+886910123456');
   });
@@ -392,13 +315,6 @@ describe('TelInput', function() {
     this.params.placeholder = 'foo';
     const subject = this.makeSubject();
     const inputComponent = subject.find(TelInput);
-
-    requests[0].respond(
-      200,
-      { 'Content-Type': 'text/javascript' },
-      libphonenumberUtils
-    );
-    window.eval(getScript().text);
 
     expect(inputComponent.props().placeholder).toBe('foo');
   });
@@ -526,13 +442,6 @@ describe('TelInput', function() {
     it('should change input placeholder on customPlaceholder prop change', () => {
       const subject = this.makeSubject();
 
-      requests[0].respond(
-        200,
-        { 'Content-Type': 'text/javascript' },
-        libphonenumberUtils
-      );
-      window.eval(getScript().text);
-
       subject.setProps({ customPlaceholder: () => 'Phone number' });
       subject.update();
 
@@ -585,13 +494,6 @@ describe('TelInput', function() {
 
     it('should change props value', () => {
       const subject = this.makeSubject();
-
-      requests[0].respond(
-        200,
-        { 'Content-Type': 'text/javascript' },
-        libphonenumberUtils
-      );
-      window.eval(getScript().text);
 
       subject.setState({
         value: '+886912345678',

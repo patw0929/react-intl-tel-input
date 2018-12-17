@@ -506,25 +506,12 @@ class IntlTelInputApp extends Component {
   };
 
   initRequests = () => {
-    // if the user has specified the path to the utils script, fetch it on window.load
-    if (this.props.utilsScript) {
-      // if the plugin is being initialised after the window.load event has already been fired
-      if (this.windowLoaded) {
+    import('libphonenumber-js-utils')
+      .then(() => {
         this.loadUtils();
-      } else {
-        // wait until the load event so we don't block any other requests e.g. the flags image
-        window.addEventListener('load', () => {
-          this.loadUtils();
-        });
-      }
-    } else {
-      import('libphonenumber-js-utils')
-        .then(() => {
-          this.loadUtils();
-          this.utilsScriptDeferred.resolve();
-        })
-        .catch(() => 'An error occurred while loading the component');
-    }
+        this.utilsScriptDeferred.resolve();
+      })
+      .catch(() => 'An error occurred while loading the component');
 
     if (this.tempCountry === 'auto') {
       this.loadAutoCountry();
@@ -1035,7 +1022,7 @@ class IntlTelInputApp extends Component {
     }
   };
 
-  // validate the input val - assumes the global function isValidNumber (from utilsScript)
+  // validate the input val - assumes the global function isValidNumber (from libphonenumber)
   isValidNumber = number => {
     const val = utils.trim(number);
     const countryCode =
@@ -1231,32 +1218,7 @@ class IntlTelInputApp extends Component {
   loadUtils = () => {
     if (window.intlTelInputUtils) {
       this.utilsScriptDeferred.resolve();
-
-      return;
     }
-
-    const request = new XMLHttpRequest();
-
-    request.open('GET', this.props.utilsScript, true);
-
-    request.onload = () => {
-      if (request.status >= 200 && request.status < 400) {
-        const data = request.responseText;
-
-        if (data && !document.getElementById('intlTelInputUtils')) {
-          const oBody = document.getElementsByTagName('body')[0];
-          const oScript = document.createElement('script');
-
-          oScript.id = 'intlTelInputUtils';
-          oScript.text = data;
-          oBody.appendChild(oScript);
-        }
-
-        this.utilsScriptDeferred.resolve();
-      }
-    };
-
-    request.send();
   };
 
   // this is called when the geoip call returns
@@ -1355,7 +1317,6 @@ IntlTelInputApp.propTypes = {
   noCountryDataHandler: PropTypes.func,
   onlyCountries: PropTypes.arrayOf(PropTypes.string),
   preferredCountries: PropTypes.arrayOf(PropTypes.string),
-  utilsScript: PropTypes.string,
   onPhoneNumberChange: PropTypes.func,
   onPhoneNumberBlur: PropTypes.func,
   onSelectFlag: PropTypes.func,
@@ -1405,8 +1366,6 @@ IntlTelInputApp.defaultProps = {
   onlyCountries: [],
   // the countries at the top of the list. defaults to united states and united kingdom
   preferredCountries: ['us', 'gb'],
-  // specify the path to the libphonenumber script to enable validation/formatting
-  utilsScript: '',
   onPhoneNumberChange: null,
   onPhoneNumberBlur: null,
   onSelectFlag: null,
