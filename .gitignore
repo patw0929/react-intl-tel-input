@@ -38,3 +38,5 @@ npm-debug.log
 yarn-error.log
 
 coverage
+example/report.html
+
