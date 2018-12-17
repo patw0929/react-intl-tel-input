@@ -201,8 +201,6 @@ module.exports = {
         defaultSizes: 'parsed',
         openAnalyzer: true,
         generateStatsFile: false,
-        statsFilename: 'stats.json',
-        statsOptions: null,
         logLevel: 'info'
       },
     ),
