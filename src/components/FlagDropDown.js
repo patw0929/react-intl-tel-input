@@ -26,92 +26,102 @@ export default class FlagDropDown extends Component {
     refCallback: PropTypes.func.isRequired,
   };
 
-  render() {
+  genSelectedDialCode = () => {
+    const { separateDialCode, dialCode } = this.props;
+
+    return separateDialCode ? (
+      <div className="selected-dial-code">{dialCode}</div>
+    ) : (
+      ''
+    );
+  };
+
+  genArrow = () => {
+    const { allowDropdown, showDropdown } = this.props;
+    const arrowClass = classNames({
+      'iti-arrow': true,
+      up: showDropdown,
+    });
+
+    return allowDropdown ? <div className={arrowClass} /> : '';
+  };
+
+  genFlagClassName = () => {
+    const { countryCode } = this.props;
     const flagClassObj = {
       'iti-flag': true,
     };
-    const arrowClass = classNames({
-      'iti-arrow': true,
-      up: this.props.showDropdown,
-    });
-    let genSelectedDialCode = () => '';
 
-    if (this.props.separateDialCode) {
-      genSelectedDialCode = () => (
-        <div className="selected-dial-code">{this.props.dialCode}</div>
-      );
+    if (countryCode) {
+      flagClassObj[countryCode] = true;
     }
 
-    let genArrow = () => '';
+    return classNames(flagClassObj);
+  };
 
-    if (this.props.allowDropdown) {
-      genArrow = () => <div className={arrowClass} />;
-    }
-
-    if (this.props.countryCode) {
-      flagClassObj[this.props.countryCode] = true;
-    }
-
-    const flagClass = classNames(flagClassObj);
-
-    let genCountryList = () => '';
-
-    if (this.props.dropdownContainer) {
-      if (this.props.showDropdown) {
-        genCountryList = () => (
-          <RootModal>
-            <CountryList
-              ref={countryList => {
-                this.countryList = countryList;
-              }}
-              dropdownContainer={this.props.dropdownContainer}
-              isMobile={this.props.isMobile}
-              showDropdown={this.props.allowDropdown && this.props.showDropdown}
-              setFlag={this.props.setFlag}
-              countries={this.props.countries}
-              inputTop={this.props.inputTop}
-              inputOuterHeight={this.props.inputOuterHeight}
-              preferredCountries={this.props.preferredCountries}
-              highlightedCountry={this.props.highlightedCountry}
-              changeHighlightCountry={this.props.changeHighlightCountry}
-            />
-          </RootModal>
-        );
-      }
-    } else {
-      genCountryList = () => (
-        <CountryList
-          ref={countryList => {
-            this.countryList = countryList;
-          }}
-          dropdownContainer={this.props.dropdownContainer}
-          isMobile={this.props.isMobile}
-          showDropdown={this.props.allowDropdown && this.props.showDropdown}
-          setFlag={this.props.setFlag}
-          countries={this.props.countries}
-          inputTop={this.props.inputTop}
-          inputOuterHeight={this.props.inputOuterHeight}
-          preferredCountries={this.props.preferredCountries}
-          highlightedCountry={this.props.highlightedCountry}
-          changeHighlightCountry={this.props.changeHighlightCountry}
-        />
-      );
-    }
+  genCountryList = () => {
+    const {
+      dropdownContainer,
+      showDropdown,
+      isMobile,
+      allowDropdown,
+      setFlag,
+      countries,
+      inputTop,
+      inputOuterHeight,
+      preferredCountries,
+      highlightedCountry,
+      changeHighlightCountry,
+    } = this.props;
 
     return (
-      <div ref={this.props.refCallback} className="flag-container">
+      <CountryList
+        ref={countryList => {
+          this.countryList = countryList;
+        }}
+        dropdownContainer={dropdownContainer}
+        isMobile={isMobile}
+        showDropdown={allowDropdown && showDropdown}
+        setFlag={setFlag}
+        countries={countries}
+        inputTop={inputTop}
+        inputOuterHeight={inputOuterHeight}
+        preferredCountries={preferredCountries}
+        highlightedCountry={highlightedCountry}
+        changeHighlightCountry={changeHighlightCountry}
+      />
+    );
+  };
+
+  render() {
+    const {
+      refCallback,
+      allowDropdown,
+      clickSelectedFlag,
+      handleSelectedFlagKeydown,
+      titleTip,
+      dropdownContainer,
+      showDropdown,
+    } = this.props;
+
+    return (
+      <div ref={refCallback} className="flag-container">
         <div
           className="selected-flag"
-          tabIndex={this.props.allowDropdown ? '0' : ''}
-          onClick={this.props.clickSelectedFlag}
-          onKeyDown={this.props.handleSelectedFlagKeydown}
-          title={this.props.titleTip}
+          tabIndex={allowDropdown ? '0' : ''}
+          onClick={clickSelectedFlag}
+          onKeyDown={handleSelectedFlagKeydown}
+          title={titleTip}
         >
-          <div className={flagClass} />
-          {genSelectedDialCode()}
-          {genArrow()}
+          <div className={this.genFlagClassName()} />
+          {this.genSelectedDialCode()}
+          {this.genArrow()}
         </div>
-        {genCountryList()}
+        {dropdownContainer && showDropdown ? (
+          <RootModal>{this.genCountryList()}</RootModal>
+        ) : (
+          this.genCountryList()
+        )}
       </div>
     );
   }
