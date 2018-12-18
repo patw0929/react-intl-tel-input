@@ -5,20 +5,24 @@
   ],
   "plugins": [
     "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-syntax-dynamic-import",
-    [
-      "transform-react-remove-prop-types",
-      {
-        "removeImport": true,
-        "additionalLibraries": [
-          "react-style-proptype"
-        ]
-      }
-    ]
+    "@babel/plugin-syntax-dynamic-import"
   ],
   "env": {
     "test": {
       "plugins": ["dynamic-import-node"]
+    },
+    "production": {
+      "plugins": [
+        [
+          "transform-react-remove-prop-types",
+          {
+            "removeImport": true,
+            "additionalLibraries": [
+              "react-style-proptype"
+            ]
+          }
+        ]
+      ]
     }
   }
 }
