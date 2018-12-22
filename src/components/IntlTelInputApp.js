@@ -836,7 +836,7 @@ class IntlTelInputApp extends Component {
       .removeEventListener('click', this.handleDocumentClick);
   };
 
-  clickSelectedFlag = () => {
+  clickSelectedFlag = e => {
     const { allowDropdown, onFlagClick } = this.props;
     const { showDropdown, disabled, readonly } = this.state;
 
@@ -866,7 +866,7 @@ class IntlTelInputApp extends Component {
     }
     // Allow main app to do things when flag icon is clicked
     if (typeof onFlagClick === 'function') {
-      onFlagClick();
+      onFlagClick(e);
     }
   };
 
