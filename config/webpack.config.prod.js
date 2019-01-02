@@ -43,6 +43,7 @@ module.exports = {
     publicPath: publicPath,
     library: 'IntlTelInput',
     libraryTarget: 'umd',
+    globalObject: '(window || this)',
   },
 
   externals: {
