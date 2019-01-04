@@ -81,6 +81,7 @@
     "postcss-safe-parser": "^4.0.1",
     "pre-commit": "^1.2.2",
     "prettier": "^1.14.2",
+    "promise": "^8.0.2",
     "raf": "^3.4.0",
     "react": "^16.4.1",
     "react-dev-utils": "^6.1.1",
@@ -97,6 +98,7 @@
     "webpack": "^4.27.1",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-dev-server": "^3.1.10",
+    "whatwg-fetch": "^3.0.0",
     "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
