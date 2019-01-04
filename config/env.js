@@ -2,16 +2,30 @@
 // Grab NODE_ENV and REACT_APP_* environment variables and prepare them to be
 // injected into the application via DefinePlugin in Webpack configuration.
 
-var REACT_APP = /^REACT_APP_/i;
+const REACT_APP = /^REACT_APP_/i;
 
-function getClientEnvironment(publicUrl) {
-  var NODE_ENV = JSON.stringify(process.env.NODE_ENV || 'development');
-  var DEVELOPMENT = NODE_ENV === JSON.stringify('development');
-  var SERVER = false;
-  var CLIENT = true;
-  var BUILD_NAME = JSON.stringify(process.env.BUILD_NAME || 'dev');
+/*
+ * Get Global Objects in different running environments
+ */
+const getGlobalObject = () =>(`
+(function(){
+  if(typeof window !== "undefined" && window)
+    return window;
+  else if(typeof self !== "undefined" && self)
+    return self;
+  else
+    return this;
+})()
+`);
 
-  var processEnv = Object.keys(process.env)
+const getClientEnvironment = (publicUrl) => {
+  const NODE_ENV = JSON.stringify(process.env.NODE_ENV || 'development');
+  const DEVELOPMENT = NODE_ENV === JSON.stringify('development');
+  const SERVER = false;
+  const CLIENT = true;
+  const BUILD_NAME = JSON.stringify(process.env.BUILD_NAME || 'dev');
+
+  const processEnv = Object.keys(process.env)
     .filter(key => REACT_APP.test(key))
     .reduce(
       (env, key) => {
@@ -34,10 +48,11 @@ function getClientEnvironment(publicUrl) {
 
   return {
     'process.env': processEnv,
+    getGlobalObject,
     __SERVER__: SERVER,
     __CLIENT__: CLIENT,
     __DEVELOPMENT__: DEVELOPMENT,
   };
-}
+};
 
 module.exports = getClientEnvironment;
