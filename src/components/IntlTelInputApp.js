@@ -836,11 +836,15 @@ class IntlTelInputApp extends Component {
       .removeEventListener('click', this.handleDocumentClick);
   };
 
-  clickSelectedFlag = () => {
+  clickSelectedFlag = e => {
+    const { allowDropdown, onFlagClick } = this.props;
+    const { showDropdown, disabled, readonly } = this.state;
+
     if (
-      !this.state.showDropdown &&
-      !this.state.disabled &&
-      !this.state.readonly
+      !showDropdown &&
+      !disabled &&
+      !readonly &&
+      allowDropdown
     ) {
       this.setState(
         {
@@ -856,9 +860,13 @@ class IntlTelInputApp extends Component {
           }
         }
       );
-    } else if (this.state.showDropdown) {
+    } else if (showDropdown) {
       // need to hide dropdown when click on opened flag button
       this.toggleDropdown(false);
+    }
+    // Allow main app to do things when flag icon is clicked
+    if (typeof onFlagClick === 'function') {
+      onFlagClick(e);
     }
   };
 
@@ -1328,6 +1336,7 @@ IntlTelInputApp.propTypes = {
   useMobileFullscreenDropdown: PropTypes.bool,
   telInputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   format: PropTypes.bool,
+  onFlagClick: PropTypes.func,
 };
 
 IntlTelInputApp.defaultProps = {
@@ -1378,6 +1387,7 @@ IntlTelInputApp.defaultProps = {
   telInputProps: {},
   // always format the number
   format: false,
+  onFlagClick: null,
 };
 
 export default IntlTelInputApp;
