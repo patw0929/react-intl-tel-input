@@ -806,7 +806,7 @@ class IntlTelInputApp extends Component {
     this.processPreferredCountries.call(this);
   };
 
-  handleOnBlur = () => {
+  handleOnBlur = (event) => {
     this.removeEmptyDialCode();
     if (typeof this.props.onPhoneNumberBlur === 'function') {
       const value = this.state.value;
@@ -818,7 +818,8 @@ class IntlTelInputApp extends Component {
         value,
         this.selectedCountryData,
         fullNumber,
-        this.getExtension(value)
+        this.getExtension(value),
+        event
       );
     }
   };
