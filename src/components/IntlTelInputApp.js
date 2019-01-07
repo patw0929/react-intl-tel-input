@@ -15,7 +15,7 @@ class IntlTelInputApp extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     let newState = null;
 
-    if (nextProps.value && prevState.value !== nextProps.value) {
+    if (typeof nextProps.value !== 'undefined' && prevState.value !== nextProps.value) {
       newState = {
         value: nextProps.value,
       };
