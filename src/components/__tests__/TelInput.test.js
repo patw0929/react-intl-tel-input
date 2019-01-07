@@ -248,11 +248,14 @@ describe('TelInput', function() {
       newNumber,
       countryData,
       fullNumber,
-      ext
+      ext,
+      event
     ) => {
+      const { type } = event;
+
       expected = `${isValid},${newNumber},${
         countryData.iso2
-      },${fullNumber},${ext}`;
+      },${fullNumber},${ext},${type}`;
     };
 
     this.params.onPhoneNumberBlur = onPhoneNumberBlur;
@@ -261,7 +264,7 @@ describe('TelInput', function() {
 
     inputComponent.simulate('change', { target: { value: '+886911222333' } });
     inputComponent.simulate('blur');
-    expect(expected).toBe('true,+886911222333,tw,+886 911 222 333,null');
+    expect(expected).toBe('true,+886911222333,tw,+886 911 222 333,null,blur');
   });
 
   it('should has empty value with false nationalMode, false autoHideDialCode and false separateDialCode', () => {
