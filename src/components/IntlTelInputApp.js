@@ -148,6 +148,7 @@ class IntlTelInputApp extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.value !== prevProps.value) {
       this.updateFlagFromNumber(this.props.value);
+      this.updateCursorPosition((this.props.value || this.props.defaultValue).length);
     }
 
     if (
@@ -676,6 +677,12 @@ class IntlTelInputApp extends Component {
 
     return number;
   };
+
+  updateCursorPosition = (cursorPosition) => {
+    this.setState({
+      cursorPosition,
+    });
+  }
 
   // update the input's value to the given val (format first if possible)
   // if doNotify is true, calls notifyPhoneNumberChange with the formatted value
