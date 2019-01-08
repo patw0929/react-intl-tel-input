@@ -1,5 +1,19 @@
 # Changelog
 
+## [v6.1.0](https://github.com/patw0929/react-intl-tel-input/releases/tag/v6.1.0)
+
+### New features
+
+- [#249](https://github.com/patw0929/react-intl-tel-input/pull/249): Add support for onFlagClick (by [@tomegz](https://github.com/tomegz))
+- [#254](https://github.com/patw0929/react-intl-tel-input/pull/254): Updated libphonenumber to 8.10.2 (by [@superhit0](https://github.com/superhit0))
+- [#256](https://github.com/patw0929/react-intl-tel-input/pull/256): Added event object to onPhoneNumberBlur callback's parameter (by [@superhit0](https://github.com/superhit0))
+
+### Bug fixes
+
+- [#254](https://github.com/patw0929/react-intl-tel-input/pull/254): Fixed issue [#253](https://github.com/patw0929/react-intl-tel-input/issues/253) - Can not import from Node.js since module build upgrade to webpack 4 (by [@superhit0](https://github.com/superhit0))
+- [#256](https://github.com/patw0929/react-intl-tel-input/pull/256): Defined `.npmrc` to avoid overriding the default npm registry server (by [@superhit0](https://github.com/superhit0))
+- [#259](https://github.com/patw0929/react-intl-tel-input/pull/259): Fixed not update value issue when value is empty string (by [@patw0929](https://github.com/patw0929))
+
 ## [v6.0.0](https://github.com/patw0929/react-intl-tel-input/releases/tag/v6.0.0)
 
 ### Breaking changes
