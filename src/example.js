@@ -40,14 +40,11 @@ class DemoComponent extends Component {
     this.selectFlagHandler2 = this.selectFlagHandler.bind(this, 'phone2');
   }
 
-  changeHandler(name, isValid, value, countryData, number, ext) {
-    log(isValid, value, countryData, number, ext);
-    this.setState({
-      [name]: value,
-    });
-  }
+  blurHandler = (name, isValid, value, countryData, number, ext, event) => {
+    log(isValid, value, countryData, number, ext, event.type);
+  };
 
-  blurHandler(name, isValid, value, countryData, number, ext) {
+  changeHandler(name, isValid, value, countryData, number, ext) {
     log(isValid, value, countryData, number, ext);
     this.setState({
       [name]: value,
