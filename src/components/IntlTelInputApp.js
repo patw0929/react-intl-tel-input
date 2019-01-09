@@ -1177,21 +1177,7 @@ class IntlTelInputApp extends Component {
   // Either notify phoneNumber changed if component is controlled
   // or udpate the state and notify change if component is uncontrolled
   handleInputChange = e => {
-    let cursorPosition = e.target.selectionStart;
-    const previousValue = e.target.value;
-    const previousStringBeforeCursor =
-      previousValue === ''
-        ? previousValue
-        : previousValue.substring(0, cursorPosition);
-    const value = this.props.format
-      ? this.formatNumber(e.target.value)
-      : e.target.value;
-
-    cursorPosition = utils.getCursorPositionAfterFormating(
-      previousStringBeforeCursor,
-      previousValue,
-      value
-    );
+    const { cursorPosition, value } = this.cursorUpdate(e);
 
     if (this.props.value !== undefined) {
       this.setState(
@@ -1215,6 +1201,33 @@ class IntlTelInputApp extends Component {
         }
       );
     }
+  };
+
+  cursorUpdate = ({ target }) => {
+    let cursorPosition = target.selectionStart;
+    const previousValue = target.value;
+    const previousStringBeforeCursor =
+      previousValue === ''
+        ? previousValue
+        : previousValue.substring(0, cursorPosition);
+    let value = this.props.format
+      ? this.formatNumber(target.value)
+      : target.value;
+
+    value = this.props.formatFull
+      ? this.formatFullNumber(target.value)
+      : value;
+
+    cursorPosition = utils.getCursorPositionAfterFormating(
+      previousStringBeforeCursor,
+      previousValue,
+      value
+    );
+
+    return {
+      cursorPosition,
+      value,
+    };
   };
 
   changeHighlightCountry = (showDropdown, selectedIndex) => {
@@ -1337,6 +1350,7 @@ IntlTelInputApp.propTypes = {
   useMobileFullscreenDropdown: PropTypes.bool,
   telInputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   format: PropTypes.bool,
+  formatFull: PropTypes.bool,
   onFlagClick: PropTypes.func,
 };
 
@@ -1388,6 +1402,7 @@ IntlTelInputApp.defaultProps = {
   telInputProps: {},
   // always format the number
   format: false,
+  formatFull: false,
   onFlagClick: null,
 };
 

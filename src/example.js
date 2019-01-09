@@ -31,23 +31,29 @@ class DemoComponent extends Component {
     this.state = {
       phone1: '',
       phone2: '',
+      phone3: '',
+      phoneNumber3: '',
     };
-    this.changePhone1 = this.changeHandler.bind(this, 'phone1');
-    this.changePhone2 = this.changeHandler.bind(this, 'phone2');
+    this.changePhone1 = this.changeHandler.bind(this, 'phone1', 'phoneNumber1');
+    this.changePhone2 = this.changeHandler.bind(this, 'phone2', 'phoneNumber2');
+    this.changePhone3 = this.changeHandler.bind(this, 'phone3', 'phoneNumber3');
     this.blurHandler1 = this.blurHandler.bind(this, 'phone1');
     this.blurHandler2 = this.blurHandler.bind(this, 'phone2');
+    this.blurHandler3 = this.blurHandler.bind(this, 'phone3');
     this.selectFlagHandler1 = this.selectFlagHandler.bind(this, 'phone1');
     this.selectFlagHandler2 = this.selectFlagHandler.bind(this, 'phone2');
+    this.selectFlagHandler3 = this.selectFlagHandler.bind(this, 'phone3');
   }
 
   blurHandler = (name, isValid, value, countryData, number, ext, event) => {
     log(isValid, value, countryData, number, ext, event.type);
   };
 
-  changeHandler(name, isValid, value, countryData, number, ext) {
+  changeHandler(name, nameNumber, isValid, value, countryData, number, ext) {
     log(isValid, value, countryData, number, ext);
     this.setState({
       [name]: value,
+      [nameNumber]: number,
     });
   }
 
@@ -90,9 +96,26 @@ class DemoComponent extends Component {
           value={this.state.phone2}
           css={['intl-tel-input', 'form-control']}
         />
+
         <div>
           Phone Number:
           {this.state.phone2}
+        </div>
+
+        <IntlTelInput
+          onPhoneNumberChange={this.changePhone3}
+          onPhoneNumberBlur={this.blurHandler3}
+          onSelectFlag={this.selectFlagHandler3}
+          defaultCountry="auto"
+          value={this.state.phoneNumber3}
+          geoIpLookup={lookup}
+          css={['intl-tel-input', 'form-control']}
+          formatFull
+        />
+
+        <div>
+          Phone Number:
+          {this.state.phone3}
         </div>
 
         <hr />
