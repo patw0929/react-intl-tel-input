@@ -19,16 +19,34 @@ export default class TelInput extends Component {
     cursorPosition: PropTypes.number,
   };
 
+  state = {
+    hasFocus: false,
+  };
+
   componentDidUpdate() {
-    this.tel.setSelectionRange(
-      this.props.cursorPosition,
-      this.props.cursorPosition
-    );
+    if (this.state.hasFocus) {
+      this.tel.setSelectionRange(
+        this.props.cursorPosition,
+        this.props.cursorPosition
+      );
+    }
   }
 
   refHandler = element => {
     this.tel = element;
     this.props.refCallback(element);
+  };
+
+  inputOnBlur = event => {
+    this.setState({ hasFocus: false });
+
+    if (this.props.handleOnBlur) {
+      this.props.handleOnBlur(event);
+    }
+  };
+
+  inputOnFocus = () => {
+    this.setState({ hasFocus: true });
   };
 
   render() {
@@ -46,7 +64,8 @@ export default class TelInput extends Component {
         value={this.props.value}
         placeholder={this.props.placeholder}
         onChange={this.props.handleInputChange}
-        onBlur={this.props.handleOnBlur}
+        onBlur={this.inputOnBlur}
+        onFocus={this.inputOnFocus}
         autoFocus={this.props.autoFocus}
       />
     );
