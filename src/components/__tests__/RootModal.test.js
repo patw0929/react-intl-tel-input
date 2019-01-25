@@ -10,7 +10,7 @@ describe('RootModal', function() {
     this.makeSubject = () => {
       return mount(
         <RootModal>
-          <div>foo</div>
+          <div className="root">foo</div>
         </RootModal>,
         {
           attachTo: document.body,
@@ -19,10 +19,10 @@ describe('RootModal', function() {
     };
   });
 
-  it('should has a noscript tag', () => {
+  it('should has a div.root tag', () => {
     const subject = this.makeSubject();
 
-    expect(subject.find('noscript').length).toBeTruthy();
+    expect(subject.find('div.root').length).toBeTruthy();
   });
 
   it('should has parent element which has specific className', () => {
