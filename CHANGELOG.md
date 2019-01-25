@@ -1,5 +1,17 @@
 # Changelog
 
+## [v6.1.1](https://github.com/patw0929/react-intl-tel-input/releases/tag/v6.1.1)
+
+### Bug fixes
+
+- [#269](https://github.com/patw0929/react-intl-tel-input/pull/269): Fixed issue [#268](https://github.com/patw0929/react-intl-tel-input/issues/268) - disabled state doesn't update an input field (by [@patw0929](https://github.com/patw0929))
+- [#265](https://github.com/patw0929/react-intl-tel-input/pull/265): update cursor position after focused (by [@Loongwoo](https://github.com/Loongwoo))
+
+### Chores
+
+- [#267](https://github.com/patw0929/react-intl-tel-input/pull/267) - Use createPortal API to implement RootModal (by [@patw0929](https://github.com/patw0929))
+- Added `ISSUE_TEMPLATE.md` & `PULL_REQUEST_TEMPLATE.md`
+
 ## [v6.1.0](https://github.com/patw0929/react-intl-tel-input/releases/tag/v6.1.0)
 
 ### New features
