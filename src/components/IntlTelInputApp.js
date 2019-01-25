@@ -21,7 +21,7 @@ class IntlTelInputApp extends Component {
       };
     }
 
-    if (nextProps.disabled && prevState.disabled !== nextProps.disabled) {
+    if (prevState.disabled !== nextProps.disabled) {
       newState = {
         disabled: nextProps.disabled,
       };
