@@ -21,7 +21,7 @@ export default class TelInput extends Component {
 
   state = {
     hasFocus: false,
-  }
+  };
 
   componentDidUpdate() {
     if (this.state.hasFocus) {
@@ -37,17 +37,17 @@ export default class TelInput extends Component {
     this.props.refCallback(element);
   };
 
-  inputOnBlur = () => {
+  inputOnBlur = event => {
     this.setState({ hasFocus: false });
 
     if (this.props.handleOnBlur) {
-      this.props.handleOnBlur();
+      this.props.handleOnBlur(event);
     }
-  }
+  };
 
   inputOnFocus = () => {
     this.setState({ hasFocus: true });
-  }
+  };
 
   render() {
     return (
