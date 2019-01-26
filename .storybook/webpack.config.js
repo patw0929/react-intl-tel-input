@@ -18,22 +18,6 @@ module.exports = {
         include: paths.appSrc,
       },
       {
-        exclude: [
-          /\.html$/,
-          /\.(js|jsx)$/,
-          /\.css$/,
-          /\.scss$/,
-          /\.json$/,
-          /\.png$/,
-          /\.svg$/,
-        ],
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: 'media/[name].[hash:8].[ext]',
-        },
-      },
-      {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         loader: 'babel-loader',
@@ -46,25 +30,18 @@ module.exports = {
           'sass-loader?outputStyle=expanded',
         ],
       },
-      // {
-      //   test: /\.css$/,
-      //   use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
-      // },
-      // {
-      //   test: /\.(jpe?g|png|gif|svg)$/i,
-      //   use: [
-      //     'file-loader?name=[name].[ext]',
-      //     {
-      //       loader: 'image-webpack-loader',
-      //       options: {
-      //         pngquant: {
-      //           quality: '30-40',
-      //           speed: 1,
-      //         },
-      //       },
-      //     },
-      //   ],
-      // },
+      {
+        test: /\.(jpg|png|svg|gif)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'img/[name].[ext]',
+          publicPath: '/',
+        },
+      },
+      {
+        test: /\.css$/,
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+      },
     ],
   },
 };
