@@ -50,7 +50,7 @@ const codeString = `\
 `;
 
 
-export default class Basic extends Component {
+export default class GeoIP extends Component {
   state = {
     value: '',
   };
@@ -66,7 +66,7 @@ export default class Basic extends Component {
   render() {
     return (
       <div className="story">
-        <h1 className="title">Basic</h1>
+        <h1 className="title">GeoIP</h1>
 
         <div className="demo">
           <IntlTelInput

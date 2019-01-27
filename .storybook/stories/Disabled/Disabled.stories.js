@@ -80,7 +80,7 @@ export default class Disabled extends Component {
   render() {
     return (
       <div className="story">
-        <h1 className="title">Basic</h1>
+        <h1 className="title">Disabled</h1>
 
         <div className="demo">
           <IntlTelInput
