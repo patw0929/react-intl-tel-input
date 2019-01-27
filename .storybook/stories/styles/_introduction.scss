@@ -1,0 +1,28 @@
+.introduction {
+  margin: 70px auto 0;
+  padding: 0 50px;
+
+  .title {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .subtitle {
+    color: #ccc;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .demo {
+    margin: 40px auto;
+    text-align: center;
+  }
+
+  th[scope="col"] {
+    background-color: #eee;
+  }
+
+  table {
+    font-size: 18px;
+  }
+}
