@@ -119,7 +119,8 @@
     "coverage": "yarn run test -- --coverage",
     "coveralls": "NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "prettier:all": "prettier --write 'src/example.js' 'src/components/**/*.js' 'config/**/*.js'",
-    "storybook": "start-storybook -p 4000 -c .storybook"
+    "storybook": "start-storybook -p 4000 -c .storybook",
+    "build:storybook": "build-storybook -c .storybook -o .example"
   },
   "lint-staged": {
     "linters": {
