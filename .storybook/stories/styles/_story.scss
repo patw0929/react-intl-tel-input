@@ -10,4 +10,21 @@
   h2 {
     margin: 20px 0;
   }
+
+  .preview {
+    margin: 10px 0;
+    font-size: 14px;
+  }
+
+  .code {
+    margin: 15px 0;
+    padding: 15px;
+    line-height: 1.5;
+    background-color: #eee;
+    border-radius: 3px;
+
+    &:empty {
+      display: none;
+    }
+  }
 }
