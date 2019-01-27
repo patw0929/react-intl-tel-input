@@ -7,28 +7,33 @@ import IntlTelInput from '../../../src/components/IntlTelInputApp';
 import '../../../example/main.css';
 
 const codeString = `\
-  state = {
-    value: '',
-  };
+  import IntlTelInput from 'react-intl-tel-input';
+  import 'react-intl-tel-input/dist/main.css';
 
-  handleChange = (isValid, value, countryData, number, ext) => {
-    console.log(isValid, value, countryData, number, ext);
+  export default App extends React.Component {
+    state = {
+      value: '',
+    };
 
-    this.setState({
-      value,
-    });
-  };
+    handleChange = (isValid, value, countryData, number, ext) => {
+      console.log(isValid, value, countryData, number, ext);
 
-  render() {
-    return (
-      <IntlTelInput
-        defaultCountry="tw"
-        css={['intl-tel-input', 'form-control']}
-        value={this.state.value}
-        onPhoneNumberChange={this.handleChange}
-        format
-      />
-    );
+      this.setState({
+        value,
+      });
+    };
+
+    render() {
+      return (
+        <IntlTelInput
+          defaultCountry="tw"
+          css={['intl-tel-input', 'form-control']}
+          value={this.state.value}
+          onPhoneNumberChange={this.handleChange}
+          format
+        />
+      );
+    }
   }
 `;
 
@@ -49,7 +54,7 @@ export default class Basic extends Component {
   render() {
     return (
       <div className="story">
-        <h1 className="title">Basic Usage</h1>
+        <h1 className="title">Basic</h1>
 
         <div className="demo">
           <IntlTelInput
