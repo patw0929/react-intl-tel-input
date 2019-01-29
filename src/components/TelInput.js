@@ -11,6 +11,7 @@ export default class TelInput extends Component {
     value: PropTypes.string,
     placeholder: PropTypes.string,
     handleInputChange: PropTypes.func,
+    handlePaste: PropTypes.func,
     handleOnBlur: PropTypes.func,
     autoFocus: PropTypes.bool,
     autoComplete: PropTypes.string,
@@ -49,6 +50,12 @@ export default class TelInput extends Component {
     this.setState({ hasFocus: true });
   };
 
+  handlePaste = event => {
+    if (typeof this.props.handlePaste === 'function') {
+      this.props.handlePaste(event);
+    }
+  };
+
   render() {
     return (
       <input
@@ -64,6 +71,7 @@ export default class TelInput extends Component {
         value={this.props.value}
         placeholder={this.props.placeholder}
         onChange={this.props.handleInputChange}
+        onPaste={this.handlePaste}
         onBlur={this.inputOnBlur}
         onFocus={this.inputOnFocus}
         autoFocus={this.props.autoFocus}
