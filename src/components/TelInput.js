@@ -38,21 +38,21 @@ export default class TelInput extends Component {
     this.props.refCallback(element);
   };
 
-  inputOnBlur = event => {
+  handleBlur = e => {
     this.setState({ hasFocus: false });
 
-    if (this.props.handleOnBlur) {
-      this.props.handleOnBlur(event);
+    if (typeof this.props.handleOnBlur === 'function') {
+      this.props.handleOnBlur(e);
     }
   };
 
-  inputOnFocus = () => {
+  handleFocus = () => {
     this.setState({ hasFocus: true });
   };
 
-  handlePaste = event => {
+  handlePaste = e => {
     if (typeof this.props.handlePaste === 'function') {
-      this.props.handlePaste(event);
+      this.props.handlePaste(e);
     }
   };
 
@@ -72,8 +72,8 @@ export default class TelInput extends Component {
         placeholder={this.props.placeholder}
         onChange={this.props.handleInputChange}
         onPaste={this.handlePaste}
-        onBlur={this.inputOnBlur}
-        onFocus={this.inputOnFocus}
+        onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
         autoFocus={this.props.autoFocus}
       />
     );
