@@ -12,10 +12,10 @@ function loadStories() {
 
 addDecorator(
   withOptions({
-    showAddonPanel: false,
     name: `react-intl-tel-input v${version}`,
     url: 'https://github.com/patw0929/react-intl-tel-input',
     sidebarAnimations: true,
+    addonPanelInRight: true,
   })
 );
 

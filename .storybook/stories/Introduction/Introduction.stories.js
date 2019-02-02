@@ -1,198 +1,51 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs, text, boolean, select, number } from '@storybook/addon-knobs/react';
+// import { withPropsTable } from 'storybook-addon-react-docgen';
+
+// import { reat as centered } from '@storybook/addon-centered';
 
 import IntlTelInput from '../../../src/components/IntlTelInputApp';
-import '../../../example/main.css';
+// import '../../../example/main.css';
 
-export default class Introduction extends React.Component {
-  render() {
-    return (
-      <div className="introduction">
-        <h1 className="title">react-intl-tel-input</h1>
-        <h2 className="subtitle">Rewrite International Telephone Input in React.js</h2>
+// export default class Introduction extends React.Component {
+//   render() {
+//     return (
+//       // <div className="introduction">
+//       //   <h1 className="title">react-intl-tel-input</h1>
+//       //   <h2 className="subtitle">Rewrite International Telephone Input in React.js</h2>
 
-        <div className="demo">
-          <IntlTelInput
-            onPhoneNumberChange={action('onPhoneNumberChange')}
-            onPhoneNumberBlur={action('onPhoneNumberBlur')}
-            onSelectFlag={action('onSelectFlag')}
-            defaultCountry="tw"
-            css={['intl-tel-input', 'form-control']}
-            format
-          />
-        </div>
+//       //   <div className="demo">
 
-        <h3>Props</h3>
-
-        <div className="table-responsive">
-          <table className="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col" style={{ width: '10%' }}>key</th>
-                <th scope="col" style={{ width: '20%' }}>default</th>
-                <th scope="col">description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">css</th>
-                <td><code>['intl-tel-input', '']</code></td>
-                <td>CSS classnames. First one is for the component wrapper, and second one is for text input.</td>
-              </tr>
-              <tr>
-                <th scope="row">style</th>
-                <td><code>{}</code></td>
-                <td>Style object for the wrapper div. Useful for setting 100% width on the wrapper, etc.</td>
-              </tr>
-              <tr>
-                <th scope="row">defaultValue</th>
-                <td><code>''</code></td>
-                <td>The value used to initialize input. This will only work on uncontrolled component.</td>
-              </tr>
-              <tr>
-                <th scope="row">value</th>
-                <td><code>''</code></td>
-                <td>The value of the input field. Useful for making input value controlled from outside the component.</td>
-              </tr>
-              <tr>
-                <th scope="row">fieldName</th>
-                <td><code>''</code></td>
-                <td>It's used as `input` field `name` attribute.</td>
-              </tr>
-              <tr>
-                <th scope="row">fieldId</th>
-                <td><code>''</code></td>
-                <td>It's used as `input` field `id` attribute.</td>
-              </tr>
-              <tr>
-                <th scope="row">countriesData</th>
-                <td><code>array</code></td>
-                <td>Countries data can be configured, it defaults to data defined in `AllCountries`.</td>
-              </tr>
-              <tr>
-                <th scope="row">disabled</th>
-                <td><code>null</code></td>
-                <td>Disable this component.</td>
-              </tr>
-              <tr>
-                <th scope="row">allowDropdown</th>
-                <td><code>true</code></td>
-                <td>Whether or not to allow the dropdown. If disabled, there is no dropdown arrow, and the selected flag is not clickable. Also we display the selected flag on the right instead because it is just a marker of state.</td>
-              </tr>
-              <tr>
-                <th scope="row">autoComplete</th>
-                <td><code>off</code></td>
-                <td>Set the value of the <code>autoComplete</code> attribute on the input. For example, set it to <code>phone</code> to tell the browser where to auto complete phone numbers.</td>
-              </tr>
-              <tr>
-                <th scope="row">autoPlaceholder</th>
-                <td><code>true</code></td>
-                <td>Add or remove input placeholder with an example number for the selected country.</td>
-              </tr>
-              <tr>
-                <th scope="row">autoHideDialCode</th>
-                <td><code>true</code></td>
-                <td>If there is just a dial code in the input: remove it on blur, and re-add it on focus.</td>
-              </tr>
-              <tr>
-                <th scope="row">placeholder</th>
-                <td><code>null</code></td>
-                <td>Static placeholder for input controller. When defined it takes priority over autoPlaceholder.</td>
-              </tr>
-              <tr>
-                <th scope="row">customPlaceholder</th>
-                <td><code>null</code></td>
-                <td>Change the placeholder generated by autoPlaceholder. Must return a string.</td>
-              </tr>
-              <tr>
-                <th scope="row">defaultCountry</th>
-                <td><code>''</code></td>
-                <td>Default country.</td>
-              </tr>
-              <tr>
-                <th scope="row">excludeCountries</th>
-                <td><code>undefined</code></td>
-                <td>Don't display the countries you specify. (<code>Array</code>)</td>
-              </tr>
-              <tr>
-                <th scope="row">formatOnInit</th>
-                <td><code>true</code></td>
-                <td>Format the input value during initialisation.</td>
-              </tr>
-              <tr>
-                <th scope="row">noCountryDataHandler</th>
-                <td><code>null</code></td>
-                <td>The function which can catch the "no this default country" exception.</td>
-              </tr>
-              <tr>
-                <th scope="row">geoIpLookup</th>
-                <td><code>null</code></td>
-                <td>GeoIp lookup function.</td>
-              </tr>
-              <tr>
-                <th scope="row">nationalMode</th>
-                <td><code>true</code></td>
-                <td>Don't insert international dial codes.</td>
-              </tr>
-              <tr>
-                <th scope="row">numberType</th>
-                <td><code>'MOBILE'</code></td>
-                <td>Number type to use for placeholders.</td>
-              </tr>
-              <tr>
-                <th scope="row">onlyCountries</th>
-                <td><code>[]</code></td>
-                <td>Display only these countries.</td>
-              </tr>
-              <tr>
-                <th scope="row">preferredCountries</th>
-                <td><code>['us', 'gb']</code></td>
-                <td>The countries at the top of the list. defaults to United States and United Kingdom.</td>
-              </tr>
-              <tr>
-                <th scope="row">separateDialCode</th>
-                <td><code>false</code></td>
-                <td>Display the country dial code next to the selected flag so it's not part of the typed number. Note that this will disable <code>nationalMode</code> because technically we are dealing with international numbers, but with the dial code separated.</td>
-              </tr>
-              <tr>
-                <th scope="row">onSelectFlag</th>
-                <td><code>null</code></td>
-                <td>Allow main app to do things when a country is selected.</td>
-              </tr>
-              <tr>
-                <th scope="row">onFlagClick</th>
-                <td><code>null</code></td>
-                <td>Allow main app to do things when flag icon is clicked.</td>
-              </tr>
-              <tr>
-                <th scope="row">onPhoneNumberChange</th>
-                <td><code>null</code></td>
-                <td>Optional validation callback function. It returns validation status, input box value and selected country data.</td>
-              </tr>
-              <tr>
-                <th scope="row">onPhoneNumberBlur</th>
-                <td><code>null</code></td>
-                <td>Optional validation callback function. It returns validation status, input box value and selected country data.</td>
-              </tr>
-              <tr>
-                <th scope="row">useMobileFullscreenDropdown</th>
-                <td><code>true</code></td>
-                <td>Render fullscreen flag dropdown when mobile useragent is detected. The dropdown element is rendered as a direct child of <code>document.body</code></td>
-              </tr>
-              <tr>
-                <th scope="row">telInputProps</th>
-                <td><code>{}</code></td>
-                <td>Pass through arbitrary props to the tel input element.</td>
-              </tr>
-              <tr>
-                <th scope="row">format</th>
-                <td><code>false</code></td>
-                <td>Format the number.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    );
-  }
-}
+//       //   </div>
+//       // </div>
+//       <IntlTelInput
+//         onPhoneNumberChange={action('onPhoneNumberChange')}
+//         onPhoneNumberBlur={action('onPhoneNumberBlur')}
+//         onSelectFlag={action('onSelectFlag')}
+//         defaultCountry="tw"
+//         css={['intl-tel-input', 'form-control']}
+//         format
+//       />
+//     );
+//   }
+// }
+storiesOf('IntlTelInput - Introduction', module)
+  // .addDecorator(withPropsTable)
+  .addDecorator(withKnobs)
+  .add('Detailed Props and source', withInfo({
+    inline: true,
+  })(() =>
+  (
+    <IntlTelInput
+      onPhoneNumberChange={action('onPhoneNumberChange')}
+      onPhoneNumberBlur={action('onPhoneNumberBlur')}
+      onSelectFlag={action('onSelectFlag')}
+      defaultCountry={text('defaultCountry', '')}
+      css={['intl-tel-input', 'form-control']}
+      format={boolean('format: ', false)}
+      disabled={boolean('disabled: ', false)}
+    />
+  )));

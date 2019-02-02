@@ -8,3 +8,40 @@ body {
   line-height: 1.2;
   font-size: 13px;
 }
+
+#root > div > div > div {
+  border: none !important;
+}
+
+#root > div:first-child > div:first-child > div {
+  padding: 20px !important;
+}
+
+#root {
+  table {
+    margin-top: 20px;
+    border: solid 1px #DDEEEE;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font: normal 13px Arial, sans-serif;
+  }
+  table thead th {
+      background-color: #DDEFEF;
+      border: solid 1px #DDEEEE;
+      color: #336B6B;
+      padding: 10px;
+      text-align: left;
+      text-shadow: 1px 1px 1px #fff;
+  }
+  table tbody td {
+      border: solid 1px #DDEEEE;
+      color: #333;
+      padding: 10px;
+      text-shadow: 1px 1px 1px #fff;
+  }
+}
+#story-root {
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}

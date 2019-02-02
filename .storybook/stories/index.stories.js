@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 
 import Introduction from './Introduction/Introduction.stories';
 import Basic from './Basic/Basic.stories';
@@ -11,8 +12,8 @@ import CustomStyle from './CustomStyle/CustomStyle.stories';
 
 import './styles/styles.scss';
 
-storiesOf('Introduction', module)
-  .add('react-intl-tel-input ', () => <Introduction />);
+// storiesOf('Introduction', module)
+//   .add('react-intl-tel-input ', withInfo({ story: true })(() => <Introduction />));
 
 storiesOf('Usage', module)
   .add('Basic', () => <Basic />)
