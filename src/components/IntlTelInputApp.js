@@ -1239,8 +1239,8 @@ class IntlTelInputApp extends Component {
   };
 
   render() {
-    this.wrapperClass[this.props.css[0]] = true;
-    const inputClass = this.props.css[1];
+    this.wrapperClass[this.props.containerClassName] = true;
+    const inputClass = this.props.inputClassName;
     const wrapperStyle = Object.assign({}, this.props.style || {});
 
     this.wrapperClass.expanded = this.state.showDropdown;
@@ -1304,7 +1304,8 @@ class IntlTelInputApp extends Component {
 }
 
 IntlTelInputApp.propTypes = {
-  css: PropTypes.arrayOf(PropTypes.string),
+  containerClassName: PropTypes.string,
+  inputClassName: PropTypes.string,
   fieldName: PropTypes.string,
   fieldId: PropTypes.string,
   value: PropTypes.string,
@@ -1341,7 +1342,8 @@ IntlTelInputApp.propTypes = {
 };
 
 IntlTelInputApp.defaultProps = {
-  css: ['intl-tel-input', ''],
+  containerClassName: 'intl-tel-input',
+  inputClassName: '',
   fieldName: '',
   fieldId: '',
   defaultValue: '',
