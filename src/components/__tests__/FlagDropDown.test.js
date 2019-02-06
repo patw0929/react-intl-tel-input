@@ -14,7 +14,8 @@ describe('FlagDropDown', function() {
     jest.resetModules();
 
     this.params = {
-      css: ['intl-tel-input', 'form-control phoneNumber'],
+      containerClassName: 'intl-tel-input',
+      inputClassName: 'form-control phoneNumber',
       fieldName: 'telephone',
       defaultCountry: 'tw',
     };
