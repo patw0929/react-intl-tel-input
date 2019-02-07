@@ -806,7 +806,7 @@ class IntlTelInputApp extends Component {
     this.processPreferredCountries.call(this);
   };
 
-  handleOnBlur = (event) => {
+  handleOnBlur = e => {
     this.removeEmptyDialCode();
     if (typeof this.props.onPhoneNumberBlur === 'function') {
       const value = this.state.value;
@@ -819,7 +819,7 @@ class IntlTelInputApp extends Component {
         this.selectedCountryData,
         fullNumber,
         this.getExtension(value),
-        event
+        e
       );
     }
   };
@@ -1217,6 +1217,12 @@ class IntlTelInputApp extends Component {
     }
   };
 
+  handlePaste = e => {
+    if (e.clipboardData) {
+      this.updateFlagFromNumber(e.clipboardData.getData('Text'), false);
+    }
+  };
+
   changeHighlightCountry = (showDropdown, selectedIndex) => {
     this.setState({
       showDropdown,
@@ -1282,6 +1288,7 @@ class IntlTelInputApp extends Component {
           refCallback={this.setTelRef}
           handleInputChange={this.handleInputChange}
           handleOnBlur={this.handleOnBlur}
+          handlePaste={this.handlePaste}
           className={inputClass}
           disabled={this.state.disabled}
           readonly={this.state.readonly}
