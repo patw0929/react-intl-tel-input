@@ -1,5 +1,12 @@
 # Changelog
 
+## [v7.0.0](https://github.com/patw0929/react-intl-tel-input/releases/tag/v7.0.0)
+
+### Bug fixes
+
+- [#270](https://github.com/patw0929/react-intl-tel-input/pull/270): Fixed the issue of pasting number to text input cannot update flag in international mode (by [@patw0929](https://github.com/patw0929))
+- [#271](https://github.com/patw0929/react-intl-tel-input/pull/271): Fixed the CSS prop name issue of styled-component (by [@patw0929](https://github.com/patw0929))
+
 ## [v6.1.1](https://github.com/patw0929/react-intl-tel-input/releases/tag/v6.1.1)
 
 ### Bug fixes
