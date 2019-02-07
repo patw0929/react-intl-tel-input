@@ -74,7 +74,8 @@ class DemoComponent extends Component {
           defaultCountry="auto"
           value={this.state.phone1}
           geoIpLookup={lookup}
-          css={['intl-tel-input', 'form-control']}
+          containerClassName="intl-tel-input"
+          inputClassName="form-control"
           format
         />
         <div>
@@ -88,7 +89,8 @@ class DemoComponent extends Component {
           onSelectFlag={this.selectFlagHandler2}
           defaultCountry="jp"
           value={this.state.phone2}
-          css={['intl-tel-input', 'form-control']}
+          containerClassName="intl-tel-input"
+          inputClassName="form-control"
         />
         <div>
           Phone Number:

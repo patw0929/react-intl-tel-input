@@ -13,7 +13,8 @@ describe('TelInput', function() {
     document.body.innerHTML = '<div id="root"></div>';
 
     this.params = {
-      css: ['intl-tel-input', 'form-control phoneNumber'],
+      containerClassName: 'intl-tel-input',
+      inputClassName: 'form-control phoneNumber',
       fieldName: 'telephone',
       fieldId: 'telephone-id',
       defaultCountry: 'tw',
