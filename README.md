@@ -64,7 +64,10 @@ yarn add react-intl-tel-input
 import IntlTelInput from 'react-intl-tel-input';
 import 'react-intl-tel-input/dist/main.css';
 
-<IntlTelInput css={['intl-tel-input', 'form-control']} />
+<IntlTelInput
+  containerClassName="intl-tel-input"
+  inputClassName="form-control"
+/>
 ```
 
 ### Properties
