@@ -31,7 +31,7 @@ module.exports = {
   mode: 'production',
   devtool: false,
   entry: {
-    main: './src/components/IntlTelInputApp.js',
+    main: './src/components/IntlTelInput.js',
     example: [require.resolve('./polyfills'), './src/example.js'],
   },
 
@@ -76,7 +76,7 @@ module.exports = {
   resolve: {
     modules: ['src', 'node_modules', ...paths.nodePaths],
     alias: {
-      'react-intl-tel-input': './components/IntlTelInputApp.js',
+      'react-intl-tel-input': './components/IntlTelInput.js',
     },
   },
   module: {

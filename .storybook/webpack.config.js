@@ -1,13 +1,11 @@
 
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 const paths = require('../config/paths');
 
 module.exports = {
   devtool: false,
   entry: {
-    main: '../src/components/IntlTelInputApp.js',
+    main: '../src/components/IntlTelInput.js',
   },
   module: {
     rules: [
@@ -25,7 +23,6 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          // MiniCssExtractPlugin.loader,
           'style-loader',
           'css-loader',
           'sass-loader?outputStyle=expanded',

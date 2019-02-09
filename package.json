@@ -49,6 +49,7 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-dynamic-import-node": "^2.2.0",
+    "babel-plugin-react-docgen": "^2.0.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "chalk": "1.1.3",
@@ -93,7 +94,6 @@
     "react-dev-utils": "^6.1.1",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^1.3.0",
-    "react-syntax-highlighter": "^10.1.2",
     "recursive-readdir": "2.1.0",
     "rimraf": "2.5.4",
     "sass-loader": "^7.1.0",
@@ -111,7 +111,7 @@
   },
   "scripts": {
     "build": "node scripts/build.js",
-    "start": "node scripts/start.js",
+    "start": "start-storybook -p 4000 -c .storybook",
     "deploy": "gh-pages -d example",
     "lint-staged": "lint-staged",
     "lint-pass": "echo '\\033[4;32m♡' No any errors! Go go go! ♡' \\033[0m'",
@@ -120,8 +120,7 @@
     "test": "TZ=Asia/Taipei node scripts/test.js --env=jsdom",
     "coverage": "yarn run test -- --coverage",
     "coveralls": "NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "prettier:all": "prettier --write 'src/example.js' 'src/components/**/*.js' 'config/**/*.js'",
-    "storybook": "start-storybook -p 4000 -c .storybook"
+    "prettier:all": "prettier --write 'src/example.js' 'src/components/**/*.js' 'config/**/*.js'"
   },
   "lint-staged": {
     "linters": {

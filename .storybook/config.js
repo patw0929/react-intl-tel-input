@@ -7,7 +7,7 @@ const req = require.context('./stories', true, /.js*/);
 function loadStories() {
   req.keys().forEach((filename) => req(filename));
 
-  require('./stories.scss');
+  require('./styles/styles.scss');
 }
 
 addDecorator(
@@ -15,7 +15,6 @@ addDecorator(
     name: `react-intl-tel-input v${version}`,
     url: 'https://github.com/patw0929/react-intl-tel-input',
     sidebarAnimations: true,
-    addonPanelInRight: true,
   })
 );
 

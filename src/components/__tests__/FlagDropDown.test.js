@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
 import { mount } from 'enzyme';
-import IntlTelInput from '../IntlTelInputApp';
+import IntlTelInput from '../IntlTelInput';
 import FlagDropDown from '../FlagDropDown';
 import CountryList from '../CountryList';
 import TelInput from '../TelInput';
