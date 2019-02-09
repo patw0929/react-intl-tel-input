@@ -148,7 +148,8 @@
       "src/**/*.js",
       "!**/__mocks__/**",
       "!**/__tests__/**",
-      "!src/example.js"
+      "!src/example.js",
+      "!.storybook"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js",

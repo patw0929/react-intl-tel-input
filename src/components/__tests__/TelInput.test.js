@@ -6,7 +6,7 @@ import TelInput from '../TelInput';
 import FlagDropDown from '../FlagDropDown';
 
 // eslint-disable-next-line func-names
-describe.skip('TelInput', function() {
+describe('TelInput', function() {
   beforeEach(() => {
     jest.resetModules();
 
