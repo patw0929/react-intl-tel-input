@@ -1,13 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import { withOptions } from '@storybook/addon-options';
 
 import IntlTelInput from '../../../src/components/IntlTelInput';
 
 storiesOf('Documentation', module)
-  .addDecorator(withOptions({ showAddonPanel: false }))
-  .add('Getting Started', withInfo({ inline: true, source: false, propTables: null})(() =>
+  .addParameters({ options: { showAddonPanel: false } })
+  .add('Getting Started', withInfo({ inline: true, source: false, propTables: null })(() =>
   (
     <IntlTelInput />
   )), { info: {
