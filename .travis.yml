@@ -9,5 +9,7 @@ script:
   - yarn test
   - yarn lint
   - yarn build
-after_success: yarn run coverage
+after_success:
+  - yarn run coverage
+  - test $TRAVIS_BRANCH = "master" && npm run deploy
 after_script: yarn run coveralls

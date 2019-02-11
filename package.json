@@ -44,6 +44,7 @@
     "@storybook/addon-options": "^4.1.11",
     "@storybook/cli": "^4.1.6",
     "@storybook/react": "^4.1.6",
+    "@storybook/storybook-deployer": "^2.8.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
@@ -112,7 +113,7 @@
   "scripts": {
     "build": "node scripts/build.js",
     "start": "start-storybook -p 4000 -c .storybook",
-    "deploy": "gh-pages -d example",
+    "deploy": "storybook-to-ghpages",
     "lint-staged": "lint-staged",
     "lint-pass": "echo '\\033[4;32m♡' No any errors! Go go go! ♡' \\033[0m'",
     "lint": "yarn run eslint",
@@ -120,7 +121,7 @@
     "test": "TZ=Asia/Taipei node scripts/test.js --env=jsdom",
     "coverage": "yarn run test -- --coverage",
     "coveralls": "NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "prettier:all": "prettier --write 'src/example.js' 'src/components/**/*.js' 'config/**/*.js'"
+    "prettier:all": "prettier --write 'src/components/**/*.js' 'config/**/*.js'"
   },
   "lint-staged": {
     "linters": {
