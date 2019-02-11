@@ -47,7 +47,7 @@ module.exports = {
   resolve: {
     modules: ['src', 'node_modules', ...paths.nodePaths],
     alias: {
-      'react-intl-tel-input': './components/IntlTelInputApp.js',
+      'react-intl-tel-input': './components/IntlTelInput.js',
     },
     // root: __dirname + '/src',
   },

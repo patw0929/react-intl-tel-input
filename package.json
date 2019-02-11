@@ -38,11 +38,19 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "4.1.11",
+    "@storybook/addon-info": "^4.1.11",
+    "@storybook/addon-knobs": "^4.1.11",
+    "@storybook/addon-options": "^4.1.11",
+    "@storybook/cli": "^4.1.6",
+    "@storybook/react": "^4.1.6",
+    "@storybook/storybook-deployer": "^2.8.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-dynamic-import-node": "^2.2.0",
+    "babel-plugin-react-docgen": "^2.0.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "chalk": "1.1.3",
@@ -92,6 +100,7 @@
     "sass-loader": "^7.1.0",
     "serve-static": "^1.11.1",
     "sinon": "^1.17.4",
+    "storybook-addon-react-docgen": "^1.0.4",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "url-loader": "^1.1.2",
@@ -103,8 +112,8 @@
   },
   "scripts": {
     "build": "node scripts/build.js",
-    "start": "node scripts/start.js",
-    "deploy": "gh-pages -d example",
+    "start": "start-storybook -p 4000 -c .storybook",
+    "deploy": "storybook-to-ghpages",
     "lint-staged": "lint-staged",
     "lint-pass": "echo '\\033[4;32m♡' No any errors! Go go go! ♡' \\033[0m'",
     "lint": "yarn run eslint",
@@ -112,7 +121,7 @@
     "test": "TZ=Asia/Taipei node scripts/test.js --env=jsdom",
     "coverage": "yarn run test -- --coverage",
     "coveralls": "NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "prettier:all": "prettier --write 'src/example.js' 'src/components/**/*.js' 'config/**/*.js'"
+    "prettier:all": "prettier --write 'src/components/**/*.js' 'config/**/*.js'"
   },
   "lint-staged": {
     "linters": {
@@ -140,7 +149,8 @@
       "src/**/*.js",
       "!**/__mocks__/**",
       "!**/__tests__/**",
-      "!src/example.js"
+      "!src/example.js",
+      "!.storybook"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js",
