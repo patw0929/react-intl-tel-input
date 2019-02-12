@@ -36,7 +36,5 @@ module.exports = {
   appDist: resolveApp('dist'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
-  yarnLockFile: resolveApp('yarn.lock'),
-  appNodeModules: resolveApp('node_modules'),
   nodePaths: nodePaths,
 };
