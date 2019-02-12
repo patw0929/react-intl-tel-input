@@ -1,14 +1,12 @@
 /* eslint-disable no-var, arrow-parens, prefer-template, comma-dangle, object-shorthand, global-require, func-names, no-else-return, vars-on-top */
-
 const webpack = require('webpack');
 const paths = require('./paths');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const safeParser = require('postcss-safe-parser');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 const getClientEnvironment = require('./env');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -32,7 +30,7 @@ module.exports = {
   devtool: false,
   entry: {
     main: './src/components/IntlTelInput.js',
-    example: [require.resolve('./polyfills'), './src/example.js'],
+    example: [require.resolve('./polyfills')],
   },
 
   output: {
@@ -170,41 +168,18 @@ module.exports = {
       minimize: true,
       debug: false,
     }),
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: paths.appHtml,
-      chunks: ['example'],
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true,
-      },
-    }),
-    // Generates an `index.html` file with the <script> injected.
-    new InterpolateHtmlPlugin(HtmlWebpackPlugin, {
-      PUBLIC_URL: publicUrl,
-    }),
     new webpack.DefinePlugin(env),
     new MiniCssExtractPlugin({
       filename: 'main.css',
     }),
-    new BundleAnalyzerPlugin(
-      {
-        analyzerMode: 'static',
-        reportFilename: 'report.html',
-        defaultSizes: 'parsed',
-        openAnalyzer: true,
-        generateStatsFile: false,
-        logLevel: 'info'
-      },
-    ),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: 'report.html',
+      defaultSizes: 'parsed',
+      openAnalyzer: true,
+      generateStatsFile: false,
+      logLevel: 'info',
+    }),
   ],
   node: {
     fs: 'empty',

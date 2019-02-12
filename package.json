@@ -115,7 +115,6 @@
     "start": "start-storybook -p 4000 -c .storybook",
     "deploy": "storybook-to-ghpages --ci",
     "lint-staged": "lint-staged",
-    "lint-pass": "echo '\\033[4;32m♡' No any errors! Go go go! ♡' \\033[0m'",
     "lint": "yarn run eslint",
     "eslint": "eslint src",
     "test": "TZ=Asia/Taipei node scripts/test.js --env=jsdom",
@@ -135,10 +134,7 @@
       ]
     }
   },
-  "pre-commit": [
-    "lint-staged",
-    "lint-pass"
-  ],
+  "pre-commit": [ "lint-staged" ],
   "prettier": {
     "printWidth": 80,
     "singleQuote": true,

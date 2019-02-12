@@ -10,18 +10,11 @@ require('dotenv').config({ silent: true });
 
 const chalk = require('chalk');
 const fs = require('fs-extra');
-const path = require('path');
 const rimrafSync = require('rimraf').sync;
 const webpack = require('webpack');
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const recursive = require('recursive-readdir');
 const config = require('../config/webpack.config.prod');
 const paths = require('../config/paths');
-
-// Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appHtml, paths.appExampleJs])) {
-  process.exit(1);
-}
 
 // First, read the current file sizes in build directory.
 // This lets us display how much they changed later.
@@ -107,15 +100,5 @@ function build() {
 }
 
 function copyToDistFolder() {
-  fs.copySync(`${paths.appBuild}/`, paths.appDist, {
-    filter: (file) => {
-      const target = path.basename(file);
-
-      if (target !== 'index.html' && target !== 'example.js') {
-        return true;
-      }
-
-      return false;
-    },
-  });
+  fs.copySync(`${paths.appBuild}/`, paths.appDist);
 }

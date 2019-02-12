@@ -33,15 +33,10 @@ const nodePaths = (process.env.NODE_PATH || '')
 
 // config after eject: we're in ./config/
 module.exports = {
-  appBuild: resolveApp('example'),
   appDist: resolveApp('dist'),
-  appPublic: resolveApp('public'),
-  appHtml: resolveApp('src/index.html'),
-  appExampleJs: resolveApp('src/example.js'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   yarnLockFile: resolveApp('yarn.lock'),
   appNodeModules: resolveApp('node_modules'),
-  ownNodeModules: resolveApp('node_modules'),
   nodePaths: nodePaths,
 };

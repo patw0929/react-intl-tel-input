@@ -15,7 +15,10 @@ class IntlTelInput extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     let newState = null;
 
-    if (typeof nextProps.value !== 'undefined' && prevState.value !== nextProps.value) {
+    if (
+      typeof nextProps.value !== 'undefined' &&
+      prevState.value !== nextProps.value
+    ) {
       newState = {
         value: nextProps.value,
       };
@@ -841,12 +844,7 @@ class IntlTelInput extends Component {
     const { allowDropdown, onFlagClick } = this.props;
     const { showDropdown, disabled, readonly } = this.state;
 
-    if (
-      !showDropdown &&
-      !disabled &&
-      !readonly &&
-      allowDropdown
-    ) {
+    if (!showDropdown && !disabled && !readonly && allowDropdown) {
       this.setState(
         {
           showDropdown: true,
