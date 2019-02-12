@@ -11,7 +11,6 @@ require('dotenv').config({ silent: true });
 const chalk = require('chalk');
 const webpack = require('webpack');
 const config = require('../config/webpack.config.prod');
-const paths = require('../config/paths');
 
 // Create the production build and print the deployment instructions.
 function build() {
@@ -24,58 +23,8 @@ function build() {
     }
 
     console.log(chalk.green('Compiled successfully.'));
+    console.log(`The ${chalk.cyan('dist')} folder is ready to be deployed.`);
     console.log();
-
-    const openCommand = process.platform === 'win32' ? 'start' : 'open';
-    const homepagePath = require(paths.appPackageJson).homepage;
-    const publicPath = config.output.publicPath;
-
-    if (homepagePath && homepagePath.indexOf('.github.io/') !== -1) {
-      // "homepage": "http://user.github.io/project"
-      console.log(`The project was built assuming it is hosted at ${chalk.green(publicPath)}.`);
-      console.log(`You can control this with the ${chalk.green('homepage')} field in your ${chalk.cyan('package.json')}.`);
-      console.log();
-      console.log(`The ${chalk.cyan('dist')} folder is ready to be deployed.`);
-      console.log(`To publish it at ${chalk.green(homepagePath)}, run:`);
-      console.log();
-      console.log(`  ${chalk.cyan('git')} commit -am ${chalk.yellow('"Save local changes"')}`);
-      console.log(`  ${chalk.cyan('git')} checkout -B gh-pages`);
-      console.log(`  ${chalk.cyan('git')} add -f dist`);
-      console.log(`  ${chalk.cyan('git')} commit -am ${chalk.yellow('"Rebuild website"')}`);
-      console.log(`  ${chalk.cyan('git')} filter-branch -f --prune-empty --subdirectory-filter dist`);
-      console.log(`  ${chalk.cyan('git')} push -f origin gh-pages`);
-      console.log(`  ${chalk.cyan('git')} checkout -`);
-      console.log();
-    } else if (publicPath !== '/') {
-      // "homepage": "http://mywebsite.com/project"
-      console.log(`The project was built assuming it is hosted at ${chalk.green(publicPath)}.`);
-      console.log(`You can control this with the ${chalk.green('homepage')} field in your ${chalk.cyan('package.json')}.`);
-      console.log();
-      console.log(`The ${chalk.cyan('dist')} folder is ready to be deployed.`);
-      console.log();
-    } else {
-      // no homepage or "homepage": "http://mywebsite.com"
-      console.log('The project was built assuming it is hosted at the server root.');
-      if (homepagePath) {
-        // "homepage": "http://mywebsite.com"
-        console.log(`You can control this with the ${chalk.green('homepage')} field in your ${chalk.cyan('package.json')}.`);
-        console.log();
-      } else {
-        // no homepage
-        console.log(`To override this, specify the ${chalk.green('homepage')} in your ${chalk.cyan('package.json')}.`);
-        console.log('For example, add this to build it for GitHub Pages:');
-        console.log();
-        console.log(`  ${chalk.green('"homepage"')}${chalk.cyan(': ')}${chalk.green('"http://myname.github.io/myapp"')}${chalk.cyan(',')}`);
-        console.log();
-      }
-      console.log(`The ${chalk.cyan('dist')} folder is ready to be deployed.`);
-      console.log('You may also serve it locally with a static server:');
-      console.log();
-      console.log(`  ${chalk.cyan('npm')} install -g pushstate-server`);
-      console.log(`  ${chalk.cyan('pushstate-server')} dist`);
-      console.log(`  ${chalk.cyan(openCommand)} http://localhost:9000`);
-      console.log();
-    }
   });
 }
 
