@@ -1,5 +1,4 @@
 dist/**
-example/**
 test/**
 node_modules/*
 package.json

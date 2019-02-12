@@ -30,11 +30,9 @@ module.exports = {
   devtool: false,
   entry: {
     main: './src/components/IntlTelInput.js',
-    example: [require.resolve('./polyfills')],
   },
-
   output: {
-    path: paths.appBuild,
+    path: paths.appDist,
     pathinfo: true,
     filename: '[name].js',
     chunkFilename: '[name].bundle.js',

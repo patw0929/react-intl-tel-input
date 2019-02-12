@@ -9,25 +9,9 @@ process.env.NODE_ENV = 'production';
 require('dotenv').config({ silent: true });
 
 const chalk = require('chalk');
-const fs = require('fs-extra');
-const rimrafSync = require('rimraf').sync;
 const webpack = require('webpack');
-const recursive = require('recursive-readdir');
 const config = require('../config/webpack.config.prod');
 const paths = require('../config/paths');
-
-// First, read the current file sizes in build directory.
-// This lets us display how much they changed later.
-recursive(paths.appBuild, () => {
-  // Remove all content but keep the directory so that
-  // if you're in it, you don't end up in Trash
-  rimrafSync(`${paths.appBuild}/*`);
-  rimrafSync(`${paths.appDist}/*`);
-
-  // Start the webpack build
-  // eslint-disable-next-line no-use-before-define
-  build();
-});
 
 // Create the production build and print the deployment instructions.
 function build() {
@@ -41,10 +25,6 @@ function build() {
 
     console.log(chalk.green('Compiled successfully.'));
     console.log();
-
-    // Copy static files to dist folder
-    // eslint-disable-next-line no-use-before-define
-    copyToDistFolder();
 
     const openCommand = process.platform === 'win32' ? 'start' : 'open';
     const homepagePath = require(paths.appPackageJson).homepage;
@@ -99,6 +79,4 @@ function build() {
   });
 }
 
-function copyToDistFolder() {
-  fs.copySync(`${paths.appBuild}/`, paths.appDist);
-}
+build();

@@ -145,7 +145,6 @@
       "src/**/*.js",
       "!**/__mocks__/**",
       "!**/__tests__/**",
-      "!src/example.js",
       "!.storybook"
     ],
     "setupFiles": [
