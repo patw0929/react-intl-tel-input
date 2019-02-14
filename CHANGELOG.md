@@ -1,5 +1,18 @@
 # Changelog
 
+## [v7.0.1](https://github.com/patw0929/react-intl-tel-input/releases/tag/v7.0.1)
+
+### Bug fixes
+
+- [#277](https://github.com/patw0929/react-intl-tel-input/pull/277): Fix([#272](https://github.com/patw0929/react-intl-tel-input/pull/272)): Updating Allowdropdown after mount (by [@nutboltu](https://github.com/nutboltu))
+
+### Docs
+
+- [#273](https://github.com/patw0929/react-intl-tel-input/pull/273): Feature: Introducing storybook for documentation and playground (by [@nutboltu](https://github.com/nutboltu))
+- [#274](https://github.com/patw0929/react-intl-tel-input/pull/274): fix(storybook-deploy): Fixed the storybook deployment script in travis (by [@nutboltu](https://github.com/nutboltu))
+- [#275](https://github.com/patw0929/react-intl-tel-input/pull/275): Fix: storybook's public path (by [@patw0929](https://github.com/patw0929))
+- [#276](https://github.com/patw0929/react-intl-tel-input/pull/276): Refactor: Removing all unused files and codes for example (by [@nutboltu](https://github.com/nutboltu))
+
 ## [v7.0.0](https://github.com/patw0929/react-intl-tel-input/releases/tag/v7.0.0)
 
 ### Bug fixes
