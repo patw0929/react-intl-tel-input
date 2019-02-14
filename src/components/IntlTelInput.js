@@ -159,6 +159,10 @@ class IntlTelInput extends Component {
     ) {
       this.updatePlaceholder(this.props);
     }
+
+    if (this.props.allowDropdown !== prevProps.allowDropdown) {
+      this.allowDropdown = this.props.allowDropdown;
+    }
   }
 
   componentWillUnmount() {
@@ -995,7 +999,6 @@ class IntlTelInput extends Component {
   };
 
   generateMarkup = () => {
-    this.wrapperClass['allow-dropdown'] = this.allowDropdown;
     this.wrapperClass['separate-dial-code'] = this.props.separateDialCode;
 
     if (this.isMobile && this.props.useMobileFullscreenDropdown) {
@@ -1247,6 +1250,7 @@ class IntlTelInput extends Component {
     const inputClass = this.props.inputClassName;
     const wrapperStyle = Object.assign({}, this.props.style || {});
 
+    this.wrapperClass['allow-dropdown'] = this.allowDropdown;
     this.wrapperClass.expanded = this.state.showDropdown;
 
     const wrapperClass = classNames(this.wrapperClass);
