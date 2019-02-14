@@ -7,7 +7,7 @@ const REACT_APP = /^REACT_APP_/i;
 /*
  * Get Global Objects in different running environments
  */
-const getGlobalObject = () =>(`
+const getGlobalObject = () => `
 (function(){
   if(typeof window !== "undefined" && window)
     return window;
@@ -16,9 +16,9 @@ const getGlobalObject = () =>(`
   else
     return this;
 })()
-`);
+`;
 
-const getClientEnvironment = (publicUrl) => {
+const getClientEnvironment = publicUrl => {
   const NODE_ENV = JSON.stringify(process.env.NODE_ENV || 'development');
   const DEVELOPMENT = NODE_ENV === JSON.stringify('development');
   const SERVER = false;
