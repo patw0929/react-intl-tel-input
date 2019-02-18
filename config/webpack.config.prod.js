@@ -169,15 +169,7 @@ module.exports = {
     new webpack.DefinePlugin(env),
     new MiniCssExtractPlugin({
       filename: 'main.css',
-    }),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      reportFilename: 'report.html',
-      defaultSizes: 'parsed',
-      openAnalyzer: true,
-      generateStatsFile: false,
-      logLevel: 'info',
-    }),
+    })
   ],
   node: {
     fs: 'empty',
