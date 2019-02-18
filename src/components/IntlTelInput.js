@@ -575,6 +575,7 @@ class IntlTelInput extends Component {
 
   removeEmptyDialCode = () => {
     const allowEmptyDialCode = this.props.allowEmptyDialCode;
+    
     if (!allowEmptyDialCode) {
       const value = this.state.value;
       const startsPlus = value.charAt(0) === '+';
@@ -1444,7 +1445,7 @@ IntlTelInput.defaultProps = {
   // always format the number
   format: false,
   onFlagClick: null,
-  allowEmptyDialCode: true,
+  allowEmptyDialCode: false,
 };
 
 export default IntlTelInput;
