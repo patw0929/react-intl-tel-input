@@ -14,10 +14,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/patw0929/react-intl-tel-input"
+    "url": "https://github.com/flyvictor/react-intl-tel-input"
   },
   "bugs": {
-    "url": "https://github.com/patw0929/react-intl-tel-input/issues"
+    "url": "https://github.com/flyvictor/react-intl-tel-input/issues"
   },
   "main": "dist/main.js",
   "peerDependencies": {
