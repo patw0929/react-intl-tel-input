@@ -574,17 +574,20 @@ class IntlTelInput extends Component {
   };
 
   removeEmptyDialCode = () => {
-    const value = this.state.value;
-    const startsPlus = value.charAt(0) === '+';
+    const allowEmptyDialCode = this.props.allowEmptyDialCode;
+    if (!allowEmptyDialCode) {
+      const value = this.state.value;
+      const startsPlus = value.charAt(0) === '+';
 
-    if (startsPlus) {
-      const numeric = utils.getNumeric(value);
+      if (startsPlus) {
+        const numeric = utils.getNumeric(value);
 
-      // if just a plus, or if just a dial code
-      if (!numeric || this.selectedCountryData.dialCode === numeric) {
-        this.setState({
-          value: '',
-        });
+        // if just a plus, or if just a dial code
+        if (!numeric || this.selectedCountryData.dialCode === numeric) {
+          this.setState({
+            value: '',
+          });
+        }
       }
     }
   };
@@ -1387,6 +1390,8 @@ IntlTelInput.propTypes = {
   format: PropTypes.bool,
   /** Allow main app to do things when flag icon is clicked. */
   onFlagClick: PropTypes.func,
+  /** Allow empty dial code. */
+  allowEmptyDialCode: PropTypes.bool,
 };
 
 IntlTelInput.defaultProps = {
@@ -1439,6 +1444,7 @@ IntlTelInput.defaultProps = {
   // always format the number
   format: false,
   onFlagClick: null,
+  allowEmptyDialCode: true,
 };
 
 export default IntlTelInput;
