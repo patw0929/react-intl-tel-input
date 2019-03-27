@@ -711,7 +711,7 @@ class IntlTelInput extends Component {
       },
       () => {
         if (doNotify) {
-          this.notifyPhoneNumberChange(this.state.value);
+          this.notifyPhoneNumberChange(number);
         }
 
         this.unbindDocumentClick();
