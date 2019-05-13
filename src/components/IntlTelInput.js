@@ -1254,8 +1254,6 @@ class IntlTelInput extends Component {
     }
   };
 
-
-
   render() {
     this.wrapperClass[this.props.containerClassName] = true;
     const inputClass = this.props.inputClassName;
