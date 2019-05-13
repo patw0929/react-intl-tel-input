@@ -119,4 +119,3 @@ yarn run lint
 MIT
 
 Copyright (c) 2015-2019 patw.
-

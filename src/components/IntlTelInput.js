@@ -163,6 +163,10 @@ class IntlTelInput extends Component {
     if (this.props.allowDropdown !== prevProps.allowDropdown) {
       this.allowDropdown = this.props.allowDropdown;
     }
+
+    if (this.props.defaultCountry !== prevProps.defaultCountry) {
+      this.updateFlagOnDefaultCountryChange(this.props.defaultCountry)
+    }
   }
 
   componentWillUnmount() {
@@ -170,6 +174,11 @@ class IntlTelInput extends Component {
     window.removeEventListener('scroll', this.handleWindowScroll);
     this.unbindDocumentClick();
   }
+
+  // Updates flag when value of defaultCountry props change
+  updateFlagOnDefaultCountryChange = (countryCode) => {
+    this.setFlag(countryCode, false)
+  };
 
   getTempCountry = countryCode => {
     if (countryCode === 'auto') {
@@ -211,7 +220,7 @@ class IntlTelInput extends Component {
   };
 
   // select the given flag, update the placeholder and the active list item
-  // Note: called from setInitialState, updateFlagFromNumber, selectListItem, setCountry
+  // Note: called from setInitialState, updateFlagFromNumber, selectListItem, setCountry, updateFlagOnDefaultCountryChange
   setFlag = (countryCode, isInit) => {
     const prevCountry =
       this.selectedCountryData && this.selectedCountryData.iso2
@@ -1244,6 +1253,8 @@ class IntlTelInput extends Component {
       this.autoCountryDeferred.resolve();
     }
   };
+
+
 
   render() {
     this.wrapperClass[this.props.containerClassName] = true;
