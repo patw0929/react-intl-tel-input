@@ -1,3 +1,7 @@
+*This project is an instance of original project made by [Patrick Wang](https://github.com/patw0929).
+Because of the lack of activity on original repo, I have added some functionalities and published it on npmjs for my own personal use.
+Copyright (c) 2015-2019 [Patrick Wang](https://github.com/patw0929).*
+
 # React-Intl-Tel-Input
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
