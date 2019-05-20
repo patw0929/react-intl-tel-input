@@ -25,12 +25,10 @@ export default class TelInput extends Component {
   };
 
   componentDidUpdate() {
-    if (this.state.hasFocus) {
       this.tel.setSelectionRange(
         this.props.cursorPosition,
         this.props.cursorPosition
       );
-    }
   }
 
   refHandler = element => {

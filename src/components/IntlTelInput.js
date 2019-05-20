@@ -24,7 +24,7 @@ class IntlTelInput extends Component {
       };
     }
 
-    if (prevState.disabled !== nextProps.disabled) {
+    if (nextProps.disabled && prevState.disabled !== nextProps.disabled) {
       newState = {
         disabled: nextProps.disabled,
       };
@@ -151,6 +151,9 @@ class IntlTelInput extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.value !== prevProps.value) {
       this.updateFlagFromNumber(this.props.value);
+	  this.updateCursorPosition(		
+        (this.props.value || this.props.defaultValue).length		
+      );
     }
 
     if (
@@ -158,10 +161,6 @@ class IntlTelInput extends Component {
       prevProps.customPlaceholder !== this.props.customPlaceholder
     ) {
       this.updatePlaceholder(this.props);
-    }
-
-    if (this.props.allowDropdown !== prevProps.allowDropdown) {
-      this.allowDropdown = this.props.allowDropdown;
     }
   }
 
@@ -684,6 +683,12 @@ class IntlTelInput extends Component {
     return number;
   };
 
+  updateCursorPosition = cursorPosition => {		
+    this.setState({		
+      cursorPosition		
+    });		
+  };
+  
   // update the input's value to the given val (format first if possible)
   // if doNotify is true, calls notifyPhoneNumberChange with the formatted value
   // NOTE: this is called from _setInitialState, handleUtils and setNumber
@@ -999,6 +1004,7 @@ class IntlTelInput extends Component {
   };
 
   generateMarkup = () => {
+	this.wrapperClass['allow-dropdown'] = this.allowDropdown;
     this.wrapperClass['separate-dial-code'] = this.props.separateDialCode;
 
     if (this.isMobile && this.props.useMobileFullscreenDropdown) {
