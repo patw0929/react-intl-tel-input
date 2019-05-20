@@ -17,7 +17,7 @@ export default class TelInput extends Component {
     autoComplete: PropTypes.string,
     inputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     refCallback: PropTypes.func.isRequired,
-    cursorPosition: PropTypes.number
+    cursorPosition: PropTypes.number,
   };
 
   componentDidUpdate() {
