@@ -17,18 +17,14 @@ export default class TelInput extends Component {
     autoComplete: PropTypes.string,
     inputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     refCallback: PropTypes.func.isRequired,
-    cursorPosition: PropTypes.number,
-  };
-
-  state = {
-    hasFocus: false,
+    cursorPosition: PropTypes.number
   };
 
   componentDidUpdate() {
-      this.tel.setSelectionRange(
-        this.props.cursorPosition,
-        this.props.cursorPosition
-      );
+    this.tel.setSelectionRange(
+      this.props.cursorPosition,
+      this.props.cursorPosition
+    );
   }
 
   refHandler = element => {
@@ -37,16 +33,12 @@ export default class TelInput extends Component {
   };
 
   handleBlur = e => {
-    this.setState({ hasFocus: false });
-
     if (typeof this.props.handleOnBlur === 'function') {
       this.props.handleOnBlur(e);
     }
   };
 
-  handleFocus = () => {
-    this.setState({ hasFocus: true });
-  };
+  handleFocus = () => {};
 
   handlePaste = e => {
     if (typeof this.props.handlePaste === 'function') {
