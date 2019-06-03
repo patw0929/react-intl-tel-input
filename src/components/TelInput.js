@@ -8,6 +8,7 @@ class TelInput extends Component {
         { ...this.props.inputProps }
         ref={ this.props.refCallback }
         type="tel"
+        aria-label="Phone Number"
         autoComplete={ this.props.autoComplete }
         className={ this.props.className }
         disabled={ this.props.disabled ? 'disabled' : false }

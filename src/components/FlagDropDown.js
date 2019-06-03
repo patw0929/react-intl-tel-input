@@ -78,6 +78,8 @@ class FlagDropDown extends Component {
       >
         <div
           className="selected-flag"
+          aria-haspopup="true"
+          aria-expanded={ this.props.showDropdown ? 'true' : 'false' }
           tabIndex={ this.props.allowDropdown ? '0' : '' }
           onClick={ this.props.clickSelectedFlag }
           onKeyDown={ this.props.handleSelectedFlagKeydown }
