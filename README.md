@@ -1,3 +1,7 @@
+## A very warm welcome to you !
+
+## Let's get started:
+
 # React-Intl-Tel-Input
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
@@ -120,3 +124,4 @@ MIT
 
 Copyright (c) 2015-2019 patw.
 
+## Thanks for visiting!
