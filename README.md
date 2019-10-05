@@ -97,14 +97,14 @@ yarn run build
 
 To contribute to react-intl-tel-input, clone this repo locally and commit your code on a separate branch. Please write tests for your code, and run the linter before opening a pull-request:
 
-```bash
+```
 npm test
 npm run lint
 ```
 
 or
 
-```bash
+```
 yarn test
 yarn run lint
 ```
