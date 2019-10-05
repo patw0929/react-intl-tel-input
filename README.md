@@ -13,7 +13,7 @@ Rewrite [International Telephone Input](https://github.com/jackocnr/intl-tel-inp
 
 ## Collaborators Wanted!
 
-Due to the long commuting time, I have no much time to maintain this project often. 😣
+Due to the long commuting time, I have not much time to maintain this project often. 😣
 
 So If anybody else is willing to take on the work of bug fixes, integrating pull requests, etc.
 Please let me know. 🙌
