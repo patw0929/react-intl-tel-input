@@ -27,13 +27,6 @@ Live demo: [patw0929.github.io/react-intl-tel-input](https://patw0929.github.io/
 To build the examples locally, run:
 
 ```bash
-npm install
-npm start
-```
-
-or
-
-```bash
 yarn
 yarn start
 ```
@@ -46,12 +39,6 @@ Then open [`localhost:3000`](http://localhost:3000) in a browser.
 The easiest way to use react-intl-tel-input is to install it from NPM and include it in your own React build process (using [Webpack](http://webpack.github.io/), etc).
 
 You can also use the standalone build by including `dist/main.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
-
-```bash
-npm install react-intl-tel-input --save
-```
-
-or
 
 ```bash
 yarn add react-intl-tel-input
@@ -84,25 +71,12 @@ To build, watch and serve the examples (which will also watch the component sour
 If you want to build to the bundle file to `dist/` folder, please run:
 
 ```bash
-npm run build
-```
-
-or
-
-```bash
 yarn run build
 ```
 
 ## Contributing
 
 To contribute to react-intl-tel-input, clone this repo locally and commit your code on a separate branch. Please write tests for your code, and run the linter before opening a pull-request:
-
-```
-npm test
-npm run lint
-```
-
-or
 
 ```
 yarn test
@@ -119,4 +93,3 @@ yarn run lint
 MIT
 
 Copyright (c) 2015-2019 patw.
-
