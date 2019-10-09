@@ -1,5 +1,20 @@
 # Changelog
 
+## [v7.0.2](https://github.com/patw0929/react-intl-tel-input/releases/tag/v7.0.2)
+
+### Bug fixes:
+
+- [#302](https://github.com/patw0929/react-intl-tel-input/pull/302): Remove package-lock.json (by [@patw0929](https://github.com/patw0929))
+- [#283](https://github.com/patw0929/react-intl-tel-input/pull/283): Fix: invoke onPhoneNumberChange callback with formatted value on init instead of unformatted value from previous state (by [@coox](https://github.com/coox))
+- [#300](https://github.com/patw0929/react-intl-tel-input/pull/300): fixed bug with pasting number over another number (by [@flagoon](https://github.com/flagoon))
+- [#299](https://github.com/patw0929/react-intl-tel-input/pull/299): Use cross-env to solve cross platforms issue (scripts with node env variables) (by [@patw0929](https://github.com/patw0929))
+
+### Docs:
+
+- [#298](https://github.com/patw0929/react-intl-tel-input/pull/298): Update LICENSE (by [@Parikshit-Hooda](https://github.com/Parikshit-Hooda))
+- [#297](https://github.com/patw0929/react-intl-tel-input/pull/297): Update README.md Update LICENSE (by [@Parikshit-Hooda](https://github.com/Parikshit-Hooda))
+- [#294](https://github.com/patw0929/react-intl-tel-input/pull/294): Removed bash highlighting for npm/yarn commands in README (by [@bhumijgupta](https://github.com/bhumijgupta))
+
 ## [v7.0.1](https://github.com/patw0929/react-intl-tel-input/releases/tag/v7.0.1)
 
 ### Bug fixes
