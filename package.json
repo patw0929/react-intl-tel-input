@@ -54,6 +54,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
     "chalk": "1.1.3",
     "coveralls": "^2.11.9",
+    "cross-env": "^6.0.3",
     "css-loader": "^1.0.1",
     "css-modules-require-hook": "^4.0.1",
     "dotenv": "^4.0.0",
@@ -105,9 +106,9 @@
     "lint-staged": "lint-staged",
     "lint": "yarn run eslint",
     "eslint": "eslint src",
-    "test": "TZ=Asia/Taipei node scripts/test.js --env=jsdom",
+    "test": "cross-env TZ=Asia/Taipei node scripts/test.js --env=jsdom",
     "coverage": "yarn run test -- --coverage",
-    "coveralls": "NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "coveralls": "cross-env NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "prettier:all": "prettier --write 'src/components/**/*.js' 'config/**/*.js'"
   },
   "lint-staged": {
