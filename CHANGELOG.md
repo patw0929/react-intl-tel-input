@@ -1,5 +1,11 @@
 # Changelog
 
+## [v7.0.3](https://github.com/patw0929/react-intl-tel-input/releases/tag/v7.0.2)
+
+### Bug fixes
+
+- [#285](https://github.com/patw0929/react-intl-tel-input/pull/285): Update flag when defaultCountry value is changed (by [@dhanesh-kapadiya](https://github.com/dhanesh-kapadiya))
+
 ## [v7.0.2](https://github.com/patw0929/react-intl-tel-input/releases/tag/v7.0.2)
 
 ### Bug fixes:
