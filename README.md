@@ -7,7 +7,7 @@
 [![npm](https://img.shields.io/npm/l/express.svg?maxAge=2592000)]()
 
 [![NPM](https://nodei.co/npm/react-intl-tel-input.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-intl-tel-input/)
-
+[![Codeship Status for anandprabhakar0507/react-intl-tel-input](https://app.codeship.com/projects/fbe89c90-cdcc-0137-7785-4ededed609cc/status?branch=master)](https://app.codeship.com/projects/368746)
 Rewrite [International Telephone Input](https://github.com/jackocnr/intl-tel-input) in React.js.
 
 
