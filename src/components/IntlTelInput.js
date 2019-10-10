@@ -24,7 +24,7 @@ class IntlTelInput extends Component {
       };
     }
 
-    if (prevState.disabled !== nextProps.disabled) {
+    if (nextProps.disabled && prevState.disabled !== nextProps.disabled) {
       newState = {
         disabled: nextProps.disabled,
       };
@@ -80,7 +80,6 @@ class IntlTelInput extends Component {
       offsetTop: 0,
       outerHeight: 0,
       placeholder: '',
-      title: '', // eslint-disable-line react/no-unused-state
       countryCode: 'us',
       dialCode: '',
       cursorPosition: (props.value || props.defaultValue).length,
@@ -151,6 +150,9 @@ class IntlTelInput extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.value !== prevProps.value) {
       this.updateFlagFromNumber(this.props.value);
+      this.updateCursorPosition(
+        (this.props.value || this.props.defaultValue).length
+      );
     }
 
     if (
@@ -158,10 +160,6 @@ class IntlTelInput extends Component {
       prevProps.customPlaceholder !== this.props.customPlaceholder
     ) {
       this.updatePlaceholder(this.props);
-    }
-
-    if (this.props.allowDropdown !== prevProps.allowDropdown) {
-      this.allowDropdown = this.props.allowDropdown;
     }
   }
 
@@ -234,13 +232,6 @@ class IntlTelInput extends Component {
       this.defaultCountry = this.selectedCountryData.iso2;
     }
 
-    // update the selected country's title attribute
-    const title = countryCode
-      ? `${this.selectedCountryData.name}: +${
-        this.selectedCountryData.dialCode
-      }`
-      : 'Unknown';
-
     let dialCode = this.state.dialCode; // eslint-disable-line react/no-access-state-in-setstate
 
     if (this.props.separateDialCode) {
@@ -290,7 +281,6 @@ class IntlTelInput extends Component {
         showDropdown: false,
         highlightedCountry: selectedIndex,
         countryCode,
-        title, // eslint-disable-line react/no-unused-state
         dialCode,
       },
       () => {
@@ -643,9 +633,7 @@ class IntlTelInput extends Component {
     for (let i = 0, max = this.countries.length; i < max; i++) {
       if (utils.startsWith(this.countries[i].name, query)) {
         const listItem = this.flagDropDown.querySelector(
-          `.country-list [data-country-code="${
-            this.countries[i].iso2
-          }"]:not(.preferred)`
+          `.country-list [data-country-code="${this.countries[i].iso2}"]:not(.preferred)`
         );
 
         const selectedIndex = utils.retrieveLiIndex(listItem);
@@ -684,6 +672,12 @@ class IntlTelInput extends Component {
     return number;
   };
 
+  updateCursorPosition = cursorPosition => {
+    this.setState({
+      cursorPosition,
+    });
+  };
+
   // update the input's value to the given val (format first if possible)
   // if doNotify is true, calls notifyPhoneNumberChange with the formatted value
   // NOTE: this is called from _setInitialState, handleUtils and setNumber
@@ -691,7 +685,7 @@ class IntlTelInput extends Component {
     if (doFormat && window.intlTelInputUtils && this.selectedCountryData) {
       const format =
         !this.props.separateDialCode &&
-        (this.nationalMode || number.charAt(0) !== '+')
+          (this.nationalMode || number.charAt(0) !== '+')
           ? window.intlTelInputUtils.numberFormat.NATIONAL
           : window.intlTelInputUtils.numberFormat.INTERNATIONAL;
 
@@ -999,6 +993,7 @@ class IntlTelInput extends Component {
   };
 
   generateMarkup = () => {
+    this.wrapperClass['allow-dropdown'] = this.allowDropdown;
     this.wrapperClass['separate-dial-code'] = this.props.separateDialCode;
 
     if (this.isMobile && this.props.useMobileFullscreenDropdown) {
@@ -1250,8 +1245,7 @@ class IntlTelInput extends Component {
     const wrapperClass = classNames(this.wrapperClass);
 
     const titleTip = this.selectedCountryData
-      ? `${this.selectedCountryData.name}: +${
-        this.selectedCountryData.dialCode
+      ? `${this.selectedCountryData.name}: +${this.selectedCountryData.dialCode
       }`
       : 'Unknown';
 
