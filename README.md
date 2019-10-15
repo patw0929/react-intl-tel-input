@@ -13,10 +13,10 @@ Rewrite [International Telephone Input](https://github.com/jackocnr/intl-tel-inp
 
 ## Collaborators Wanted!
 
-Due to the long commuting time, I have not much time to maintain this project often. 😣
+Due to the long commuting time, I do not have much time to maintain this project often. 😣
 
-So If anybody else is willing to take on the work of bug fixes, integrating pull requests, etc.
-Please let me know. 🙌
+So if anybody else is willing to take on the work of bug fixes, integrating pull requests, etc,
+please let me know. 🙌
 
 I hope we can maintain the project together, and make this project better! 💪
 
@@ -38,7 +38,7 @@ Then open [`localhost:3000`](http://localhost:3000) in a browser.
 
 The easiest way to use react-intl-tel-input is to install it from NPM and include it in your own React build process (using [Webpack](http://webpack.github.io/), etc).
 
-You can also use the standalone build by including `dist/main.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
+You can also use the standalone build by including `dist/main.js` in your page. If you use this, make sure you have already included React, and that it is available as a global variable.
 
 ```bash
 yarn add react-intl-tel-input
@@ -68,7 +68,7 @@ Please see the [Demo Page](https://patw0929.github.io/react-intl-tel-input/)
 
 To build, watch and serve the examples (which will also watch the component source), run `npm start`.
 
-If you want to build to the bundle file to `dist/` folder, please run:
+If you want to build the bundle file to the `dist/` folder, please run:
 
 ```bash
 yarn run build
