@@ -11,7 +11,7 @@
 Rewrite [International Telephone Input](https://github.com/jackocnr/intl-tel-input) in React.js.
 
 
-## Collaborators Wanted!
+### Collaborators Wanted!
 
 Due to the long commuting time, I have not much time to maintain this project often. 😣
 
@@ -34,7 +34,7 @@ yarn start
 Then open [`localhost:3000`](http://localhost:3000) in a browser.
 
 
-## Installation
+### Installation
 
 The easiest way to use react-intl-tel-input is to install it from NPM and include it in your own React build process (using [Webpack](http://webpack.github.io/), etc).
 
@@ -45,7 +45,7 @@ yarn add react-intl-tel-input
 ```
 
 
-## Usage
+### Usage
 
 ```javascript
 import IntlTelInput from 'react-intl-tel-input';
@@ -74,7 +74,7 @@ If you want to build to the bundle file to `dist/` folder, please run:
 yarn run build
 ```
 
-## Contributing
+### Contributing
 
 To contribute to react-intl-tel-input, clone this repo locally and commit your code on a separate branch. Please write tests for your code, and run the linter before opening a pull-request:
 
@@ -83,12 +83,12 @@ yarn test
 yarn run lint
 ```
 
-## Inspired by
+### Inspired by
 
 [International Telephone Input](https://github.com/jackocnr/intl-tel-input) - [@jackocnr](https://github.com/jackocnr)
 
 
-## License
+### License
 
 MIT
 
