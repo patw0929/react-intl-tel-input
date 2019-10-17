@@ -12,6 +12,7 @@ export default class TelInput extends Component {
     placeholder: PropTypes.string,
     handleInputChange: PropTypes.func,
     handleOnBlur: PropTypes.func,
+    handleOnFocus: PropTypes.func,
     autoFocus: PropTypes.bool,
     autoComplete: PropTypes.string,
     inputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
@@ -45,8 +46,12 @@ export default class TelInput extends Component {
     }
   };
 
-  handleFocus = () => {
+  handleFocus = e => {
     this.setState({ hasFocus: true });
+
+    if (typeof this.props.handleOnFocus === 'function') {
+      this.props.handleOnFocus(e);
+    }
   };
 
   render() {
