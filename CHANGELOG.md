@@ -1,5 +1,11 @@
 # Changelog
 
+## [v7.1.0](https://github.com/patw0929/react-intl-tel-input/releases/tag/v7.1.0)
+
+### New features
+
+- [#308](https://github.com/patw0929/react-intl-tel-input/pull/308): Add optional onPhoneNumberFocus function (by [@johannessjoberg](https://github.com/johannessjoberg))
+
 ## [v7.0.3](https://github.com/patw0929/react-intl-tel-input/releases/tag/v7.0.2)
 
 ### Bug fixes
