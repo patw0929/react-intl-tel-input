@@ -242,31 +242,39 @@ describe('TelInput', function() {
     expect(subject.state().value).toBe('');
   });
 
-  it('onPhoneNumberBlur', () => {
-    let expected = '';
-    const onPhoneNumberBlur = (
-      isValid,
-      newNumber,
-      countryData,
-      fullNumber,
-      ext,
-      event
-    ) => {
-      const { type } = event;
+  const testOnPhoneNumberEvent = ({ property, eventType }) =>
+    it(`${property}`, () => {
+      let expected = '';
+      const onPhoneNumberEvent = (
+        isValid,
+        newNumber,
+        countryData,
+        fullNumber,
+        ext,
+        event
+      ) => {
+        const { type } = event;
 
-      expected = `${isValid},${newNumber},${
-        countryData.iso2
-      },${fullNumber},${ext},${type}`;
-    };
+        expected = `${isValid},${newNumber},${
+          countryData.iso2
+        },${fullNumber},${ext},${type}`;
+      };
 
-    this.params.onPhoneNumberBlur = onPhoneNumberBlur;
-    const subject = this.makeSubject();
-    const inputComponent = subject.find(TelInput);
+      this.params[property] = onPhoneNumberEvent;
+      const subject = this.makeSubject();
+      const inputComponent = subject.find(TelInput);
 
-    inputComponent.simulate('change', { target: { value: '+886911222333' } });
-    inputComponent.simulate('blur');
-    expect(expected).toBe('true,+886911222333,tw,+886 911 222 333,null,blur');
-  });
+      inputComponent.simulate('change', { target: { value: '+886911222333' } });
+      inputComponent.simulate(eventType);
+      expect(expected).toBe(
+        `true,+886911222333,tw,+886 911 222 333,null,${eventType}`
+      );
+    });
+
+  [
+    { property: 'onPhoneNumberBlur', eventType: 'blur' },
+    { property: 'onPhoneNumberFocus', eventType: 'focus' },
+  ].forEach(testOnPhoneNumberEvent);
 
   it('should has empty value with false nationalMode, false autoHideDialCode and false separateDialCode', () => {
     this.params = {

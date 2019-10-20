@@ -35,6 +35,7 @@ storiesOf('Documentation', module)
       preferredCountries={array('preferredCountries', defaultProps.preferredCountries)}
       onPhoneNumberChange={action('onPhoneNumberChange')}
       onPhoneNumberBlur={action('onPhoneNumberBlur')}
+      onPhoneNumberFocus={action('onPhoneNumberFocus')}
       onSelectFlag={action('onSelectFlag')}
       disabled={boolean('disabled', defaultProps.disabled)}
       placeholder={text('placeholder', defaultProps.placeholder)}
