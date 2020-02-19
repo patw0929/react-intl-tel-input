@@ -1210,8 +1210,13 @@ class IntlTelInput extends Component {
       previousValue === ''
         ? previousValue
         : previousValue.substring(0, cursorPosition);
+
+    // Don't format if user is deleting chars
+    const formattedValue = previousValue.length < priorValue.length
+      ? previousValue
+      : this.formatNumber(e.target.value);
     const value = this.props.format
-      ? this.formatNumber(e.target.value)
+      ? formattedValue
       : e.target.value;
 
     cursorPosition = utils.getCursorPositionAfterFormating(
