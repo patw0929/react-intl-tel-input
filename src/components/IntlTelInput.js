@@ -1205,7 +1205,10 @@ class IntlTelInput extends Component {
   // or udpate the state and notify change if component is uncontrolled
   handleInputChange = e => {
     let cursorPosition = e.target.selectionStart;
+    // previous value is pre formatted value
     const previousValue = e.target.value;
+    // prior value is existing state value/ before update
+    const priorValue = this.state.value;
     const previousStringBeforeCursor =
       previousValue === ''
         ? previousValue
