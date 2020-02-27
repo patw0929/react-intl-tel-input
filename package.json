@@ -105,17 +105,19 @@
     "webpack-dev-server": "^3.1.10"
   },
   "scripts": {
-    "build": "npm run clean && babel src -d dist",
+    "prebuild": "yarn run clean",
+    "build": "babel src -d dist",
     "clean": "rimraf dist",
     "start": "start-storybook -p 4000 -c .storybook",
     "deploy": "storybook-to-ghpages --ci",
     "lint-staged": "lint-staged",
     "lint": "yarn run eslint",
     "eslint": "eslint src",
-    "test": "cross-env TZ=Asia/Taipei node scripts/test.js --env=jsdom",
     "coverage": "yarn run test -- --coverage",
     "coveralls": "cross-env NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "prettier:all": "prettier --write 'src/components/**/*.js' 'config/**/*.js'"
+    "prettier:all": "prettier --write 'src/components/**/*.js' 'config/**/*.js'",
+    "test": "jest src",
+    "test:watch": "jest src --watchAll --coverage"
   },
   "lint-staged": {
     "linters": {
