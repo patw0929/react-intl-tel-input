@@ -24,6 +24,9 @@
     "react": ">15.4.2 <17.0.0",
     "react-dom": ">15.4.2 <17.0.0"
   },
+  "files": [
+    "!.html"
+  ],
   "dependencies": {
     "classnames": "^2.2.5",
     "libphonenumber-js-utils": "^8.10.2",
