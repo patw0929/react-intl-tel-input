@@ -117,7 +117,8 @@
     "coveralls": "cross-env NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "prettier:all": "prettier --write 'src/components/**/*.js' 'config/**/*.js'",
     "test": "jest src",
-    "test:watch": "jest src --watchAll --coverage"
+    "test:watch": "jest src --watchAll --coverage",
+    "footprint": "yarn build && node scripts/package-footprint.js"
   },
   "lint-staged": {
     "linters": {
@@ -132,7 +133,8 @@
     }
   },
   "pre-commit": [
-    "lint-staged"
+    "lint-staged",
+    "yarn footprint"
   ],
   "prettier": {
     "printWidth": 80,
