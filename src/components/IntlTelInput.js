@@ -165,7 +165,7 @@ class IntlTelInput extends Component {
     }
 
     if (this.props.defaultCountry !== prevProps.defaultCountry) {
-      this.updateFlagOnDefaultCountryChange(this.props.defaultCountry)
+      this.updateFlagOnDefaultCountryChange(this.props.defaultCountry);
     }
   }
 
@@ -176,8 +176,8 @@ class IntlTelInput extends Component {
   }
 
   // Updates flag when value of defaultCountry props change
-  updateFlagOnDefaultCountryChange = (countryCode) => {
-    this.setFlag(countryCode, false)
+  updateFlagOnDefaultCountryChange = countryCode => {
+    this.setFlag(countryCode, false);
   };
 
   getTempCountry = countryCode => {

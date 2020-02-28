@@ -115,7 +115,7 @@
     "eslint": "eslint src",
     "coverage": "yarn run test -- --coverage",
     "coveralls": "cross-env NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "prettier:all": "prettier --write 'src/components/**/*.js' 'config/**/*.js'",
+    "prettier:all": "prettier --write 'src/components/**/*.js' 'config/**/*.js' 'scripts/**/*.js'",
     "test": "jest src",
     "test:watch": "jest src --watchAll --coverage",
     "footprint": "yarn build && node scripts/package-footprint.js"
@@ -133,8 +133,7 @@
     }
   },
   "pre-commit": [
-    "lint-staged",
-    "yarn footprint"
+    "lint-staged"
   ],
   "prettier": {
     "printWidth": 80,
