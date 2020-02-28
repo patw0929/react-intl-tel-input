@@ -19,11 +19,16 @@
   "bugs": {
     "url": "https://github.com/patw0929/react-intl-tel-input/issues"
   },
-  "main": "dist/main.js",
+  "main": "dist/index.js",
   "peerDependencies": {
     "react": ">15.4.2 <17.0.0",
     "react-dom": ">15.4.2 <17.0.0"
   },
+  "files": [
+    "dist/**/*",
+    "!*.test.js",
+    "!*.html"
+  ],
   "dependencies": {
     "classnames": "^2.2.5",
     "libphonenumber-js-utils": "^8.10.2",
@@ -32,6 +37,7 @@
     "underscore.deferred": "^0.4.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
@@ -99,17 +105,20 @@
     "webpack-dev-server": "^3.1.10"
   },
   "scripts": {
-    "build": "npm run clean && node scripts/build.js",
+    "prebuild": "yarn run clean",
+    "build": "babel src -d dist && cp -r ./src/images ./dist && cp -r ./src/styles ./dist",
     "clean": "rimraf dist",
     "start": "start-storybook -p 4000 -c .storybook",
     "deploy": "storybook-to-ghpages --ci",
     "lint-staged": "lint-staged",
     "lint": "yarn run eslint",
     "eslint": "eslint src",
-    "test": "cross-env TZ=Asia/Taipei node scripts/test.js --env=jsdom",
     "coverage": "yarn run test -- --coverage",
     "coveralls": "cross-env NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "prettier:all": "prettier --write 'src/components/**/*.js' 'config/**/*.js'"
+    "prettier:all": "prettier --write 'src/components/**/*.js' 'config/**/*.js' 'scripts/**/*.js'",
+    "test": "jest src",
+    "test:watch": "jest src --watchAll --coverage",
+    "footprint": "yarn build && node scripts/package-footprint.js"
   },
   "lint-staged": {
     "linters": {
