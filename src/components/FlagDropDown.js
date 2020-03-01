@@ -36,7 +36,7 @@ export default class FlagDropDown extends Component {
 
   genArrow = () => {
     const { allowDropdown, showDropdown } = this.props;
-    const arrowClasses = classNames('arrow', showDropdown ? 'up' : 'down')
+    const arrowClasses = classNames('arrow', showDropdown ? 'up' : 'down');
 
     return allowDropdown ? <div className={arrowClasses} /> : null;
   };

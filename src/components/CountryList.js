@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -31,7 +30,7 @@ export default class CountryList extends Component {
   }
 
   setDropdownPosition = () => {
-    this.listElement.classList.remove('hide')
+    this.listElement.classList.remove('hide');
     const inputTop = this.props.inputTop;
     const windowTop =
       window.pageYOffset !== undefined
@@ -59,7 +58,7 @@ export default class CountryList extends Component {
         : '';
 
     this.listElement.style.top = cssTop;
-    this.listElement.classList.remove('v-hide')
+    this.listElement.classList.remove('v-hide');
   };
 
   appendListItem = (countries, isPreferred = false) => {
@@ -115,7 +114,7 @@ export default class CountryList extends Component {
 
     const preferredOptions = this.appendListItem(preferredCountries, true);
     const allOptions = this.appendListItem(countries);
-    const divider = <div className="divider"/>
+    const divider = <div className="divider" />;
 
     return (
       <ul
