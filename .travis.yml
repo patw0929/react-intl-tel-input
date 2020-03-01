@@ -16,7 +16,7 @@ jobs:
       script: yarn run lint
     - stage: build
       name: "Build package"
-      script: yarn run build
+      script: yarn run build:ci
     - stage: coveralls
       name: "Coveralls"
       script: yarn run coveralls
