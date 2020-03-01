@@ -134,17 +134,6 @@ describe('utils', () => {
     ).toEqual({});
   });
 
-  it('hasClass', () => {
-    const DEFAULT_HTML = `<html><body>
-      <div class="abc cde">test</div>
-    </body></html>`;
-    const doc = jsdom.jsdom(DEFAULT_HTML);
-    const element = doc.querySelector('.abc');
-
-    expect(utils.hasClass(element, 'cde')).toBeTruthy();
-  });
-
-
   it('findIndex', () => {
     let array = [];
     let predicate = () => true;
