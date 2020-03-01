@@ -4,6 +4,12 @@ import classNames from 'classnames';
 import CountryList from './CountryList';
 import RootModal from './RootModal';
 
+import {
+  DownArrow,
+  UpArrow,
+  SelectedFlagPopoverButton,
+} from './FlagDropDown.styles';
+
 export default class FlagDropDown extends Component {
   static propTypes = {
     allowDropdown: PropTypes.bool,
@@ -31,33 +37,20 @@ export default class FlagDropDown extends Component {
 
     return separateDialCode ? (
       <div className="selected-dial-code">{dialCode}</div>
-    ) : (
-      ''
-    );
+    ) : null;
   };
 
   genArrow = () => {
     const { allowDropdown, showDropdown } = this.props;
-    const arrowClass = classNames({
-      'iti-arrow': true,
-      up: showDropdown,
+    const arrow = showDropdown ? <UpArrow /> : <DownArrow />;
+
+    return allowDropdown ? arrow : null;
+  };
+
+  genFlagClassName = () =>
+    classNames('iti-flag', {
+      [this.props.countryCode]: !!this.props.countryCode,
     });
-
-    return allowDropdown ? <div className={arrowClass} /> : '';
-  };
-
-  genFlagClassName = () => {
-    const { countryCode } = this.props;
-    const flagClassObj = {
-      'iti-flag': true,
-    };
-
-    if (countryCode) {
-      flagClassObj[countryCode] = true;
-    }
-
-    return classNames(flagClassObj);
-  };
 
   genCountryList = () => {
     const {
@@ -106,7 +99,7 @@ export default class FlagDropDown extends Component {
 
     return (
       <div ref={refCallback} className="flag-container">
-        <div
+        <SelectedFlagPopoverButton
           className="selected-flag"
           tabIndex={allowDropdown ? '0' : ''}
           onClick={clickSelectedFlag}
@@ -116,7 +109,7 @@ export default class FlagDropDown extends Component {
           <div className={this.genFlagClassName()} />
           {this.genSelectedDialCode()}
           {this.genArrow()}
-        </div>
+        </SelectedFlagPopoverButton>
         {dropdownContainer && showDropdown ? (
           <RootModal>{this.genCountryList()}</RootModal>
         ) : (

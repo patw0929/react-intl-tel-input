@@ -1,13 +1,11 @@
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import utils from './utils';
 
-import FlagBox from './FlagBox'
-
-function partial(fn, ...args) {
-  return fn.bind(fn, ...args);
-}
+import FlagBox from './FlagBox';
+import { Divider } from './CountryList.styles'
 
 export default class CountryList extends Component {
   static propTypes = {
@@ -26,7 +24,7 @@ export default class CountryList extends Component {
     const shouldUpdate = !utils.shallowEquals(this.props, nextProps);
 
     if (shouldUpdate && nextProps.showDropdown) {
-      this.listElement.setAttribute('class', 'country-list v-hide');
+      this.listElement.classList.add('v-hide');
       this.setDropdownPosition();
     }
 
@@ -34,8 +32,7 @@ export default class CountryList extends Component {
   }
 
   setDropdownPosition = () => {
-    utils.removeClass(this.listElement, 'hide');
-
+    this.listElement.classList.remove('hide')
     const inputTop = this.props.inputTop;
     const windowTop =
       window.pageYOffset !== undefined
@@ -63,11 +60,7 @@ export default class CountryList extends Component {
         : '';
 
     this.listElement.style.top = cssTop;
-    this.listElement.setAttribute('class', 'country-list');
-  };
-
-  setFlag = iso2 => {
-    this.props.setFlag(iso2);
+    this.listElement.classList.remove('v-hide')
   };
 
   appendListItem = (countries, isPreferred = false) => {
@@ -81,23 +74,29 @@ export default class CountryList extends Component {
         preferred: isPreferred,
       };
       const countryClass = classNames(countryClassObj);
-      const onMouseOverOrFocus = this.props.isMobile ? () => {} : this.handleMouseOver
-      const keyPrefix = isPreferred ? 'pref-' : ''
- 
+      const onMouseOverOrFocus = this.props.isMobile
+        ? () => {}
+        : this.handleMouseOver;
+      const keyPrefix = isPreferred ? 'pref-' : '';
+
       return (
         <FlagBox
-          key={`${keyPrefix}${country.iso2}`} 
+          key={`${keyPrefix}${country.iso2}`}
           dialCode={country.dialCode}
           isoCode={country.iso2}
           name={country.name}
           onMouseOver={onMouseOverOrFocus}
-          onClick={partial(this.setFlag, country.iso2)}
+          onClick={() => this.props.setFlag(country.iso2)}
           onFocus={onMouseOverOrFocus}
-          flagRef={selectedFlag => { this.selectedFlag = selectedFlag }}
-          innerFlagRef={selectedFlagInner => { this.selectedFlagInner = selectedFlagInner }}
+          flagRef={selectedFlag => {
+            this.selectedFlag = selectedFlag;
+          }}
+          innerFlagRef={selectedFlagInner => {
+            this.selectedFlagInner = selectedFlagInner;
+          }}
           countryClass={countryClass}
         />
-      )
+      );
     });
   };
 
@@ -110,21 +109,13 @@ export default class CountryList extends Component {
   };
 
   render() {
-    const { preferredCountries, countries, showDropdown } = this.props
-    let options = '';
-    let preferredOptions = null;
-    const className = classNames({
-      'country-list': true,
+    const { preferredCountries, countries, showDropdown } = this.props;
+    const className = classNames('country-list', {
       hide: !showDropdown,
     });
-    let divider = null;
 
-    if (preferredCountries.length) {
-      preferredOptions = this.appendListItem(preferredCountries, true);
-      divider = <div className="divider" />;
-    }
-
-    options = this.appendListItem(countries);
+    const preferredOptions = this.appendListItem(preferredCountries, true);
+    const allOptions = this.appendListItem(countries);
 
     return (
       <ul
@@ -134,8 +125,8 @@ export default class CountryList extends Component {
         className={className}
       >
         {preferredOptions}
-        {divider}
-        {options}
+        {preferredCountries.length > 0 ? <Divider /> : null}
+        {allOptions}
       </ul>
     );
   }
