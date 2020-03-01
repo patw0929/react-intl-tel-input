@@ -25,9 +25,7 @@
     "react-dom": ">15.4.2 <17.0.0"
   },
   "files": [
-    "dist/**/*",
-    "!*.test.js",
-    "!*.html"
+    "dist/**/*"
   ],
   "dependencies": {
     "classnames": "^2.2.5",
@@ -87,6 +85,7 @@
     "mini-css-extract-plugin": "^0.4.5",
     "node-sass": "^4.2.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "packwatch": "^1.0.0",
     "postcss-safe-parser": "^4.0.1",
     "pre-commit": "^1.2.2",
     "prettier": "^1.14.2",
@@ -118,7 +117,7 @@
     "prettier:all": "prettier --write 'src/components/**/*.js' 'config/**/*.js' 'scripts/**/*.js'",
     "test": "jest src",
     "test:watch": "jest src --watchAll --coverage",
-    "footprint": "yarn build && node scripts/package-footprint.js"
+    "footprint": "yarn build && yarn packwatch"
   },
   "lint-staged": {
     "linters": {
