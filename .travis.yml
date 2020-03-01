@@ -5,24 +5,28 @@ cache:
     - node_modules
 node_js:
   - "8.10.0"
+  - "10.4.0"
+
 jobs:
   include:
-    - stage: test
-      script: yarn run test
-      after_success:
-        - yarn run coveralls
-    - stage: lint
-      script: yarn run lint
+    - stage: test-lint
+      name: "Test and Lint"
+      script:
+        - yarn run test
+        - yarn run lint
     - stage: build
+      name: "Build package"
       script: yarn run build
     - stage: coveralls
+      name: "Coveralls"
       script: yarn run coveralls
+    - stage: deploy
+      name: "Deploy"
+      if: branch = 'master' AND type != 'pull_request'
+      script: yarn run deploy
 
 stages:
-    - test
-    - lint
+    - test-lint
     - build
-
-after_success:
-  - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then yarn run deploy; fi
-after_script: yarn run coveralls
+    - coveralls
+    - deploy
