@@ -111,20 +111,14 @@ export default class CountryList extends Component {
 
   render() {
     const { preferredCountries, countries, showDropdown } = this.props
-    let options = '';
-    let preferredOptions = null;
     const className = classNames({
       'country-list': true,
       hide: !showDropdown,
     });
-    let divider = null;
-
-    if (preferredCountries.length) {
-      preferredOptions = this.appendListItem(preferredCountries, true);
-      divider = <div className="divider" />;
-    }
-
-    options = this.appendListItem(countries);
+    
+    const divider = <div className="divider" />;
+    const preferredOptions = this.appendListItem(preferredCountries, true);
+    const allOptions = this.appendListItem(countries);
 
     return (
       <ul
@@ -134,8 +128,8 @@ export default class CountryList extends Component {
         className={className}
       >
         {preferredOptions}
-        {divider}
-        {options}
+        {preferredCountries.length > 0 ? divider : null}
+        {allOptions}
       </ul>
     );
   }
