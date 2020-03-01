@@ -129,13 +129,6 @@ $mobilePopupMargin: 30px;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 
-    // the divider below the preferred countries
-    .divider {
-      padding-bottom: 5px;
-      margin-bottom: 5px;
-      border-bottom: $borderWidth solid $greyBorder;
-    }
-
     // each country item in dropdown (we must have separate class to differentiate from dividers)
     .country {
       // Note: decided not to use line-height here for alignment because it causes issues e.g. large font-sizes will overlap, and also looks bad if one country overflows onto 2 lines

@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import utils from './utils';
 
 import FlagBox from './FlagBox';
+import { Divider } from './CountryList.styles'
 
 export default class CountryList extends Component {
   static propTypes = {
@@ -113,7 +114,6 @@ export default class CountryList extends Component {
       hide: !showDropdown,
     });
 
-    const divider = <div className="divider" />;
     const preferredOptions = this.appendListItem(preferredCountries, true);
     const allOptions = this.appendListItem(countries);
 
@@ -125,7 +125,7 @@ export default class CountryList extends Component {
         className={className}
       >
         {preferredOptions}
-        {preferredCountries.length > 0 ? divider : null}
+        {preferredCountries.length > 0 ? <Divider /> : null}
         {allOptions}
       </ul>
     );
