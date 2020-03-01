@@ -5,11 +5,24 @@ cache:
     - node_modules
 node_js:
   - "8.10.0"
-script:
-  - yarn test
-  - yarn lint
-  - yarn build
+jobs:
+  include:
+    - stage: test
+      script: yarn run test
+      after_success:
+        - yarn run coveralls
+    - stage: lint
+      script: yarn run lint
+    - stage: build
+      script: yarn run build
+    - stage: coveralls
+      script: yarn run coveralls
+
+stages:
+    - test
+    - lint
+    - build
+
 after_success:
-  - yarn run coverage
   - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then yarn run deploy; fi
 after_script: yarn run coveralls
