@@ -75,6 +75,20 @@ $mobilePopupMargin: 30px;
     right: 0;
     // prevent the highlighted child from overlapping the input border
     padding: $borderWidth;
+  
+    .arrow {
+        font-size: 6px;
+        margin-left: 5px;
+        
+        &.up:after {
+            content: '▲';
+        }
+
+        &.down:after {
+            content: '▼';
+
+        }
+    }
   }
 
   .selected-flag {
@@ -85,6 +99,10 @@ $mobilePopupMargin: 30px;
     // this must be full-height both for the hover highlight, and to push down the
     // dropdown so it appears below the input
     height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   // the dropdown
@@ -97,6 +115,12 @@ $mobilePopupMargin: 30px;
     list-style: none;
     // in case any container has text-align:center
     text-align: left;
+    
+    .divider {
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        border-bottom: $borderWidth solid $greyBorder;
+    }
 
     // place menu above the input element
     &.dropup {
