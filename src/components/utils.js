@@ -170,24 +170,7 @@ export default {
 
     return {};
   },
-
-  // Copied from http://jaketrent.com/post/addremove-classes-raw-javascript/
-  hasClass(el, className) {
-    if (el.classList) {
-      return el.classList.contains(className);
-    }
-
-    return !!el.className.match(new RegExp(`(\\s|^)${className}(\\s|$)`));
-  },
-
-  addClass(el, className) {
-    if (el.classList) {
-      el.classList.add(className);
-    } else if (!this.hasClass(el, className)) {
-      el.className += ` ${className}`;
-    }
-  },
-
+  
   findIndex(items, predicate) {
     let index = -1;
 
