@@ -90,15 +90,6 @@ $mobilePopupMargin: 30px;
     // this must be full-height both for the hover highlight, and to push down the
     // dropdown so it appears below the input
     height: 100%;
-    padding: 0 0 0 $flagPadding;
-
-    // vertically center the flag
-    .iti-flag {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-    }
 
     .iti-arrow {
       position: absolute;
