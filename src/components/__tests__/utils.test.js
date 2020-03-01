@@ -144,18 +144,6 @@ describe('utils', () => {
     expect(utils.hasClass(element, 'cde')).toBeTruthy();
   });
 
-  it('addClass', () => {
-    const DEFAULT_HTML = `<html><body>
-      <div class="abc cde">test</div>
-    </body></html>`;
-    const doc = jsdom.jsdom(DEFAULT_HTML);
-    const element = doc.querySelector('.abc');
-
-    utils.addClass(element, 'efg');
-
-    expect(element.classList.contains('efg')).toBeTruthy();
-  });
-
 
   it('findIndex', () => {
     let array = [];

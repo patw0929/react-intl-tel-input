@@ -1017,7 +1017,7 @@ class IntlTelInput extends Component {
     this.wrapperClass['separate-dial-code'] = this.props.separateDialCode;
 
     if (this.isMobile && this.props.useMobileFullscreenDropdown) {
-      utils.addClass(document.querySelector('body'), 'iti-mobile');
+      document.querySelector('body').classList.add('iti-mobile')
       // on mobile, we want a full screen dropdown, so we must append it to the body
       this.dropdownContainer = 'body';
       window.addEventListener('scroll', this.handleWindowScroll);
