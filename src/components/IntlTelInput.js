@@ -7,6 +7,7 @@ import AllCountries from './AllCountries';
 import FlagDropDown from './FlagDropDown';
 import TelInput from './TelInput';
 import utils from './utils';
+import { KEYS } from './constants'
 import '../styles/intlTelInput.scss';
 
 const mobileUserAgentRegexp = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
@@ -55,18 +56,6 @@ class IntlTelInput extends Component {
     this.countryCodes = {};
 
     this.windowLoaded = false;
-
-    this.keys = {
-      UP: 38,
-      DOWN: 40,
-      ENTER: 13,
-      ESC: 27,
-      PLUS: 43,
-      A: 65,
-      Z: 90,
-      SPACE: 32,
-      TAB: 9,
-    };
 
     this.query = '';
     this.selectedCountryData = {};
@@ -603,13 +592,13 @@ class IntlTelInput extends Component {
     const current = this.flagDropDown.querySelectorAll('.highlight')[0];
     const prevElement = current ? current.previousElementSibling : undefined;
     const nextElement = current ? current.nextElementSibling : undefined;
-    let next = key === this.keys.UP ? prevElement : nextElement;
+    let next = key === KEYS.UP ? prevElement : nextElement;
 
     if (next) {
       // skip the divider
       if (next.getAttribute('class').indexOf('divider') > -1) {
         next =
-          key === this.keys.UP
+          key === KEYS.UP
             ? next.previousElementSibling
             : next.nextElementSibling;
       }
@@ -1038,10 +1027,10 @@ class IntlTelInput extends Component {
   handleSelectedFlagKeydown = e => {
     if (
       !this.state.showDropdown &&
-      (e.which === this.keys.UP ||
-        e.which === this.keys.DOWN ||
-        e.which === this.keys.SPACE ||
-        e.which === this.keys.ENTER)
+      (e.which === KEYS.UP ||
+        e.which === KEYS.DOWN ||
+        e.which === KEYS.SPACE ||
+        e.which === KEYS.ENTER)
     ) {
       // prevent form from being submitted if "ENTER" was pressed
       e.preventDefault();
@@ -1053,7 +1042,7 @@ class IntlTelInput extends Component {
     }
 
     // allow navigation from dropdown to input on TAB
-    if (e.which === this.keys.TAB) {
+    if (e.which === KEYS.TAB) {
       this.toggleDropdown(false);
     }
   };
@@ -1146,20 +1135,20 @@ class IntlTelInput extends Component {
     // and enter key from submitting a form etc
     e.preventDefault();
 
-    if (e.which === this.keys.UP || e.which === this.keys.DOWN) {
+    if (e.which === KEYS.UP || e.which === KEYS.DOWN) {
       // up and down to navigate
       this.handleUpDownKey(e.which);
-    } else if (e.which === this.keys.ENTER) {
+    } else if (e.which === KEYS.ENTER) {
       // enter to select
       this.handleEnterKey();
-    } else if (e.which === this.keys.ESC) {
+    } else if (e.which === KEYS.ESC) {
       // esc to close
       this.setState({
         showDropdown: false,
       });
     } else if (
-      (e.which >= this.keys.A && e.which <= this.keys.Z) ||
-      e.which === this.keys.SPACE
+      (e.which >= KEYS.A && e.which <= KEYS.Z) ||
+      e.which === KEYS.SPACE
     ) {
       // upper case letters (note: keyup/keydown only return upper case letters)
       // jump to countries that start with the query string
