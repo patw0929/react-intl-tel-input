@@ -72,7 +72,10 @@ describe('FlagDropDown', function() {
     expect(
       subject.find(CountryList).find('.country-list.hide').length
     ).toBeTruthy();
-    flagComponent.find('.selected-flag').last().simulate('click');
+    flagComponent
+      .find('.selected-flag')
+      .last()
+      .simulate('click');
 
     subject.update();
     expect(

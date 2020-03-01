@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import utils from './utils';
 
-import FlagBox from './FlagBox'
+import FlagBox from './FlagBox';
 
 function partial(fn, ...args) {
   return fn.bind(fn, ...args);
@@ -81,23 +81,29 @@ export default class CountryList extends Component {
         preferred: isPreferred,
       };
       const countryClass = classNames(countryClassObj);
-      const onMouseOverOrFocus = this.props.isMobile ? () => {} : this.handleMouseOver
-      const keyPrefix = isPreferred ? 'pref-' : ''
- 
+      const onMouseOverOrFocus = this.props.isMobile
+        ? () => {}
+        : this.handleMouseOver;
+      const keyPrefix = isPreferred ? 'pref-' : '';
+
       return (
         <FlagBox
-          key={`${keyPrefix}${country.iso2}`} 
+          key={`${keyPrefix}${country.iso2}`}
           dialCode={country.dialCode}
           isoCode={country.iso2}
           name={country.name}
           onMouseOver={onMouseOverOrFocus}
           onClick={partial(this.setFlag, country.iso2)}
           onFocus={onMouseOverOrFocus}
-          flagRef={selectedFlag => { this.selectedFlag = selectedFlag }}
-          innerFlagRef={selectedFlagInner => { this.selectedFlagInner = selectedFlagInner }}
+          flagRef={selectedFlag => {
+            this.selectedFlag = selectedFlag;
+          }}
+          innerFlagRef={selectedFlagInner => {
+            this.selectedFlagInner = selectedFlagInner;
+          }}
           countryClass={countryClass}
         />
-      )
+      );
     });
   };
 
@@ -110,12 +116,12 @@ export default class CountryList extends Component {
   };
 
   render() {
-    const { preferredCountries, countries, showDropdown } = this.props
+    const { preferredCountries, countries, showDropdown } = this.props;
     const className = classNames({
       'country-list': true,
       hide: !showDropdown,
     });
-    
+
     const divider = <div className="divider" />;
     const preferredOptions = this.appendListItem(preferredCountries, true);
     const allOptions = this.appendListItem(countries);

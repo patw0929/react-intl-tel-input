@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const FlagBox = ({
   dialCode,
@@ -20,22 +20,14 @@ const FlagBox = ({
     onFocus={onFocus}
     onClick={onClick}
   >
-    <div
-      ref={flagRef}
-      className="flag-box"
-    >
-      <div
-        ref={innerFlagRef}
-        className={`iti-flag ${isoCode}`}
-      />
+    <div ref={flagRef} className="flag-box">
+      <div ref={innerFlagRef} className={`iti-flag ${isoCode}`} />
     </div>
 
     <span className="country-name">{name}</span>
-    <span className="dial-code">
-      {`+ ${dialCode}`}
-    </span>
+    <span className="dial-code">{`+ ${dialCode}`}</span>
   </li>
-) 
+);
 
 FlagBox.propTypes = {
   dialCode: PropTypes.string.isRequired,
@@ -47,12 +39,12 @@ FlagBox.propTypes = {
   flagRef: PropTypes.func,
   innerFlagRef: PropTypes.func,
   countryClass: PropTypes.string.isRequired,
-}
+};
 
 FlagBox.defaultProps = {
   onFocus: () => {},
   onMouseOver: () => {},
   onClick: () => {},
-}
+};
 
-export default FlagBox
+export default FlagBox;

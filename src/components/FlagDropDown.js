@@ -4,7 +4,11 @@ import classNames from 'classnames';
 import CountryList from './CountryList';
 import RootModal from './RootModal';
 
-import { DownArrow, UpArrow, SelectedFlagPopoverButton } from './FlagDropDown.styles'
+import {
+  DownArrow,
+  UpArrow,
+  SelectedFlagPopoverButton,
+} from './FlagDropDown.styles';
 
 export default class FlagDropDown extends Component {
   static propTypes = {
@@ -33,31 +37,20 @@ export default class FlagDropDown extends Component {
 
     return separateDialCode ? (
       <div className="selected-dial-code">{dialCode}</div>
-    ) : (
-      ''
-    );
+    ) : null;
   };
 
   genArrow = () => {
     const { allowDropdown, showDropdown } = this.props;
-    const arrow = showDropdown ? <UpArrow /> : <DownArrow />
+    const arrow = showDropdown ? <UpArrow /> : <DownArrow />;
 
-    
-    return allowDropdown ? arrow : null
+    return allowDropdown ? arrow : null;
   };
 
-  genFlagClassName = () => {
-    const { countryCode } = this.props;
-    const flagClassObj = {
-      'iti-flag': true,
-    };
-
-    if (countryCode) {
-      flagClassObj[countryCode] = true;
-    }
-
-    return classNames(flagClassObj);
-  };
+  genFlagClassName = () =>
+    classNames('iti-flag', {
+      [this.props.countryCode]: !!this.props.countryCode,
+    });
 
   genCountryList = () => {
     const {
