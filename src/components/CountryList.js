@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -23,7 +24,7 @@ export default class CountryList extends Component {
     const shouldUpdate = !utils.shallowEquals(this.props, nextProps);
 
     if (shouldUpdate && nextProps.showDropdown) {
-      this.listElement.setAttribute('class', 'country-list v-hide');
+      this.listElement.classList.add('v-hide');
       this.setDropdownPosition();
     }
 
@@ -31,8 +32,7 @@ export default class CountryList extends Component {
   }
 
   setDropdownPosition = () => {
-    utils.removeClass(this.listElement, 'hide');
-
+    this.listElement.classList.remove('hide')
     const inputTop = this.props.inputTop;
     const windowTop =
       window.pageYOffset !== undefined
@@ -60,7 +60,7 @@ export default class CountryList extends Component {
         : '';
 
     this.listElement.style.top = cssTop;
-    this.listElement.setAttribute('class', 'country-list');
+    this.listElement.classList.remove('v-hide')
   };
 
   appendListItem = (countries, isPreferred = false) => {

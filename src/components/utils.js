@@ -188,16 +188,6 @@ export default {
     }
   },
 
-  removeClass(el, className) {
-    if (el.classList) {
-      el.classList.remove(className);
-    } else if (this.hasClass(el, className)) {
-      const reg = new RegExp(`(\\s|^)${className}(\\s|$)`);
-
-      el.className = el.className.replace(reg, ' ');
-    }
-  },
-
   findIndex(items, predicate) {
     let index = -1;
 

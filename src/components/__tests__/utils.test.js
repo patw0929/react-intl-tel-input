@@ -156,17 +156,6 @@ describe('utils', () => {
     expect(element.classList.contains('efg')).toBeTruthy();
   });
 
-  it('removeClass', () => {
-    const DEFAULT_HTML = `<html><body>
-      <div class="abc cde">test</div>
-    </body></html>`;
-    const doc = jsdom.jsdom(DEFAULT_HTML);
-    const element = doc.querySelector('.abc');
-
-    utils.removeClass(element, 'abc');
-
-    expect(element.classList.contains('abc')).toBeFalsy();
-  });
 
   it('findIndex', () => {
     let array = [];
