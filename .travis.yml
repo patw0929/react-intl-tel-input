@@ -12,9 +12,8 @@ jobs:
   include:
     - stage: test-lint
       name: "Test and Lint"
-      script:
-        - yarn run coverage
-        - yarn run lint
+      script: yarn run coverage
+      script: yarn run lint
     - stage: build
       name: "Build package"
       script: yarn run build
