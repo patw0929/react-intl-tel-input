@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import utils from './utils';
 
+import FlagBox from './FlagBox'
+
 function partial(fn, ...args) {
   return fn.bind(fn, ...args);
 }
@@ -79,38 +81,23 @@ export default class CountryList extends Component {
         preferred: isPreferred,
       };
       const countryClass = classNames(countryClassObj);
-      const keyPrefix = isPreferred ? 'pref-' : '';
-
+      const onMouseOverOrFocus = this.props.isMobile ? () => {} : this.handleMouseOver
+      const keyPrefix = isPreferred ? 'pref-' : ''
+ 
       return (
-        <li
-          key={`${keyPrefix}${country.iso2}`}
-          className={countryClass}
-          data-dial-code={country.dialCode}
-          data-country-code={country.iso2}
-          onMouseOver={this.props.isMobile ? null : this.handleMouseOver}
+        <FlagBox
+          key={`${keyPrefix}${country.iso2}`} 
+          dialCode={country.dialCode}
+          isoCode={country.iso2}
+          name={country.name}
+          onMouseOver={onMouseOverOrFocus}
           onClick={partial(this.setFlag, country.iso2)}
-        >
-          <div
-            ref={selectedFlag => {
-              this.selectedFlag = selectedFlag;
-            }}
-            className="flag-box"
-          >
-            <div
-              ref={selectedFlagInner => {
-                this.selectedFlagInner = selectedFlagInner;
-              }}
-              className={`iti-flag ${country.iso2}`}
-            />
-          </div>
-
-          <span className="country-name">{country.name}</span>
-          <span className="dial-code">
-+
-            {country.dialCode}
-          </span>
-        </li>
-      );
+          onFocus={onMouseOverOrFocus}
+          flagRef={selectedFlag => { this.selectedFlag = selectedFlag }}
+          innerFlagRef={selectedFlagInner => { this.selectedFlagInner = selectedFlagInner }}
+          countryClass={countryClass}
+        />
+      )
     });
   };
 
@@ -123,13 +110,12 @@ export default class CountryList extends Component {
   };
 
   render() {
+    const { preferredCountries, countries, showDropdown } = this.props
     let options = '';
-    const preferredCountries = this.props.preferredCountries;
     let preferredOptions = null;
-    const countries = this.props.countries;
     const className = classNames({
       'country-list': true,
-      hide: !this.props.showDropdown,
+      hide: !showDropdown,
     });
     let divider = null;
 
