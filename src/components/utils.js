@@ -170,7 +170,7 @@ export default {
 
     return {};
   },
-  
+
   findIndex(items, predicate) {
     let index = -1;
 

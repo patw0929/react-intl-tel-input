@@ -7,7 +7,7 @@ import AllCountries from './AllCountries';
 import FlagDropDown from './FlagDropDown';
 import TelInput from './TelInput';
 import utils from './utils';
-import { KEYS } from './constants'
+import { KEYS } from './constants';
 import '../styles/intlTelInput.scss';
 
 const mobileUserAgentRegexp = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
@@ -1017,7 +1017,7 @@ class IntlTelInput extends Component {
     this.wrapperClass['separate-dial-code'] = this.props.separateDialCode;
 
     if (this.isMobile && this.props.useMobileFullscreenDropdown) {
-      document.querySelector('body').classList.add('iti-mobile')
+      document.querySelector('body').classList.add('iti-mobile');
       // on mobile, we want a full screen dropdown, so we must append it to the body
       this.dropdownContainer = 'body';
       window.addEventListener('scroll', this.handleWindowScroll);
