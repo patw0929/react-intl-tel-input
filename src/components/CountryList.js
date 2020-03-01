@@ -5,10 +5,6 @@ import utils from './utils';
 
 import FlagBox from './FlagBox';
 
-function partial(fn, ...args) {
-  return fn.bind(fn, ...args);
-}
-
 export default class CountryList extends Component {
   static propTypes = {
     setFlag: PropTypes.func,
@@ -66,10 +62,6 @@ export default class CountryList extends Component {
     this.listElement.setAttribute('class', 'country-list');
   };
 
-  setFlag = iso2 => {
-    this.props.setFlag(iso2);
-  };
-
   appendListItem = (countries, isPreferred = false) => {
     const preferredCountriesCount = this.props.preferredCountries.length;
 
@@ -93,7 +85,7 @@ export default class CountryList extends Component {
           isoCode={country.iso2}
           name={country.name}
           onMouseOver={onMouseOverOrFocus}
-          onClick={partial(this.setFlag, country.iso2)}
+          onClick={() => this.props.setFlag(country.iso2)}
           onFocus={onMouseOverOrFocus}
           flagRef={selectedFlag => {
             this.selectedFlag = selectedFlag;
@@ -117,8 +109,7 @@ export default class CountryList extends Component {
 
   render() {
     const { preferredCountries, countries, showDropdown } = this.props;
-    const className = classNames({
-      'country-list': true,
+    const className = classNames('country-list', {
       hide: !showDropdown,
     });
 
