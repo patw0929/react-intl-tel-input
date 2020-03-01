@@ -29,6 +29,7 @@
     "libphonenumber-js-utils": "^8.10.2",
     "prop-types": "^15.6.1",
     "react-style-proptype": "^3.0.0",
+    "styled-components": "^4.0.0",
     "underscore.deferred": "^0.4.0"
   },
   "devDependencies": {
