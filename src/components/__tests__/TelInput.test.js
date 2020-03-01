@@ -467,7 +467,7 @@ describe('TelInput', function() {
 
     it('should set "expanded" class to wrapper only when flags are open', () => {
       const subject = this.makeSubject();
-      const flagComponent = subject.find(FlagDropDown).find('.selected-flag');
+      const flagComponent = subject.find(FlagDropDown).find('.selected-flag').last();
 
       flagComponent.simulate('click');
       expect(subject.instance().wrapperClass.expanded).toBe(true);
