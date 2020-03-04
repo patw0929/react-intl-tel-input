@@ -1,5 +1,15 @@
 # Changelog
 
+## [v7.1.1](https://github.com/patw0929/react-intl-tel-input/releases/tag/v7.1.1)
+
+### Bug fixes
+
+- [#313](https://github.com/patw0929/react-intl-tel-input/pull/313): Bug fix: Bypass formatNumber if user is deleting (by [@Kongfujonstew](https://github.com/Kongfujonstew))
+
+### Chore
+
+- [#307](https://github.com/patw0929/react-intl-tel-input/pull/307): Improved README.md documentation (by [@michizhou](https://github.com/michizhou))
+
 ## [v7.1.0](https://github.com/patw0929/react-intl-tel-input/releases/tag/v7.1.0)
 
 ### New features
