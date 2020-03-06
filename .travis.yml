@@ -14,7 +14,7 @@ jobs:
       script: yarn run lint
     - stage: build
       name: "Build package"
-      script: yarn run build:ci
+      script: yarn run build
     - stage: deploy
       name: "Deploy"
       if: branch = 'master' AND type != 'pull_request'
