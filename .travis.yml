@@ -1,15 +1,26 @@
 language: node_js
-cache:
-  yarn: true
-  directories:
-    - node_modules
+cache: yarn
+
 node_js:
-  - "8.10.0"
-script:
-  - yarn test
-  - yarn lint
-  - yarn build
-after_success:
-  - yarn run coverage
-  - if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then yarn run deploy; fi
-after_script: yarn run coveralls
+  - "10.4.0"
+
+jobs:
+  include:
+    - stage: test-lint
+      name: "Test and Lint"
+      script:
+        - yarn run coverage
+        - yarn run coveralls
+      script: yarn run lint
+    - stage: build
+      name: "Build package"
+      script: yarn run build
+    - stage: deploy
+      name: "Deploy"
+      if: branch = 'master' AND type != 'pull_request'
+      script: yarn run deploy
+
+stages:
+    - test-lint
+    - build
+    - deploy

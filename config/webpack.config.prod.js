@@ -5,8 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const safeParser = require('postcss-safe-parser');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
 const getClientEnvironment = require('./env');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -169,14 +167,6 @@ module.exports = {
     new webpack.DefinePlugin(env),
     new MiniCssExtractPlugin({
       filename: 'main.css',
-    }),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      reportFilename: 'report.html',
-      defaultSizes: 'parsed',
-      openAnalyzer: true,
-      generateStatsFile: false,
-      logLevel: 'info',
     }),
   ],
   node: {
