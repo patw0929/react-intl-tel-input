@@ -105,7 +105,7 @@
   },
   "scripts": {
     "prebuild": "yarn run clean",
-    "build": "babel src -d dist && cp -r ./src/images ./dist && cp -r ./src/styles ./dist",
+    "build": "BABEL_ENV=production babel src -d dist && cp -r ./src/images ./dist && cp -r ./src/styles ./dist",
     "clean": "rimraf dist",
     "start": "start-storybook -p 4000 -c .storybook",
     "deploy": "storybook-to-ghpages --ci",
@@ -138,32 +138,6 @@
     "printWidth": 80,
     "singleQuote": true,
     "trailingComma": "es5"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.js",
-      "!**/__mocks__/**",
-      "!**/__tests__/**",
-      "!.storybook"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/jest/setup.js"
-    ],
-    "setupTestFrameworkScriptFile": "<rootDir>/config/jest/setupTestFramework.js",
-    "testPathIgnorePatterns": [
-      "<rootDir>[/\\\\](build|docs|node_modules)[/\\\\]"
-    ],
-    "testEnvironment": "jsdom",
-    "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx)$": "<rootDir>/config/jest/transform.js",
-      "^.+\\.(scss|css)$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|scss|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
-    "testRegex": "/__tests__/.*\\.(test|spec)\\.js$"
   },
   "engines": {
     "node": ">=6.2.2"

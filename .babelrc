@@ -14,6 +14,7 @@
       "plugins": ["dynamic-import-node"]
     },
     "production": {
+      "ignore": ["**/*.test.js"],
       "plugins": [
         [
           "transform-react-remove-prop-types",
