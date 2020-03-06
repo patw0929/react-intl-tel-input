@@ -1,4 +1,5 @@
 {
+  "comments": false,
   "presets": [
     "@babel/preset-env",
     "@babel/preset-react"
@@ -13,6 +14,7 @@
       "plugins": ["dynamic-import-node"]
     },
     "production": {
+      "ignore": ["**/*.test.js"],
       "plugins": [
         [
           "transform-react-remove-prop-types",

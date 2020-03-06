@@ -134,40 +134,6 @@ describe('utils', () => {
     ).toEqual({});
   });
 
-  it('hasClass', () => {
-    const DEFAULT_HTML = `<html><body>
-      <div class="abc cde">test</div>
-    </body></html>`;
-    const doc = jsdom.jsdom(DEFAULT_HTML);
-    const element = doc.querySelector('.abc');
-
-    expect(utils.hasClass(element, 'cde')).toBeTruthy();
-  });
-
-  it('addClass', () => {
-    const DEFAULT_HTML = `<html><body>
-      <div class="abc cde">test</div>
-    </body></html>`;
-    const doc = jsdom.jsdom(DEFAULT_HTML);
-    const element = doc.querySelector('.abc');
-
-    utils.addClass(element, 'efg');
-
-    expect(element.classList.contains('efg')).toBeTruthy();
-  });
-
-  it('removeClass', () => {
-    const DEFAULT_HTML = `<html><body>
-      <div class="abc cde">test</div>
-    </body></html>`;
-    const doc = jsdom.jsdom(DEFAULT_HTML);
-    const element = doc.querySelector('.abc');
-
-    utils.removeClass(element, 'abc');
-
-    expect(element.classList.contains('abc')).toBeFalsy();
-  });
-
   it('findIndex', () => {
     let array = [];
     let predicate = () => true;

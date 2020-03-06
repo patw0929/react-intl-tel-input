@@ -30,7 +30,7 @@ module.exports = {
     'no-console': 0,
     'no-alert': 0,
     'no-underscore-dangle': 'off',
-    'max-len': ['error', 150, 2, { ignoreUrls: true, ignoreComments: false }],
+    'max-len': 'off',
     'react/require-default-props': 'off',
     'react/jsx-curly-spacing': 'off',
     'arrow-body-style': 'off',
@@ -62,6 +62,7 @@ module.exports = {
       'error',
       {
         devDependencies: [
+          'scripts/**/*.js',
           'test/**', // tape, common npm pattern
           'tests/**', // also common npm pattern
           'spec/**', // mocha, rspec-like pattern

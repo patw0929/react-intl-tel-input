@@ -62,8 +62,8 @@ export default class TelInput extends Component {
         type="tel"
         autoComplete={this.props.autoComplete}
         className={this.props.className}
-        disabled={this.props.disabled ? 'disabled' : false}
-        readOnly={this.props.readonly ? 'readonly' : false}
+        disabled={this.props.disabled}
+        readOnly={this.props.readonly}
         name={this.props.fieldName}
         id={this.props.fieldId}
         value={this.props.value}

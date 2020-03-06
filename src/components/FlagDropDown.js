@@ -31,33 +31,20 @@ export default class FlagDropDown extends Component {
 
     return separateDialCode ? (
       <div className="selected-dial-code">{dialCode}</div>
-    ) : (
-      ''
-    );
+    ) : null;
   };
 
   genArrow = () => {
     const { allowDropdown, showDropdown } = this.props;
-    const arrowClass = classNames({
-      'iti-arrow': true,
-      up: showDropdown,
+    const arrowClasses = classNames('arrow', showDropdown ? 'up' : 'down');
+
+    return allowDropdown ? <div className={arrowClasses} /> : null;
+  };
+
+  genFlagClassName = () =>
+    classNames('iti-flag', {
+      [this.props.countryCode]: !!this.props.countryCode,
     });
-
-    return allowDropdown ? <div className={arrowClass} /> : '';
-  };
-
-  genFlagClassName = () => {
-    const { countryCode } = this.props;
-    const flagClassObj = {
-      'iti-flag': true,
-    };
-
-    if (countryCode) {
-      flagClassObj[countryCode] = true;
-    }
-
-    return classNames(flagClassObj);
-  };
 
   genCountryList = () => {
     const {

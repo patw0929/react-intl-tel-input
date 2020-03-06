@@ -11,15 +11,10 @@ $flagPadding: 8px !default;
 // assumed to be the border width of the input, which we do not control
 $borderWidth: 1px !default;
 
-$arrowHeight: 4px !default;
-$arrowWidth: 6px !default;
-$triangleBorder: 3px !default;
-$arrowPadding: 6px !default;
-$arrowColor: #555 !default;
-
 $inputPadding: 6px !default;
 $selectedFlagWidth: $flagWidth + (2 * $flagPadding) !default;
-$selectedFlagArrowWidth: $flagWidth + $flagPadding + $arrowWidth + (2 * $arrowPadding) !default;
+// 18px previously arrow width and padding, 6px ea.
+$selectedFlagArrowWidth: $flagWidth + $flagPadding + 18px !default;
 $selectedFlagArrowDialCodeWidth: $selectedFlagArrowWidth + $flagPadding !default;
 
 // enough space for them to click off to close
@@ -80,6 +75,20 @@ $mobilePopupMargin: 30px;
     right: 0;
     // prevent the highlighted child from overlapping the input border
     padding: $borderWidth;
+  
+    .arrow {
+        font-size: 6px;
+        margin-left: 5px;
+        
+        &.up:after {
+            content: '▲';
+        }
+
+        &.down:after {
+            content: '▼';
+
+        }
+    }
   }
 
   .selected-flag {
@@ -90,35 +99,10 @@ $mobilePopupMargin: 30px;
     // this must be full-height both for the hover highlight, and to push down the
     // dropdown so it appears below the input
     height: 100%;
-    padding: 0 0 0 $flagPadding;
 
-    // vertically center the flag
-    .iti-flag {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-    }
-
-    .iti-arrow {
-      position: absolute;
-      // split the difference between the flag and the arrow height to verically center
-      top: 50%;
-      margin-top: -1 * ($arrowHeight / 2);
-      right: $arrowPadding;
-
-      // css triangle
-      width: 0;
-      height: 0;
-      border-left: $triangleBorder solid transparent;
-      border-right: $triangleBorder solid transparent;
-      border-top: $arrowHeight solid $arrowColor;
-
-      &.up {
-        border-top: none;
-        border-bottom: $arrowHeight solid $arrowColor;
-      }
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   // the dropdown
@@ -131,6 +115,12 @@ $mobilePopupMargin: 30px;
     list-style: none;
     // in case any container has text-align:center
     text-align: left;
+    
+    .divider {
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        border-bottom: $borderWidth solid $greyBorder;
+    }
 
     // place menu above the input element
     &.dropup {
@@ -162,13 +152,6 @@ $mobilePopupMargin: 30px;
     max-height: 200px;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-
-    // the divider below the preferred countries
-    .divider {
-      padding-bottom: 5px;
-      margin-bottom: 5px;
-      border-bottom: $borderWidth solid $greyBorder;
-    }
 
     // each country item in dropdown (we must have separate class to differentiate from dividers)
     .country {
