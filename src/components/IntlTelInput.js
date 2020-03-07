@@ -8,7 +8,6 @@ import FlagDropDown from './FlagDropDown';
 import TelInput from './TelInput';
 import utils from './utils';
 import { KEYS } from './constants';
-import '../styles/intlTelInput.scss';
 
 const mobileUserAgentRegexp = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
 
