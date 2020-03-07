@@ -12,7 +12,7 @@ jobs:
         - yarn run coverage
         - yarn run coveralls
       script: yarn run lint
-      script: commitlint-travis
+      script: if [ $TRAVIS_BRANCH != "master" ]; then commitlint-travis; fi
     - stage: build
       name: "Build package"
       script: yarn run build
