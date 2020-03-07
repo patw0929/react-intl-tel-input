@@ -12,6 +12,7 @@ jobs:
         - yarn run coverage
         - yarn run coveralls
       script: yarn run lint
+      script: commitlint-travis
     - stage: build
       name: "Build package"
       script: yarn run build
