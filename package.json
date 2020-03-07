@@ -42,6 +42,9 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/travis-cli": "^8.3.5",
     "@storybook/addon-actions": "4.1.11",
     "@storybook/addon-info": "^4.1.11",
     "@storybook/addon-knobs": "^4.1.11",
@@ -76,6 +79,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^2.0.0",
     "gzip-size": "3.0.0",
+    "husky": "^4.2.3",
     "identity-obj-proxy": "^3.0.0",
     "image-webpack-loader": "^4.6.0",
     "jasmine-reporters": "^2.2.0",
@@ -87,7 +91,6 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "packwatch": "^1.0.0",
     "postcss-safe-parser": "^4.0.1",
-    "pre-commit": "^1.2.2",
     "prettier": "^1.14.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -118,7 +121,8 @@
     "prettier:all": "prettier --write 'src/components/**/*.js' 'config/**/*.js' 'scripts/**/*.js'",
     "test": "jest src",
     "test:watch": "jest src --watchAll --coverage",
-    "footprint": "yarn build && yarn packwatch"
+    "footprint": "yarn build && yarn packwatch",
+    "lint:commits": "yarn commitlint --from HEAD --to HEAD --verbose"
   },
   "lint-staged": {
     "linters": {
@@ -132,9 +136,11 @@
       ]
     }
   },
-  "pre-commit": [
-    "lint-staged"
-  ],
+  "husky": {
+      "hooks": {
+          "pre-commit": "lint-staged",
+          "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+  }},
   "prettier": {
     "printWidth": 80,
     "singleQuote": true,
