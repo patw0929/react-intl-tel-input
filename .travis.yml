@@ -22,8 +22,9 @@ jobs:
     - stage: release
       name: "Release"
       #if: branch = 'master' AND type != 'pull_request'
-      yarn script semantic-release
+      script: yarn semantic-release --dry-run
 stages:
     - test-lint
     - build
     - deploy
+    - release
