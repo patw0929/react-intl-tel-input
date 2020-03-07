@@ -4,7 +4,7 @@ import { withInfo } from '@storybook/addon-info';
 import { action } from '@storybook/addon-actions';
 
 import IntlTelInput from '../../../src/components/IntlTelInput';
-
+import '../../../src/styles/intlTelInput.scss'
 import { lookup } from '../../helpers/helpers';
 
 storiesOf('Usage', module)
