@@ -5,7 +5,7 @@ import { withInfo } from '@storybook/addon-info';
 import { withKnobs, text, boolean, array } from '@storybook/addon-knobs/react';
 
 import IntlTelInput from '../../../src/components/IntlTelInput';
-import '../../../src/styles/intlTelInput.scss'
+import '../../../src/intlTelInput.scss'
 const { defaultProps } = IntlTelInput;
 
 storiesOf('Documentation', module)
