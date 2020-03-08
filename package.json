@@ -115,7 +115,6 @@
     "clean": "rimraf dist",
     "start": "start-storybook -p 4000 -c .storybook",
     "deploy": "storybook-to-ghpages --ci",
-    "lint-staged": "lint-staged",
     "lint": "eslint src *.js",
     "coverage": "yarn run test -- --coverage",
     "coveralls": "cross-env NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
@@ -127,9 +126,7 @@
   "lint-staged": {
     "linters": {
       "*.js": [
-        "yarn prettier --write",
-        "yarn run eslint -- --fix",
-        "git add"
+        "yarn eslint --"
       ],
       "src/**/*.js": [
         "yarn run test -- --bail --findRelatedTests"
