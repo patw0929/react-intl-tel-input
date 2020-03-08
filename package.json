@@ -107,7 +107,7 @@
   },
   "scripts": {
     "prebuild": "yarn run clean",
-    "build": "BABEL_ENV=production babel src -d dist && cp -r ./src/images ./dist && cp -r ./src/styles ./dist",
+    "build": "BABEL_ENV=production babel src -d dist && cp -r ./src/*.png ./dist && node-sass ./src/intlTelInput.scss ./dist/main.css",
     "clean": "rimraf dist",
     "start": "start-storybook -p 4000 -c .storybook",
     "deploy": "storybook-to-ghpages --ci",
