@@ -9,4 +9,4 @@ export const KEYS = {
   Z: 90,
   SPACE: 32,
   TAB: 9,
-};
+}

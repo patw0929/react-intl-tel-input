@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export default class TelInput extends Component {
   static propTypes = {
@@ -18,41 +18,41 @@ export default class TelInput extends Component {
     inputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     refCallback: PropTypes.func.isRequired,
     cursorPosition: PropTypes.number,
-  };
+  }
 
   state = {
     hasFocus: false,
-  };
+  }
 
   componentDidUpdate() {
     if (this.state.hasFocus) {
       this.tel.setSelectionRange(
         this.props.cursorPosition,
         this.props.cursorPosition
-      );
+      )
     }
   }
 
   refHandler = element => {
-    this.tel = element;
-    this.props.refCallback(element);
-  };
+    this.tel = element
+    this.props.refCallback(element)
+  }
 
   handleBlur = e => {
-    this.setState({ hasFocus: false });
+    this.setState({ hasFocus: false })
 
     if (typeof this.props.handleOnBlur === 'function') {
-      this.props.handleOnBlur(e);
+      this.props.handleOnBlur(e)
     }
-  };
+  }
 
   handleFocus = e => {
-    this.setState({ hasFocus: true });
+    this.setState({ hasFocus: true })
 
     if (typeof this.props.handleOnFocus === 'function') {
-      this.props.handleOnFocus(e);
+      this.props.handleOnFocus(e)
     }
-  };
+  }
 
   render() {
     return (
@@ -73,6 +73,6 @@ export default class TelInput extends Component {
         onFocus={this.handleFocus}
         autoFocus={this.props.autoFocus}
       />
-    );
+    )
   }
 }
