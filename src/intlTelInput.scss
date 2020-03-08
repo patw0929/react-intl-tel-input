@@ -276,8 +276,8 @@ $mobilePopupMargin: 30px;
 
 @import "sprite";
 
-$intl-tel-input-sprite-path: "../images/flags.png" !default;
-$intl-tel-input-sprite-2x-path: "../images/flags@2x.png" !default;
+$intl-tel-input-sprite-path: "./flags.png" !default;
+$intl-tel-input-sprite-2x-path: "./flags@2x.png" !default;
 
 .iti-flag {
   width: $flagWidth;
