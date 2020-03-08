@@ -341,9 +341,9 @@ const defaultCountriesData = [
   ['Zambia', 'zm', '260'],
   ['Zimbabwe', 'zw', '263'],
   ['Åland Islands', 'ax', '358', 1],
-];
+]
 
-let countries;
+let countries
 
 function _formatCountriesData(countriesData) {
   return countriesData.map(country => ({
@@ -352,26 +352,26 @@ function _formatCountriesData(countriesData) {
     dialCode: country[2],
     priority: country[3] || 0,
     areaCodes: country[4] || null,
-  }));
+  }))
 }
 
 function initialize(externalCountriesList) {
   countries = _formatCountriesData(
     externalCountriesList || defaultCountriesData
-  );
+  )
 }
 
 function getCountries() {
   if (!countries) {
-    initialize();
+    initialize()
   }
 
-  return countries;
+  return countries
 }
 
 const AllCountries = {
   initialize,
   getCountries,
-};
+}
 
-export default AllCountries;
+export default AllCountries
