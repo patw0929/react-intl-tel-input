@@ -522,13 +522,19 @@ class IntlTelInput extends Component {
     }
   }
 
-  loadAutoCountry = () => {
-    // check for localStorage
-    const lsAutoCountry =
-      window.localStorage !== undefined
+  loadCountryFromLocalStorage = () => {
+    try {
+      return window.localStorage !== undefined
         ? window.localStorage.getItem('itiAutoCountry')
         : ''
+    } catch (e) {
+      return ''
+    }
+  }
 
+  loadAutoCountry = () => {
+    // check for localStorage
+    const lsAutoCountry = this.loadCountryFromLocalStorage()
     if (lsAutoCountry) {
       this.autoCountry = lsAutoCountry
     }

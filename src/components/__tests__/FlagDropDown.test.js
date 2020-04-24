@@ -48,6 +48,25 @@ describe('FlagDropDown', function() {
     })
   })
 
+  it('should fallback to US when localStorage is not available', async () => {
+    const mockedLocalStorage = window.localStorage
+    // This will cause calls to localStorage.getItem() to throw
+    window.localStorage = {}
+
+    this.params = {
+      ...this.params,
+      defaultCountry: 'auto',
+    }
+    const subject = await this.makeSubject()
+
+    subject.instance().utilsScriptDeferred.then(() => {
+      expect(subject.state().countryCode).toBe('us')
+      window.localStorage.clear()
+    })
+
+    window.localStorage = mockedLocalStorage
+  })
+
   it('should has .separate-dial-code class when with separateDialCode = true', () => {
     this.params = {
       ...this.params,
