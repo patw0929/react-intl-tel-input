@@ -1257,14 +1257,16 @@ class IntlTelInput extends Component {
   }
 
   render() {
-    this.wrapperClass[this.props.containerClassName] = true
     const inputClass = this.props.inputClassName
     const wrapperStyle = Object.assign({}, this.props.style || {})
 
     this.wrapperClass['allow-dropdown'] = this.allowDropdown
     this.wrapperClass.expanded = this.state.showDropdown
 
-    const wrapperClass = classNames(this.wrapperClass)
+    const wrapperClass = classNames(
+      this.wrapperClass,
+      this.props.containerClassName
+    )
 
     const titleTip = this.selectedCountryData
       ? `${this.selectedCountryData.name}: +${this.selectedCountryData.dialCode}`
