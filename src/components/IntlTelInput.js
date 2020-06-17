@@ -507,13 +507,10 @@ class IntlTelInput extends Component {
     }
   }
 
-  initRequests = () => {
-    import('libphonenumber-js-utils')
-      .then(() => {
-        this.loadUtils()
-        this.utilsScriptDeferred.resolve()
-      })
-      .catch(() => 'An error occurred while loading the component')
+  initRequests = async () => {
+    await import('libphonenumber-js-utils')
+    this.loadUtils()
+    this.utilsScriptDeferred.resolve()
 
     if (this.tempCountry === 'auto') {
       this.loadAutoCountry()
