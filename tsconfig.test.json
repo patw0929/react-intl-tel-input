@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // Prevent the output of any files to /dist during compilation because this is just a test only.
+    "declaration": false, 
+    "emitDeclarationOnly": false,
+    "noEmit": true
+  },
+  "include": [
+    "src/**/*.d.ts",
+    "src/**/*.test.tsx"
+  ],
+  "exclude": [] // Include all the .test.tsx files in the compilation to verify that the modules are exported as intended.
+}
