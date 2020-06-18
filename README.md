@@ -40,9 +40,50 @@ Then open [`localhost:3000`](http://localhost:3000) in a browser.
 yarn add react-intl-tel-input
 ```
 
+
+### TypeScript
+
+`react-intl-tel-input` ships with official type declarations out of the box.
+
+
 ## Usage
 
+### JavaScript
 ```javascript
+import IntlTelInput from 'react-intl-tel-input';
+import 'react-intl-tel-input/dist/main.css';
+
+<IntlTelInput
+  containerClassName="intl-tel-input"
+  inputClassName="form-control"
+/>
+```
+
+### TypeScript
+```tsx
+import * as IntlTelInput from 'react-intl-tel-input';
+import 'react-intl-tel-input/dist/main.css';
+
+<IntlTelInput
+  containerClassName="intl-tel-input"
+  inputClassName="form-control"
+/>
+```
+
+If your `tsconfig.json` contains the following config:
+
+**tsconfig.json**
+```json
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+  }
+}
+```
+
+... use the default import workflow instead:
+```tsx
 import IntlTelInput from 'react-intl-tel-input';
 import 'react-intl-tel-input/dist/main.css';
 
@@ -67,11 +108,13 @@ You can prepare a distribution build using `yarn build`.
 
 Any kind of contribution including proposals, doc improvements, enhancements, bug fixes are always welcome. 
 
-To contribute to react-intl-tel-input, clone this repo locally and commit your code on a separate branch. Please write tests for your code, and run the linter before opening a pull-request:
+To contribute to `react-intl-tel-input`, clone this repo locally and commit your code on a separate branch. Please write tests for your code, and run the linter before opening a pull-request:
 
-```
-yarn test
-yarn run lint
+```bash
+yarn test    # if you are enhancing the JavaScript modules
+yarn test:ts # if you are enhancing the TypeScript type declarations
+yarn tsd     # in addition to test:ts, also check that the type declarations work as intended
+yarn lint
 ```
 
 Also, please let us know if you encounter any issue by filing an [issue](https://github.com/patw0929/react-intl-tel-input/issues).
