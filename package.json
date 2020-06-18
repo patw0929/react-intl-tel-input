@@ -128,7 +128,11 @@
   },
   "scripts": {
     "prebuild": "yarn run clean",
-    "build": "BABEL_ENV=production babel src -d dist && cp -r ./src/*.png ./dist && node-sass ./src/intlTelInput.scss ./dist/main.css && gulp build:ts",
+    "build": "yarn build:js && yarn build:png && yarn build:css && yarn build:ts",
+    "build:js": "cross-env BABEL_ENV=production babel src -d dist",
+    "build:png": "cp -r ./src/*.png ./dist",
+    "build:css": "node-sass ./src/intlTelInput.scss ./dist/main.css",
+    "build:ts": "gulp build:ts",
     "clean": "rimraf dist",
     "start": "start-storybook -p 4000 -c .storybook",
     "deploy": "storybook-to-ghpages --ci",
