@@ -374,4 +374,5 @@ const AllCountries = {
   getCountries,
 }
 
+export const DEFAULT_COUNTRIES = _formatCountriesData(defaultCountriesData)
 export default AllCountries

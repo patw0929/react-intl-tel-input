@@ -59,6 +59,28 @@ import 'react-intl-tel-input/dist/main.css';
 
 Please see the [Demo Page](https://patw0929.github.io/react-intl-tel-input/)
 
+### Default Countries
+
+List of default Countries can be imported as
+
+```javascript
+import { DEFAULT_COUNTRIES } from 'react-intl-tel-input';
+
+console.log(DEFAULT_COUNTRIES);
+/*
+  [
+    {
+      name: 'Afghanistan (‫افغانستان‬‎)',
+      iso2: 'af',
+      dialCode: '93',
+      priority: 0,
+      areaCodes: null,
+    },
+    ...
+  ]
+*/
+```
+
 
 ## Development (`src` and the build process)
 
