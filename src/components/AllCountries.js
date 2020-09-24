@@ -327,7 +327,7 @@ const defaultCountriesData = [
   ['Uganda', 'ug', '256'],
   ['Ukraine (Україна)', 'ua', '380'],
   ['United Arab Emirates (‫الإمارات العربية المتحدة‬‎)', 'ae', '971'],
-  ['United Kingdom', 'gb', '44', 0],
+  ['United Kingdom', 'uk', '44', 0],
   ['United States', 'us', '1', 0],
   ['Uruguay', 'uy', '598'],
   ['Uzbekistan (Oʻzbekiston)', 'uz', '998'],
