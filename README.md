@@ -68,12 +68,16 @@ You can prepare a distribution build using `yarn run build`.
 
 ## Contributing
 
+Any kind of contribution including proposals, doc improvements, enhancements, bug fixes are always welcome. 
+
 To contribute to react-intl-tel-input, clone this repo locally and commit your code on a separate branch. Please write tests for your code, and run the linter before opening a pull-request:
 
 ```
 yarn test
 yarn run lint
 ```
+
+Also, please let us know if you encounter any issue by filing an [issue](https://github.com/patw0929/react-intl-tel-input/issues).
 
 ## Inspired by
 
