@@ -76,7 +76,7 @@ yarn test
 yarn run lint
 ```
 
-Also, Please let us know if you encounter any issue by filing an [issue](https://github.com/patw0929/react-intl-tel-input/issues).
+Also, please let us know if you encounter any issue by filing an [issue](https://github.com/patw0929/react-intl-tel-input/issues).
 
 ## Inspired by
 
