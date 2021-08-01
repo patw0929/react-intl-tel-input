@@ -2,7 +2,7 @@ language: node_js
 cache: yarn
 
 node_js:
-  - "10.18.0"
+  - "12.14.14"
 
 jobs:
   include:
