@@ -117,6 +117,7 @@
     "build": "BABEL_ENV=production babel src -d dist && cp -r ./src/*.png ./dist && node-sass ./src/intlTelInput.scss ./dist/main.css",
     "clean": "rimraf dist",
     "start": "start-storybook -p 4000 -c .storybook",
+    "deploy:dryrun": "storybook-to-ghpages --dry-run",
     "deploy": "storybook-to-ghpages --ci",
     "lint": "eslint src *.js",
     "coverage": "yarn run test -- --coverage",
