@@ -95,9 +95,44 @@ jobs:
         with:
           name: build-artifacts
           path: dist
+  release:
+    runs-on: ubuntu-latest
+    name: Release
+    needs:
+      - build
+      - test
+      - lint
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        id: node-setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache-restore
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
+      - name: Build Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build-artifacts
+          path: dist
+      - name: Release (dry)
+        if: ${{ github.ref != 'refs/heads/master' }}
+        run: |
+          yarn
+          yarn semantic-release --dry-run
+      - name: Release
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+          yarn
+          yarn semantic-release
   website-deploy:
     runs-on: ubuntu-latest
-    name: Website deploy (dry)
+    name: Website deploy
     needs: setup
     steps:
       - uses: actions/checkout@v2
