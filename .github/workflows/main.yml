@@ -95,3 +95,30 @@ jobs:
         with:
           name: build-artifacts
           path: dist
+  website-deploy:
+    runs-on: ubuntu-latest
+    name: Website deploy (dry)
+    needs: setup
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        id: node-setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache-restore
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
+      - name: Deploy (dry)
+        if: ${{ github.ref != 'refs/heads/master' }}
+        run: |
+          yarn
+          yarn deploy:dryrun
+      - name: Deploy
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+          yarn
+          yarn deploy
