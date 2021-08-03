@@ -1,0 +1,97 @@
+name: CICD
+on:
+  push:
+    branches:
+      master
+  pull_request:
+
+env:
+  NODE_VERSION: 14
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    name: Setup
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        id: node-setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2
+        id: cache-restore
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
+      - name: Install dependencies
+        if: steps.cache-restore.outputs.cache-hit != 'true'
+        run: yarn
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    needs: setup
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        id: node-setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache-restore
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
+      - name: Lint
+        run: |
+          yarn
+          yarn lint
+  test:
+    runs-on: ubuntu-latest
+    name: Test
+    needs: setup
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        id: node-setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache-restore
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
+      - name: Tests
+        run: |
+          yarn
+          yarn test
+
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    needs: setup
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        id: node-setup
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache-restore
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
+      - run: |
+          yarn
+          yarn build
+      - name: Build Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifacts
+          path: dist
