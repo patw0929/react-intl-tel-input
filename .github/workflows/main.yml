@@ -47,7 +47,7 @@ jobs:
       - name: Lint
         run: |
           yarn
-          yarn lint
+          yarn coveralls
   test:
     runs-on: ubuntu-latest
     name: Test
@@ -68,7 +68,7 @@ jobs:
       - name: Tests
         run: |
           yarn
-          yarn test
+          yarn coverage
 
   build:
     runs-on: ubuntu-latest
