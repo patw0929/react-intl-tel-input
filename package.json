@@ -149,7 +149,7 @@
     "trailingComma": "es5"
   },
   "engines": {
-    "node": ">=6.2.2"
+    "node": ">=6.14.14"
   },
   "license": "MIT"
 }
