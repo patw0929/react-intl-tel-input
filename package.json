@@ -118,7 +118,7 @@
     "clean": "rimraf dist",
     "start": "start-storybook -p 4000 -c .storybook",
     "deploy:dryrun": "storybook-to-ghpages --dry-run",
-    "deploy": "storybook-to-ghpages --ci",
+    "deploy": "storybook-to-ghpages --ci -t GITHUB_TOKEN",
     "lint": "eslint src *.js",
     "coverage": "yarn run test -- --coverage",
     "coveralls": "cross-env NODE_ENV=development cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
