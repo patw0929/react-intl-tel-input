@@ -124,12 +124,12 @@ jobs:
         if: ${{ github.ref != 'refs/heads/master' }}
         run: |
           yarn
-          yarn semantic-release --dry-run
+          yarn semantic-release --ci --dry-run
       - name: Release
         if: ${{ github.ref == 'refs/heads/master' }}
         run: |
           yarn
-          yarn semantic-release
+          yarn semantic-release --ci
   website-deploy:
     runs-on: ubuntu-latest
     name: Website deploy
