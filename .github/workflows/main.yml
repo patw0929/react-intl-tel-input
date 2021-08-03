@@ -127,6 +127,9 @@ jobs:
           yarn semantic-release --ci --dry-run
       - name: Release
         if: ${{ github.ref == 'refs/heads/master' }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           yarn
           yarn semantic-release --ci
@@ -154,6 +157,8 @@ jobs:
           yarn deploy:dryrun
       - name: Deploy
         if: ${{ github.ref == 'refs/heads/master' }}
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           yarn
           yarn deploy
