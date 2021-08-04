@@ -89,7 +89,7 @@ describe('FlagDropDown', function() {
     const flagComponent = subject.find(FlagDropDown)
 
     expect(
-      subject.find(CountryList).find('.country-list.hide').length
+      subject.find(CountryList).find('.country-list.hide').length,
     ).toBeTruthy()
     flagComponent
       .find('.selected-flag')
@@ -98,7 +98,7 @@ describe('FlagDropDown', function() {
 
     subject.update()
     expect(
-      subject.find(CountryList).find('.country-list.hide').length
+      subject.find(CountryList).find('.country-list.hide').length,
     ).toBeFalsy()
   })
 
@@ -180,25 +180,25 @@ describe('FlagDropDown', function() {
           css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
-        />
+        />,
       )
 
       const flagComponent = ReactTestUtils.findRenderedDOMComponentWithClass(
         renderedComponent,
-        'selected-flag'
+        'selected-flag',
       )
 
       const dropDownComponent = ReactTestUtils.findRenderedDOMComponentWithClass(
         renderedComponent,
-        'country-list'
+        'country-list',
       )
 
       ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(flagComponent))
       const options = ReactDOM.findDOMNode(dropDownComponent).querySelectorAll(
-        '.country:not([class="preferred"])'
+        '.country:not([class="preferred"])',
       )
       const koreaOption = ReactDOM.findDOMNode(dropDownComponent).querySelector(
-        '[data-country-code="kr"]'
+        '[data-country-code="kr"]',
       )
 
       let index = -1
@@ -219,16 +219,17 @@ describe('FlagDropDown', function() {
           css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
-        />
+        />,
       )
 
       const flagComponent = ReactTestUtils.findRenderedDOMComponentWithClass(
         renderedComponent,
-        'selected-flag'
+        'selected-flag',
       )
 
       expect(
-        ReactDOM.findDOMNode(flagComponent).querySelector('.iti-flag').className
+        ReactDOM.findDOMNode(flagComponent).querySelector('.iti-flag')
+          .className,
       ).toBe('iti-flag tw')
 
       ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent), {
@@ -276,7 +277,7 @@ describe('FlagDropDown', function() {
       expect(renderedComponent.state.showDropdown).toBeFalsy()
       expect(
         ReactDOM.findDOMNode(flagComponent).querySelector('.iti-flag')
-          .className === 'iti-flag sy'
+          .className === 'iti-flag sy',
       )
     })
 
@@ -286,12 +287,12 @@ describe('FlagDropDown', function() {
           css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
-        />
+        />,
       )
 
       const flagComponent = ReactTestUtils.findRenderedDOMComponentWithClass(
         renderedComponent,
-        'selected-flag'
+        'selected-flag',
       )
 
       ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent), {
@@ -320,12 +321,12 @@ describe('FlagDropDown', function() {
           css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
-        />
+        />,
       )
 
       const flagComponent = ReactTestUtils.findRenderedDOMComponentWithClass(
         renderedComponent,
-        'selected-flag'
+        'selected-flag',
       )
 
       ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent), {
@@ -351,12 +352,12 @@ describe('FlagDropDown', function() {
           css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
-        />
+        />,
       )
 
       const flagComponent = ReactTestUtils.findRenderedDOMComponentWithClass(
         renderedComponent,
-        'selected-flag'
+        'selected-flag',
       )
 
       ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent), {
@@ -384,12 +385,12 @@ describe('FlagDropDown', function() {
           css={['intl-tel-input', 'form-control phoneNumber']}
           fieldName="telephone"
           defaultCountry="tw"
-        />
+        />,
       )
 
       const flagComponent = ReactTestUtils.findRenderedDOMComponentWithClass(
         renderedComponent,
-        'selected-flag'
+        'selected-flag',
       )
 
       ReactTestUtils.Simulate.keyDown(ReactDOM.findDOMNode(flagComponent), {
@@ -468,7 +469,7 @@ describe('FlagDropDown', function() {
     const onSelectFlag = (currentNumber, countryData, fullNumber, isValid) => {
       expected = Object.assign(
         {},
-        { currentNumber, fullNumber, isValid, ...countryData }
+        { currentNumber, fullNumber, isValid, ...countryData },
       )
     }
 
@@ -502,7 +503,7 @@ describe('FlagDropDown', function() {
     const subject = this.makeSubject()
 
     expect(subject.instance().formatNumber('+886 912 345 678')).toBe(
-      '0912 345 678'
+      '0912 345 678',
     )
   })
 

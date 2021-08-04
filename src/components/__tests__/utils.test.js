@@ -118,10 +118,10 @@ describe('utils', () => {
     }
 
     expect(utils.getCountryData(AllCountries.getCountries(), 'tw')).toEqual(
-      result
+      result,
     )
     expect(
-      utils.getCountryData(AllCountries.getCountries(), 'zz', true, true)
+      utils.getCountryData(AllCountries.getCountries(), 'zz', true, true),
     ).toBeNull()
     expect(
       utils.getCountryData(
@@ -129,8 +129,8 @@ describe('utils', () => {
         'zz',
         false,
         false,
-        country => `${country}!!`
-      )
+        country => `${country}!!`,
+      ),
     ).toEqual({})
   })
 
@@ -160,8 +160,8 @@ describe('utils', () => {
       utils.getCursorPositionAfterFormating(
         previousStringBeforeCursor,
         previousString,
-        nextString
-      )
+        nextString,
+      ),
     ).toEqual(4)
 
     previousStringBeforeCursor = '0912 345'
@@ -172,8 +172,8 @@ describe('utils', () => {
       utils.getCursorPositionAfterFormating(
         previousStringBeforeCursor,
         previousString,
-        nextString
-      )
+        nextString,
+      ),
     ).toEqual(5)
 
     previousStringBeforeCursor = '91234'
@@ -184,8 +184,8 @@ describe('utils', () => {
       utils.getCursorPositionAfterFormating(
         previousStringBeforeCursor,
         previousString,
-        nextString
-      )
+        nextString,
+      ),
     ).toEqual(7)
 
     previousStringBeforeCursor = '(201) 5'
@@ -196,8 +196,8 @@ describe('utils', () => {
       utils.getCursorPositionAfterFormating(
         previousStringBeforeCursor,
         previousString,
-        nextString
-      )
+        nextString,
+      ),
     ).toEqual(5)
   })
 })

@@ -48,7 +48,7 @@ describe('TelInput', function() {
       newNumber,
       countryData,
       fullNumber,
-      ext
+      ext,
     ) => {
       expected = `${isValid},${newNumber},${countryData.iso2},${fullNumber},${ext}`
     }
@@ -84,7 +84,7 @@ describe('TelInput', function() {
 
     IntlTelInput.prototype.selectFlag = function selectFlag(
       countryCode,
-      setFocus = true
+      setFocus = true,
     ) {
       focused = focused || setFocus
       initialSelectFlag.call(this, countryCode, setFocus)
@@ -214,7 +214,7 @@ describe('TelInput', function() {
       newNumber,
       countryData,
       fullNumber,
-      ext
+      ext,
     ) => {
       expected = `${isValid},${newNumber},${countryData.iso2},${fullNumber},${ext}`
     }
@@ -245,7 +245,7 @@ describe('TelInput', function() {
         countryData,
         fullNumber,
         ext,
-        event
+        event,
       ) => {
         const { type } = event
 
@@ -259,7 +259,7 @@ describe('TelInput', function() {
       inputComponent.simulate('change', { target: { value: '+886911222333' } })
       inputComponent.simulate(eventType)
       expect(expected).toBe(
-        `true,+886911222333,tw,+886 911 222 333,null,${eventType}`
+        `true,+886911222333,tw,+886 911 222 333,null,${eventType}`,
       )
     })
 

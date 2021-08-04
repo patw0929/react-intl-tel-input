@@ -14,7 +14,7 @@ describe('RootModal', function() {
         </RootModal>,
         {
           attachTo: document.body,
-        }
+        },
       )
     }
   })

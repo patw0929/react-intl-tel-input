@@ -1,5 +1,5 @@
 module.exports = {
-    extends: ['eslint-config-airbnb', "plugin:prettier/recommended"],
+  extends: ['eslint-config-airbnb', 'plugin:prettier/recommended'],
   plugins: ['react', 'import', 'security', 'prettier'],
   parser: 'babel-eslint',
   env: {
@@ -75,7 +75,7 @@ module.exports = {
     ],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
   },
-  
+
   globals: {
     __DEVELOPMENT__: true,
     __CLIENT__: true,
@@ -83,4 +83,4 @@ module.exports = {
     __DISABLE_SSR__: true,
     __DEVTOOLS__: true,
   },
-};
+}

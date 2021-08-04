@@ -2,7 +2,7 @@
 // Grab NODE_ENV and REACT_APP_* environment variables and prepare them to be
 // injected into the application via DefinePlugin in Webpack configuration.
 
-const REACT_APP = /^REACT_APP_/i;
+const REACT_APP = /^REACT_APP_/i
 
 /*
  * Get Global Objects in different running environments
@@ -16,22 +16,22 @@ const getGlobalObject = () => `
   else
     return this;
 })()
-`;
+`
 
 const getClientEnvironment = publicUrl => {
-  const NODE_ENV = JSON.stringify(process.env.NODE_ENV || 'development');
-  const DEVELOPMENT = NODE_ENV === JSON.stringify('development');
-  const SERVER = false;
-  const CLIENT = true;
-  const BUILD_NAME = JSON.stringify(process.env.BUILD_NAME || 'dev');
+  const NODE_ENV = JSON.stringify(process.env.NODE_ENV || 'development')
+  const DEVELOPMENT = NODE_ENV === JSON.stringify('development')
+  const SERVER = false
+  const CLIENT = true
+  const BUILD_NAME = JSON.stringify(process.env.BUILD_NAME || 'dev')
 
   const processEnv = Object.keys(process.env)
     .filter(key => REACT_APP.test(key))
     .reduce(
       (env, key) => {
-        env[key] = JSON.stringify(process.env[key]); // eslint-disable-line no-param-reassign
+        env[key] = JSON.stringify(process.env[key]) // eslint-disable-line no-param-reassign
 
-        return env;
+        return env
       },
       {
         // Useful for determining whether we’re running in production mode.
@@ -43,8 +43,8 @@ const getClientEnvironment = publicUrl => {
         // images into the `src` and `import` them in code to get their paths.
         PUBLIC_URL: JSON.stringify(publicUrl),
         BUILD_NAME: BUILD_NAME,
-      }
-    );
+      },
+    )
 
   return {
     'process.env': processEnv,
@@ -52,7 +52,7 @@ const getClientEnvironment = publicUrl => {
     __SERVER__: SERVER,
     __CLIENT__: CLIENT,
     __DEVELOPMENT__: DEVELOPMENT,
-  };
-};
+  }
+}
 
-module.exports = getClientEnvironment;
+module.exports = getClientEnvironment
