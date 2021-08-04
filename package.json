@@ -116,7 +116,7 @@
     "deploy:dryrun": "storybook-to-ghpages --dry-run",
     "deploy": "storybook-to-ghpages -- --ci",
     "lint": "eslint src *.js",
-    "coverage": "yarn run test -- --coverage",
+    "coverage": "yarn test --coverage",
     "coveralls": "NODE_ENV=development cat coverage/lcov.info | yarn coveralls",
     "test": "jest src",
     "test:watch": "jest src --watchAll --coverage",
