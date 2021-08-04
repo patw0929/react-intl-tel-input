@@ -357,7 +357,7 @@ function _formatCountriesData(countriesData) {
 
 function initialize(externalCountriesList) {
   countries = _formatCountriesData(
-    externalCountriesList || defaultCountriesData
+    externalCountriesList || defaultCountriesData,
   )
 }
 

@@ -9,12 +9,12 @@ describe('Style customization', () => {
     const mockClass = 'mock-class-1'
     component.setProps({ containerClassName: mockClass })
     expect(component.props().className).toMatchInlineSnapshot(
-      `"allow-dropdown mock-class-1"`
+      `"allow-dropdown mock-class-1"`,
     )
     const otherMockClass = 'mock-class-2'
     component.setProps({ containerClassName: otherMockClass })
     expect(component.props().className).toMatchInlineSnapshot(
-      `"allow-dropdown mock-class-2"`
+      `"allow-dropdown mock-class-2"`,
     )
   })
 })

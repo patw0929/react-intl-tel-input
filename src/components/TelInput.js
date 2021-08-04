@@ -28,7 +28,7 @@ export default class TelInput extends Component {
     if (this.state.hasFocus) {
       this.tel.setSelectionRange(
         this.props.cursorPosition,
-        this.props.cursorPosition
+        this.props.cursorPosition,
       )
     }
   }

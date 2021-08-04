@@ -25,7 +25,7 @@ export default class RootModal extends Component {
   render() {
     return ReactDOM.createPortal(
       <Fragment>{this.props.children}</Fragment>,
-      this.modalTarget
+      this.modalTarget,
     )
   }
 }

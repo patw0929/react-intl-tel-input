@@ -6,11 +6,11 @@ module.exports = {
     return `
       const idObj = require('identity-obj-proxy');
       module.exports = idObj;
-    `;
+    `
   },
   getCacheKey() {
     // eslint-disable-line no-unused-vars
     // The output is always the same.
-    return 'cssTransform';
+    return 'cssTransform'
   },
-};
+}
