@@ -127,12 +127,12 @@
     "lint:commits": "yarn commitlint --from HEAD --to HEAD --verbose"
   },
   "lint-staged": {
-      "*.js": [
-        "yarn eslint --"
-      ],
-      "src/**/*.js": [
-        "yarn run test -- --bail --findRelatedTests"
-      ]
+    "*.js": [
+      "yarn eslint --"
+    ],
+    "src/**/*.js": [
+      "yarn run test -- --bail --findRelatedTests"
+    ]
   },
   "husky": {
     "hooks": {
