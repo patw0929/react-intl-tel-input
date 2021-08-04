@@ -151,12 +151,12 @@ jobs:
             node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
       - name: Deploy (dry)
-        if: ${{ github.ref != 'refs/heads/master' }}
+        if: ${{ github.ref == 'refs/heads/master' }}
         run: |
           yarn
           yarn deploy:dryrun
       - name: Deploy
-        if: ${{ github.ref == 'refs/heads/master' }}
+        if: ${{ github.ref != 'refs/heads/master' }}
         env:
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GH_TOKEN }}
         run: |
