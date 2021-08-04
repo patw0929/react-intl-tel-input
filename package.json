@@ -51,7 +51,6 @@
     "@babel/preset-react": "^7.0.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "@commitlint/travis-cli": "^8.3.5",
     "@storybook/addon-actions": "4.1.11",
     "@storybook/addon-info": "^4.1.11",
     "@storybook/addon-knobs": "^4.1.11",
