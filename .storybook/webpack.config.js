@@ -25,7 +25,13 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          'sass-loader?outputStyle=expanded',
+          {
+              loader: 'sass-loader',
+              options: {
+                  implementation: require('sass'),
+                  sassOptions: { outputStyle: 'expanded' }
+              }
+          }
         ],
       },
       {
