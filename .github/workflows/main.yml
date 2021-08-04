@@ -128,7 +128,7 @@ jobs:
       - name: Release
         if: ${{ github.ref == 'refs/heads/master' }}
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           yarn
@@ -158,7 +158,7 @@ jobs:
       - name: Deploy
         if: ${{ github.ref == 'refs/heads/master' }}
         env:
-          GH_TOKEN: ${{ github.actor }}:${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn
           yarn deploy
