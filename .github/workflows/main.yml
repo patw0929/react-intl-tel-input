@@ -22,7 +22,7 @@ jobs:
         id: cache-restore
         with:
           path: |
-            node_modules
+            .yarn
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
       - name: Install dependencies
         if: steps.cache-restore.outputs.cache-hit != 'true'
@@ -42,7 +42,7 @@ jobs:
         id: yarn-cache-restore
         with:
           path: |
-            node_modules
+            .yarn
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
       - name: Lint
         run: |
@@ -63,7 +63,7 @@ jobs:
         id: yarn-cache-restore
         with:
           path: |
-            node_modules
+            .yarn
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
       - name: Tests
         run: |
@@ -85,7 +85,7 @@ jobs:
         id: yarn-cache-restore
         with:
           path: |
-            node_modules
+            .yarn
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
       - run: |
           yarn
@@ -113,7 +113,7 @@ jobs:
         id: yarn-cache-restore
         with:
           path: |
-            node_modules
+            .yarn
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
       - name: Build Artifacts
         uses: actions/download-artifact@v2
@@ -148,7 +148,7 @@ jobs:
         id: yarn-cache-restore
         with:
           path: |
-            node_modules
+            .yarn
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
       - name: Deploy (dry)
         if: ${{ github.ref != 'refs/heads/master' }}
