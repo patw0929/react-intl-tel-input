@@ -71,6 +71,8 @@ jobs:
       - name: Tests
         run: |
           yarn coverage
+      - name: Coverage upload
+        run: |
           yarn coveralls
   build:
     runs-on: ubuntu-latest
