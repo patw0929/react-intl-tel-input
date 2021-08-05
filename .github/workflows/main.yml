@@ -19,13 +19,13 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - uses: actions/cache@v2
-        id: cache-restore
+        id: yarn-cache-restore
         with:
           path: |
             node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
       - name: Install dependencies
-        if: steps.cache-restore.outputs.cache-hit != 'true'
+        if: steps.yarn-cache-restore.outputs.cache-hit != 'true'
         run: yarn
   lint:
     runs-on: ubuntu-latest
@@ -44,9 +44,10 @@ jobs:
           path: |
             node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
+      - if: steps.yarn-cache-restore.outputs.cache-hit != 'true'
+        run: yarn
       - name: Lint
         run: |
-          yarn
           yarn lint
   test:
     runs-on: ubuntu-latest
@@ -65,11 +66,14 @@ jobs:
           path: |
             node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
+      - if: steps.yarn-cache-restore.outputs.cache-hit != 'true'
+        run: yarn     
       - name: Tests
         run: |
-          yarn
           yarn coverage
-          yarn coveralls
+      - name: Coverage upload
+        run: |
+          yarn coverage-upload
   build:
     runs-on: ubuntu-latest
     name: Build
@@ -87,8 +91,9 @@ jobs:
           path: |
             node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
+      - if: steps.yarn-cache-restore.outputs.cache-hit != 'true'
+        run: yarn     
       - run: |
-          yarn
           yarn build
       - name: Build Artifacts
         uses: actions/upload-artifact@v2
@@ -120,10 +125,11 @@ jobs:
         with:
           name: build-artifacts
           path: dist
+      - if: steps.yarn-cache-restore.outputs.cache-hit != 'true'
+        run: yarn    
       - name: Release (dry)
         if: ${{ github.ref != 'refs/heads/master' }}
         run: |
-          yarn
           yarn semantic-release --ci --dry-run
       - name: Release
         if: ${{ github.ref == 'refs/heads/master' }}
@@ -131,7 +137,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          yarn
           yarn semantic-release --ci
   website-deploy:
     runs-on: ubuntu-latest
@@ -150,15 +155,15 @@ jobs:
           path: |
             node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}-${{ env.NODE_VERSION }}
+      - if: steps.yarn-cache-restore.outputs.cache-hit != 'true'
+        run: yarn    
       - name: Deploy (dry)
         if: ${{ github.ref != 'refs/heads/master' }}
         run: |
-          yarn
           yarn deploy:dryrun
       - name: Deploy
         if: ${{ github.ref == 'refs/heads/master' }}
         env:
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
         run: |
-          yarn
           yarn deploy
