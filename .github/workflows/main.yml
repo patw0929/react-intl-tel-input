@@ -73,7 +73,7 @@ jobs:
           yarn coverage
       - name: Coverage upload
         run: |
-          yarn coveralls
+          yarn coverage-upload
   build:
     runs-on: ubuntu-latest
     name: Build

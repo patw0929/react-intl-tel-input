@@ -117,7 +117,7 @@
     "deploy": "storybook-to-ghpages -- --ci",
     "lint": "eslint src *.js",
     "coverage": "yarn test --coverage",
-    "coveralls": "NODE_ENV=development cat coverage/lcov.info | yarn coveralls",
+    "coverage-upload": "NODE_ENV=development cat coverage/lcov.info | yarn coveralls",
     "test": "jest src",
     "test:watch": "jest src --watchAll --coverage",
     "footprint": "yarn build && yarn packwatch",
