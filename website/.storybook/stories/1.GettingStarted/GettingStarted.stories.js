@@ -1,17 +1,20 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { withInfo } from '@storybook/addon-info';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import { withInfo } from '@storybook/addon-info'
 
-import IntlTelInput from '../../../src/components/IntlTelInput';
-import '../../../src/intlTelInput.scss'
+import IntlTelInput from '../../../../src/components/IntlTelInput'
+import '../../../../src/intlTelInput.scss'
 
 storiesOf('Documentation', module)
   .addParameters({ options: { showAddonPanel: false } })
-  .add('Getting Started', withInfo({ inline: true, source: false, propTables: null })(() =>
-  (
-    <IntlTelInput />
-  )), { info: {
-    text: `
+  .add(
+    'Getting Started',
+    withInfo({ inline: true, source: false, propTables: null })(() => (
+      <IntlTelInput />
+    )),
+    {
+      info: {
+        text: `
       ## Installation
 
       ~~~bash
@@ -41,4 +44,6 @@ storiesOf('Documentation', module)
       );
       ~~~
         `,
-  },});
+      },
+    },
+  )

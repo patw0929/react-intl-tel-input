@@ -1,11 +1,11 @@
 
 const webpack = require('webpack');
-const paths = require('../config/paths');
+const paths = require('../../config/paths');
 
 module.exports = {
   devtool: false,
   entry: {
-    main: '../src/components/IntlTelInput.js',
+    main: '../../src/components/IntlTelInput.js',
   },
   module: {
     rules: [
@@ -19,6 +19,16 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         loader: 'babel-loader',
+        options: {
+            presets: [
+            "@babel/preset-env",
+    "@babel/preset-react",
+
+                {
+                plugins: ["@babel/plugin-syntax-dynamic-import", "@babel/plugin-proposal-class-properties"]
+                }
+            ]
+        }
       },
       {
         test: /\.scss$/,

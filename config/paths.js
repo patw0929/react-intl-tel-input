@@ -3,10 +3,12 @@ var fs = require('fs')
 
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebookincubator/create-react-app/issues/637
-const appDirectory = fs.realpathSync(process.cwd())
+const appDirectory = fs.realpathSync(path.join(path.dirname(process.cwd())))
 
 function resolveApp(relativePath) {
-  return path.resolve(appDirectory, relativePath)
+  const c = path.resolve(appDirectory, relativePath)
+    console.log(c)
+    return c
 }
 
 // We support resolving modules according to `NODE_PATH`.
