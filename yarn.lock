@@ -24321,6 +24321,11 @@ typescript@^3.2.1:
     uglifyjs-webpack-plugin: ^2.0.1
     url-loader: ^1.1.2
     webpack: ^4.27.1
+  peerDependencies:
+    "@babel/cli": ^7.8.4
+    "@babel/core": ^7.2.0
+    react: ^16.4.1
+    react-dom: ^16.4.1
   languageName: unknown
   linkType: soft
 

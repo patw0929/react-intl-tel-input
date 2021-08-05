@@ -17,6 +17,6 @@ storiesOf('Usage', module)
         geoIpLookup={lookup}
         onPhoneNumberChange={action('onPhoneNumberChange')}
         format
-      />,
+      />
     )),
   )

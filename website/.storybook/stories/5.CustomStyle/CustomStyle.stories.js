@@ -17,6 +17,6 @@ storiesOf('Usage', module)
         onPhoneNumberChange={action('onPhoneNumberChange')}
         style={object('style', { transform: 'rotate(3deg)' })}
         format
-      />,
+      />
     )),
   )

@@ -11,16 +11,18 @@ storiesOf('Usage', module)
   .addDecorator(withKnobs)
   .add(
     'Custom CSS',
-    withInfo({ inline: true, source: false, propTables: null })(() => (
-      <IntlTelInput
-        defaultCountry="tw"
-        containerClassName={text(
-          'containerClassName',
-          'intl-tel-input tel-wrapper',
-        )}
-        inputClassName={text('inputClassName', 'form-control tel-input')}
-        onPhoneNumberChange={action('onPhoneNumberChange')}
-        format
-      />,
-    )),
+    withInfo({ inline: true, source: false, propTables: null })(() => {
+      return (
+        <IntlTelInput
+          defaultCountry="tw"
+          containerClassName={text(
+            'containerClassName',
+            'intl-tel-input tel-wrapper',
+          )}
+          inputClassName={text('inputClassName', 'form-control tel-input')}
+          onPhoneNumberChange={action('onPhoneNumberChange')}
+          format
+        />
+      )
+    }),
   )
