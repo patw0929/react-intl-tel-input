@@ -28,7 +28,7 @@ To build the examples locally, run:
 
 ```bash
 yarn
-yarn start
+yarn website:start
 ```
 
 Then open [`localhost:3000`](http://localhost:3000) in a browser.
@@ -36,12 +36,9 @@ Then open [`localhost:3000`](http://localhost:3000) in a browser.
 
 ## Installation
 
-The easiest way to use react-intl-tel-input is to install it from NPM and include it in your own React build process (using [Webpack](http://webpack.github.io/), etc).
-
 ```bash
 yarn add react-intl-tel-input
 ```
-
 
 ## Usage
 
@@ -62,9 +59,9 @@ Please see the [Demo Page](https://patw0929.github.io/react-intl-tel-input/)
 
 ## Development (`src` and the build process)
 
-To build, watch and serve the examples (which will also watch the component source), run `yarn start`.
+To build, watch and serve the examples (which will also watch the component source), run `yarn website:start`.
 
-You can prepare a distribution build using `yarn run build`.
+You can prepare a distribution build using `yarn build`.
 
 ## Contributing
 
