@@ -20,5 +20,8 @@
   },
   "include": [
     "src/**/*.d.ts"
+  ],
+  "exclude": [
+    "src/components/__tests__/**/*"
   ]
 }
