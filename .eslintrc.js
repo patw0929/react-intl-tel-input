@@ -75,7 +75,6 @@ module.exports = {
     ],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
   },
-
   globals: {
     __DEVELOPMENT__: true,
     __CLIENT__: true,
@@ -83,4 +82,61 @@ module.exports = {
     __DISABLE_SSR__: true,
     __DEVTOOLS__: true,
   },
+  overrides: [
+    // typescript .d.ts config
+    {
+      extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+      ],
+      files: ['**/*.d.ts'],
+      parser: '@typescript-eslint/parser',
+      plugins: [
+        '@typescript-eslint',
+        'eslint-plugin-import',
+        'eslint-plugin-react',
+      ],
+      rules: {
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-empty-interface': 'off',
+        'import/order': [
+          'error',
+          {
+            alphabetize: {
+              order: 'asc',
+            },
+            groups: [['external', 'builtin'], 'parent', 'sibling'],
+            'newlines-between': 'always',
+          },
+        ],
+        'react/sort-comp': [
+          2,
+          {
+            order: [
+              'static-methods',
+              'instance-variables',
+              'instance-methods',
+              'lifecycle',
+              'everything-else',
+              'render',
+            ],
+          },
+        ],
+        'spaced-comment': [
+          'error',
+          'always',
+          {
+            line: {
+              markers: ['#region', '#endregion', 'region', 'endregion'],
+            },
+          },
+        ],
+      },
+      settings: {
+        'import/resolver': 'eslint-import-resolver-typescript',
+      },
+    },
+  ],
 }
