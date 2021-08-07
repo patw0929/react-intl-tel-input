@@ -30,6 +30,7 @@
     "url": "https://github.com/patw0929/react-intl-tel-input/issues"
   },
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "peerDependencies": {
     "react": ">15.4.2 <17.0.0",
     "react-dom": ">15.4.2 <17.0.0"
@@ -86,7 +87,8 @@
     "rimraf": "2.5.4",
     "sass": "^1.37.4",
     "semantic-release": "^17.0.4",
-    "sinon": "^1.17.4"
+    "sinon": "^1.17.4",
+    "typescript": "^4.3.5"
   },
   "scripts": {
     "prebuild": "yarn run clean",

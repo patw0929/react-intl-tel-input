@@ -20030,6 +20030,7 @@ fsevents@~2.3.2:
     sass: ^1.37.4
     semantic-release: ^17.0.4
     sinon: ^1.17.4
+    typescript: ^4.3.5
     underscore.deferred: ^0.4.0
   peerDependencies:
     react: ">15.4.2 <17.0.0"
@@ -23543,6 +23544,16 @@ typescript@^3.2.1:
   languageName: node
   linkType: hard
 
+typescript@^4.3.5:
+  version: 4.3.5
+  resolution: "typescript@npm:4.3.5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: bab033b5e2b0790dd35b77fd005df976ef80b8d84fd2c6e63cc31808151875beae9216e5a315fe7068e8499905c3c354248fe83272cdfc13b7705635f0c66c97
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@^3.2.1#~builtin<compat/typescript>":
   version: 3.8.3
   resolution: "typescript@patch:typescript@npm%3A3.8.3#~builtin<compat/typescript>::version=3.8.3&hash=d8b4e7"
@@ -23550,6 +23561,16 @@ typescript@^3.2.1:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 225f11e8f4c2f02619af395af9d71fee8ce775d548df8a84647f8a9629905b743949f64f61c12a21fd69f66fa71483fb1e41049e9cadaf92d438ea61e40a1f44
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^4.3.5#~builtin<compat/typescript>":
+  version: 4.3.5
+  resolution: "typescript@patch:typescript@npm%3A4.3.5#~builtin<compat/typescript>::version=4.3.5&hash=d8b4e7"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: bc2c4fdf0f1557fdafe4ef74848c72ebd9c8c60829568248f869121aea2bb20e16649a252431d0acb185ec118143be22bed73d08f64379557810d82756afedde
   languageName: node
   linkType: hard
 
