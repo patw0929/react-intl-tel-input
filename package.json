@@ -100,8 +100,11 @@
   },
   "scripts": {
     "prebuild": "yarn run clean",
-    "build": "BABEL_ENV=production babel src -d dist && cp -r ./src/*.png ./dist && sass ./src/intlTelInput.scss ./dist/main.css",
+    "build": "yarn compile:js && yarn compile:dts && yarn compile:css && yarn compile:png",
+    "compile:js": "BABEL_ENV=production babel src -d dist",
     "compile:dts": "rsync -avh --include='*/' --include='*.d.ts' --exclude='*' src/ dist --prune-empty-dirs",
+    "compile:css": "sass ./src/intlTelInput.scss ./dist/main.css",
+    "compile:png": "cp -r -v ./src/*.png ./dist",
     "clean": "rimraf dist",
     "website:start": "yarn workspace website run start",
     "website:dryrun": "yarn workspace website run deploy:dryrun",
