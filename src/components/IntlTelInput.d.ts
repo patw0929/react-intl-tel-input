@@ -274,11 +274,21 @@ export default class IntlTelInput extends React.Component<
    */
   tel: HTMLInputElement | null
 
-  deferreds: any[]
+  // NOTE:
+  // The underscore.deferred package doesn't have known type definitions.
+  // The closest counterpart is jquery's Deferred object, which it claims to derive itself from.
+  // These two are equivalent if you log it in console:
+  //
+  // underscore.deferred
+  // var deferred = new _.Deferred()
+  //
+  // jquery
+  // var deferred = $.Deferred()
+  deferreds: JQuery.Deferred<any, any, any>[]
 
-  autoCountryDeferred: any
+  autoCountryDeferred: JQuery.Deferred<any, any, any>
 
-  utilsScriptDeferred: any
+  utilsScriptDeferred: JQuery.Deferred<any, any, any>
   //#endregion
 
   //#region Methods
