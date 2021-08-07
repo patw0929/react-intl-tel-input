@@ -3802,6 +3802,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^14.0.13":
+  version: 14.17.9
+  resolution: "@types/node@npm:14.17.9"
+  checksum: e59b92e4346ed0db61e042d439f9658d1d3e8ad1d14825b714804cafae8ce22220ff6c8d907c4e4c6384aac748de07283fa321ef13cb8bdeb460eb789d634244
+  languageName: node
+  linkType: hard
+
 "@types/normalize-package-data@npm:^2.4.0":
   version: 2.4.0
   resolution: "@types/normalize-package-data@npm:2.4.0"
@@ -3816,10 +3823,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prop-types@npm:*":
+  version: 15.7.4
+  resolution: "@types/prop-types@npm:15.7.4"
+  checksum: ef6e1899e59b876c273811b1bd845022fc66d5a3d11cb38a25b6c566b30514ae38fe20a40f67622f362a4f4f7f9224e22d8da101cff3d6e97e11d7b4c307cfc1
+  languageName: node
+  linkType: hard
+
 "@types/q@npm:^1.5.1":
   version: 1.5.5
   resolution: "@types/q@npm:1.5.5"
   checksum: 3bd386fb97a0e5f1ce1ed7a14e39b60e469b5ca9d920a7f69e0cdb58d22c0f5bdd16637d8c3a5bfeda76663c023564dd47a65389ee9aaabd65aee54803d5ba45
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^16.9.9":
+  version: 16.9.14
+  resolution: "@types/react-dom@npm:16.9.14"
+  dependencies:
+    "@types/react": ^16
+  checksum: 68a4ee88f7a56cdbfbca24b1936b9aa5dad8b40ffbf1f047ddf990454aec6e0c9da2a01c9ae87045e95236602061646c90d02f01281533e14f1970687873030f
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^16, @types/react@npm:^16.9.56":
+  version: 16.14.12
+  resolution: "@types/react@npm:16.14.12"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: e740434b00ba4ba20ec6edd8b779ed2dcd4f5d866a5b1b78bfe6e99b019c8deb078a15640795aa7ebaf32acd9882194305884ffc5fc885c59049a5f14a91b8c0
   languageName: node
   linkType: hard
 
@@ -3836,6 +3870,13 @@ __metadata:
   version: 0.12.0
   resolution: "@types/retry@npm:0.12.0"
   checksum: 61a072c7639f6e8126588bf1eb1ce8835f2cb9c2aba795c4491cf6310e013267b0c8488039857c261c387e9728c1b43205099223f160bb6a76b4374f741b5603
+  languageName: node
+  linkType: hard
+
+"@types/scheduler@npm:*":
+  version: 0.16.2
+  resolution: "@types/scheduler@npm:0.16.2"
+  checksum: b6b4dcfeae6deba2e06a70941860fb1435730576d3689225a421280b7742318d1548b3d22c1f66ab68e414f346a9542f29240bc955b6332c5b11e561077583bc
   languageName: node
   linkType: hard
 
@@ -8591,6 +8632,13 @@ __metadata:
   dependencies:
     cssom: 0.3.x
   checksum: 1a6e737ee86b1e4784f10b24005bf26aa71915058258ba62c651113eb081e1932fd4dcde544a9904443f68b2130d22812c143aceb4acdafb891874f91a4169ec
+  languageName: node
+  linkType: hard
+
+"csstype@npm:^3.0.2":
+  version: 3.0.8
+  resolution: "csstype@npm:3.0.8"
+  checksum: 5939a003858a31a32cbc52a8f45496aa0c2bcb4629b21c5bc14a7ddcac1a3d4adfd655f56843dc14940f60563378e9444af2c9c373b3f212601b9eeb6740b8db
   languageName: node
   linkType: hard
 
@@ -19993,6 +20041,9 @@ fsevents@~2.3.2:
     "@babel/preset-react": ^7.0.0
     "@commitlint/cli": ^8.3.5
     "@commitlint/config-conventional": ^8.3.4
+    "@types/node": ^14.0.13
+    "@types/react": ^16.9.56
+    "@types/react-dom": ^16.9.9
     babel-core: ^7.0.0-bridge.0
     babel-eslint: ^10.0.1
     babel-jest: ^23.6.0
