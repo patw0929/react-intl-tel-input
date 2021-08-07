@@ -160,10 +160,10 @@ jobs:
       - name: Deploy (dry)
         if: ${{ github.ref != 'refs/heads/master' }}
         run: |
-          yarn deploy:dryrun
+          yarn website:dryrun
       - name: Deploy
         if: ${{ github.ref == 'refs/heads/master' }}
         env:
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
         run: |
-          yarn deploy
+          yarn website:deploy

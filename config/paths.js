@@ -6,9 +6,7 @@ var fs = require('fs')
 const appDirectory = fs.realpathSync(path.join(path.dirname(process.cwd())))
 
 function resolveApp(relativePath) {
-  const c = path.resolve(appDirectory, relativePath)
-    console.log(c)
-    return c
+  return path.resolve(appDirectory, relativePath)
 }
 
 // We support resolving modules according to `NODE_PATH`.
