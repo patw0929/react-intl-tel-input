@@ -30,6 +30,7 @@
     "url": "https://github.com/patw0929/react-intl-tel-input/issues"
   },
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "peerDependencies": {
     "react": ">15.4.2 <17.0.0",
     "react-dom": ">15.4.2 <17.0.0"
@@ -37,6 +38,9 @@
   "files": [
     "dist/**/*"
   ],
+  "tsd": {
+    "directory": "src/components/__tests__"
+  },
   "dependencies": {
     "classnames": "^2.2.5",
     "libphonenumber-js-utils": "^8.10.5",
@@ -54,6 +58,12 @@
     "@babel/preset-react": "^7.0.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "@types/jquery": "^3.5.6",
+    "@types/node": "^14.0.13",
+    "@types/react": "^16.9.56",
+    "@types/react-dom": "^16.9.9",
+    "@typescript-eslint/eslint-plugin": "^4.29.0",
+    "@typescript-eslint/parser": "^4.29.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
@@ -67,7 +77,9 @@
     "eslint-config-airbnb": "~17.1.0",
     "eslint-config-airbnb-base": "~13.1.0",
     "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-import": "^2.14.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.11.0",
@@ -86,20 +98,29 @@
     "rimraf": "2.5.4",
     "sass": "^1.37.4",
     "semantic-release": "^17.0.4",
-    "sinon": "^1.17.4"
+    "sinon": "^1.17.4",
+    "tsd": "^0.17.0",
+    "typescript": "^4.3.5"
   },
   "scripts": {
     "prebuild": "yarn run clean",
-    "build": "BABEL_ENV=production babel src -d dist && cp -r ./src/*.png ./dist && sass ./src/intlTelInput.scss ./dist/main.css",
+    "build": "yarn compile:js && yarn compile:dts && yarn compile:css && yarn compile:png",
+    "compile:js": "BABEL_ENV=production babel src -d dist",
+    "compile:dts": "rsync -avh --include='*/' --include='*.d.ts' --exclude='*' src/ dist --prune-empty-dirs",
+    "compile:css": "sass ./src/intlTelInput.scss ./dist/main.css",
+    "compile:png": "cp -r -v ./src/*.png ./dist",
     "clean": "rimraf dist",
     "website:start": "yarn workspace website run start",
     "website:dryrun": "yarn workspace website run deploy:dryrun",
     "website:deploy": "yarn workspace website run deploy",
-    "lint": "eslint src website/.storybook *.js",
+    "lint": "eslint src website/.storybook --ext .js,.d.ts",
     "coverage": "yarn test --coverage",
     "coverage-upload": "NODE_ENV=development cat coverage/lcov.info | yarn coveralls",
     "test": "jest src",
     "test:watch": "jest src --watchAll --coverage",
+    "test:ts": "tsc --project ./tsconfig.test.json",
+    "test:ts-watch": "tsc --watch --project ./tsconfig.test.json",
+    "tsd": "tsd",
     "footprint": "yarn build && yarn packwatch",
     "lint:commits": "yarn commitlint --from HEAD --to HEAD --verbose"
   },
