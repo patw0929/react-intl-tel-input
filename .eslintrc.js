@@ -43,7 +43,10 @@ module.exports = {
         allowSamePrecedence: true,
       },
     ],
-    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': [
+      'error',
+      { extensions: ['.js', '.jsx', '.tsx'] },
+    ],
     'react/no-string-refs': 'off',
     'no-param-reassign': 'off',
     'no-unused-vars': ['error', { ignoreRestSiblings: true }],
