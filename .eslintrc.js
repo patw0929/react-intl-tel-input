@@ -141,5 +141,13 @@ module.exports = {
         'import/resolver': 'eslint-import-resolver-typescript',
       },
     },
+    // typescript test-only config
+    {
+      files: ['**/*.test.ts', '**/*.test.tsx'],
+      rules: {
+        'no-use-before-define': 'off',
+        'no-console': 'off', // we want to be able to output results for tsc purposes
+      },
+    },
   ],
 }
