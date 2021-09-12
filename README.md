@@ -113,7 +113,6 @@ To contribute to `react-intl-tel-input`, clone this repo locally and commit your
 ```bash
 yarn test    # if you are enhancing the JavaScript modules
 yarn test:ts # if you are enhancing the TypeScript type declarations
-yarn tsd     # in addition to test:ts, also check that the type declarations work as intended
 yarn lint
 ```
 
