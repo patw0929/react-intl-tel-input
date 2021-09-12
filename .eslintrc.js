@@ -86,14 +86,14 @@ module.exports = {
     __DEVTOOLS__: true,
   },
   overrides: [
-    // typescript .d.ts config
+    // typescript common config
     {
       extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
       ],
-      files: ['**/*.d.ts'],
+      files: ['**/*.d.ts', '**/*.test.ts', '**/*.test.tsx'],
       parser: '@typescript-eslint/parser',
       plugins: [
         '@typescript-eslint',
