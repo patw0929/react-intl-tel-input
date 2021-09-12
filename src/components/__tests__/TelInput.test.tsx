@@ -1,5 +1,6 @@
 import React from 'react'
-import TelInput from '../../components/TelInput'
+
+import TelInput from '../TelInput'
 
 const App: React.FunctionComponent = () => {
   const telInputComponentRef = React.useRef<TelInput | null>(null)
@@ -21,7 +22,6 @@ const App: React.FunctionComponent = () => {
 
     inputElement.focus()
     console.log('inputElement.focus()')
-
     console.log('telInputComponent.state.hasFocus', telInputComponent.state.hasFocus)
     console.log('telInputComponent.tel', telInputComponent.tel)
   }

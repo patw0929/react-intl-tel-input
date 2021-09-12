@@ -1,8 +1,9 @@
 import React from 'react'
-import CountryList from '../../components/CountryList'
-import AllCountries from '../../components/AllCountries'
 
-const App: React.FunctionComponent = () => {
+import AllCountries from '../AllCountries'
+import CountryList from '../CountryList'
+
+const App = () => {
   const countryListComponentRef = React.useRef<CountryList | null>(null)
 
   const init = () => {

@@ -1,8 +1,10 @@
 import React from 'react'
-import IntlTelInput, { CountryData } from '../..'
 
-type AppProps = {}
-type AppState = {
+import { CountryData } from '../../types'
+import IntlTelInput from '../IntlTelInput'
+
+interface AppProps {}
+interface AppState {
   value: string
   fullNumber: string
   iso2: string
@@ -22,15 +24,20 @@ class App extends React.Component<AppProps, AppState> {
     value: string,
     seletedCountryData: CountryData,
     fullNumber: string,
-    extension: string
+    extension: string,
   ) => {
-    console.log(value, fullNumber)
+    console.log('Details:', {
+      isValid,
+      value,
+      fullNumber,
+      extension,
+    })
     const { iso2 = '' } = seletedCountryData
 
     this.setState({
-      value: value,
-      fullNumber: fullNumber,
-      iso2: iso2
+      value,
+      fullNumber,
+      iso2,
     })
   }
 
@@ -40,12 +47,18 @@ class App extends React.Component<AppProps, AppState> {
     seletedCountryData: CountryData,
     fullNumber: string,
     extension: string,
-    event: React.FocusEvent<HTMLInputElement>
+    event: React.FocusEvent<HTMLInputElement>,
   ) => {
     console.log('Blur event', event)
     console.log('Native event type:', event.type)
-    console.log('Details:')
-    console.log({ isValid, value, seletedCountryData, fullNumber, extension, event })
+    console.log('Details:', {
+      isValid,
+      value,
+      seletedCountryData,
+      fullNumber,
+      extension,
+      event,
+    })
   }
 
   handlePhoneNumberFocus = (
@@ -54,16 +67,22 @@ class App extends React.Component<AppProps, AppState> {
     seletedCountryData: CountryData,
     fullNumber: string,
     extension: string,
-    event: React.FocusEvent<HTMLInputElement>
+    event: React.FocusEvent<HTMLInputElement>,
   ) => {
     console.log('Focus event')
     console.log('Native event type:', event.type)
-    console.log('Details:')
-    console.log({ isValid, value, seletedCountryData, fullNumber, extension, event })
+    console.log('Details:', {
+      isValid,
+      value,
+      seletedCountryData,
+      fullNumber,
+      extension,
+      event,
+    })
   }
 
   render() {
-    const { value, fullNumber } = this.state
+    const { value, fullNumber, iso2 } = this.state
 
     return (
       <div>
@@ -74,7 +93,14 @@ class App extends React.Component<AppProps, AppState> {
           onPhoneNumberFocus={this.handlePhoneNumberFocus}
           value={value}
         />
-        <div>Full number: {fullNumber}</div>
+        <div>
+          <span>Full number:</span>
+          <span>{fullNumber}</span>
+        </div>
+        <div>
+          <span>ISO-2:</span>
+          <span>{iso2}</span>
+        </div>
       </div>
     )
   }

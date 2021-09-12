@@ -1,4 +1,4 @@
-import { KEYS } from '../../components/constants'
+import { KEYS } from '../constants'
 
 console.log(KEYS)
 console.log(KEYS.ENTER)

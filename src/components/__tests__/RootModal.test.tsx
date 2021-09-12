@@ -1,5 +1,6 @@
 import React from 'react'
-import RootModal from '../../components/RootModal'
+
+import RootModal from '../RootModal'
 
 const App: React.FunctionComponent = () => {
   const rootModalComponentRef = React.useRef<RootModal | null>(null)
@@ -9,7 +10,7 @@ const App: React.FunctionComponent = () => {
     if (rootModalComponent == null) {
       return
     }
-  
+
     const { modalTarget } = rootModalComponent
     if (modalTarget == null) {
       return

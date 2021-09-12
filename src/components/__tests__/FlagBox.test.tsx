@@ -1,5 +1,6 @@
 import React from 'react'
-import FlagBox from '../../components/FlagBox'
+
+import FlagBox from '../FlagBox'
 
 const App = () => {
   const flagRef = React.useRef<HTMLDivElement | null>(null)

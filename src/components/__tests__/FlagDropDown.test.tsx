@@ -1,7 +1,8 @@
 import React from 'react'
-import FlagDropDown from '../../components/FlagDropDown'
 
-const App: React.FunctionComponent = () => {
+import FlagDropDown from '../FlagDropDown'
+
+const App = () => {
   const flagDropDownComponentRef = React.useRef<FlagDropDown | null>(null)
   const flagDropDownElementRef = React.useRef<HTMLDivElement | null>(null)
   const refCallback = (instance: HTMLDivElement | null) => {
@@ -20,11 +21,23 @@ const App: React.FunctionComponent = () => {
     }
 
     console.log('flagDropDownElement.className', flagDropDownElement.className)
-    console.log('flagDropDownComponent.countryList', flagDropDownComponent.countryList)
+    console.log(
+      'flagDropDownComponent.countryList',
+      flagDropDownComponent.countryList,
+    )
 
-    console.log('flagDropDownComponent.genArrow()', flagDropDownComponent.genArrow())
-    console.log('flagDropDownComponent.genCountryList()', flagDropDownComponent.genCountryList())
-    console.log('flagDropDownComponent.genSelectedDialCode()', flagDropDownComponent.genSelectedDialCode())
+    console.log(
+      'flagDropDownComponent.genArrow()',
+      flagDropDownComponent.genArrow(),
+    )
+    console.log(
+      'flagDropDownComponent.genCountryList()',
+      flagDropDownComponent.genCountryList(),
+    )
+    console.log(
+      'flagDropDownComponent.genSelectedDialCode()',
+      flagDropDownComponent.genSelectedDialCode(),
+    )
   }
 
   React.useEffect(() => {
@@ -33,8 +46,10 @@ const App: React.FunctionComponent = () => {
 
   return (
     <FlagDropDown
+      allowDropdown
       ref={flagDropDownComponentRef}
       refCallback={refCallback}
+      separateDialCode
     />
   )
 }
