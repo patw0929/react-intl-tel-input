@@ -48,42 +48,7 @@ yarn add react-intl-tel-input
 
 ## Usage
 
-### JavaScript
 ```javascript
-import IntlTelInput from 'react-intl-tel-input';
-import 'react-intl-tel-input/dist/main.css';
-
-<IntlTelInput
-  containerClassName="intl-tel-input"
-  inputClassName="form-control"
-/>
-```
-
-### TypeScript
-```tsx
-import * as IntlTelInput from 'react-intl-tel-input';
-import 'react-intl-tel-input/dist/main.css';
-
-<IntlTelInput
-  containerClassName="intl-tel-input"
-  inputClassName="form-control"
-/>
-```
-
-If your `tsconfig.json` contains the following config:
-
-**tsconfig.json**
-```json
-{
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-  }
-}
-```
-
-... use the default import workflow instead:
-```tsx
 import IntlTelInput from 'react-intl-tel-input';
 import 'react-intl-tel-input/dist/main.css';
 
