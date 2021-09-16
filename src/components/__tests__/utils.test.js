@@ -131,7 +131,7 @@ describe('utils', () => {
         false,
         country => `${country}!!`,
       ),
-    ).toEqual({})
+    ).toStrictEqual({})
   })
 
   it('findIndex', () => {
