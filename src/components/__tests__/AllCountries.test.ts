@@ -1,3 +1,3 @@
-import AllCountries from '../../components/AllCountries'
+import AllCountries from '../AllCountries'
 
 console.log(AllCountries.getCountries())

@@ -43,7 +43,10 @@ module.exports = {
         allowSamePrecedence: true,
       },
     ],
-    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': [
+      'error',
+      { extensions: ['.js', '.jsx', '.tsx'] },
+    ],
     'react/no-string-refs': 'off',
     'no-param-reassign': 'off',
     'no-unused-vars': ['error', { ignoreRestSiblings: true }],
@@ -83,14 +86,14 @@ module.exports = {
     __DEVTOOLS__: true,
   },
   overrides: [
-    // typescript .d.ts config
+    // typescript common config
     {
       extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
       ],
-      files: ['**/*.d.ts'],
+      files: ['**/*.d.ts', '**/*.test.ts', '**/*.test.tsx'],
       parser: '@typescript-eslint/parser',
       plugins: [
         '@typescript-eslint',
@@ -109,6 +112,13 @@ module.exports = {
             },
             groups: [['external', 'builtin'], 'parent', 'sibling'],
             'newlines-between': 'always',
+          },
+        ],
+        'react/jsx-first-prop-new-line': [1, 'multiline'],
+        'react/jsx-max-props-per-line': [
+          1,
+          {
+            maximum: 1,
           },
         ],
         'react/sort-comp': [
@@ -136,6 +146,14 @@ module.exports = {
       },
       settings: {
         'import/resolver': 'eslint-import-resolver-typescript',
+      },
+    },
+    // typescript test-only config
+    {
+      files: ['**/*.test.ts', '**/*.test.tsx'],
+      rules: {
+        'no-use-before-define': 'off',
+        'no-console': 'off', // we want to be able to output results for tsc purposes
       },
     },
   ],

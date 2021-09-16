@@ -38,9 +38,6 @@
   "files": [
     "dist/**/*"
   ],
-  "tsd": {
-    "directory": "src/components/__tests__"
-  },
   "dependencies": {
     "classnames": "^2.2.5",
     "libphonenumber-js-utils": "^8.10.5",
@@ -99,8 +96,7 @@
     "sass": "^1.37.4",
     "semantic-release": "^17.0.4",
     "sinon": "^1.17.4",
-    "tsd": "^0.17.0",
-    "typescript": "^4.3.5"
+    "typescript": "^4.4.3"
   },
   "scripts": {
     "prebuild": "yarn run clean",
@@ -120,7 +116,6 @@
     "test:watch": "jest src --watchAll --coverage",
     "test:ts": "tsc --project ./tsconfig.test.json",
     "test:ts-watch": "tsc --watch --project ./tsconfig.test.json",
-    "tsd": "tsd",
     "footprint": "yarn build && yarn packwatch",
     "lint:commits": "yarn commitlint --from HEAD --to HEAD --verbose"
   },

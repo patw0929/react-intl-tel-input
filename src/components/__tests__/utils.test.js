@@ -117,6 +117,10 @@ describe('utils', () => {
       areaCodes: null,
     }
 
+    expect(utils.getCountryData(AllCountries.getCountries())).toStrictEqual({})
+    expect(
+      utils.getCountryData(AllCountries.getCountries(), undefined, true, true),
+    ).toEqual(null)
     expect(utils.getCountryData(AllCountries.getCountries(), 'tw')).toEqual(
       result,
     )
@@ -131,7 +135,7 @@ describe('utils', () => {
         false,
         country => `${country}!!`,
       ),
-    ).toEqual({})
+    ).toStrictEqual({})
   })
 
   it('findIndex', () => {
