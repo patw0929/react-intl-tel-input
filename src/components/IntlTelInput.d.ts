@@ -58,7 +58,7 @@ export interface IntlTelInputProps {
    * @default null
    */
   customPlaceholder?:
-    | ((placeholder: string, seletedCountryData: CountryData) => string)
+    | ((placeholder: string, selectedCountryData: CountryData) => string)
     | null
   /**
    * Don't display the countries you specify. (Array)
@@ -119,7 +119,7 @@ export interface IntlTelInputProps {
   onPhoneNumberChange?: (
     isValid: boolean,
     value: string,
-    seletedCountryData: CountryData,
+    selectedCountryData: CountryData,
     fullNumber: string,
     extension: string,
   ) => void
@@ -130,7 +130,7 @@ export interface IntlTelInputProps {
   onPhoneNumberBlur?: (
     isValid: boolean,
     value: string,
-    seletedCountryData: CountryData,
+    selectedCountryData: CountryData,
     fullNumber: string,
     extension: string,
     event: React.FocusEvent<HTMLInputElement>,
@@ -142,7 +142,7 @@ export interface IntlTelInputProps {
   onPhoneNumberFocus?: (
     isValid: boolean,
     value: string,
-    seletedCountryData: CountryData,
+    selectedCountryData: CountryData,
     fullNumber: string,
     extension: string,
     event: React.FocusEvent<HTMLInputElement>,
@@ -153,7 +153,7 @@ export interface IntlTelInputProps {
    */
   onSelectFlag?: (
     currentNumber: string,
-    seletedCountryData: CountryData,
+    selectedCountryData: CountryData,
     fullNumber: string,
     isValid: boolean,
   ) => void
