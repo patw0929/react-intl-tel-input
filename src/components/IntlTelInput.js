@@ -1281,28 +1281,60 @@ class IntlTelInput extends Component {
     const value =
       this.props.value !== undefined ? this.props.value : this.state.value
 
+    const wrapperProps = {
+      className: wrapperClass,
+      style: wrapperStyle,
+    }
+    const flagDropDownProps = {
+      refCallback: this.setFlagDropdownRef,
+      allowDropdown: this.allowDropdown,
+      dropdownContainer: this.dropdownContainer,
+      separateDialCode: this.props.separateDialCode,
+      dialCode: this.state.dialCode,
+      clickSelectedFlag: this.clickSelectedFlag,
+      setFlag: this.setFlag,
+      countryCode: this.state.countryCode,
+      isMobile: this.isMobile,
+      handleSelectedFlagKeydown: this.handleSelectedFlagKeydown,
+      changeHighlightCountry: this.changeHighlightCountry,
+      countries: this.countries,
+      showDropdown: this.state.showDropdown,
+      inputTop: this.state.offsetTop,
+      inputOuterHeight: this.state.outerHeight,
+      preferredCountries: this.preferredCountries,
+      highlightedCountry: this.state.highlightedCountry,
+      titleTip,
+    }
+    const inputProps = {
+      ref: this.setTelRef,
+      onChange: this.handleInputChange,
+      onBlur: this.handleOnBlur,
+      onFocus: this.handleOnFocus,
+      className: inputClass,
+      disabled: this.state.disabled,
+      readonly: this.state.readonly,
+      name: this.props.fieldName,
+      id: this.props.fieldId,
+      value,
+      placeholder:
+        this.props.placeholder !== undefined
+          ? this.props.placeholder
+          : this.state.placeholder,
+      autoFocus: this.props.autoFocus,
+      autoComplete: this.props.autoComplete,
+      inputProps: this.props.telInputProps,
+      cursorPosition: this.state.cursorPosition,
+    }
+    if (this.props.renderComponent) {
+      return this.props.renderComponent(
+        wrapperProps,
+        flagDropDownProps,
+        inputProps,
+      )
+    }
     return (
-      <div className={wrapperClass} style={wrapperStyle}>
-        <FlagDropDown
-          refCallback={this.setFlagDropdownRef}
-          allowDropdown={this.allowDropdown}
-          dropdownContainer={this.dropdownContainer}
-          separateDialCode={this.props.separateDialCode}
-          dialCode={this.state.dialCode}
-          clickSelectedFlag={this.clickSelectedFlag}
-          setFlag={this.setFlag}
-          countryCode={this.state.countryCode}
-          isMobile={this.isMobile}
-          handleSelectedFlagKeydown={this.handleSelectedFlagKeydown}
-          changeHighlightCountry={this.changeHighlightCountry}
-          countries={this.countries}
-          showDropdown={this.state.showDropdown}
-          inputTop={this.state.offsetTop}
-          inputOuterHeight={this.state.outerHeight}
-          preferredCountries={this.preferredCountries}
-          highlightedCountry={this.state.highlightedCountry}
-          titleTip={titleTip}
-        />
+      <div {...wrapperProps}>
+        <FlagDropDown {...flagDropDownProps} />
         <TelInput
           refCallback={this.setTelRef}
           handleInputChange={this.handleInputChange}
@@ -1406,6 +1438,7 @@ IntlTelInput.propTypes = {
   format: PropTypes.bool,
   /** Allow main app to do things when flag icon is clicked. */
   onFlagClick: PropTypes.func,
+  renderComponent: PropTypes.func,
 }
 
 IntlTelInput.defaultProps = {
