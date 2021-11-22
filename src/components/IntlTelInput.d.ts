@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { CountryData } from '../types'
+import { FlagDropDownProps } from "./FlagDropDown";
 
 export interface IntlTelInputProps {
   /**
@@ -202,6 +203,11 @@ export interface IntlTelInputProps {
    * @default null
    */
   onFlagClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  /**
+   * Allow the main app to customize how the component is being rendered
+   * @default null
+   */
+   renderComponent?: (wrapperProps: Record<string, any>, flagDropDownProps: FlagDropDownProps, inputProps: Record<string, any>) => React.ReactNode
 }
 
 export interface IntlTelInputState {

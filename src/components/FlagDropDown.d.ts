@@ -30,6 +30,7 @@ export interface FlagDropDownProps {
   ) => void
   titleTip?: string
   refCallback: (instance: HTMLDivElement | null) => void
+  flagContainerProps?: React.HTMLProps<HTMLDivElement>
 }
 
 export interface FlagDropDownState {}

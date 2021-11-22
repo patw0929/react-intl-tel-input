@@ -24,6 +24,7 @@ export default class FlagDropDown extends Component {
     changeHighlightCountry: PropTypes.func,
     titleTip: PropTypes.string,
     refCallback: PropTypes.func.isRequired,
+    flagContainerProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   }
 
   genSelectedDialCode = () => {
@@ -92,7 +93,11 @@ export default class FlagDropDown extends Component {
     } = this.props
 
     return (
-      <div ref={refCallback} className="flag-container">
+      <div
+        ref={refCallback}
+        className="flag-container"
+        {...this.props.flagContainerProps}
+      >
         <div
           className="selected-flag"
           tabIndex={allowDropdown ? '0' : ''}
