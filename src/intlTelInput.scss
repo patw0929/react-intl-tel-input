@@ -46,8 +46,6 @@ $mobilePopupMargin: 30px;
   // specify types to increase specificity e.g. to override bootstrap v2.3
   input, input[type=text], input[type=tel] {
     position: relative;
-    // input is bottom level, below selected flag and dropdown
-    z-index: 0;
 
     // any vertical margin the user has on their inputs would no longer work as expected
     // because we wrap everything in a container div. i justify the use of !important
@@ -75,11 +73,11 @@ $mobilePopupMargin: 30px;
     right: 0;
     // prevent the highlighted child from overlapping the input border
     padding: $borderWidth;
-  
+
     .arrow {
         font-size: 6px;
         margin-left: 5px;
-        
+
         &.up:after {
             content: '▲';
         }
@@ -92,8 +90,6 @@ $mobilePopupMargin: 30px;
   }
 
   .selected-flag {
-    // render above the input
-    z-index: 1;
     position: relative;
     width: $selectedFlagWidth;
     // this must be full-height both for the hover highlight, and to push down the
@@ -115,7 +111,7 @@ $mobilePopupMargin: 30px;
     list-style: none;
     // in case any container has text-align:center
     text-align: left;
-    
+
     .divider {
         padding-bottom: 5px;
         margin-bottom: 5px;
@@ -184,7 +180,6 @@ $mobilePopupMargin: 30px;
     .flag-container {
       right: auto;
       left: 0;
-      width: 100%;
     }
     .selected-flag {
       width: $selectedFlagArrowWidth;

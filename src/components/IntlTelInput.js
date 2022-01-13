@@ -1283,26 +1283,6 @@ class IntlTelInput extends Component {
 
     return (
       <div className={wrapperClass} style={wrapperStyle}>
-        <FlagDropDown
-          refCallback={this.setFlagDropdownRef}
-          allowDropdown={this.allowDropdown}
-          dropdownContainer={this.dropdownContainer}
-          separateDialCode={this.props.separateDialCode}
-          dialCode={this.state.dialCode}
-          clickSelectedFlag={this.clickSelectedFlag}
-          setFlag={this.setFlag}
-          countryCode={this.state.countryCode}
-          isMobile={this.isMobile}
-          handleSelectedFlagKeydown={this.handleSelectedFlagKeydown}
-          changeHighlightCountry={this.changeHighlightCountry}
-          countries={this.countries}
-          showDropdown={this.state.showDropdown}
-          inputTop={this.state.offsetTop}
-          inputOuterHeight={this.state.outerHeight}
-          preferredCountries={this.preferredCountries}
-          highlightedCountry={this.state.highlightedCountry}
-          titleTip={titleTip}
-        />
         <TelInput
           refCallback={this.setTelRef}
           handleInputChange={this.handleInputChange}
@@ -1323,6 +1303,26 @@ class IntlTelInput extends Component {
           autoComplete={this.props.autoComplete}
           inputProps={this.props.telInputProps}
           cursorPosition={this.state.cursorPosition}
+        />
+        <FlagDropDown
+          refCallback={this.setFlagDropdownRef}
+          allowDropdown={this.allowDropdown}
+          dropdownContainer={this.dropdownContainer}
+          separateDialCode={this.props.separateDialCode}
+          dialCode={this.state.dialCode}
+          clickSelectedFlag={this.clickSelectedFlag}
+          setFlag={this.setFlag}
+          countryCode={this.state.countryCode}
+          isMobile={this.isMobile}
+          handleSelectedFlagKeydown={this.handleSelectedFlagKeydown}
+          changeHighlightCountry={this.changeHighlightCountry}
+          countries={this.countries}
+          showDropdown={this.state.showDropdown}
+          inputTop={this.state.offsetTop}
+          inputOuterHeight={this.state.outerHeight}
+          preferredCountries={this.preferredCountries}
+          highlightedCountry={this.state.highlightedCountry}
+          titleTip={titleTip}
         />
       </div>
     )
