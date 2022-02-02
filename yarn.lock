@@ -9780,39 +9780,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enzyme-adapter-react-16@npm:^1.5.0":
-  version: 1.7.1
-  resolution: "enzyme-adapter-react-16@npm:1.7.1"
-  dependencies:
-    enzyme-adapter-utils: ^1.9.0
-    function.prototype.name: ^1.1.0
-    object.assign: ^4.1.0
-    object.values: ^1.0.4
-    prop-types: ^15.6.2
-    react-is: ^16.6.1
-    react-test-renderer: ^16.0.0-0
-  peerDependencies:
-    enzyme: ^3.0.0
-    react: ^16.0.0-0
-    react-dom: ^16.0.0-0
-  checksum: 5883301d16f13065929e0fcfbb892c81d31bda1b5bdfb6e1e998c4c2ede2743160c43fe44c8f39058f4043b416dba49ad57f1199f225a68ca8d2db0607f16eb5
-  languageName: node
-  linkType: hard
-
-"enzyme-adapter-utils@npm:^1.9.0":
-  version: 1.9.1
-  resolution: "enzyme-adapter-utils@npm:1.9.1"
-  dependencies:
-    function.prototype.name: ^1.1.0
-    object.assign: ^4.1.0
-    prop-types: ^15.6.2
-    semver: ^5.6.0
-  peerDependencies:
-    react: 0.13.x || 0.14.x || ^15.0.0-0 || ^16.0.0-0
-  checksum: 4d28b7ae32098f1983b2bec04e483d997771370c823f99f22b48c0b9a7ab19c091e54415219d560001a81e544147a01ff5168ffe5eb2f319a4f9a7a8508f0df9
-  languageName: node
-  linkType: hard
-
 "enzyme-shallow-equal@npm:^1.0.0":
   version: 1.0.4
   resolution: "enzyme-shallow-equal@npm:1.0.4"
@@ -20294,7 +20261,6 @@ fsevents@~2.3.2:
     classnames: ^2.2.5
     coveralls: ^2.11.9
     enzyme: ^3.3.0
-    enzyme-adapter-react-16: ^1.5.0
     eslint: ^7.32.0
     eslint-config-airbnb: ~17.1.0
     eslint-config-airbnb-base: ~13.1.0
@@ -20343,13 +20309,6 @@ fsevents@~2.3.2:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
-  languageName: node
-  linkType: hard
-
-"react-is@npm:^16.6.1, react-is@npm:^16.7.0":
-  version: 16.7.0
-  resolution: "react-is@npm:16.7.0"
-  checksum: a2f46033d3c3859151fd32e8a599e5f2813b9c50cba741584fea780714fed2833f7e2a4e0c4b5191fd7217b971f669eec3698791a7f415a57cc5d1b6b35e71b6
   languageName: node
   linkType: hard
 
@@ -20407,20 +20366,6 @@ fsevents@~2.3.2:
   dependencies:
     prop-types: ^15.5.4
   checksum: f0e646e1488a18849a2a0fcff459a3769869d62be5729ff578dc6d37d0c0617706075efe09a15ff9372ba35419e31af5b0df154bc9487d1381cdc80d3dab6d7c
-  languageName: node
-  linkType: hard
-
-"react-test-renderer@npm:^16.0.0-0":
-  version: 16.7.0
-  resolution: "react-test-renderer@npm:16.7.0"
-  dependencies:
-    object-assign: ^4.1.1
-    prop-types: ^15.6.2
-    react-is: ^16.7.0
-    scheduler: ^0.12.0
-  peerDependencies:
-    react: ^16.0.0
-  checksum: c3ab9974af85cfa3121e55e50abde7c4302e4b862e961bcc1e512aec74df16a58eb255d3079bb0524b8f0c6190101c8554a036f4bee6cb74988390fff9209277
   languageName: node
   linkType: hard
 
@@ -21777,16 +21722,6 @@ resolve@^1.10.0:
   version: 1.2.4
   resolution: "sax@npm:1.2.4"
   checksum: d3df7d32b897a2c2f28e941f732c71ba90e27c24f62ee918bd4d9a8cfb3553f2f81e5493c7f0be94a11c1911b643a9108f231dd6f60df3fa9586b5d2e3e9e1fe
-  languageName: node
-  linkType: hard
-
-"scheduler@npm:^0.12.0":
-  version: 0.12.0
-  resolution: "scheduler@npm:0.12.0"
-  dependencies:
-    loose-envify: ^1.1.0
-    object-assign: ^4.1.1
-  checksum: d38f7180db7eb08c388fcf1ac04b24bd2ad134b5f0333daae58beb45f66de2f40e38296730e568ea47f5a38552ca834bf92262fb30d89b6d4551992800cec3e2
   languageName: node
   linkType: hard
 
