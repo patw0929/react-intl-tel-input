@@ -11,6 +11,8 @@ const FlagBox = ({
   flagRef,
   innerFlagRef,
   countryClass,
+  isSelected,
+  index,
 }) => (
   <li
     className={countryClass}
@@ -19,6 +21,10 @@ const FlagBox = ({
     onMouseOver={onMouseOver}
     onFocus={onFocus}
     onClick={onClick}
+    role="option"
+    aria-selected={isSelected}
+    id={`intl-tel-item-${index}`}
+    tabIndex="-1"
   >
     <div ref={flagRef} className="flag-box">
       <div ref={innerFlagRef} className={`iti-flag ${isoCode}`} />
@@ -39,6 +45,8 @@ FlagBox.propTypes = {
   flagRef: PropTypes.func,
   innerFlagRef: PropTypes.func,
   countryClass: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool,
+  index: PropTypes.number,
 }
 
 FlagBox.defaultProps = {

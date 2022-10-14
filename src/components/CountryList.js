@@ -16,6 +16,7 @@ export default class CountryList extends Component {
     changeHighlightCountry: PropTypes.func,
     showDropdown: PropTypes.bool,
     isMobile: PropTypes.bool,
+    selectedCountryCode: PropTypes.string,
   }
 
   shouldComponentUpdate(nextProps) {
@@ -76,6 +77,7 @@ export default class CountryList extends Component {
         ? () => {}
         : this.handleMouseOver
       const keyPrefix = isPreferred ? 'pref-' : ''
+      const isSelected = this.props.selectedCountryCode === country.iso2
 
       return (
         <FlagBox
@@ -93,6 +95,8 @@ export default class CountryList extends Component {
             this.selectedFlagInner = selectedFlagInner
           }}
           countryClass={countryClass}
+          isSelected={isSelected}
+          index={actualIndex}
         />
       )
     })
@@ -122,6 +126,8 @@ export default class CountryList extends Component {
           this.listElement = listElement
         }}
         className={className}
+        id="intl-tel-countries-list"
+        role="listbox"
       >
         {preferredOptions}
         {preferredCountries.length > 0 ? divider : null}
