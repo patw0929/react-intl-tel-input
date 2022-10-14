@@ -24,6 +24,7 @@ export default class FlagDropDown extends Component {
     changeHighlightCountry: PropTypes.func,
     titleTip: PropTypes.string,
     refCallback: PropTypes.func.isRequired,
+    flagDropdownProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   }
 
   genSelectedDialCode = () => {
@@ -59,6 +60,7 @@ export default class FlagDropDown extends Component {
       preferredCountries,
       highlightedCountry,
       changeHighlightCountry,
+      countryCode,
     } = this.props
 
     return (
@@ -76,6 +78,7 @@ export default class FlagDropDown extends Component {
         preferredCountries={preferredCountries}
         highlightedCountry={highlightedCountry}
         changeHighlightCountry={changeHighlightCountry}
+        selectedCountryCode={countryCode}
       />
     )
   }
@@ -89,16 +92,25 @@ export default class FlagDropDown extends Component {
       titleTip,
       dropdownContainer,
       showDropdown,
+      highlightedCountry,
+      flagDropdownProps,
     } = this.props
 
     return (
       <div ref={refCallback} className="flag-container">
         <div
+          {...flagDropdownProps}
           className="selected-flag"
           tabIndex={allowDropdown ? '0' : ''}
           onClick={clickSelectedFlag}
           onKeyDown={handleSelectedFlagKeydown}
           title={titleTip}
+          role="combobox"
+          aria-controls="intl-tel-countries-list"
+          aria-owns="intl-tel-countries-list"
+          aria-autocomplete="none"
+          aria-activedescendant={`intl-tel-item-${highlightedCountry}`}
+          aria-expanded={showDropdown}
         >
           <div className={this.genFlagClassName()} />
           {this.genSelectedDialCode()}

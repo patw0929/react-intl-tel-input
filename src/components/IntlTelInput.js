@@ -1302,6 +1302,7 @@ class IntlTelInput extends Component {
           preferredCountries={this.preferredCountries}
           highlightedCountry={this.state.highlightedCountry}
           titleTip={titleTip}
+          flagDropdownProps={this.props.flagDropdownProps}
         />
         <TelInput
           refCallback={this.setTelRef}
@@ -1402,6 +1403,8 @@ IntlTelInput.propTypes = {
   useMobileFullscreenDropdown: PropTypes.bool,
   /** Pass through arbitrary props to the tel input element. */
   telInputProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  /** Pass through arbitrary props to the flag dropdown element. */
+  flagDropdownProps: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   /** Format the number. */
   format: PropTypes.bool,
   /** Allow main app to do things when flag icon is clicked. */
@@ -1456,6 +1459,8 @@ IntlTelInput.defaultProps = {
   autoComplete: 'off',
   // pass through arbitrary props to the tel input element
   telInputProps: {},
+  // pass through arbitrary props to the flag dropdown element
+  flagDropdownProps: {},
   // always format the number
   format: false,
   onFlagClick: null,
