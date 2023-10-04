@@ -142,5 +142,6 @@
   "engines": {
     "node": ">=6.14.14"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "packageManager": "yarn@3.6.4"
 }
