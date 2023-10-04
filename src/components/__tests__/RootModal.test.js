@@ -7,22 +7,29 @@ describe('RootModal', function() {
   beforeEach(() => {
     jest.resetModules()
 
+    const rootElement = document.createElement('div')
+    document.body.appendChild(rootElement)
+
+    this.getRootElement = () => {
+      return rootElement
+    }
+
     this.makeSubject = () => {
       return mount(
         <RootModal>
-          <div className="root">foo</div>
+          <div className="content">foo</div>
         </RootModal>,
         {
-          attachTo: document.body,
+          attachTo: rootElement,
         },
       )
     }
   })
 
-  it('should has a div.root tag', () => {
+  it('should has a div.content tag', () => {
     const subject = this.makeSubject()
 
-    expect(subject.find('div.root').length).toBeTruthy()
+    expect(subject.find('div.content').length).toBeTruthy()
   })
 
   it('should has parent element which has specific className', () => {
@@ -46,6 +53,6 @@ describe('RootModal', function() {
     const subject = this.makeSubject()
 
     subject.unmount()
-    expect(document.body.querySelector('.iti-container')).toBeNull()
+    expect(this.getRootElement().querySelector('.iti-container')).toBeNull()
   })
 })
