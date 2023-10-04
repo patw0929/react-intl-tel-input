@@ -1,6 +1,6 @@
 {
-  "name": "react-intl-tel-input",
-  "version": "0.0.0",
+  "name": "@skillx/react-intl-tel-input",
+  "version": "8.2.0",
   "description": "Telephone input component. Rewrite intl-tel-input in React.js.",
   "author": "patw",
   "workspaces": [
@@ -24,10 +24,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/patw0929/react-intl-tel-input"
+    "url": "git+https://github.com/Skillx/react-intl-tel-input.git"
   },
   "bugs": {
-    "url": "https://github.com/patw0929/react-intl-tel-input/issues"
+    "url": "https://github.com/Skillx/react-intl-tel-input/issues"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
