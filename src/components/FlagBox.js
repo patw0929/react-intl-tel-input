@@ -5,9 +5,9 @@ const FlagBox = ({
   dialCode,
   isoCode,
   name,
-  onMouseOver,
-  onFocus,
-  onClick,
+  onMouseOver = () => {},
+  onFocus = () => {},
+  onClick = () => {},
   flagRef,
   innerFlagRef,
   countryClass,
@@ -39,12 +39,6 @@ FlagBox.propTypes = {
   flagRef: PropTypes.func,
   innerFlagRef: PropTypes.func,
   countryClass: PropTypes.string.isRequired,
-}
-
-FlagBox.defaultProps = {
-  onFocus: () => {},
-  onMouseOver: () => {},
-  onClick: () => {},
 }
 
 export default FlagBox
