@@ -1,24 +1,39 @@
 # React-Intl-Tel-Input
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![CICD](https://github.com/patw0929/react-intl-tel-input/actions/workflows/main.yml/badge.svg)](https://github.com/patw0929/react-intl-tel-input/actions/workflows/main.yml)
-[![npm version](https://badge.fury.io/js/react-intl-tel-input.svg)](http://badge.fury.io/js/react-intl-tel-input)
-[![Coverage Status](https://coveralls.io/repos/github/patw0929/react-intl-tel-input/badge.svg?branch=master)](https://coveralls.io/github/patw0929/react-intl-tel-input?branch=master)
-[![npm](https://img.shields.io/npm/l/express.svg?maxAge=2592000)]()
-
-[![NPM](https://nodei.co/npm/react-intl-tel-input.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-intl-tel-input/)
+![React-Intl-Tel-Input: Deprecated & Archived](./assets/banner.jpg)
 
 Rewrite [International Telephone Input](https://github.com/jackocnr/intl-tel-input) in React.js.
 
 
-## Collaborators Wanted!
-
-Due to the long commuting time, I do not have much time to maintain this project often. 😣
-
-So if anybody else is willing to take on the work of bug fixes, integrating pull requests, etc,
-please let me know. 🙌
-
-I hope we can maintain the project together, and make this project better! 💪
+> [!WARNING]
+> ### ⚠️ Project Status: Deprecated & Archived
+>
+> This project is no longer actively maintained and has been officially archived.
+>
+> **A Note from the Author (@patw0929):**
+> 
+> Back in 2015, I started `react-intl-tel-input` because there was no straightforward way to use [Jack O'Connor's `intl-tel-input`](https://github.com/jackocnr/intl-tel-input) in the early React ecosystem.
+> 
+> Over the years, due to various ups and downs in my personal life, I found myself without the time and energy to maintain this project. I sincerely apologize for leaving this repository unattended for such a long time without clearly communicating its status.
+> 
+> Even with its long hiatus, the repository still gathered nearly 300 stars, over 200 forks, and continues to see tens of thousands of weekly downloads. I am deeply grateful to everyone who trusted this package in their applications, and to all the contributors who submitted pull requests, reported issues, or helped keep this project going over the years.
+> 
+> Today, the React and frontend ecosystem has evolved significantly, and most importantly, **the original `intl-tel-input` now provides an official React component ([`@intl-tel-input/react`](https://www.npmjs.com/package/@intl-tel-input/react))**. The original mission of this project is now fully and officially supported upstream.
+> 
+> Rather than leaving this project in limbo with unresolved issues and pull requests, I believe the most responsible closure is to formally archive it and guide developers to modern, actively maintained solutions.
+> 
+> Existing versions will stay on npm for legacy builds, but no further updates or fixes will be provided. Thank you all for your support, patience, and understanding over the years. ❤️
+>
+> ---
+>
+> ### 📦 Recommended Alternatives & Migration
+>
+> If you are starting a new project or upgrading React, please migrate to one of the following:
+>
+> 1. **Official React Component**: [`@intl-tel-input/react`](https://www.npmjs.com/package/@intl-tel-input/react) (by [@jackocnr](https://github.com/jackocnr))
+>    - Official wrapper with React 18+ support, dynamic utils loading, and active upstream maintenance.
+> 2. **Community Favorite**: [`react-phone-number-input`](https://www.npmjs.com/package/react-phone-number-input) (by [@catamphetamine](https://github.com/catamphetamine))
+>    - Lightweight, customizable, and powered by `libphonenumber-js`.
 
 ## Demo & Examples
 
